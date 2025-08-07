@@ -1,0 +1,5 @@
+.vscode/
+/target
+.DS_Store
+/lib
+/tests

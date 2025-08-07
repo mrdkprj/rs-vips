@@ -1,0 +1,14 @@
+[package]
+name = "rs-vips"
+description = "Safe bindings for libvips"
+version = "0.1.0"
+repository = "https://github.com/mrdkprj/rs-vips"
+readme = "README.md"
+license = "MIT"
+edition = "2021"
+keywords = ["libvips", "bindgen", "image", "bindings"]
+categories = ["multimedia::images", "multimedia::encoding", "graphics"]
+
+[dependencies]
+num-traits = "0.2"
+num-derive = "0.4"
