@@ -1410,7 +1410,7 @@ impl VipsImage {
     ///
     /// premultiplied: `bool` -> Images have premultiplied alpha
     ///
-    /// extend: `Extend` -> How to generate the extra pixels
+    /// extend: [`Extend`] -> How to generate the extra pixels
     pub fn affine_with_opts(&self, matrix: &[f64], option: VOption) -> Result<VipsImage> {
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
@@ -1468,13 +1468,13 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn analyzeload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
@@ -1533,9 +1533,9 @@ impl VipsImage {
     ///
     /// background: `&[f64]` -> Colour for new pixels
     ///
-    /// halign: `Align` -> Align on the left, centre or right
+    /// halign: [`Align`] -> Align on the left, centre or right
     ///
-    /// valign: `Align` -> Align on the top, centre or bottom
+    /// valign: [`Align`] -> Align on the top, centre or bottom
     ///
     /// hspacing: `i32` -> Horizontal spacing between images
     ///
@@ -1586,7 +1586,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// angle: `Angle` -> Angle image was rotated by
+    /// angle: [`Angle`] -> Angle image was rotated by
     ///
     /// flip: `&mut bool` -> Whether the image was flipped or not
     pub fn autorot_with_opts(&self, option: VOption) -> Result<VipsImage> {
@@ -2090,7 +2090,7 @@ impl VipsImage {
     ///
     /// sigma: `f64` -> Sigma of Gaussian
     ///
-    /// precision: `Precision` -> Convolve with this precision
+    /// precision: [`Precision`] -> Convolve with this precision
     pub fn canny_with_opts(&self, option: VOption) -> Result<VipsImage> {
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
@@ -2291,7 +2291,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// source_space: `Interpretation` -> Source color space
+    /// source_space: [`Interpretation`] -> Source color space
     pub fn colourspace_with_opts(
         &self,
         space: Interpretation,
@@ -2359,11 +2359,11 @@ impl VipsImage {
     ///
     /// times: `i32` -> Rotate and convolve this many times
     ///
-    /// angle: `Angle45` -> Rotate mask by this much between convolutions
+    /// angle: [`Angle45`] -> Rotate mask by this much between convolutions
     ///
-    /// combine: `Combine` -> Combine convolution results like this
+    /// combine: [`Combine`] -> Combine convolution results like this
     ///
-    /// precision: `Precision` -> Convolve with this precision
+    /// precision: [`Precision`] -> Convolve with this precision
     ///
     /// layers: `i32` -> Use this many layers in approximation
     ///
@@ -2563,7 +2563,7 @@ impl VipsImage {
     ///
     /// y: `i32` -> y position of overlay
     ///
-    /// compositing_space: `Interpretation` -> Composite images in this colour space
+    /// compositing_space: [`Interpretation`] -> Composite images in this colour space
     ///
     /// premultiplied: `bool` -> Images have premultiplied alpha
     pub fn composite2_with_opts(
@@ -2641,7 +2641,7 @@ impl VipsImage {
     ///
     /// y: `&[i32]` -> Array of y coordinates to join at
     ///
-    /// compositing_space: `Interpretation` -> Composite images in this colour space
+    /// compositing_space: [`Interpretation`] -> Composite images in this colour space
     ///
     /// premultiplied: `bool` -> Images have premultiplied alpha
     pub fn composite_with_opts(
@@ -2706,7 +2706,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// precision: `Precision` -> Convolve with this precision
+    /// precision: [`Precision`] -> Convolve with this precision
     ///
     /// layers: `i32` -> Use this many layers in approximation
     ///
@@ -2956,7 +2956,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// precision: `Precision` -> Convolve with this precision
+    /// precision: [`Precision`] -> Convolve with this precision
     ///
     /// layers: `i32` -> Use this many layers in approximation
     ///
@@ -3020,11 +3020,11 @@ impl VipsImage {
     ///
     /// bands: `i32` -> Number of bands in image
     ///
-    /// format: `BandFormat` -> Pixel format in image
+    /// format: [`BandFormat`] -> Pixel format in image
     ///
-    /// coding: `Coding` -> Pixel coding
+    /// coding: [`Coding`] -> Pixel coding
     ///
-    /// interpretation: `Interpretation` -> Pixel interpretation
+    /// interpretation: [`Interpretation`] -> Pixel interpretation
     ///
     /// xres: `f64` -> Horizontal resolution in pixels/mm
     ///
@@ -3123,13 +3123,13 @@ impl VipsImage {
     ///
     /// separator: `&str` -> Set of separator characters
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn csvload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
@@ -3193,13 +3193,13 @@ impl VipsImage {
     ///
     /// separator: `&str` -> Set of separator characters
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn csvload_source_with_opts(source: &VipsSource, option: VOption) -> Result<VipsImage> {
@@ -3254,7 +3254,7 @@ impl VipsImage {
     ///
     /// separator: `&str` -> Separator characters
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -3312,7 +3312,7 @@ impl VipsImage {
     ///
     /// separator: `&str` -> Separator characters
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -3589,7 +3589,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-
+    /// test: `` -> Test pixels in this image
     ///
     /// equal: `bool` -> DrawFlood while equal to edge
     ///
@@ -3655,7 +3655,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// mode: `CombineMode` -> Combining mode
+    /// mode: [`CombineMode`] -> Combining mode
     pub fn draw_image_with_opts(
         &self,
         sub: &VipsImage,
@@ -3915,7 +3915,7 @@ impl VipsImage {
     ///
     /// imagename: `&str` -> Image name
     ///
-    /// layout: `ForeignDzLayout` -> Directory layout
+    /// layout: [`ForeignDzLayout`] -> Directory layout
     ///
     /// suffix: `&str` -> Filename suffix for tiles
     ///
@@ -3925,15 +3925,15 @@ impl VipsImage {
     ///
     /// centre: `bool` -> Center image in tile
     ///
-    /// depth: `ForeignDzDepth` -> Pyramid depth
+    /// depth: [`ForeignDzDepth`] -> Pyramid depth
     ///
-    /// angle: `Angle` -> Rotate image during save
+    /// angle: [`Angle`] -> Rotate image during save
     ///
-    /// container: `ForeignDzContainer` -> Pyramid container type
+    /// container: [`ForeignDzContainer`] -> Pyramid container type
     ///
     /// compression: `i32` -> ZIP deflate compression level
     ///
-    /// region_shrink: `RegionShrink` -> Method to shrink regions
+    /// region_shrink: [`RegionShrink`] -> Method to shrink regions
     ///
     /// skip_blanks: `i32` -> Skip tiles which are nearly equal to the background
     ///
@@ -3941,7 +3941,7 @@ impl VipsImage {
     ///
     /// Q: `i32` -> Q factor
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -3998,7 +3998,7 @@ impl VipsImage {
     ///
     /// imagename: `&str` -> Image name
     ///
-    /// layout: `ForeignDzLayout` -> Directory layout
+    /// layout: [`ForeignDzLayout`] -> Directory layout
     ///
     /// suffix: `&str` -> Filename suffix for tiles
     ///
@@ -4008,15 +4008,15 @@ impl VipsImage {
     ///
     /// centre: `bool` -> Center image in tile
     ///
-    /// depth: `ForeignDzDepth` -> Pyramid depth
+    /// depth: [`ForeignDzDepth`] -> Pyramid depth
     ///
-    /// angle: `Angle` -> Rotate image during save
+    /// angle: [`Angle`] -> Rotate image during save
     ///
-    /// container: `ForeignDzContainer` -> Pyramid container type
+    /// container: [`ForeignDzContainer`] -> Pyramid container type
     ///
     /// compression: `i32` -> ZIP deflate compression level
     ///
-    /// region_shrink: `RegionShrink` -> Method to shrink regions
+    /// region_shrink: [`RegionShrink`] -> Method to shrink regions
     ///
     /// skip_blanks: `i32` -> Skip tiles which are nearly equal to the background
     ///
@@ -4024,7 +4024,7 @@ impl VipsImage {
     ///
     /// Q: `i32` -> Q factor
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -4083,7 +4083,7 @@ impl VipsImage {
     ///
     /// imagename: `&str` -> Image name
     ///
-    /// layout: `ForeignDzLayout` -> Directory layout
+    /// layout: [`ForeignDzLayout`] -> Directory layout
     ///
     /// suffix: `&str` -> Filename suffix for tiles
     ///
@@ -4093,15 +4093,15 @@ impl VipsImage {
     ///
     /// centre: `bool` -> Center image in tile
     ///
-    /// depth: `ForeignDzDepth` -> Pyramid depth
+    /// depth: [`ForeignDzDepth`] -> Pyramid depth
     ///
-    /// angle: `Angle` -> Rotate image during save
+    /// angle: [`Angle`] -> Rotate image during save
     ///
-    /// container: `ForeignDzContainer` -> Pyramid container type
+    /// container: [`ForeignDzContainer`] -> Pyramid container type
     ///
     /// compression: `i32` -> ZIP deflate compression level
     ///
-    /// region_shrink: `RegionShrink` -> Method to shrink regions
+    /// region_shrink: [`RegionShrink`] -> Method to shrink regions
     ///
     /// skip_blanks: `i32` -> Skip tiles which are nearly equal to the background
     ///
@@ -4109,7 +4109,7 @@ impl VipsImage {
     ///
     /// Q: `i32` -> Q factor
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -4190,7 +4190,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// extend: `Extend` -> How to generate the extra pixels
+    /// extend: [`Extend`] -> How to generate the extra pixels
     ///
     /// background: `&[f64]` -> Color for background pixels
     pub fn embed_with_opts(
@@ -4701,13 +4701,13 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn fitsload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
@@ -4763,13 +4763,13 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn fitsload_source_with_opts(source: &VipsSource, option: VOption) -> Result<VipsImage> {
@@ -4822,7 +4822,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -5130,7 +5130,7 @@ impl VipsImage {
     ///
     /// min_ampl: `f64` -> Minimum amplitude of Gaussian
     ///
-    /// precision: `Precision` -> Convolve with this precision
+    /// precision: [`Precision`] -> Convolve with this precision
     pub fn gaussblur_with_opts(&self, sigma: f64, option: VOption) -> Result<VipsImage> {
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
@@ -5198,7 +5198,7 @@ impl VipsImage {
     ///
     /// separable: `bool` -> Generate separable Gaussian
     ///
-    /// precision: `Precision` -> Generate with this precision
+    /// precision: [`Precision`] -> Generate with this precision
     pub fn gaussmat_with_opts(sigma: f64, min_ampl: f64, option: VOption) -> Result<VipsImage> {
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
@@ -5392,13 +5392,13 @@ impl VipsImage {
     ///
     /// page: `i32` -> First page to load
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn gifload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
@@ -5458,13 +5458,13 @@ impl VipsImage {
     ///
     /// page: `i32` -> First page to load
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn gifload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
@@ -5524,13 +5524,13 @@ impl VipsImage {
     ///
     /// page: `i32` -> First page to load
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn gifload_source_with_opts(source: &VipsSource, option: VOption) -> Result<VipsImage> {
@@ -5599,7 +5599,7 @@ impl VipsImage {
     ///
     /// keep_duplicate_frames: `bool` -> Keep duplicate frames in the output instead of combining them
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -5670,7 +5670,7 @@ impl VipsImage {
     ///
     /// keep_duplicate_frames: `bool` -> Keep duplicate frames in the output instead of combining them
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -5743,7 +5743,7 @@ impl VipsImage {
     ///
     /// keep_duplicate_frames: `bool` -> Keep duplicate frames in the output instead of combining them
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -5879,7 +5879,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// extend: `Extend` -> How to generate the extra pixels
+    /// extend: [`Extend`] -> How to generate the extra pixels
     ///
     /// background: `&[f64]` -> Color for background pixels
     pub fn gravity_with_opts(
@@ -6068,13 +6068,13 @@ impl VipsImage {
     ///
     /// unlimited: `bool` -> Remove all denial of service limits
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn heifload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
@@ -6138,13 +6138,13 @@ impl VipsImage {
     ///
     /// unlimited: `bool` -> Remove all denial of service limits
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn heifload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
@@ -6208,13 +6208,13 @@ impl VipsImage {
     ///
     /// unlimited: `bool` -> Remove all denial of service limits
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn heifload_source_with_opts(source: &VipsSource, option: VOption) -> Result<VipsImage> {
@@ -6273,15 +6273,15 @@ impl VipsImage {
     ///
     /// lossless: `bool` -> Enable lossless compression
     ///
-    /// compression: `ForeignHeifCompression` -> Compression format
+    /// compression: [`ForeignHeifCompression`] -> Compression format
     ///
     /// effort: `i32` -> CPU effort
     ///
-    /// subsample_mode: `ForeignSubsample` -> Select chroma subsample operation mode
+    /// subsample_mode: [`ForeignSubsample`] -> Select chroma subsample operation mode
     ///
-    /// encoder: `ForeignHeifEncoder` -> Select encoder to use
+    /// encoder: [`ForeignHeifEncoder`] -> Select encoder to use
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -6342,15 +6342,15 @@ impl VipsImage {
     ///
     /// lossless: `bool` -> Enable lossless compression
     ///
-    /// compression: `ForeignHeifCompression` -> Compression format
+    /// compression: [`ForeignHeifCompression`] -> Compression format
     ///
     /// effort: `i32` -> CPU effort
     ///
-    /// subsample_mode: `ForeignSubsample` -> Select chroma subsample operation mode
+    /// subsample_mode: [`ForeignSubsample`] -> Select chroma subsample operation mode
     ///
-    /// encoder: `ForeignHeifEncoder` -> Select encoder to use
+    /// encoder: [`ForeignHeifEncoder`] -> Select encoder to use
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -6413,15 +6413,15 @@ impl VipsImage {
     ///
     /// lossless: `bool` -> Enable lossless compression
     ///
-    /// compression: `ForeignHeifCompression` -> Compression format
+    /// compression: [`ForeignHeifCompression`] -> Compression format
     ///
     /// effort: `i32` -> CPU effort
     ///
-    /// subsample_mode: `ForeignSubsample` -> Select chroma subsample operation mode
+    /// subsample_mode: [`ForeignSubsample`] -> Select chroma subsample operation mode
     ///
-    /// encoder: `ForeignHeifEncoder` -> Select encoder to use
+    /// encoder: [`ForeignHeifEncoder`] -> Select encoder to use
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -6630,7 +6630,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// combine: `Combine` -> Combine bins like this
+    /// combine: [`Combine`] -> Combine bins like this
     pub fn hist_find_indexed_with_opts(
         &self,
         index: &VipsImage,
@@ -7020,9 +7020,9 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// pcs: `PCS` -> Set Profile Connection Space
+    /// pcs: [`PCS`] -> Set Profile Connection Space
     ///
-    /// intent: `Intent` -> Rendering intent
+    /// intent: [`Intent`] -> Rendering intent
     ///
     /// black_point_compensation: `bool` -> Enable black point compensation
     ///
@@ -7078,9 +7078,9 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// pcs: `PCS` -> Set Profile Connection Space
+    /// pcs: [`PCS`] -> Set Profile Connection Space
     ///
-    /// intent: `Intent` -> Rendering intent
+    /// intent: [`Intent`] -> Rendering intent
     ///
     /// black_point_compensation: `bool` -> Enable black point compensation
     ///
@@ -7144,9 +7144,9 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// pcs: `PCS` -> Set Profile Connection Space
+    /// pcs: [`PCS`] -> Set Profile Connection Space
     ///
-    /// intent: `Intent` -> Rendering intent
+    /// intent: [`Intent`] -> Rendering intent
     ///
     /// black_point_compensation: `bool` -> Enable black point compensation
     ///
@@ -7541,7 +7541,7 @@ impl VipsImage {
     ///
     /// background: `&[f64]` -> Colour for new pixels
     ///
-    /// align: `Align` -> Align on the low, centre or high coordinate edge
+    /// align: [`Align`] -> Align on the low, centre or high coordinate edge
     pub fn join_with_opts(
         &self,
         in2: &VipsImage,
@@ -7609,13 +7609,13 @@ impl VipsImage {
     ///
     /// oneshot: `bool` -> Load images a frame at a time
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn jp2kload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
@@ -7675,13 +7675,13 @@ impl VipsImage {
     ///
     /// oneshot: `bool` -> Load images a frame at a time
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn jp2kload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
@@ -7741,13 +7741,13 @@ impl VipsImage {
     ///
     /// oneshot: `bool` -> Load images a frame at a time
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn jp2kload_source_with_opts(source: &VipsSource, option: VOption) -> Result<VipsImage> {
@@ -7808,9 +7808,9 @@ impl VipsImage {
     ///
     /// Q: `i32` -> Q factor
     ///
-    /// subsample_mode: `ForeignSubsample` -> Select chroma subsample operation mode
+    /// subsample_mode: [`ForeignSubsample`] -> Select chroma subsample operation mode
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -7873,9 +7873,9 @@ impl VipsImage {
     ///
     /// Q: `i32` -> Q factor
     ///
-    /// subsample_mode: `ForeignSubsample` -> Select chroma subsample operation mode
+    /// subsample_mode: [`ForeignSubsample`] -> Select chroma subsample operation mode
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -7940,9 +7940,9 @@ impl VipsImage {
     ///
     /// Q: `i32` -> Q factor
     ///
-    /// subsample_mode: `ForeignSubsample` -> Select chroma subsample operation mode
+    /// subsample_mode: [`ForeignSubsample`] -> Select chroma subsample operation mode
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -8007,13 +8007,13 @@ impl VipsImage {
     ///
     /// unlimited: `bool` -> Remove all denial of service limits
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn jpegload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
@@ -8075,13 +8075,13 @@ impl VipsImage {
     ///
     /// unlimited: `bool` -> Remove all denial of service limits
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn jpegload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
@@ -8143,13 +8143,13 @@ impl VipsImage {
     ///
     /// unlimited: `bool` -> Remove all denial of service limits
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn jpegload_source_with_opts(source: &VipsSource, option: VOption) -> Result<VipsImage> {
@@ -8216,11 +8216,11 @@ impl VipsImage {
     ///
     /// quant_table: `i32` -> Use predefined quantization table with given index
     ///
-    /// subsample_mode: `ForeignSubsample` -> Select chroma subsample operation mode
+    /// subsample_mode: [`ForeignSubsample`] -> Select chroma subsample operation mode
     ///
     /// restart_interval: `i32` -> Add restart markers every specified number of mcu
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -8289,11 +8289,11 @@ impl VipsImage {
     ///
     /// quant_table: `i32` -> Use predefined quantization table with given index
     ///
-    /// subsample_mode: `ForeignSubsample` -> Select chroma subsample operation mode
+    /// subsample_mode: [`ForeignSubsample`] -> Select chroma subsample operation mode
     ///
     /// restart_interval: `i32` -> Add restart markers every specified number of mcu
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -8355,11 +8355,11 @@ impl VipsImage {
     ///
     /// quant_table: `i32` -> Use predefined quantization table with given index
     ///
-    /// subsample_mode: `ForeignSubsample` -> Select chroma subsample operation mode
+    /// subsample_mode: [`ForeignSubsample`] -> Select chroma subsample operation mode
     ///
     /// restart_interval: `i32` -> Add restart markers every specified number of mcu
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -8424,11 +8424,11 @@ impl VipsImage {
     ///
     /// quant_table: `i32` -> Use predefined quantization table with given index
     ///
-    /// subsample_mode: `ForeignSubsample` -> Select chroma subsample operation mode
+    /// subsample_mode: [`ForeignSubsample`] -> Select chroma subsample operation mode
     ///
     /// restart_interval: `i32` -> Add restart markers every specified number of mcu
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -8491,13 +8491,13 @@ impl VipsImage {
     ///
     /// n: `i32` -> Number of pages to load, -1 for all
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn jxlload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
@@ -8557,13 +8557,13 @@ impl VipsImage {
     ///
     /// n: `i32` -> Number of pages to load, -1 for all
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn jxlload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
@@ -8623,13 +8623,13 @@ impl VipsImage {
     ///
     /// n: `i32` -> Number of pages to load, -1 for all
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn jxlload_source_with_opts(source: &VipsSource, option: VOption) -> Result<VipsImage> {
@@ -8692,7 +8692,7 @@ impl VipsImage {
     ///
     /// Q: `i32` -> Quality factor
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -8757,7 +8757,7 @@ impl VipsImage {
     ///
     /// Q: `i32` -> Quality factor
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -8824,7 +8824,7 @@ impl VipsImage {
     ///
     /// Q: `i32` -> Quality factor
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -8993,7 +8993,7 @@ impl VipsImage {
     ///
     /// tile_height: `i32` -> Tile height in pixels
     ///
-    /// access: `Access` -> Expected access pattern
+    /// access: [`Access`] -> Expected access pattern
     ///
     /// threaded: `bool` -> Allow threaded access
     ///
@@ -9061,7 +9061,7 @@ impl VipsImage {
     ///
     /// separable: `bool` -> Generate separable Gaussian
     ///
-    /// precision: `Precision` -> Generate with this precision
+    /// precision: [`Precision`] -> Generate with this precision
     pub fn logmat_with_opts(sigma: f64, min_ampl: f64, option: VOption) -> Result<VipsImage> {
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
@@ -9125,13 +9125,13 @@ impl VipsImage {
     ///
     /// n: `i32` -> Number of pages to load, -1 for all
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn magickload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
@@ -9193,13 +9193,13 @@ impl VipsImage {
     ///
     /// n: `i32` -> Number of pages to load, -1 for all
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn magickload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
@@ -9262,7 +9262,7 @@ impl VipsImage {
     ///
     /// bitdepth: `i32` -> Number of bits per pixel
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -9327,7 +9327,7 @@ impl VipsImage {
     ///
     /// bitdepth: `i32` -> Number of bits per pixel
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -9397,7 +9397,7 @@ impl VipsImage {
     ///
     /// premultiplied: `bool` -> Images have premultiplied alpha
     ///
-    /// extend: `Extend` -> How to generate the extra pixels
+    /// extend: [`Extend`] -> How to generate the extra pixels
     pub fn mapim_with_opts(&self, index: &VipsImage, option: VOption) -> Result<VipsImage> {
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
@@ -10922,13 +10922,13 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn matload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
@@ -11007,13 +11007,13 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn matrixload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
@@ -11069,13 +11069,13 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn matrixload_source_with_opts(source: &VipsSource, option: VOption) -> Result<VipsImage> {
@@ -11148,7 +11148,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -11199,7 +11199,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -11255,7 +11255,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -12067,13 +12067,13 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn openexrload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
@@ -12139,13 +12139,13 @@ impl VipsImage {
     ///
     /// rgb: `bool` -> Output RGB (not RGBA)
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn openslideload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
@@ -12213,13 +12213,13 @@ impl VipsImage {
     ///
     /// rgb: `bool` -> Output RGB (not RGBA)
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn openslideload_source_with_opts(
@@ -12292,13 +12292,13 @@ impl VipsImage {
     ///
     /// password: `&str` -> Password to decrypt with
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn pdfload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
@@ -12366,13 +12366,13 @@ impl VipsImage {
     ///
     /// password: `&str` -> Password to decrypt with
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn pdfload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
@@ -12440,13 +12440,13 @@ impl VipsImage {
     ///
     /// password: `&str` -> Password to decrypt with
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn pdfload_source_with_opts(source: &VipsSource, option: VOption) -> Result<VipsImage> {
@@ -12629,13 +12629,13 @@ impl VipsImage {
     ///
     /// unlimited: `bool` -> Remove all denial of service limits
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn pngload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
@@ -12693,13 +12693,13 @@ impl VipsImage {
     ///
     /// unlimited: `bool` -> Remove all denial of service limits
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn pngload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
@@ -12757,13 +12757,13 @@ impl VipsImage {
     ///
     /// unlimited: `bool` -> Remove all denial of service limits
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn pngload_source_with_opts(source: &VipsSource, option: VOption) -> Result<VipsImage> {
@@ -12820,7 +12820,7 @@ impl VipsImage {
     ///
     /// interlace: `bool` -> Interlace image
     ///
-    /// filter: `ForeignPngFilter` -> libspng row filter flag(s)
+    /// filter: [`ForeignPngFilter`] -> libspng row filter flag(s)
     ///
     /// palette: `bool` -> Quantise to 8bpp palette
     ///
@@ -12832,7 +12832,7 @@ impl VipsImage {
     ///
     /// effort: `i32` -> Quantisation CPU effort
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -12891,7 +12891,7 @@ impl VipsImage {
     ///
     /// interlace: `bool` -> Interlace image
     ///
-    /// filter: `ForeignPngFilter` -> libspng row filter flag(s)
+    /// filter: [`ForeignPngFilter`] -> libspng row filter flag(s)
     ///
     /// palette: `bool` -> Quantise to 8bpp palette
     ///
@@ -12903,7 +12903,7 @@ impl VipsImage {
     ///
     /// effort: `i32` -> Quantisation CPU effort
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -12964,7 +12964,7 @@ impl VipsImage {
     ///
     /// interlace: `bool` -> Interlace image
     ///
-    /// filter: `ForeignPngFilter` -> libspng row filter flag(s)
+    /// filter: [`ForeignPngFilter`] -> libspng row filter flag(s)
     ///
     /// palette: `bool` -> Quantise to 8bpp palette
     ///
@@ -12976,7 +12976,7 @@ impl VipsImage {
     ///
     /// effort: `i32` -> Quantisation CPU effort
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -13035,13 +13035,13 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn ppmload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
@@ -13097,13 +13097,13 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn ppmload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
@@ -13159,13 +13159,13 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn ppmload_source_with_opts(source: &VipsSource, option: VOption) -> Result<VipsImage> {
@@ -13218,13 +13218,13 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// format: `ForeignPpmFormat` -> Format to save in
+    /// format: [`ForeignPpmFormat`] -> Format to save in
     ///
     /// ascii: `bool` -> Save as ascii
     ///
     /// bitdepth: `i32` -> Set to 1 to write as a 1 bit image
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -13280,13 +13280,13 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// format: `ForeignPpmFormat` -> Format to save in
+    /// format: [`ForeignPpmFormat`] -> Format to save in
     ///
     /// ascii: `bool` -> Save as ascii
     ///
     /// bitdepth: `i32` -> Set to 1 to write as a 1 bit image
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -13606,13 +13606,13 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn radload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
@@ -13668,13 +13668,13 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn radload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
@@ -13730,13 +13730,13 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn radload_source_with_opts(source: &VipsSource, option: VOption) -> Result<VipsImage> {
@@ -13789,7 +13789,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -13844,7 +13844,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -13901,7 +13901,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -14027,17 +14027,17 @@ impl VipsImage {
     ///
     /// offset: `u64` -> Offset in bytes from start of file
     ///
-    /// format: `BandFormat` -> Pixel format in image
+    /// format: [`BandFormat`] -> Pixel format in image
     ///
-    /// interpretation: `Interpretation` -> Pixel interpretation
+    /// interpretation: [`Interpretation`] -> Pixel interpretation
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn rawload_with_opts(
@@ -14108,7 +14108,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -14163,7 +14163,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -14220,7 +14220,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -14317,7 +14317,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// kernel: `Kernel` -> Resampling kernel
+    /// kernel: [`Kernel`] -> Resampling kernel
     ///
     /// gap: `f64` -> Reducing gap
     pub fn reduce_with_opts(
@@ -14390,7 +14390,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// kernel: `Kernel` -> Resampling kernel
+    /// kernel: [`Kernel`] -> Resampling kernel
     ///
     /// gap: `f64` -> Reducing gap
     pub fn reduceh_with_opts(&self, hshrink: f64, option: VOption) -> Result<VipsImage> {
@@ -14454,7 +14454,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// kernel: `Kernel` -> Resampling kernel
+    /// kernel: [`Kernel`] -> Resampling kernel
     ///
     /// gap: `f64` -> Reducing gap
     pub fn reducev_with_opts(&self, vshrink: f64, option: VOption) -> Result<VipsImage> {
@@ -14718,7 +14718,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// kernel: `Kernel` -> Resampling kernel
+    /// kernel: [`Kernel`] -> Resampling kernel
     ///
     /// gap: `f64` -> Reducing gap
     ///
@@ -14776,7 +14776,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// angle: `Angle45` -> Angle to rotate image
+    /// angle: [`Angle45`] -> Angle to rotate image
     pub fn rot45_with_opts(&self, option: VOption) -> Result<VipsImage> {
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
@@ -15779,7 +15779,7 @@ impl VipsImage {
     ///
     /// attention_y: `&mut i32` -> Vertical position of attention centre
     ///
-    /// interesting: `Interesting` -> How to measure interestingness
+    /// interesting: [`Interesting`] -> How to measure interestingness
     ///
     /// premultiplied: `bool` -> Input image already has premultiplied alpha
     pub fn smartcrop_with_opts(
@@ -16160,13 +16160,13 @@ impl VipsImage {
     ///
     /// high_bitdepth: `bool` -> Enable scRGB 128-bit output (32-bit per channel)
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn svgload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
@@ -16232,13 +16232,13 @@ impl VipsImage {
     ///
     /// high_bitdepth: `bool` -> Enable scRGB 128-bit output (32-bit per channel)
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn svgload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
@@ -16304,13 +16304,13 @@ impl VipsImage {
     ///
     /// high_bitdepth: `bool` -> Enable scRGB 128-bit output (32-bit per channel)
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn svgload_source_with_opts(source: &VipsSource, option: VOption) -> Result<VipsImage> {
@@ -16445,7 +16445,7 @@ impl VipsImage {
     ///
     /// height: `i32` -> Maximum image height in pixels
     ///
-    /// align: `Align` -> Align on the low, centre or high edge
+    /// align: [`Align`] -> Align on the low, centre or high edge
     ///
     /// justify: `bool` -> Justify lines
     ///
@@ -16459,7 +16459,7 @@ impl VipsImage {
     ///
     /// rgba: `bool` -> Enable RGBA output
     ///
-    /// wrap: `TextWrap` -> Wrap lines on word or character boundaries
+    /// wrap: [`TextWrap`] -> Wrap lines on word or character boundaries
     pub fn text_with_opts(text: &str, option: VOption) -> Result<VipsImage> {
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
@@ -16523,11 +16523,11 @@ impl VipsImage {
     ///
     /// height: `i32` -> Size to this height
     ///
-    /// size: `Size` -> Only upsize, only downsize, or both
+    /// size: [`Size`] -> Only upsize, only downsize, or both
     ///
     /// no_rotate: `bool` -> Don't use orientation tags to rotate image upright
     ///
-    /// crop: `Interesting` -> Reduce to fill target rectangle, then crop
+    /// crop: [`Interesting`] -> Reduce to fill target rectangle, then crop
     ///
     /// linear: `bool` -> Reduce in linear light
     ///
@@ -16535,9 +16535,9 @@ impl VipsImage {
     ///
     /// output_profile: `&str` -> Fallback output profile
     ///
-    /// intent: `Intent` -> Rendering intent
+    /// intent: [`Intent`] -> Rendering intent
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     pub fn thumbnail_with_opts(filename: &str, width: i32, option: VOption) -> Result<VipsImage> {
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
@@ -16607,11 +16607,11 @@ impl VipsImage {
     ///
     /// height: `i32` -> Size to this height
     ///
-    /// size: `Size` -> Only upsize, only downsize, or both
+    /// size: [`Size`] -> Only upsize, only downsize, or both
     ///
     /// no_rotate: `bool` -> Don't use orientation tags to rotate image upright
     ///
-    /// crop: `Interesting` -> Reduce to fill target rectangle, then crop
+    /// crop: [`Interesting`] -> Reduce to fill target rectangle, then crop
     ///
     /// linear: `bool` -> Reduce in linear light
     ///
@@ -16619,9 +16619,9 @@ impl VipsImage {
     ///
     /// output_profile: `&str` -> Fallback output profile
     ///
-    /// intent: `Intent` -> Rendering intent
+    /// intent: [`Intent`] -> Rendering intent
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     pub fn thumbnail_buffer_with_opts(
         buffer: &[u8],
         width: i32,
@@ -16689,11 +16689,11 @@ impl VipsImage {
     ///
     /// height: `i32` -> Size to this height
     ///
-    /// size: `Size` -> Only upsize, only downsize, or both
+    /// size: [`Size`] -> Only upsize, only downsize, or both
     ///
     /// no_rotate: `bool` -> Don't use orientation tags to rotate image upright
     ///
-    /// crop: `Interesting` -> Reduce to fill target rectangle, then crop
+    /// crop: [`Interesting`] -> Reduce to fill target rectangle, then crop
     ///
     /// linear: `bool` -> Reduce in linear light
     ///
@@ -16701,9 +16701,9 @@ impl VipsImage {
     ///
     /// output_profile: `&str` -> Fallback output profile
     ///
-    /// intent: `Intent` -> Rendering intent
+    /// intent: [`Intent`] -> Rendering intent
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     pub fn thumbnail_image_with_opts(&self, width: i32, option: VOption) -> Result<VipsImage> {
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
@@ -16773,11 +16773,11 @@ impl VipsImage {
     ///
     /// height: `i32` -> Size to this height
     ///
-    /// size: `Size` -> Only upsize, only downsize, or both
+    /// size: [`Size`] -> Only upsize, only downsize, or both
     ///
     /// no_rotate: `bool` -> Don't use orientation tags to rotate image upright
     ///
-    /// crop: `Interesting` -> Reduce to fill target rectangle, then crop
+    /// crop: [`Interesting`] -> Reduce to fill target rectangle, then crop
     ///
     /// linear: `bool` -> Reduce in linear light
     ///
@@ -16785,9 +16785,9 @@ impl VipsImage {
     ///
     /// output_profile: `&str` -> Fallback output profile
     ///
-    /// intent: `Intent` -> Rendering intent
+    /// intent: [`Intent`] -> Rendering intent
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     pub fn thumbnail_source_with_opts(
         source: &VipsSource,
         width: i32,
@@ -16859,13 +16859,13 @@ impl VipsImage {
     ///
     /// unlimited: `bool` -> Remove all denial of service limits
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn tiffload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
@@ -16931,13 +16931,13 @@ impl VipsImage {
     ///
     /// unlimited: `bool` -> Remove all denial of service limits
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn tiffload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
@@ -17003,13 +17003,13 @@ impl VipsImage {
     ///
     /// unlimited: `bool` -> Remove all denial of service limits
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn tiffload_source_with_opts(source: &VipsSource, option: VOption) -> Result<VipsImage> {
@@ -17062,11 +17062,11 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// compression: `ForeignTiffCompression` -> Compression for this file
+    /// compression: [`ForeignTiffCompression`] -> Compression for this file
     ///
     /// Q: `i32` -> Q factor
     ///
-    /// predictor: `ForeignTiffPredictor` -> Compression prediction
+    /// predictor: [`ForeignTiffPredictor`] -> Compression prediction
     ///
     /// tile: `bool` -> Write a tiled tiff
     ///
@@ -17080,7 +17080,7 @@ impl VipsImage {
     ///
     /// bitdepth: `i32` -> Write as a 1, 2, 4 or 8 bit image
     ///
-    /// resunit: `ForeignTiffResunit` -> Resolution unit
+    /// resunit: [`ForeignTiffResunit`] -> Resolution unit
     ///
     /// xres: `f64` -> Horizontal resolution in pixels/mm
     ///
@@ -17090,19 +17090,19 @@ impl VipsImage {
     ///
     /// properties: `bool` -> Write a properties document to IMAGEDESCRIPTION
     ///
-    /// region_shrink: `RegionShrink` -> Method to shrink regions
+    /// region_shrink: [`RegionShrink`] -> Method to shrink regions
     ///
     /// level: `i32` -> Deflate (1-9, default 6) or ZSTD (1-22, default 9) compression level
     ///
     /// lossless: `bool` -> Enable WEBP lossless mode
     ///
-    /// depth: `ForeignDzDepth` -> Pyramid depth
+    /// depth: [`ForeignDzDepth`] -> Pyramid depth
     ///
     /// subifd: `bool` -> Save pyr layers as sub-IFDs
     ///
     /// premultiply: `bool` -> Save with premultiplied alpha
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -17157,11 +17157,11 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// compression: `ForeignTiffCompression` -> Compression for this file
+    /// compression: [`ForeignTiffCompression`] -> Compression for this file
     ///
     /// Q: `i32` -> Q factor
     ///
-    /// predictor: `ForeignTiffPredictor` -> Compression prediction
+    /// predictor: [`ForeignTiffPredictor`] -> Compression prediction
     ///
     /// tile: `bool` -> Write a tiled tiff
     ///
@@ -17175,7 +17175,7 @@ impl VipsImage {
     ///
     /// bitdepth: `i32` -> Write as a 1, 2, 4 or 8 bit image
     ///
-    /// resunit: `ForeignTiffResunit` -> Resolution unit
+    /// resunit: [`ForeignTiffResunit`] -> Resolution unit
     ///
     /// xres: `f64` -> Horizontal resolution in pixels/mm
     ///
@@ -17185,19 +17185,19 @@ impl VipsImage {
     ///
     /// properties: `bool` -> Write a properties document to IMAGEDESCRIPTION
     ///
-    /// region_shrink: `RegionShrink` -> Method to shrink regions
+    /// region_shrink: [`RegionShrink`] -> Method to shrink regions
     ///
     /// level: `i32` -> Deflate (1-9, default 6) or ZSTD (1-22, default 9) compression level
     ///
     /// lossless: `bool` -> Enable WEBP lossless mode
     ///
-    /// depth: `ForeignDzDepth` -> Pyramid depth
+    /// depth: [`ForeignDzDepth`] -> Pyramid depth
     ///
     /// subifd: `bool` -> Save pyr layers as sub-IFDs
     ///
     /// premultiply: `bool` -> Save with premultiplied alpha
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -17254,11 +17254,11 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// compression: `ForeignTiffCompression` -> Compression for this file
+    /// compression: [`ForeignTiffCompression`] -> Compression for this file
     ///
     /// Q: `i32` -> Q factor
     ///
-    /// predictor: `ForeignTiffPredictor` -> Compression prediction
+    /// predictor: [`ForeignTiffPredictor`] -> Compression prediction
     ///
     /// tile: `bool` -> Write a tiled tiff
     ///
@@ -17272,7 +17272,7 @@ impl VipsImage {
     ///
     /// bitdepth: `i32` -> Write as a 1, 2, 4 or 8 bit image
     ///
-    /// resunit: `ForeignTiffResunit` -> Resolution unit
+    /// resunit: [`ForeignTiffResunit`] -> Resolution unit
     ///
     /// xres: `f64` -> Horizontal resolution in pixels/mm
     ///
@@ -17282,19 +17282,19 @@ impl VipsImage {
     ///
     /// properties: `bool` -> Write a properties document to IMAGEDESCRIPTION
     ///
-    /// region_shrink: `RegionShrink` -> Method to shrink regions
+    /// region_shrink: [`RegionShrink`] -> Method to shrink regions
     ///
     /// level: `i32` -> Deflate (1-9, default 6) or ZSTD (1-22, default 9) compression level
     ///
     /// lossless: `bool` -> Enable WEBP lossless mode
     ///
-    /// depth: `ForeignDzDepth` -> Pyramid depth
+    /// depth: [`ForeignDzDepth`] -> Pyramid depth
     ///
     /// subifd: `bool` -> Save pyr layers as sub-IFDs
     ///
     /// premultiply: `bool` -> Save with premultiplied alpha
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -17355,7 +17355,7 @@ impl VipsImage {
     ///
     /// max_tiles: `i32` -> Maximum number of tiles to cache
     ///
-    /// access: `Access` -> Expected access pattern
+    /// access: [`Access`] -> Expected access pattern
     ///
     /// threaded: `bool` -> Allow threaded access
     ///
@@ -17573,13 +17573,13 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn vipsload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
@@ -17635,13 +17635,13 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn vipsload_source_with_opts(source: &VipsSource, option: VOption) -> Result<VipsImage> {
@@ -17694,7 +17694,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -17750,7 +17750,7 @@ impl VipsImage {
     ///
     /// <ins>Optional arguments</ins>
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -17815,13 +17815,13 @@ impl VipsImage {
     ///
     /// scale: `f64` -> Factor to scale by
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn webpload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
@@ -17883,13 +17883,13 @@ impl VipsImage {
     ///
     /// scale: `f64` -> Factor to scale by
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn webpload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
@@ -17951,13 +17951,13 @@ impl VipsImage {
     ///
     /// scale: `f64` -> Factor to scale by
     ///
-    /// flags: `ForeignFlags` -> Flags for this file
+    /// flags: [`ForeignFlags`] -> Flags for this file
     ///
     /// memory: `bool` -> Force open via memory
     ///
-    /// access: `Access` -> Required access pattern for this file
+    /// access: [`Access`] -> Required access pattern for this file
     ///
-    /// fail_on: `FailOn` -> Error level to fail on
+    /// fail_on: [`FailOn`] -> Error level to fail on
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn webpload_source_with_opts(source: &VipsSource, option: VOption) -> Result<VipsImage> {
@@ -18014,7 +18014,7 @@ impl VipsImage {
     ///
     /// lossless: `bool` -> Enable lossless compression
     ///
-    /// preset: `ForeignWebpPreset` -> Preset for lossy compression
+    /// preset: [`ForeignWebpPreset`] -> Preset for lossy compression
     ///
     /// smart_subsample: `bool` -> Enable high quality chroma subsampling
     ///
@@ -18038,7 +18038,7 @@ impl VipsImage {
     ///
     /// passes: `i32` -> Number of entropy-analysis passes (in [1..10])
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -18097,7 +18097,7 @@ impl VipsImage {
     ///
     /// lossless: `bool` -> Enable lossless compression
     ///
-    /// preset: `ForeignWebpPreset` -> Preset for lossy compression
+    /// preset: [`ForeignWebpPreset`] -> Preset for lossy compression
     ///
     /// smart_subsample: `bool` -> Enable high quality chroma subsampling
     ///
@@ -18121,7 +18121,7 @@ impl VipsImage {
     ///
     /// passes: `i32` -> Number of entropy-analysis passes (in [1..10])
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -18173,7 +18173,7 @@ impl VipsImage {
     ///
     /// lossless: `bool` -> Enable lossless compression
     ///
-    /// preset: `ForeignWebpPreset` -> Preset for lossy compression
+    /// preset: [`ForeignWebpPreset`] -> Preset for lossy compression
     ///
     /// smart_subsample: `bool` -> Enable high quality chroma subsampling
     ///
@@ -18197,7 +18197,7 @@ impl VipsImage {
     ///
     /// passes: `i32` -> Number of entropy-analysis passes (in [1..10])
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///
@@ -18252,7 +18252,7 @@ impl VipsImage {
     ///
     /// lossless: `bool` -> Enable lossless compression
     ///
-    /// preset: `ForeignWebpPreset` -> Preset for lossy compression
+    /// preset: [`ForeignWebpPreset`] -> Preset for lossy compression
     ///
     /// smart_subsample: `bool` -> Enable high quality chroma subsampling
     ///
@@ -18276,7 +18276,7 @@ impl VipsImage {
     ///
     /// passes: `i32` -> Number of entropy-analysis passes (in [1..10])
     ///
-    /// keep: `ForeignKeep` -> Which metadata to retain
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
     /// background: `&[f64]` -> Background value
     ///

@@ -145,7 +145,7 @@ pub fn result<T>(res: i32, output: T, error: Error) -> Result<T> {
 }
 
 #[inline]
-pub fn safe_result<F, O, R>(res: i32, output: O, func: F, error: Error) -> Result<R>
+pub(crate) fn safe_result<F, O, R>(res: i32, output: O, func: F, error: Error) -> Result<R>
 where
     F: Fn(O) -> R,
 {
@@ -236,13 +236,13 @@ pub(crate) unsafe fn vips_matrix(image: &bindings::VipsImage, x: i32, y: i32) ->
     ) as *mut f64
 }
 
-pub const G_TYPE_BOOLEAN: &str = "gboolean";
-pub const G_TYPE_INT: &str = "gint";
-pub const G_TYPE_UINT64: &str = "guint64";
-pub const G_TYPE_DOUBLE: &str = "gdouble";
-pub const G_TYPE_STRING: &str = "gchararray";
+pub(crate) const G_TYPE_BOOLEAN: &str = "gboolean";
+pub(crate) const G_TYPE_INT: &str = "gint";
+pub(crate) const G_TYPE_UINT64: &str = "guint64";
+pub(crate) const G_TYPE_DOUBLE: &str = "gdouble";
+pub(crate) const G_TYPE_STRING: &str = "gchararray";
 
-pub fn get_g_type(name: &str) -> u64 {
+pub(crate) fn get_g_type(name: &str) -> u64 {
     let type_name = new_c_string(name).unwrap();
     unsafe { g_type_from_name(type_name.as_ptr()) }
 }

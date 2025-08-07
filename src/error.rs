@@ -1,6 +1,5 @@
-use std::ffi::CStr;
-
 use crate::bindings::vips_error_buffer;
+use std::ffi::CStr;
 
 #[derive(Debug)]
 pub enum Error {
