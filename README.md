@@ -35,7 +35,7 @@ Most (if not all) vips operations don't mutate the `VipsImage` object, so they'l
 ### Example
 
 ```rust
-use libvips::{voption::{VOption, Setter}, Vips, VipsImage};
+use rs_vips::{voption::{VOption, Setter}, Vips, VipsImage};
 
 fn main() {
     // this initializes the libvips library.
