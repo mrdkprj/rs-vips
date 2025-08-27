@@ -81,3 +81,13 @@ fn main() {
     Vips::shutdown();
 }
 ```
+
+## Platform-specific notes
+### Windows
+Download dll (`libvips-42.dll`) and lib (`libvips.lib`) files from [libvips releases](https://github.com/libvips/libvips/releases) (e.g., `vips-dev-w64-web-8.17.0-static.zip`).  
+Place them in a folder and add the folder path to the library search path in your build script.  
+```rust
+fn main() {
+    println!("cargo:rustc-link-search=native={}", "/path/to/lib");
+}
+```
