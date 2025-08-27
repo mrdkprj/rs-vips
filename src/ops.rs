@@ -1,13 +1,14 @@
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::upper_case_acronyms)]
+use crate::bindings::{vips_area_unref, vips_blob_new};
+use crate::connection::VipsSource;
+use crate::connection::VipsTarget;
 use crate::error::*;
+use crate::region::VipsBlob;
 use crate::utils;
 use crate::voption::{call, Setter, VOption};
 use crate::Result;
-use crate::VipsBlob;
 use crate::VipsImage;
-use crate::VipsSource;
-use crate::VipsTarget;
 use std::ffi::c_void;
 use std::ptr::null_mut;
 
@@ -799,15 +800,13 @@ impl VipsImage {
         let vips_op_response = call(
             "CMC2LCh",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -822,15 +821,13 @@ impl VipsImage {
         let vips_op_response = call(
             "CMYK2XYZ",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -845,15 +842,13 @@ impl VipsImage {
         let vips_op_response = call(
             "HSV2sRGB",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -868,15 +863,13 @@ impl VipsImage {
         let vips_op_response = call(
             "LCh2CMC",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -891,15 +884,13 @@ impl VipsImage {
         let vips_op_response = call(
             "LCh2Lab",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -914,15 +905,13 @@ impl VipsImage {
         let vips_op_response = call(
             "Lab2LCh",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -937,15 +926,13 @@ impl VipsImage {
         let vips_op_response = call(
             "Lab2LabQ",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -960,15 +947,13 @@ impl VipsImage {
         let vips_op_response = call(
             "Lab2LabS",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -983,15 +968,13 @@ impl VipsImage {
         let vips_op_response = call(
             "Lab2XYZ",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1010,15 +993,13 @@ impl VipsImage {
         let vips_op_response = call(
             "Lab2XYZ",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1033,15 +1014,13 @@ impl VipsImage {
         let vips_op_response = call(
             "LabQ2Lab",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1056,15 +1035,13 @@ impl VipsImage {
         let vips_op_response = call(
             "LabQ2LabS",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1079,15 +1056,13 @@ impl VipsImage {
         let vips_op_response = call(
             "LabQ2sRGB",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1102,15 +1077,13 @@ impl VipsImage {
         let vips_op_response = call(
             "LabS2Lab",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1125,15 +1098,13 @@ impl VipsImage {
         let vips_op_response = call(
             "LabS2LabQ",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1148,15 +1119,13 @@ impl VipsImage {
         let vips_op_response = call(
             "XYZ2CMYK",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1171,15 +1140,13 @@ impl VipsImage {
         let vips_op_response = call(
             "XYZ2Lab",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1198,15 +1165,13 @@ impl VipsImage {
         let vips_op_response = call(
             "XYZ2Lab",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1221,15 +1186,13 @@ impl VipsImage {
         let vips_op_response = call(
             "XYZ2Yxy",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1244,15 +1207,13 @@ impl VipsImage {
         let vips_op_response = call(
             "XYZ2scRGB",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1267,15 +1228,13 @@ impl VipsImage {
         let vips_op_response = call(
             "Yxy2XYZ",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1290,15 +1249,13 @@ impl VipsImage {
         let vips_op_response = call(
             "abs",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1317,7 +1274,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "left",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "right",
@@ -1328,6 +1285,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1342,15 +1300,13 @@ impl VipsImage {
         let vips_op_response = call(
             "addalpha",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1367,10 +1323,7 @@ impl VipsImage {
         let vips_op_response = call(
             "affine",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -1380,6 +1333,7 @@ impl VipsImage {
                     matrix,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1416,10 +1370,7 @@ impl VipsImage {
         let vips_op_response = call(
             "affine",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -1429,6 +1380,7 @@ impl VipsImage {
                     matrix,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1454,6 +1406,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1491,6 +1444,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1513,6 +1467,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1551,6 +1506,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1565,15 +1521,13 @@ impl VipsImage {
         let vips_op_response = call(
             "autorot",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1594,15 +1548,13 @@ impl VipsImage {
         let vips_op_response = call(
             "autorot",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1617,15 +1569,13 @@ impl VipsImage {
         let vips_op_response = call(
             "avg",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1642,10 +1592,7 @@ impl VipsImage {
         let vips_op_response = call(
             "bandbool",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -1655,6 +1602,7 @@ impl VipsImage {
                     boolean as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1669,15 +1617,13 @@ impl VipsImage {
         let vips_op_response = call(
             "bandfold",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1696,15 +1642,13 @@ impl VipsImage {
         let vips_op_response = call(
             "bandfold",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1727,6 +1671,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1743,16 +1688,14 @@ impl VipsImage {
         let vips_op_response = call(
             "bandjoin_const",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 )
                 .set("c", c),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1767,15 +1710,13 @@ impl VipsImage {
         let vips_op_response = call(
             "bandmean",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1798,6 +1739,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1824,6 +1766,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1838,15 +1781,13 @@ impl VipsImage {
         let vips_op_response = call(
             "bandunfold",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1865,15 +1806,13 @@ impl VipsImage {
         let vips_op_response = call(
             "bandunfold",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1905,6 +1844,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1940,6 +1880,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1960,7 +1901,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "left",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "right",
@@ -1975,6 +1916,7 @@ impl VipsImage {
                     boolean as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -1993,10 +1935,7 @@ impl VipsImage {
         let vips_op_response = call(
             "boolean_const",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -2007,6 +1946,7 @@ impl VipsImage {
                 )
                 .set("c", c),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2021,15 +1961,13 @@ impl VipsImage {
         let vips_op_response = call(
             "buildlut",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2044,15 +1982,13 @@ impl VipsImage {
         let vips_op_response = call(
             "byteswap",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2067,15 +2003,13 @@ impl VipsImage {
         let vips_op_response = call(
             "canny",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2096,15 +2030,13 @@ impl VipsImage {
         let vips_op_response = call(
             "canny",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2123,7 +2055,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "index",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "cases",
@@ -2134,6 +2066,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2150,10 +2083,7 @@ impl VipsImage {
         let vips_op_response = call(
             "cast",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -2163,6 +2093,7 @@ impl VipsImage {
                     format as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2183,10 +2114,7 @@ impl VipsImage {
         let vips_op_response = call(
             "cast",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -2196,6 +2124,7 @@ impl VipsImage {
                     format as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2210,15 +2139,13 @@ impl VipsImage {
         let vips_op_response = call(
             "clamp",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2239,15 +2166,13 @@ impl VipsImage {
         let vips_op_response = call(
             "clamp",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2264,10 +2189,7 @@ impl VipsImage {
         let vips_op_response = call(
             "colourspace",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -2277,6 +2199,7 @@ impl VipsImage {
                     space as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2301,10 +2224,7 @@ impl VipsImage {
         let vips_op_response = call(
             "colourspace",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -2314,6 +2234,7 @@ impl VipsImage {
                     space as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2330,10 +2251,7 @@ impl VipsImage {
         let vips_op_response = call(
             "compass",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -2343,6 +2261,7 @@ impl VipsImage {
                     mask,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2373,10 +2292,7 @@ impl VipsImage {
         let vips_op_response = call(
             "compass",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -2386,6 +2302,7 @@ impl VipsImage {
                     mask,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2406,7 +2323,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "left",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "right",
@@ -2421,6 +2338,7 @@ impl VipsImage {
                     cmplx as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2437,10 +2355,7 @@ impl VipsImage {
         let vips_op_response = call(
             "complex",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -2450,6 +2365,7 @@ impl VipsImage {
                     cmplx as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2468,7 +2384,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "left",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "right",
@@ -2479,6 +2395,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2495,10 +2412,7 @@ impl VipsImage {
         let vips_op_response = call(
             "complexget",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -2508,6 +2422,7 @@ impl VipsImage {
                     get as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2528,7 +2443,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "base",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "overlay",
@@ -2543,6 +2458,7 @@ impl VipsImage {
                     mode as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2578,7 +2494,7 @@ impl VipsImage {
             option
                 .set(
                     "base",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "overlay",
@@ -2593,6 +2509,7 @@ impl VipsImage {
                     mode as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2621,6 +2538,7 @@ impl VipsImage {
                     mode,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2663,6 +2581,7 @@ impl VipsImage {
                     mode,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2679,10 +2598,7 @@ impl VipsImage {
         let vips_op_response = call(
             "conv",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -2692,6 +2608,7 @@ impl VipsImage {
                     mask,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2716,10 +2633,7 @@ impl VipsImage {
         let vips_op_response = call(
             "conv",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -2729,6 +2643,7 @@ impl VipsImage {
                     mask,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2745,10 +2660,7 @@ impl VipsImage {
         let vips_op_response = call(
             "conva",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -2758,6 +2670,7 @@ impl VipsImage {
                     mask,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2780,10 +2693,7 @@ impl VipsImage {
         let vips_op_response = call(
             "conva",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -2793,6 +2703,7 @@ impl VipsImage {
                     mask,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2809,10 +2720,7 @@ impl VipsImage {
         let vips_op_response = call(
             "convasep",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -2822,6 +2730,7 @@ impl VipsImage {
                     mask,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2842,10 +2751,7 @@ impl VipsImage {
         let vips_op_response = call(
             "convasep",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -2855,6 +2761,7 @@ impl VipsImage {
                     mask,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2871,10 +2778,7 @@ impl VipsImage {
         let vips_op_response = call(
             "convf",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -2884,6 +2788,7 @@ impl VipsImage {
                     mask,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2900,10 +2805,7 @@ impl VipsImage {
         let vips_op_response = call(
             "convi",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -2913,6 +2815,7 @@ impl VipsImage {
                     mask,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2929,10 +2832,7 @@ impl VipsImage {
         let vips_op_response = call(
             "convsep",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -2942,6 +2842,7 @@ impl VipsImage {
                     mask,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2966,10 +2867,7 @@ impl VipsImage {
         let vips_op_response = call(
             "convsep",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -2979,6 +2877,7 @@ impl VipsImage {
                     mask,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -2993,15 +2892,13 @@ impl VipsImage {
         let vips_op_response = call(
             "copy",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -3038,15 +2935,13 @@ impl VipsImage {
         let vips_op_response = call(
             "copy",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -3063,10 +2958,7 @@ impl VipsImage {
         let vips_op_response = call(
             "countlines",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "nolines",
                     &mut nolines_out,
@@ -3076,6 +2968,7 @@ impl VipsImage {
                     direction as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             nolines_out,
@@ -3101,6 +2994,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -3146,6 +3040,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -3171,6 +3066,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -3216,6 +3112,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -3230,15 +3127,13 @@ impl VipsImage {
         let vips_op_response = call(
             "csvsave",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -3265,15 +3160,13 @@ impl VipsImage {
         let vips_op_response = call(
             "csvsave",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -3288,15 +3181,13 @@ impl VipsImage {
         let vips_op_response = call(
             "csvsave_target",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -3323,15 +3214,13 @@ impl VipsImage {
         let vips_op_response = call(
             "csvsave_target",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -3350,7 +3239,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "left",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "right",
@@ -3361,6 +3250,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -3379,7 +3269,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "left",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "right",
@@ -3390,6 +3280,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -3408,7 +3299,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "left",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "right",
@@ -3419,6 +3310,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -3433,15 +3325,13 @@ impl VipsImage {
         let vips_op_response = call(
             "deviate",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -3460,7 +3350,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "left",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "right",
@@ -3471,6 +3361,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -3493,7 +3384,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "image",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set("ink", ink)
                 .set("cx", cx)
@@ -3503,6 +3394,7 @@ impl VipsImage {
                     radius,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -3536,7 +3428,7 @@ impl VipsImage {
             option
                 .set(
                     "image",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set("ink", ink)
                 .set("cx", cx)
@@ -3546,6 +3438,7 @@ impl VipsImage {
                     radius,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -3566,12 +3459,13 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "image",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set("ink", ink)
                 .set("x", x)
                 .set("y", y),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -3606,12 +3500,13 @@ impl VipsImage {
             option
                 .set(
                     "image",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set("ink", ink)
                 .set("x", x)
                 .set("y", y),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -3632,12 +3527,13 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "image",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set("sub", sub)
                 .set("x", x)
                 .set("y", y),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -3668,12 +3564,13 @@ impl VipsImage {
             option
                 .set(
                     "image",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set("sub", sub)
                 .set("x", x)
                 .set("y", y),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -3698,7 +3595,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "image",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set("ink", ink)
                 .set("x1", x1)
@@ -3706,6 +3603,7 @@ impl VipsImage {
                 .set("x2", x2)
                 .set("y2", y2),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -3728,7 +3626,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "image",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set("ink", ink)
                 .set(
@@ -3738,6 +3636,7 @@ impl VipsImage {
                 .set("x", x)
                 .set("y", y),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -3769,7 +3668,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "image",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set("ink", ink)
                 .set(
@@ -3786,6 +3685,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -3822,7 +3722,7 @@ impl VipsImage {
             option
                 .set(
                     "image",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set("ink", ink)
                 .set(
@@ -3839,6 +3739,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -3861,7 +3762,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "image",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "left",
@@ -3877,6 +3778,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -3891,15 +3793,13 @@ impl VipsImage {
         let vips_op_response = call(
             "dzsave",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -3952,15 +3852,13 @@ impl VipsImage {
         let vips_op_response = call(
             "dzsave",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -3975,15 +3873,13 @@ impl VipsImage {
         let vips_op_response = call(
             "dzsave_buffer",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -4036,15 +3932,13 @@ impl VipsImage {
         let vips_op_response = call(
             "dzsave_buffer",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -4059,15 +3953,13 @@ impl VipsImage {
         let vips_op_response = call(
             "dzsave_target",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -4120,15 +4012,13 @@ impl VipsImage {
         let vips_op_response = call(
             "dzsave_target",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -4151,10 +4041,7 @@ impl VipsImage {
         let vips_op_response = call(
             "embed",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -4170,6 +4057,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -4205,10 +4093,7 @@ impl VipsImage {
         let vips_op_response = call(
             "embed",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -4224,6 +4109,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -4248,7 +4134,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "input",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "out",
@@ -4268,6 +4154,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -4292,7 +4179,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "input",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "out",
@@ -4312,6 +4199,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -4328,10 +4216,7 @@ impl VipsImage {
         let vips_op_response = call(
             "extract_band",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -4341,6 +4226,7 @@ impl VipsImage {
                     band,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -4361,10 +4247,7 @@ impl VipsImage {
         let vips_op_response = call(
             "extract_band",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -4374,6 +4257,7 @@ impl VipsImage {
                     band,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -4405,6 +4289,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -4442,6 +4327,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -4456,15 +4342,13 @@ impl VipsImage {
         let vips_op_response = call(
             "falsecolour",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -4481,10 +4365,7 @@ impl VipsImage {
         let vips_op_response = call(
             "fastcor",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "ref", refp,
                 )
@@ -4493,6 +4374,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -4507,15 +4389,13 @@ impl VipsImage {
         let vips_op_response = call(
             "fill_nearest",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -4534,15 +4414,13 @@ impl VipsImage {
         let vips_op_response = call(
             "fill_nearest",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -4572,10 +4450,7 @@ impl VipsImage {
         let vips_op_response = call(
             "find_trim",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "left",
                     &mut left_out,
@@ -4593,6 +4468,7 @@ impl VipsImage {
                     &mut height_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (
@@ -4636,10 +4512,7 @@ impl VipsImage {
         let vips_op_response = call(
             "find_trim",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "left",
                     &mut left_out,
@@ -4657,6 +4530,7 @@ impl VipsImage {
                     &mut height_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (
@@ -4687,6 +4561,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -4724,6 +4599,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -4749,6 +4625,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -4786,6 +4663,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -4800,15 +4678,13 @@ impl VipsImage {
         let vips_op_response = call(
             "fitssave",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -4833,15 +4709,13 @@ impl VipsImage {
         let vips_op_response = call(
             "fitssave",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -4856,15 +4730,13 @@ impl VipsImage {
         let vips_op_response = call(
             "flatten",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -4885,15 +4757,13 @@ impl VipsImage {
         let vips_op_response = call(
             "flatten",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -4910,10 +4780,7 @@ impl VipsImage {
         let vips_op_response = call(
             "flip",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -4923,6 +4790,7 @@ impl VipsImage {
                     direction as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -4937,15 +4805,13 @@ impl VipsImage {
         let vips_op_response = call(
             "float2rad",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -4983,6 +4849,7 @@ impl VipsImage {
                     fractal_dimension,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -4999,10 +4866,7 @@ impl VipsImage {
         let vips_op_response = call(
             "freqmult",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "mask",
                     mask,
@@ -5012,6 +4876,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -5026,15 +4891,13 @@ impl VipsImage {
         let vips_op_response = call(
             "fwfft",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -5049,15 +4912,13 @@ impl VipsImage {
         let vips_op_response = call(
             "gamma",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -5076,15 +4937,13 @@ impl VipsImage {
         let vips_op_response = call(
             "gamma",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -5101,10 +4960,7 @@ impl VipsImage {
         let vips_op_response = call(
             "gaussblur",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -5114,6 +4970,7 @@ impl VipsImage {
                     sigma,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -5136,10 +4993,7 @@ impl VipsImage {
         let vips_op_response = call(
             "gaussblur",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -5149,6 +5003,7 @@ impl VipsImage {
                     sigma,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -5180,6 +5035,7 @@ impl VipsImage {
                     min_ampl,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -5217,6 +5073,7 @@ impl VipsImage {
                     min_ampl,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -5248,6 +5105,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -5287,6 +5145,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -5305,10 +5164,7 @@ impl VipsImage {
         let vips_op_response = call(
             "getpoint",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out-array",
                     &mut out_array_out,
@@ -5316,6 +5172,7 @@ impl VipsImage {
                 .set("x", x)
                 .set("y", y),
         );
+
         utils::result(
             vips_op_response,
             out_array_out,
@@ -5338,10 +5195,7 @@ impl VipsImage {
         let vips_op_response = call(
             "getpoint",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out-array",
                     &mut out_array_out,
@@ -5349,6 +5203,7 @@ impl VipsImage {
                 .set("x", x)
                 .set("y", y),
         );
+
         utils::result(
             vips_op_response,
             out_array_out,
@@ -5374,6 +5229,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -5415,6 +5271,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -5427,19 +5284,27 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn gifload_buffer(buffer: &[u8]) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "gifload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -5468,19 +5333,27 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn gifload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "gifload_buffer",
             option
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -5506,6 +5379,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -5547,6 +5421,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -5561,15 +5436,13 @@ impl VipsImage {
         let vips_op_response = call(
             "gifsave",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -5610,15 +5483,13 @@ impl VipsImage {
         let vips_op_response = call(
             "gifsave",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -5633,15 +5504,13 @@ impl VipsImage {
         let vips_op_response = call(
             "gifsave_buffer",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -5682,15 +5551,13 @@ impl VipsImage {
         let vips_op_response = call(
             "gifsave_buffer",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -5705,15 +5572,13 @@ impl VipsImage {
         let vips_op_response = call(
             "gifsave_target",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -5754,15 +5619,13 @@ impl VipsImage {
         let vips_op_response = call(
             "gifsave_target",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -5777,15 +5640,13 @@ impl VipsImage {
         let vips_op_response = call(
             "globalbalance",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -5806,15 +5667,13 @@ impl VipsImage {
         let vips_op_response = call(
             "globalbalance",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -5840,10 +5699,7 @@ impl VipsImage {
         let vips_op_response = call(
             "gravity",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -5861,6 +5717,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -5893,10 +5750,7 @@ impl VipsImage {
         let vips_op_response = call(
             "gravity",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -5914,6 +5768,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -5945,6 +5800,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -5980,6 +5836,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6000,10 +5857,7 @@ impl VipsImage {
         let vips_op_response = call(
             "grid",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -6021,6 +5875,7 @@ impl VipsImage {
                     down,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6046,6 +5901,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6091,6 +5947,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6103,19 +5960,27 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn heifload_buffer(buffer: &[u8]) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "heifload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -6148,19 +6013,27 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn heifload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "heifload_buffer",
             option
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -6186,6 +6059,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6231,6 +6105,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6245,15 +6120,13 @@ impl VipsImage {
         let vips_op_response = call(
             "heifsave",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -6292,15 +6165,13 @@ impl VipsImage {
         let vips_op_response = call(
             "heifsave",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -6315,15 +6186,13 @@ impl VipsImage {
         let vips_op_response = call(
             "heifsave_buffer",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -6362,15 +6231,13 @@ impl VipsImage {
         let vips_op_response = call(
             "heifsave_buffer",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -6385,15 +6252,13 @@ impl VipsImage {
         let vips_op_response = call(
             "heifsave_target",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -6432,15 +6297,13 @@ impl VipsImage {
         let vips_op_response = call(
             "heifsave_target",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -6455,15 +6318,13 @@ impl VipsImage {
         let vips_op_response = call(
             "hist_cum",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6478,15 +6339,13 @@ impl VipsImage {
         let vips_op_response = call(
             "hist_entropy",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6501,15 +6360,13 @@ impl VipsImage {
         let vips_op_response = call(
             "hist_equal",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6528,15 +6385,13 @@ impl VipsImage {
         let vips_op_response = call(
             "hist_equal",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6551,15 +6406,13 @@ impl VipsImage {
         let vips_op_response = call(
             "hist_find",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6578,15 +6431,13 @@ impl VipsImage {
         let vips_op_response = call(
             "hist_find",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6603,10 +6454,7 @@ impl VipsImage {
         let vips_op_response = call(
             "hist_find_indexed",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "index",
                     index,
@@ -6616,6 +6464,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6640,10 +6489,7 @@ impl VipsImage {
         let vips_op_response = call(
             "hist_find_indexed",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "index",
                     index,
@@ -6653,6 +6499,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6667,15 +6514,13 @@ impl VipsImage {
         let vips_op_response = call(
             "hist_find_ndim",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6694,15 +6539,13 @@ impl VipsImage {
         let vips_op_response = call(
             "hist_find_ndim",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6717,15 +6560,13 @@ impl VipsImage {
         let vips_op_response = call(
             "hist_ismonotonic",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "monotonic",
                     &mut monotonic_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             monotonic_out,
@@ -6744,10 +6585,7 @@ impl VipsImage {
         let vips_op_response = call(
             "hist_local",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -6761,6 +6599,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6788,10 +6627,7 @@ impl VipsImage {
         let vips_op_response = call(
             "hist_local",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -6805,6 +6641,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6821,10 +6658,7 @@ impl VipsImage {
         let vips_op_response = call(
             "hist_match",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "ref", refp,
                 )
@@ -6833,6 +6667,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6847,15 +6682,13 @@ impl VipsImage {
         let vips_op_response = call(
             "hist_norm",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6870,15 +6703,13 @@ impl VipsImage {
         let vips_op_response = call(
             "hist_plot",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6893,15 +6724,13 @@ impl VipsImage {
         let vips_op_response = call(
             "hough_circle",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6924,15 +6753,13 @@ impl VipsImage {
         let vips_op_response = call(
             "hough_circle",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6947,15 +6774,13 @@ impl VipsImage {
         let vips_op_response = call(
             "hough_line",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6976,15 +6801,13 @@ impl VipsImage {
         let vips_op_response = call(
             "hough_line",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -6999,15 +6822,13 @@ impl VipsImage {
         let vips_op_response = call(
             "icc_export",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7034,15 +6855,13 @@ impl VipsImage {
         let vips_op_response = call(
             "icc_export",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7057,15 +6876,13 @@ impl VipsImage {
         let vips_op_response = call(
             "icc_import",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7092,15 +6909,13 @@ impl VipsImage {
         let vips_op_response = call(
             "icc_import",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7117,10 +6932,7 @@ impl VipsImage {
         let vips_op_response = call(
             "icc_transform",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -7130,6 +6942,7 @@ impl VipsImage {
                     output_profile,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7164,10 +6977,7 @@ impl VipsImage {
         let vips_op_response = call(
             "icc_transform",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -7177,6 +6987,7 @@ impl VipsImage {
                     output_profile,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7195,6 +7006,7 @@ impl VipsImage {
                 &mut out_out,
             ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7221,6 +7033,7 @@ impl VipsImage {
                 &mut out_out,
             ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7241,7 +7054,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "cond",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set("in1", in1)
                 .set("in2", in2)
@@ -7250,6 +7063,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7279,7 +7093,7 @@ impl VipsImage {
             option
                 .set(
                     "cond",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set("in1", in1)
                 .set("in2", in2)
@@ -7288,6 +7102,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7310,7 +7125,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "main",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set("sub", sub)
                 .set(
@@ -7320,6 +7135,7 @@ impl VipsImage {
                 .set("x", x)
                 .set("y", y),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7354,7 +7170,7 @@ impl VipsImage {
             option
                 .set(
                     "main",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set("sub", sub)
                 .set(
@@ -7364,6 +7180,7 @@ impl VipsImage {
                 .set("x", x)
                 .set("y", y),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7378,15 +7195,13 @@ impl VipsImage {
         let vips_op_response = call(
             "invert",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7401,15 +7216,13 @@ impl VipsImage {
         let vips_op_response = call(
             "invertlut",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7428,15 +7241,13 @@ impl VipsImage {
         let vips_op_response = call(
             "invertlut",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7451,15 +7262,13 @@ impl VipsImage {
         let vips_op_response = call(
             "invfft",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7478,15 +7287,13 @@ impl VipsImage {
         let vips_op_response = call(
             "invfft",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7506,8 +7313,7 @@ impl VipsImage {
             "join",
             VOption::new()
                 .set(
-                    "in1",
-                    &VipsImage::from(self.ctx),
+                    "in1", self,
                 )
                 .set("in2", in2)
                 .set(
@@ -7519,6 +7325,7 @@ impl VipsImage {
                     direction as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7553,8 +7360,7 @@ impl VipsImage {
             "join",
             option
                 .set(
-                    "in1",
-                    &VipsImage::from(self.ctx),
+                    "in1", self,
                 )
                 .set("in2", in2)
                 .set(
@@ -7566,6 +7372,7 @@ impl VipsImage {
                     direction as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7591,6 +7398,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7632,6 +7440,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7644,19 +7453,27 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn jp2kload_buffer(buffer: &[u8]) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "jp2kload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -7685,19 +7502,27 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn jp2kload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "jp2kload_buffer",
             option
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -7723,6 +7548,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7764,6 +7590,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -7778,15 +7605,13 @@ impl VipsImage {
         let vips_op_response = call(
             "jp2ksave",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -7821,15 +7646,13 @@ impl VipsImage {
         let vips_op_response = call(
             "jp2ksave",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -7844,15 +7667,13 @@ impl VipsImage {
         let vips_op_response = call(
             "jp2ksave_buffer",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -7887,15 +7708,13 @@ impl VipsImage {
         let vips_op_response = call(
             "jp2ksave_buffer",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -7910,15 +7729,13 @@ impl VipsImage {
         let vips_op_response = call(
             "jp2ksave_target",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -7953,15 +7770,13 @@ impl VipsImage {
         let vips_op_response = call(
             "jp2ksave_target",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -7987,6 +7802,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -8030,6 +7846,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -8042,19 +7859,27 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn jpegload_buffer(buffer: &[u8]) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "jpegload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -8085,19 +7910,27 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn jpegload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "jpegload_buffer",
             option
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -8123,6 +7956,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -8166,6 +8000,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -8180,15 +8015,13 @@ impl VipsImage {
         let vips_op_response = call(
             "jpegsave",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -8231,15 +8064,13 @@ impl VipsImage {
         let vips_op_response = call(
             "jpegsave",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -8254,15 +8085,13 @@ impl VipsImage {
         let vips_op_response = call(
             "jpegsave_buffer",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -8305,15 +8134,13 @@ impl VipsImage {
         let vips_op_response = call(
             "jpegsave_buffer",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -8325,11 +8152,9 @@ impl VipsImage {
     pub fn jpegsave_mime(&self) -> Result<()> {
         let vips_op_response = call(
             "jpegsave_mime",
-            VOption::new().set(
-                "in",
-                &VipsImage::from(self.ctx),
-            ),
+            VOption::new().set("in", self),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -8369,11 +8194,9 @@ impl VipsImage {
     pub fn jpegsave_mime_with_opts(&self, option: VOption) -> Result<()> {
         let vips_op_response = call(
             "jpegsave_mime",
-            option.set(
-                "in",
-                &VipsImage::from(self.ctx),
-            ),
+            option.set("in", self),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -8388,15 +8211,13 @@ impl VipsImage {
         let vips_op_response = call(
             "jpegsave_target",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -8439,15 +8260,13 @@ impl VipsImage {
         let vips_op_response = call(
             "jpegsave_target",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -8473,6 +8292,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -8514,6 +8334,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -8526,19 +8347,27 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn jxlload_buffer(buffer: &[u8]) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "jxlload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -8567,19 +8396,27 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn jxlload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "jxlload_buffer",
             option
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -8605,6 +8442,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -8646,6 +8484,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -8660,15 +8499,13 @@ impl VipsImage {
         let vips_op_response = call(
             "jxlsave",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -8703,15 +8540,13 @@ impl VipsImage {
         let vips_op_response = call(
             "jxlsave",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -8726,15 +8561,13 @@ impl VipsImage {
         let vips_op_response = call(
             "jxlsave_buffer",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -8769,15 +8602,13 @@ impl VipsImage {
         let vips_op_response = call(
             "jxlsave_buffer",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -8792,15 +8623,13 @@ impl VipsImage {
         let vips_op_response = call(
             "jxlsave_target",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -8835,15 +8664,13 @@ impl VipsImage {
         let vips_op_response = call(
             "jxlsave_target",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -8858,15 +8685,13 @@ impl VipsImage {
         let vips_op_response = call(
             "labelregions",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "mask",
                     &mut mask_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             mask_out,
@@ -8885,15 +8710,13 @@ impl VipsImage {
         let vips_op_response = call(
             "labelregions",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "mask",
                     &mut mask_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             mask_out,
@@ -8912,10 +8735,7 @@ impl VipsImage {
         let vips_op_response = call(
             "linear",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -8923,6 +8743,7 @@ impl VipsImage {
                 .set("a", a)
                 .set("b", b),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -8945,10 +8766,7 @@ impl VipsImage {
         let vips_op_response = call(
             "linear",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -8956,6 +8774,7 @@ impl VipsImage {
                 .set("a", a)
                 .set("b", b),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -8970,15 +8789,13 @@ impl VipsImage {
         let vips_op_response = call(
             "linecache",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -9003,15 +8820,13 @@ impl VipsImage {
         let vips_op_response = call(
             "linecache",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -9043,6 +8858,7 @@ impl VipsImage {
                     min_ampl,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -9080,6 +8896,7 @@ impl VipsImage {
                     min_ampl,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -9105,6 +8922,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -9148,6 +8966,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -9160,19 +8979,27 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn magickload_buffer(buffer: &[u8]) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "magickload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -9203,19 +9030,27 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn magickload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "magickload_buffer",
             option
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -9230,15 +9065,13 @@ impl VipsImage {
         let vips_op_response = call(
             "magicksave",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -9273,15 +9106,13 @@ impl VipsImage {
         let vips_op_response = call(
             "magicksave",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -9296,15 +9127,13 @@ impl VipsImage {
         let vips_op_response = call(
             "magicksave_buffer",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -9339,15 +9168,13 @@ impl VipsImage {
         let vips_op_response = call(
             "magicksave_buffer",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -9364,10 +9191,7 @@ impl VipsImage {
         let vips_op_response = call(
             "mapim",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -9377,6 +9201,7 @@ impl VipsImage {
                     index,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -9403,10 +9228,7 @@ impl VipsImage {
         let vips_op_response = call(
             "mapim",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -9416,6 +9238,7 @@ impl VipsImage {
                     index,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -9432,16 +9255,14 @@ impl VipsImage {
         let vips_op_response = call(
             "maplut",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 )
                 .set("lut", lut),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -9462,16 +9283,14 @@ impl VipsImage {
         let vips_op_response = call(
             "maplut",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 )
                 .set("lut", lut),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -9527,6 +9346,7 @@ impl VipsImage {
                     amplitude_cutoff,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -9593,6 +9413,7 @@ impl VipsImage {
                     amplitude_cutoff,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -9662,6 +9483,7 @@ impl VipsImage {
                     amplitude_cutoff,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -9744,6 +9566,7 @@ impl VipsImage {
                     amplitude_cutoff,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -9808,6 +9631,7 @@ impl VipsImage {
                     ringwidth,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -9883,6 +9707,7 @@ impl VipsImage {
                     ringwidth,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -9922,6 +9747,7 @@ impl VipsImage {
                     fractal_dimension,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -9974,6 +9800,7 @@ impl VipsImage {
                     fractal_dimension,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -10022,6 +9849,7 @@ impl VipsImage {
                     amplitude_cutoff,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -10081,6 +9909,7 @@ impl VipsImage {
                     amplitude_cutoff,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -10143,6 +9972,7 @@ impl VipsImage {
                     amplitude_cutoff,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -10216,6 +10046,7 @@ impl VipsImage {
                     amplitude_cutoff,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -10271,6 +10102,7 @@ impl VipsImage {
                     ringwidth,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -10337,6 +10169,7 @@ impl VipsImage {
                     ringwidth,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -10374,6 +10207,7 @@ impl VipsImage {
                     frequency_cutoff,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -10426,6 +10260,7 @@ impl VipsImage {
                     frequency_cutoff,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -10481,6 +10316,7 @@ impl VipsImage {
                     radius,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -10547,6 +10383,7 @@ impl VipsImage {
                     radius,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -10595,6 +10432,7 @@ impl VipsImage {
                     ringwidth,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -10654,6 +10492,7 @@ impl VipsImage {
                     ringwidth,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -10698,8 +10537,7 @@ impl VipsImage {
             "match",
             VOption::new()
                 .set(
-                    "ref",
-                    &VipsImage::from(self.ctx),
+                    "ref", self,
                 )
                 .set("sec", sec)
                 .set(
@@ -10715,6 +10553,7 @@ impl VipsImage {
                 .set("xs2", xs2)
                 .set("ys2", ys2),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -10770,8 +10609,7 @@ impl VipsImage {
             "match",
             option
                 .set(
-                    "ref",
-                    &VipsImage::from(self.ctx),
+                    "ref", self,
                 )
                 .set("sec", sec)
                 .set(
@@ -10787,6 +10625,7 @@ impl VipsImage {
                 .set("xs2", xs2)
                 .set("ys2", ys2),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -10807,7 +10646,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "left",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "right",
@@ -10822,6 +10661,7 @@ impl VipsImage {
                     math2 as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -10840,10 +10680,7 @@ impl VipsImage {
         let vips_op_response = call(
             "math2_const",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -10854,6 +10691,7 @@ impl VipsImage {
                 )
                 .set("c", c),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -10870,10 +10708,7 @@ impl VipsImage {
         let vips_op_response = call(
             "math",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -10883,6 +10718,7 @@ impl VipsImage {
                     math as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -10908,6 +10744,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -10945,6 +10782,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -10959,15 +10797,13 @@ impl VipsImage {
         let vips_op_response = call(
             "matrixinvert",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -10993,6 +10829,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -11030,6 +10867,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -11055,6 +10893,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -11092,6 +10931,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -11110,7 +10950,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "left",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "right",
@@ -11121,6 +10961,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -11132,11 +10973,9 @@ impl VipsImage {
     pub fn matrixprint(&self) -> Result<()> {
         let vips_op_response = call(
             "matrixprint",
-            VOption::new().set(
-                "in",
-                &VipsImage::from(self.ctx),
-            ),
+            VOption::new().set("in", self),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -11158,11 +10997,9 @@ impl VipsImage {
     pub fn matrixprint_with_opts(&self, option: VOption) -> Result<()> {
         let vips_op_response = call(
             "matrixprint",
-            option.set(
-                "in",
-                &VipsImage::from(self.ctx),
-            ),
+            option.set("in", self),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -11177,15 +11014,13 @@ impl VipsImage {
         let vips_op_response = call(
             "matrixsave",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -11210,15 +11045,13 @@ impl VipsImage {
         let vips_op_response = call(
             "matrixsave",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -11233,15 +11066,13 @@ impl VipsImage {
         let vips_op_response = call(
             "matrixsave_target",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -11266,15 +11097,13 @@ impl VipsImage {
         let vips_op_response = call(
             "matrixsave_target",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -11289,15 +11118,13 @@ impl VipsImage {
         let vips_op_response = call(
             "max",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -11326,15 +11153,13 @@ impl VipsImage {
         let vips_op_response = call(
             "max",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -11353,7 +11178,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "left",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "right",
@@ -11364,6 +11189,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -11382,10 +11208,7 @@ impl VipsImage {
         let vips_op_response = call(
             "measure",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -11393,6 +11216,7 @@ impl VipsImage {
                 .set("h", h)
                 .set("v", v),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -11421,10 +11245,7 @@ impl VipsImage {
         let vips_op_response = call(
             "measure",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -11432,6 +11253,7 @@ impl VipsImage {
                 .set("h", h)
                 .set("v", v),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -11461,8 +11283,7 @@ impl VipsImage {
             "merge",
             VOption::new()
                 .set(
-                    "ref",
-                    &VipsImage::from(self.ctx),
+                    "ref", self,
                 )
                 .set("sec", sec)
                 .set(
@@ -11476,6 +11297,7 @@ impl VipsImage {
                 .set("dx", dx)
                 .set("dy", dy),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -11510,8 +11332,7 @@ impl VipsImage {
             "merge",
             option
                 .set(
-                    "ref",
-                    &VipsImage::from(self.ctx),
+                    "ref", self,
                 )
                 .set("sec", sec)
                 .set(
@@ -11525,6 +11346,7 @@ impl VipsImage {
                 .set("dx", dx)
                 .set("dy", dy),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -11539,15 +11361,13 @@ impl VipsImage {
         let vips_op_response = call(
             "min",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -11576,15 +11396,13 @@ impl VipsImage {
         let vips_op_response = call(
             "min",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -11603,7 +11421,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "left",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "right",
@@ -11614,6 +11432,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -11632,10 +11451,7 @@ impl VipsImage {
         let vips_op_response = call(
             "morph",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -11649,6 +11465,7 @@ impl VipsImage {
                     morph as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -11696,8 +11513,7 @@ impl VipsImage {
             "mosaic1",
             VOption::new()
                 .set(
-                    "ref",
-                    &VipsImage::from(self.ctx),
+                    "ref", self,
                 )
                 .set("sec", sec)
                 .set(
@@ -11717,6 +11533,7 @@ impl VipsImage {
                 .set("xs2", xs2)
                 .set("ys2", ys2),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -11777,8 +11594,7 @@ impl VipsImage {
             "mosaic1",
             option
                 .set(
-                    "ref",
-                    &VipsImage::from(self.ctx),
+                    "ref", self,
                 )
                 .set("sec", sec)
                 .set(
@@ -11798,6 +11614,7 @@ impl VipsImage {
                 .set("xs2", xs2)
                 .set("ys2", ys2),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -11833,8 +11650,7 @@ impl VipsImage {
             "mosaic",
             VOption::new()
                 .set(
-                    "ref",
-                    &VipsImage::from(self.ctx),
+                    "ref", self,
                 )
                 .set("sec", sec)
                 .set(
@@ -11862,6 +11678,7 @@ impl VipsImage {
                     ysec,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -11920,8 +11737,7 @@ impl VipsImage {
             "mosaic",
             option
                 .set(
-                    "ref",
-                    &VipsImage::from(self.ctx),
+                    "ref", self,
                 )
                 .set("sec", sec)
                 .set(
@@ -11949,6 +11765,7 @@ impl VipsImage {
                     ysec,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -11963,15 +11780,13 @@ impl VipsImage {
         let vips_op_response = call(
             "msb",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -11990,15 +11805,13 @@ impl VipsImage {
         let vips_op_response = call(
             "msb",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -12017,7 +11830,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "left",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "right",
@@ -12028,6 +11841,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -12053,6 +11867,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -12090,6 +11905,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -12115,6 +11931,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -12162,6 +11979,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -12187,6 +12005,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -12239,6 +12058,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -12266,6 +12086,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -12315,6 +12136,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -12327,19 +12149,27 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn pdfload_buffer(buffer: &[u8]) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "pdfload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -12376,19 +12206,27 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn pdfload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "pdfload_buffer",
             option
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -12414,6 +12252,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -12463,6 +12302,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -12479,10 +12319,7 @@ impl VipsImage {
         let vips_op_response = call(
             "percent",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "percent",
                     percent,
@@ -12492,6 +12329,7 @@ impl VipsImage {
                     &mut threshold_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             threshold_out,
@@ -12523,6 +12361,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -12562,6 +12401,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -12578,16 +12418,14 @@ impl VipsImage {
         let vips_op_response = call(
             "phasecor",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set("in2", in2)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -12613,6 +12451,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -12652,6 +12491,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -12664,19 +12504,27 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn pngload_buffer(buffer: &[u8]) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "pngload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -12703,19 +12551,27 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn pngload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "pngload_buffer",
             option
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -12741,6 +12597,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -12780,6 +12637,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -12794,15 +12652,13 @@ impl VipsImage {
         let vips_op_response = call(
             "pngsave",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -12843,15 +12699,13 @@ impl VipsImage {
         let vips_op_response = call(
             "pngsave",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -12866,15 +12720,13 @@ impl VipsImage {
         let vips_op_response = call(
             "pngsave_buffer",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -12915,15 +12767,13 @@ impl VipsImage {
         let vips_op_response = call(
             "pngsave_buffer",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -12938,15 +12788,13 @@ impl VipsImage {
         let vips_op_response = call(
             "pngsave_target",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -12987,15 +12835,13 @@ impl VipsImage {
         let vips_op_response = call(
             "pngsave_target",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -13021,6 +12867,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -13058,6 +12905,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -13070,19 +12918,27 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn ppmload_buffer(buffer: &[u8]) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "ppmload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -13107,19 +12963,27 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn ppmload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "ppmload_buffer",
             option
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -13145,6 +13009,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -13182,6 +13047,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -13196,15 +13062,13 @@ impl VipsImage {
         let vips_op_response = call(
             "ppmsave",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -13235,15 +13099,13 @@ impl VipsImage {
         let vips_op_response = call(
             "ppmsave",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -13258,15 +13120,13 @@ impl VipsImage {
         let vips_op_response = call(
             "ppmsave_target",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -13297,15 +13157,13 @@ impl VipsImage {
         let vips_op_response = call(
             "ppmsave_target",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -13320,15 +13178,13 @@ impl VipsImage {
         let vips_op_response = call(
             "premultiply",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -13347,15 +13203,13 @@ impl VipsImage {
         let vips_op_response = call(
             "premultiply",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -13370,15 +13224,13 @@ impl VipsImage {
         let vips_op_response = call(
             "prewitt",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -13402,10 +13254,7 @@ impl VipsImage {
         let vips_op_response = call(
             "profile",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "columns",
                     &mut columns_out,
@@ -13415,6 +13264,7 @@ impl VipsImage {
                     &mut rows_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (
@@ -13443,6 +13293,7 @@ impl VipsImage {
                     &mut profile_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             profile_out.into(),
@@ -13466,10 +13317,7 @@ impl VipsImage {
         let vips_op_response = call(
             "project",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "columns",
                     &mut columns_out,
@@ -13479,6 +13327,7 @@ impl VipsImage {
                     &mut rows_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (
@@ -13498,10 +13347,7 @@ impl VipsImage {
         let vips_op_response = call(
             "quadratic",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -13511,6 +13357,7 @@ impl VipsImage {
                     coeff,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -13531,10 +13378,7 @@ impl VipsImage {
         let vips_op_response = call(
             "quadratic",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -13544,6 +13388,7 @@ impl VipsImage {
                     coeff,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -13558,15 +13403,13 @@ impl VipsImage {
         let vips_op_response = call(
             "rad2float",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -13592,6 +13435,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -13629,6 +13473,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -13641,19 +13486,27 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn radload_buffer(buffer: &[u8]) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "radload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -13678,19 +13531,27 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn radload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "radload_buffer",
             option
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -13716,6 +13577,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -13753,6 +13615,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -13767,15 +13630,13 @@ impl VipsImage {
         let vips_op_response = call(
             "radsave",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -13800,15 +13661,13 @@ impl VipsImage {
         let vips_op_response = call(
             "radsave",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -13823,15 +13682,13 @@ impl VipsImage {
         let vips_op_response = call(
             "radsave_buffer",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -13856,15 +13713,13 @@ impl VipsImage {
         let vips_op_response = call(
             "radsave_buffer",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -13879,15 +13734,13 @@ impl VipsImage {
         let vips_op_response = call(
             "radsave_target",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -13912,15 +13765,13 @@ impl VipsImage {
         let vips_op_response = call(
             "radsave_target",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -13941,10 +13792,7 @@ impl VipsImage {
         let vips_op_response = call(
             "rank",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -13962,6 +13810,7 @@ impl VipsImage {
                     index,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14005,6 +13854,7 @@ impl VipsImage {
                     bands,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14072,6 +13922,7 @@ impl VipsImage {
                     bands,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14086,15 +13937,13 @@ impl VipsImage {
         let vips_op_response = call(
             "rawsave",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -14119,15 +13968,13 @@ impl VipsImage {
         let vips_op_response = call(
             "rawsave",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -14142,15 +13989,13 @@ impl VipsImage {
         let vips_op_response = call(
             "rawsave_buffer",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -14175,15 +14020,13 @@ impl VipsImage {
         let vips_op_response = call(
             "rawsave_buffer",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -14198,15 +14041,13 @@ impl VipsImage {
         let vips_op_response = call(
             "rawsave_target",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -14231,15 +14072,13 @@ impl VipsImage {
         let vips_op_response = call(
             "rawsave_target",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -14256,16 +14095,14 @@ impl VipsImage {
         let vips_op_response = call(
             "recomb",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 )
                 .set("m", m),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14284,10 +14121,7 @@ impl VipsImage {
         let vips_op_response = call(
             "reduce",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -14301,6 +14135,7 @@ impl VipsImage {
                     vshrink,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14330,10 +14165,7 @@ impl VipsImage {
         let vips_op_response = call(
             "reduce",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -14347,6 +14179,7 @@ impl VipsImage {
                     vshrink,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14363,10 +14196,7 @@ impl VipsImage {
         let vips_op_response = call(
             "reduceh",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -14376,6 +14206,7 @@ impl VipsImage {
                     hshrink,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14398,10 +14229,7 @@ impl VipsImage {
         let vips_op_response = call(
             "reduceh",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -14411,6 +14239,7 @@ impl VipsImage {
                     hshrink,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14427,10 +14256,7 @@ impl VipsImage {
         let vips_op_response = call(
             "reducev",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -14440,6 +14266,7 @@ impl VipsImage {
                     vshrink,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14462,10 +14289,7 @@ impl VipsImage {
         let vips_op_response = call(
             "reducev",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -14475,6 +14299,7 @@ impl VipsImage {
                     vshrink,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14499,7 +14324,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "left",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "right",
@@ -14514,6 +14339,7 @@ impl VipsImage {
                     relational as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14536,10 +14362,7 @@ impl VipsImage {
         let vips_op_response = call(
             "relational_const",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -14550,6 +14373,7 @@ impl VipsImage {
                 )
                 .set("c", c),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14568,7 +14392,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "left",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "right",
@@ -14579,6 +14403,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14595,16 +14420,14 @@ impl VipsImage {
         let vips_op_response = call(
             "remainder_const",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 )
                 .set("c", c),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14623,10 +14446,7 @@ impl VipsImage {
         let vips_op_response = call(
             "remosaic",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -14640,6 +14460,7 @@ impl VipsImage {
                     new_str,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14658,10 +14479,7 @@ impl VipsImage {
         let vips_op_response = call(
             "replicate",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -14675,6 +14493,7 @@ impl VipsImage {
                     down,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14691,10 +14510,7 @@ impl VipsImage {
         let vips_op_response = call(
             "resize",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -14704,6 +14520,7 @@ impl VipsImage {
                     scale,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14728,10 +14545,7 @@ impl VipsImage {
         let vips_op_response = call(
             "resize",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -14741,6 +14555,7 @@ impl VipsImage {
                     scale,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14755,15 +14570,13 @@ impl VipsImage {
         let vips_op_response = call(
             "rot45",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14782,15 +14595,13 @@ impl VipsImage {
         let vips_op_response = call(
             "rot45",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14807,10 +14618,7 @@ impl VipsImage {
         let vips_op_response = call(
             "rot",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -14820,6 +14628,7 @@ impl VipsImage {
                     angle as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14836,10 +14645,7 @@ impl VipsImage {
         let vips_op_response = call(
             "rotate",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -14849,6 +14655,7 @@ impl VipsImage {
                     angle,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14879,10 +14686,7 @@ impl VipsImage {
         let vips_op_response = call(
             "rotate",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -14892,6 +14696,7 @@ impl VipsImage {
                     angle,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14908,10 +14713,7 @@ impl VipsImage {
         let vips_op_response = call(
             "round",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -14921,6 +14723,7 @@ impl VipsImage {
                     round as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14935,15 +14738,13 @@ impl VipsImage {
         let vips_op_response = call(
             "sRGB2HSV",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14958,15 +14759,13 @@ impl VipsImage {
         let vips_op_response = call(
             "sRGB2scRGB",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -14981,15 +14780,13 @@ impl VipsImage {
         let vips_op_response = call(
             "scRGB2BW",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15008,15 +14805,13 @@ impl VipsImage {
         let vips_op_response = call(
             "scRGB2BW",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15031,15 +14826,13 @@ impl VipsImage {
         let vips_op_response = call(
             "scRGB2XYZ",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15054,15 +14847,13 @@ impl VipsImage {
         let vips_op_response = call(
             "scRGB2sRGB",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15081,15 +14872,13 @@ impl VipsImage {
         let vips_op_response = call(
             "scRGB2sRGB",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15104,15 +14893,13 @@ impl VipsImage {
         let vips_op_response = call(
             "scale",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15133,15 +14920,13 @@ impl VipsImage {
         let vips_op_response = call(
             "scale",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15156,15 +14941,13 @@ impl VipsImage {
         let vips_op_response = call(
             "scharr",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15202,6 +14985,7 @@ impl VipsImage {
                     shape as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15254,6 +15038,7 @@ impl VipsImage {
                     shape as i32,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15268,15 +15053,13 @@ impl VipsImage {
         let vips_op_response = call(
             "sequential",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15295,15 +15078,13 @@ impl VipsImage {
         let vips_op_response = call(
             "sequential",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15318,15 +15099,13 @@ impl VipsImage {
         let vips_op_response = call(
             "sharpen",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15355,15 +15134,13 @@ impl VipsImage {
         let vips_op_response = call(
             "sharpen",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15382,10 +15159,7 @@ impl VipsImage {
         let vips_op_response = call(
             "shrink",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -15399,6 +15173,7 @@ impl VipsImage {
                     vshrink,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15426,10 +15201,7 @@ impl VipsImage {
         let vips_op_response = call(
             "shrink",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -15443,6 +15215,7 @@ impl VipsImage {
                     vshrink,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15459,10 +15232,7 @@ impl VipsImage {
         let vips_op_response = call(
             "shrinkh",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -15472,6 +15242,7 @@ impl VipsImage {
                     hshrink,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15492,10 +15263,7 @@ impl VipsImage {
         let vips_op_response = call(
             "shrinkh",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -15505,6 +15273,7 @@ impl VipsImage {
                     hshrink,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15521,10 +15290,7 @@ impl VipsImage {
         let vips_op_response = call(
             "shrinkv",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -15534,6 +15300,7 @@ impl VipsImage {
                     vshrink,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15554,10 +15321,7 @@ impl VipsImage {
         let vips_op_response = call(
             "shrinkv",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -15567,6 +15331,7 @@ impl VipsImage {
                     vshrink,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15581,15 +15346,13 @@ impl VipsImage {
         let vips_op_response = call(
             "sign",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15604,15 +15367,13 @@ impl VipsImage {
         let vips_op_response = call(
             "similarity",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15645,15 +15406,13 @@ impl VipsImage {
         let vips_op_response = call(
             "similarity",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15685,6 +15444,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15724,6 +15484,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15744,7 +15505,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "input",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "out",
@@ -15759,6 +15520,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15794,7 +15556,7 @@ impl VipsImage {
             option
                 .set(
                     "input",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "out",
@@ -15809,6 +15571,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15823,15 +15586,13 @@ impl VipsImage {
         let vips_op_response = call(
             "sobel",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15848,10 +15609,7 @@ impl VipsImage {
         let vips_op_response = call(
             "spcor",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "ref", refp,
                 )
@@ -15860,6 +15618,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15874,15 +15633,13 @@ impl VipsImage {
         let vips_op_response = call(
             "spectrum",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15897,15 +15654,13 @@ impl VipsImage {
         let vips_op_response = call(
             "stats",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15924,10 +15679,7 @@ impl VipsImage {
         let vips_op_response = call(
             "stdif",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -15941,6 +15693,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -15969,10 +15722,7 @@ impl VipsImage {
         let vips_op_response = call(
             "stdif",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -15986,6 +15736,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -16006,7 +15757,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "input",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "out",
@@ -16021,6 +15772,7 @@ impl VipsImage {
                     yfac,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -16045,7 +15797,7 @@ impl VipsImage {
             option
                 .set(
                     "input",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "out",
@@ -16060,6 +15812,7 @@ impl VipsImage {
                     yfac,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -16078,7 +15831,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "left",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "right",
@@ -16089,6 +15842,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -16111,6 +15865,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -16136,6 +15891,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -16183,6 +15939,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -16195,19 +15952,27 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn svgload_buffer(buffer: &[u8]) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "svgload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -16242,19 +16007,27 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn svgload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "svgload_buffer",
             option
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -16280,6 +16053,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -16327,6 +16101,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -16352,6 +16127,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -16370,6 +16146,7 @@ impl VipsImage {
                 cmd_format,
             ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -16400,6 +16177,7 @@ impl VipsImage {
                 cmd_format,
             ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -16425,6 +16203,7 @@ impl VipsImage {
                     text,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -16474,6 +16253,7 @@ impl VipsImage {
                     text,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -16505,6 +16285,7 @@ impl VipsImage {
                     width,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -16556,6 +16337,7 @@ impl VipsImage {
                     width,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -16570,13 +16352,20 @@ impl VipsImage {
     ///
     /// width: `i32` -> Size to this width
     pub fn thumbnail_buffer(buffer: &[u8], width: i32) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "thumbnail_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
@@ -16587,6 +16376,7 @@ impl VipsImage {
                     width,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -16627,13 +16417,20 @@ impl VipsImage {
         width: i32,
         option: VOption,
     ) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "thumbnail_buffer",
             option
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
@@ -16644,6 +16441,7 @@ impl VipsImage {
                     width,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -16660,10 +16458,7 @@ impl VipsImage {
         let vips_op_response = call(
             "thumbnail_image",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -16673,6 +16468,7 @@ impl VipsImage {
                     width,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -16709,10 +16505,7 @@ impl VipsImage {
         let vips_op_response = call(
             "thumbnail_image",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
@@ -16722,6 +16515,7 @@ impl VipsImage {
                     width,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -16753,6 +16547,7 @@ impl VipsImage {
                     width,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -16810,6 +16605,7 @@ impl VipsImage {
                     width,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -16835,6 +16631,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -16882,6 +16679,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -16894,19 +16692,27 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn tiffload_buffer(buffer: &[u8]) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "tiffload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -16941,19 +16747,27 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn tiffload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "tiffload_buffer",
             option
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -16979,6 +16793,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -17026,6 +16841,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -17040,15 +16856,13 @@ impl VipsImage {
         let vips_op_response = call(
             "tiffsave",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -17113,15 +16927,13 @@ impl VipsImage {
         let vips_op_response = call(
             "tiffsave",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -17136,15 +16948,13 @@ impl VipsImage {
         let vips_op_response = call(
             "tiffsave_buffer",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -17209,15 +17019,13 @@ impl VipsImage {
         let vips_op_response = call(
             "tiffsave_buffer",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -17232,15 +17040,13 @@ impl VipsImage {
         let vips_op_response = call(
             "tiffsave_target",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -17305,15 +17111,13 @@ impl VipsImage {
         let vips_op_response = call(
             "tiffsave_target",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -17328,15 +17132,13 @@ impl VipsImage {
         let vips_op_response = call(
             "tilecache",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -17365,15 +17167,13 @@ impl VipsImage {
         let vips_op_response = call(
             "tilecache",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -17392,6 +17192,7 @@ impl VipsImage {
                 &mut out_out,
             ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -17432,6 +17233,7 @@ impl VipsImage {
                 &mut out_out,
             ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -17446,15 +17248,13 @@ impl VipsImage {
         let vips_op_response = call(
             "transpose3d",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -17473,15 +17273,13 @@ impl VipsImage {
         let vips_op_response = call(
             "transpose3d",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -17496,15 +17294,13 @@ impl VipsImage {
         let vips_op_response = call(
             "unpremultiply",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -17525,15 +17321,13 @@ impl VipsImage {
         let vips_op_response = call(
             "unpremultiply",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -17559,6 +17353,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -17596,6 +17391,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -17621,6 +17417,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -17658,6 +17455,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -17672,15 +17470,13 @@ impl VipsImage {
         let vips_op_response = call(
             "vipssave",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -17705,15 +17501,13 @@ impl VipsImage {
         let vips_op_response = call(
             "vipssave",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -17728,15 +17522,13 @@ impl VipsImage {
         let vips_op_response = call(
             "vipssave_target",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -17761,15 +17553,13 @@ impl VipsImage {
         let vips_op_response = call(
             "vipssave_target",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -17795,6 +17585,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -17838,6 +17629,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -17850,19 +17642,27 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn webpload_buffer(buffer: &[u8]) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "webpload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -17893,19 +17693,27 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn webpload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
+        let blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "webpload_buffer",
             option
                 .set(
                     "buffer",
-                    buffer,
+                    &VipsBlob::from(blob),
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+        unsafe { vips_area_unref(&mut (*blob).area) };
         utils::result(
             vips_op_response,
             out_out,
@@ -17931,6 +17739,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -17974,6 +17783,7 @@ impl VipsImage {
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -17988,15 +17798,13 @@ impl VipsImage {
         let vips_op_response = call(
             "webpsave",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -18049,15 +17857,13 @@ impl VipsImage {
         let vips_op_response = call(
             "webpsave",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "filename",
                     filename,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -18072,15 +17878,13 @@ impl VipsImage {
         let vips_op_response = call(
             "webpsave_buffer",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -18133,15 +17937,13 @@ impl VipsImage {
         let vips_op_response = call(
             "webpsave_buffer",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "buffer",
                     &mut buffer_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             buffer_out.into(),
@@ -18153,11 +17955,9 @@ impl VipsImage {
     pub fn webpsave_mime(&self) -> Result<()> {
         let vips_op_response = call(
             "webpsave_mime",
-            VOption::new().set(
-                "in",
-                &VipsImage::from(self.ctx),
-            ),
+            VOption::new().set("in", self),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -18207,11 +18007,9 @@ impl VipsImage {
     pub fn webpsave_mime_with_opts(&self, option: VOption) -> Result<()> {
         let vips_op_response = call(
             "webpsave_mime",
-            option.set(
-                "in",
-                &VipsImage::from(self.ctx),
-            ),
+            option.set("in", self),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -18226,15 +18024,13 @@ impl VipsImage {
         let vips_op_response = call(
             "webpsave_target",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -18287,15 +18083,13 @@ impl VipsImage {
         let vips_op_response = call(
             "webpsave_target",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "target",
                     target,
                 ),
         );
+
         utils::result(
             vips_op_response,
             (),
@@ -18327,6 +18121,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -18364,6 +18159,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -18378,15 +18174,13 @@ impl VipsImage {
         let vips_op_response = call(
             "wrap",
             VOption::new()
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -18407,15 +18201,13 @@ impl VipsImage {
         let vips_op_response = call(
             "wrap",
             option
-                .set(
-                    "in",
-                    &VipsImage::from(self.ctx),
-                )
+                .set("in", self)
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -18447,6 +18239,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -18486,6 +18279,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -18517,6 +18311,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -18552,6 +18347,7 @@ impl VipsImage {
                     height,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -18572,7 +18368,7 @@ impl VipsImage {
             VOption::new()
                 .set(
                     "input",
-                    &VipsImage::from(self.ctx),
+                    self,
                 )
                 .set(
                     "out",
@@ -18587,6 +18383,7 @@ impl VipsImage {
                     yfac,
                 ),
         );
+
         utils::result(
             vips_op_response,
             out_out,
@@ -18603,8 +18400,8 @@ impl VipsImage {
     /// returns `VipsImage` - Output image
     ///
     /// other: `VipsImage` -> Input images
-    pub fn bandjoin_with(&self, other: VipsImage) -> Result<VipsImage> {
-        Self::bandjoin(&[VipsImage::from(self.ctx), other])
+    pub fn bandjoin_with(self, other: VipsImage) -> Result<VipsImage> {
+        Self::bandjoin(&[self, other])
     }
 
     /// VipsMedian (median), median filter of the specified size.

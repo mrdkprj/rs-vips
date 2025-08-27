@@ -45,7 +45,9 @@ use rs_vips::{voption::{VOption, Setter}, Vips, VipsImage};
 
 fn main() {
     // this initializes the libvips library.
-    Vips::init("Test Libvips", false).expect("Cannot initialize libvips");
+    Vips::init("Test Libvips").expect("Cannot initialize libvips");
+    // if you want leak checking, turn it on.
+    Vips::leak_set(true);
     // set number of threads in libvips's threadpool
     Vips::concurrency_set(2);
 

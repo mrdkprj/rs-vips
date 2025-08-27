@@ -8,17 +8,27 @@ extern crate num_derive;
 extern crate num_traits;
 
 pub mod bindings;
+/// VipsConnection, VipsSource, VipsTarget
+mod connection;
 pub mod error;
+/// VipsImage
 mod image;
+/// VipsInterpolate
+mod interpolate;
 pub mod operator;
 /// Vips Enumerations
 pub mod ops;
+/// VipsBlob
+mod region;
 pub mod utils;
 /// VOption, a list of name-value pairs
 pub mod voption;
 
+pub use connection::*;
 use error::Error;
 pub use image::*;
+pub use interpolate::*;
+pub use region::*;
 use std::ffi::*;
 pub type Result<T> = std::result::Result<T, error::Error>;
 
@@ -27,24 +37,19 @@ pub struct Vips;
 /// That's the main type of this crate. Use it to initialize the system
 impl Vips {
     /// Starts up libvips
-    pub fn init(name: &str, detect_leak: bool) -> Result<()> {
-        let cstring = utils::new_c_string(name);
-        if let Ok(c_name) = cstring {
-            let res = unsafe { bindings::vips_init(c_name.as_ptr()) };
-            let result = if res == 0 {
-                Ok(())
-            } else {
-                Err(Error::InitializationError("Failed to init libvips".to_string()))
-            };
-
-            if detect_leak {
-                unsafe { bindings::vips_leak_set(1) };
-            };
-
-            result
+    pub fn init(name: &str) -> Result<()> {
+        let c_name = utils::new_c_string(name)?;
+        let res = unsafe { bindings::vips_init(c_name.as_ptr()) };
+        if res == 0 {
+            Ok(())
         } else {
-            Err(Error::InitializationError("Failed to convert rust string to C string".to_string()))
+            Err(Error::InitializationError("Failed to init libvips".to_string()))
         }
+    }
+
+    /// Turn on or off vips leak checking.
+    pub fn leak_set(leak: bool) {
+        unsafe { bindings::vips_leak_set(if leak { 1 } else { 0 }) };
     }
 
     /// A structure available to eval callbacks giving information on evaluation progress

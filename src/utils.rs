@@ -2,7 +2,10 @@ use crate::bindings::{self, g_type_from_name};
 use crate::bindings::{VipsArrayDouble, VipsArrayImage, VipsArrayInt};
 use crate::error::Error;
 use crate::VipsImage;
-use crate::{Result, VipsSource, VipsTarget};
+use crate::{
+    connection::{VipsSource, VipsTarget},
+    Result,
+};
 use std::ffi::c_void;
 use std::ffi::CString;
 
@@ -159,25 +162,23 @@ where
 }
 
 #[inline]
-pub(crate) fn new_c_string(string: &str) -> Result<CString> {
+pub(crate) fn new_c_string(string: impl Into<Vec<u8>>) -> Result<CString> {
     CString::new(string)
         .map_err(|_| Error::InitializationError("Error initializing C string.".to_string()))
 }
 
 #[inline]
-pub(crate) fn ensure_null_terminated(input: impl AsRef<[u8]>) -> Vec<u8> {
+pub(crate) fn ensure_null_terminated(input: impl AsRef<[u8]>) -> crate::Result<CString> {
     let bytes = input.as_ref();
 
     // Check if already null-terminated
     if bytes.last() == Some(&0) {
-        bytes.to_vec()
+        CString::new(&bytes[..bytes.len() - 1])
+            .map_err(|_| Error::InitializationError("Error initializing C string.".to_string()))
     } else {
         // Not null-terminated, append 0 and create CString
-        let cstr = CString::new(bytes)
+        CString::new(bytes)
             .map_err(|_| Error::InitializationError("Error initializing C string.".to_string()))
-            .unwrap();
-        cstr.as_bytes()
-            .to_vec()
     }
 }
 

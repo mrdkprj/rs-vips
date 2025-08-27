@@ -1,20 +1,22 @@
+#![allow(unused_imports)]
 use crate::{
     bindings::{
         g_log, g_object_get_property, g_object_ref, g_object_set_property, g_object_unref,
         g_type_check_instance_is_a, g_value_dup_boxed, g_value_get_boolean, g_value_get_double,
         g_value_get_int, g_value_get_object, g_value_get_string, g_value_init, g_value_set_boolean,
         g_value_set_boxed, g_value_set_double, g_value_set_enum, g_value_set_int,
-        g_value_set_object, g_value_set_string, g_value_set_uint64, g_value_unset,
+        g_value_set_object, g_value_set_string, g_value_set_uint64, g_value_unset, vips_area_unref,
         vips_array_double_get_type, vips_array_image_get_type, vips_array_int_get_type,
-        vips_blob_get_type, vips_blob_new, vips_cache_operation_buildp, vips_enum_from_nick,
-        vips_error_buffer, vips_error_clear, vips_image_get_type, vips_interpolate_get_type,
-        vips_object_get_argument, vips_object_unref_outputs, vips_operation_new,
+        vips_blob_get_type, vips_cache_operation_buildp, vips_enum_from_nick, vips_error_buffer,
+        vips_error_clear, vips_image_get_type, vips_interpolate_get_type, vips_object_get_argument,
+        vips_object_set_from_string, vips_object_unref_outputs, vips_operation_new,
         vips_source_get_type, vips_target_get_type, vips_value_get_array_double,
         vips_value_get_array_image, vips_value_set_array_double, vips_value_set_array_image,
         vips_value_set_array_int, GLogLevelFlags_G_LOG_LEVEL_WARNING, GParamSpec, GTypeInstance,
         GValue, VipsArgumentClass, VipsArgumentInstance, VipsBlob, VipsImage, VipsObject,
         VipsOperation,
     },
+    unref_area,
     utils::{
         get_g_type, new_c_string, G_TYPE_BOOLEAN, G_TYPE_DOUBLE, G_TYPE_INT, G_TYPE_STRING,
         G_TYPE_UINT64,
@@ -24,9 +26,46 @@ use std::{mem::MaybeUninit, os::raw::c_void};
 
 /// Runs the vips operation with options
 pub fn call(operation: &str, option: VOption) -> std::os::raw::c_int {
+    call_option_string(
+        operation,
+        "",
+        option,
+    )
+}
+
+/// Runs the vips operation with options
+pub fn call_option_string(
+    operation: &str,
+    option_string: &str,
+    option: VOption,
+) -> std::os::raw::c_int {
+    let operation = new_c_string(operation).unwrap();
+    let option_string = new_c_string(option_string).unwrap();
+    call_option_string_(
+        operation.as_ptr(),
+        option_string.as_ptr() as _,
+        option,
+    )
+}
+
+pub(crate) fn call_option_string_(
+    operation: *const i8,
+    option_string: *mut i8,
+    option: VOption,
+) -> std::os::raw::c_int {
     unsafe {
-        let operation_name = new_c_string(operation).unwrap();
-        let mut vips_operation = vips_operation_new(operation_name.as_ptr());
+        let mut vips_operation = vips_operation_new(operation);
+
+        if !option_string.is_null()
+            && vips_object_set_from_string(
+                vips_operation as _,
+                option_string,
+            ) < 0
+        {
+            vips_object_unref_outputs(vips_operation as _);
+            g_object_unref(vips_operation as _);
+            return 1;
+        }
 
         set_opreration(
             vips_operation,
@@ -65,14 +104,14 @@ enum VipsValue<'a> {
     MutImage(&'a mut crate::VipsImage),
     IntArray(&'a [i32]),
     DoubleArray(&'a [f64]),
+    DoubleVec(Vec<f64>),
     MutDoubleArray(&'a mut Vec<f64>),
     ImageArray(&'a [crate::VipsImage]),
-    Blob(&'a crate::VipsBlob),
-    Buffer(&'a [u8]),
-    MutBlob(&'a mut crate::VipsBlob),
-    Target(&'a crate::VipsTarget),
-    Source(&'a crate::VipsSource),
-    Interpolate(&'a crate::VipsInterpolate),
+    Blob(&'a crate::region::VipsBlob),
+    MutBlob(&'a mut crate::region::VipsBlob),
+    Target(&'a crate::connection::VipsTarget),
+    Source(&'a crate::connection::VipsSource),
+    Interpolate(&'a crate::interpolate::VipsInterpolate),
 }
 
 struct Pair<'a> {
@@ -121,58 +160,59 @@ fn get_operation(vips_operation: *mut VipsOperation, option: VOption) {
             }
 
             let mut gvalue = MaybeUninit::<GValue>::zeroed();
-            let value = gvalue.as_mut_ptr();
-            let name = new_c_string(&opt.name).unwrap();
+            let gvalue_ptr = gvalue.as_mut_ptr();
+            let name = new_c_string(opt.name).unwrap();
+
             match opt.value {
                 VipsValue::MutBool(out) => {
                     g_value_init(
-                        value,
+                        gvalue_ptr,
                         get_g_type(G_TYPE_BOOLEAN),
                     );
                     g_object_get_property(
                         vips_operation.cast(),
                         name.as_ptr(),
-                        value,
+                        gvalue_ptr,
                     );
-                    *out = g_value_get_boolean(value) != 0;
+                    *out = g_value_get_boolean(gvalue_ptr) != 0;
                 }
                 VipsValue::MutInt(out) => {
                     g_value_init(
-                        value,
+                        gvalue_ptr,
                         get_g_type(G_TYPE_INT),
                     );
                     g_object_get_property(
                         vips_operation.cast(),
                         name.as_ptr(),
-                        value,
+                        gvalue_ptr,
                     );
-                    *out = g_value_get_int(value);
+                    *out = g_value_get_int(gvalue_ptr);
                 }
                 VipsValue::MutDouble(out) => {
                     g_value_init(
-                        value,
+                        gvalue_ptr,
                         get_g_type(G_TYPE_DOUBLE),
                     );
                     g_object_get_property(
                         vips_operation.cast(),
                         name.as_ptr(),
-                        value,
+                        gvalue_ptr,
                     );
-                    *out = g_value_get_double(value);
+                    *out = g_value_get_double(gvalue_ptr);
                 }
                 VipsValue::MutDoubleArray(out) => {
                     g_value_init(
-                        value,
+                        gvalue_ptr,
                         vips_array_double_get_type(),
                     );
                     g_object_get_property(
                         vips_operation.cast(),
                         name.as_ptr(),
-                        value,
+                        gvalue_ptr,
                     );
                     let mut len: i32 = 0;
                     let array = vips_value_get_array_double(
-                        value,
+                        gvalue_ptr,
                         &mut len,
                     );
                     let result = std::slice::from_raw_parts(
@@ -183,33 +223,33 @@ fn get_operation(vips_operation: *mut VipsOperation, option: VOption) {
                 }
                 VipsValue::MutBlob(out) => {
                     g_value_init(
-                        value,
+                        gvalue_ptr,
                         vips_blob_get_type(),
                     );
                     g_object_get_property(
                         vips_operation.cast(),
                         name.as_ptr(),
-                        value,
+                        gvalue_ptr,
                     );
-                    let out_blob: *mut VipsBlob = g_value_dup_boxed(value).cast();
+                    let out_blob: *mut VipsBlob = g_value_dup_boxed(gvalue_ptr).cast();
                     out.ctx = out_blob;
                 }
                 VipsValue::MutImage(out) => {
                     g_value_init(
-                        value,
+                        gvalue_ptr,
                         vips_image_get_type(),
                     );
                     g_object_get_property(
                         vips_operation.cast(),
                         name.as_ptr(),
-                        value,
+                        gvalue_ptr,
                     );
-                    let out_image: *mut VipsImage = g_value_get_object(value).cast();
+                    let out_image: *mut VipsImage = g_value_get_object(gvalue_ptr).cast();
                     out.ctx = out_image;
                 }
                 _ => {}
             }
-            g_value_unset(value);
+            g_value_unset(gvalue_ptr);
         }
     }
 }
@@ -223,6 +263,7 @@ fn set_opreration(operation: *mut VipsOperation, option: &VOption) {
 
             let mut gvalue = MaybeUninit::<GValue>::zeroed();
             let gvalue_ptr = gvalue.as_mut_ptr();
+
             match pair.value {
                 VipsValue::Bool(value) => {
                     g_value_init(
@@ -325,8 +366,8 @@ fn set_opreration(operation: *mut VipsOperation, option: &VOption) {
                         value.len() as _,
                     );
                     for i in 0..value.len() {
-                        array[i] = value[i].ctx;
                         g_object_ref(value[i].ctx as _);
+                        array[i] = value[i].ctx;
                     }
                 }
                 VipsValue::Blob(value) => {
@@ -337,22 +378,6 @@ fn set_opreration(operation: *mut VipsOperation, option: &VOption) {
                     g_value_set_boxed(
                         gvalue_ptr,
                         value.ctx as *const c_void,
-                    );
-                    // vips_area_unref(value.ctx as _);
-                }
-                VipsValue::Buffer(value) => {
-                    let blob = vips_blob_new(
-                        None,
-                        value.as_ptr() as _,
-                        value.len() as _,
-                    );
-                    g_value_init(
-                        gvalue_ptr,
-                        vips_blob_get_type(),
-                    );
-                    g_value_set_boxed(
-                        gvalue_ptr,
-                        blob as *const c_void,
                     );
                 }
                 VipsValue::Source(value) => {
@@ -393,6 +418,7 @@ fn set_opreration(operation: *mut VipsOperation, option: &VOption) {
                 &pair.name,
                 gvalue_ptr,
             );
+            g_value_unset(gvalue_ptr);
         }
     }
 }
@@ -777,8 +803,8 @@ impl<'a, const N: usize> Setter<'a, &'a [crate::VipsImage; N]> for VOption<'a> {
 }
 
 // input VipsBlob
-impl<'a> Setter<'a, &'a crate::VipsBlob> for VOption<'a> {
-    fn set(mut self, name: &str, value: &'a crate::VipsBlob) -> VOption<'a> {
+impl<'a> Setter<'a, &'a crate::region::VipsBlob> for VOption<'a> {
+    fn set(mut self, name: &str, value: &'a crate::region::VipsBlob) -> VOption<'a> {
         self.options
             .push(
                 Pair::input(
@@ -788,65 +814,20 @@ impl<'a> Setter<'a, &'a crate::VipsBlob> for VOption<'a> {
             );
         self
     }
-    fn add(&mut self, name: &str, value: &'a crate::VipsBlob) {
+    fn add(&mut self, name: &str, value: &'a crate::region::VipsBlob) {
         self.options
             .push(
                 Pair::input(
                     name,
                     VipsValue::Blob(value),
-                ),
-            );
-    }
-}
-
-// input &[u8]
-impl<'a> Setter<'a, &'a [u8]> for VOption<'a> {
-    fn set(mut self, name: &str, value: &'a [u8]) -> VOption<'a> {
-        self.options
-            .push(
-                Pair::input(
-                    name,
-                    VipsValue::Buffer(value),
-                ),
-            );
-        self
-    }
-    fn add(&mut self, name: &str, value: &'a [u8]) {
-        self.options
-            .push(
-                Pair::input(
-                    name,
-                    VipsValue::Buffer(value),
-                ),
-            );
-    }
-}
-
-impl<'a, const N: usize> Setter<'a, &'a [u8; N]> for VOption<'a> {
-    fn set(mut self, name: &str, value: &'a [u8; N]) -> VOption<'a> {
-        self.options
-            .push(
-                Pair::input(
-                    name,
-                    VipsValue::Buffer(value),
-                ),
-            );
-        self
-    }
-    fn add(&mut self, name: &str, value: &'a [u8; N]) {
-        self.options
-            .push(
-                Pair::input(
-                    name,
-                    VipsValue::Buffer(value),
                 ),
             );
     }
 }
 
 // input VipsTarget
-impl<'a> Setter<'a, &'a crate::VipsTarget> for VOption<'a> {
-    fn set(mut self, name: &str, value: &'a crate::VipsTarget) -> VOption<'a> {
+impl<'a> Setter<'a, &'a crate::connection::VipsTarget> for VOption<'a> {
+    fn set(mut self, name: &str, value: &'a crate::connection::VipsTarget) -> VOption<'a> {
         self.options
             .push(
                 Pair::input(
@@ -856,7 +837,7 @@ impl<'a> Setter<'a, &'a crate::VipsTarget> for VOption<'a> {
             );
         self
     }
-    fn add(&mut self, name: &str, value: &'a crate::VipsTarget) {
+    fn add(&mut self, name: &str, value: &'a crate::connection::VipsTarget) {
         self.options
             .push(
                 Pair::input(
@@ -868,8 +849,8 @@ impl<'a> Setter<'a, &'a crate::VipsTarget> for VOption<'a> {
 }
 
 // input VipsSource
-impl<'a> Setter<'a, &'a crate::VipsSource> for VOption<'a> {
-    fn set(mut self, name: &str, value: &'a crate::VipsSource) -> VOption<'a> {
+impl<'a> Setter<'a, &'a crate::connection::VipsSource> for VOption<'a> {
+    fn set(mut self, name: &str, value: &'a crate::connection::VipsSource) -> VOption<'a> {
         self.options
             .push(
                 Pair::input(
@@ -879,7 +860,7 @@ impl<'a> Setter<'a, &'a crate::VipsSource> for VOption<'a> {
             );
         self
     }
-    fn add(&mut self, name: &str, value: &'a crate::VipsSource) {
+    fn add(&mut self, name: &str, value: &'a crate::connection::VipsSource) {
         self.options
             .push(
                 Pair::input(
@@ -891,8 +872,8 @@ impl<'a> Setter<'a, &'a crate::VipsSource> for VOption<'a> {
 }
 
 // input VipsInterpolate
-impl<'a> Setter<'a, &'a crate::VipsInterpolate> for VOption<'a> {
-    fn set(mut self, name: &str, value: &'a crate::VipsInterpolate) -> VOption<'a> {
+impl<'a> Setter<'a, &'a crate::interpolate::VipsInterpolate> for VOption<'a> {
+    fn set(mut self, name: &str, value: &'a crate::interpolate::VipsInterpolate) -> VOption<'a> {
         self.options
             .push(
                 Pair::input(
@@ -902,7 +883,7 @@ impl<'a> Setter<'a, &'a crate::VipsInterpolate> for VOption<'a> {
             );
         self
     }
-    fn add(&mut self, name: &str, value: &'a crate::VipsInterpolate) {
+    fn add(&mut self, name: &str, value: &'a crate::interpolate::VipsInterpolate) {
         self.options
             .push(
                 Pair::input(
@@ -1029,8 +1010,8 @@ impl<'a> Setter<'a, &'a mut Vec<f64>> for VOption<'a> {
 }
 
 // output VipsBlob
-impl<'a> Setter<'a, &'a mut crate::VipsBlob> for VOption<'a> {
-    fn set(mut self, name: &str, value: &'a mut crate::VipsBlob) -> VOption<'a> {
+impl<'a> Setter<'a, &'a mut crate::region::VipsBlob> for VOption<'a> {
+    fn set(mut self, name: &str, value: &'a mut crate::region::VipsBlob) -> VOption<'a> {
         self.options
             .push(
                 Pair::output(
@@ -1040,7 +1021,7 @@ impl<'a> Setter<'a, &'a mut crate::VipsBlob> for VOption<'a> {
             );
         self
     }
-    fn add(&mut self, name: &str, value: &'a mut crate::VipsBlob) {
+    fn add(&mut self, name: &str, value: &'a mut crate::region::VipsBlob) {
         self.options
             .push(
                 Pair::output(
