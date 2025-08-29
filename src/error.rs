@@ -1,3 +1,4 @@
+// (c) Copyright 2025 mrdkprj
 use crate::bindings::vips_error_buffer;
 use std::ffi::CStr;
 

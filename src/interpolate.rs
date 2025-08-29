@@ -1,3 +1,5 @@
+// (c) Copyright 2019-2025 OLX
+// (c) Copyright 2025 mrdkprj
 use crate::{bindings, error::Error, utils, Result};
 use std::ffi::*;
 

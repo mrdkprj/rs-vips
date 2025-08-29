@@ -1,3 +1,5 @@
+// (c) Copyright 2019-2025 OLX
+// (c) Copyright 2025 mrdkprj
 use crate::bindings::{self, _VipsBlob, vips_area_unref};
 
 #[derive(Debug, Clone)]

@@ -1,3 +1,5 @@
+// (c) Copyright 2019-2025 OLX
+// (c) Copyright 2025 mrdkprj
 use crate::{
     bindings::{self, vips_blob_new},
     connection::{VipsSource, VipsTarget},

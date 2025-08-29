@@ -1,3 +1,4 @@
+// (c) Copyright 2025 mrdkprj
 //! Operator overloads for VipsImage
 //!
 //! `+`, `-`, `*`, `/`

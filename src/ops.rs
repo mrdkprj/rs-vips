@@ -1,3 +1,5 @@
+// (c) Copyright 2019-2025 OLX
+// (c) Copyright 2025 mrdkprj
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::upper_case_acronyms)]
 use crate::bindings::{vips_area_unref, vips_blob_new};

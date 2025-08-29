@@ -1,3 +1,5 @@
+// (c) Copyright 2019-2025 OLX
+// (c) Copyright 2025 mrdkprj
 fn main() {
     #[cfg(target_os = "windows")]
     {
