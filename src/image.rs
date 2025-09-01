@@ -1013,10 +1013,12 @@ impl VipsImage {
     pub fn set_string(&self, name: impl AsRef<[u8]>, value: &str) -> Result<()> {
         unsafe {
             let name = ensure_null_terminated(name)?;
+            let value = ensure_null_terminated(value)?;
+
             bindings::vips_image_set_string(
                 self.ctx,
                 name.as_ptr(),
-                value.as_ptr() as _,
+                value.as_ptr(),
             );
             Ok(())
         }
