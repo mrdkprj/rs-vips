@@ -1,6 +1,6 @@
 // (c) Copyright 2019-2025 OLX
 // (c) Copyright 2025 mrdkprj
-use crate::bindings::{self, _VipsBlob, vips_area_unref};
+use crate::bindings::{self, vips_area_unref};
 
 #[derive(Debug, Clone)]
 pub struct VipsBlob {
@@ -16,6 +16,18 @@ impl Drop for VipsBlob {
             {
                 bindings::g_object_unref(self.ctx as _);
             }
+        }
+    }
+}
+
+impl VipsBlob {
+    pub(crate) fn area_unref(mut self) {
+        unsafe {
+            (*self.ctx)
+                .area
+                .free_fn = None;
+            vips_area_unref(&mut (*self.ctx).area);
+            self.ctx = std::ptr::null_mut();
         }
     }
 }
@@ -45,21 +57,12 @@ impl Into<Vec<u8>> for VipsBlob {
                 &mut size,
             );
             // unref area
-            unref_area(self.ctx);
+            self.area_unref();
             Vec::from_raw_parts(
                 bytes as *mut u8,
                 size as usize,
                 size as usize,
             )
         }
-    }
-}
-
-pub(crate) fn unref_area(blob: *mut _VipsBlob) {
-    unsafe {
-        (*blob)
-            .area
-            .free_fn = None;
-        vips_area_unref(&mut (*blob).area);
     }
 }

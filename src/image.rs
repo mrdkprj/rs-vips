@@ -6,7 +6,6 @@ use crate::{
     error::Error,
     ops::*,
     region::VipsBlob,
-    unref_area,
     utils::{self, ensure_null_terminated, vips_image_result, vips_image_result_ext},
     voption::{call, call_option_string_, Setter, VOption},
     Result,
@@ -201,26 +200,27 @@ impl VipsImage {
                 );
             }
 
-            let blob = vips_blob_new(
+            let vips_blob = vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             );
             let mut out_out = VipsImage::from(null_mut());
+            let blob = VipsBlob::from(vips_blob);
             call_option_string_(
                 operation,
                 utils::new_c_string(option_str)?.as_ptr() as _,
                 option
                     .set(
                         "buffer",
-                        &VipsBlob::from(blob),
+                        &blob,
                     )
                     .set(
                         "out",
                         &mut out_out,
                     ),
             );
-            unref_area(blob);
+            blob.area_unref();
             vips_image_result_ext(
                 out_out,
                 Error::InitializationError(

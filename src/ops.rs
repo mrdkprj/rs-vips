@@ -2,7 +2,7 @@
 // (c) Copyright 2025 mrdkprj
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::upper_case_acronyms)]
-use crate::bindings::{vips_area_unref, vips_blob_new};
+use crate::bindings::vips_blob_new;
 use crate::connection::VipsSource;
 use crate::connection::VipsTarget;
 use crate::error::*;
@@ -5286,27 +5286,28 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn gifload_buffer(buffer: &[u8]) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "gifload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -5335,27 +5336,28 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn gifload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "gifload_buffer",
             option
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -5962,27 +5964,28 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn heifload_buffer(buffer: &[u8]) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "heifload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -6015,27 +6018,28 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn heifload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "heifload_buffer",
             option
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -7455,27 +7459,28 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn jp2kload_buffer(buffer: &[u8]) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "jp2kload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -7504,27 +7509,28 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn jp2kload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "jp2kload_buffer",
             option
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -7861,27 +7867,28 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn jpegload_buffer(buffer: &[u8]) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "jpegload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -7912,27 +7919,28 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn jpegload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "jpegload_buffer",
             option
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -8349,27 +8357,28 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn jxlload_buffer(buffer: &[u8]) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "jxlload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -8398,27 +8407,28 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn jxlload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "jxlload_buffer",
             option
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -8981,27 +8991,28 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn magickload_buffer(buffer: &[u8]) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "magickload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -9032,27 +9043,28 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn magickload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "magickload_buffer",
             option
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -12151,27 +12163,28 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn pdfload_buffer(buffer: &[u8]) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "pdfload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -12208,27 +12221,28 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn pdfload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "pdfload_buffer",
             option
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -12506,27 +12520,28 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn pngload_buffer(buffer: &[u8]) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "pngload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -12553,27 +12568,28 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn pngload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "pngload_buffer",
             option
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -12920,27 +12936,28 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn ppmload_buffer(buffer: &[u8]) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "ppmload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -12965,27 +12982,28 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn ppmload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "ppmload_buffer",
             option
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -13488,27 +13506,28 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn radload_buffer(buffer: &[u8]) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "radload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -13533,27 +13552,28 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn radload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "radload_buffer",
             option
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -15954,27 +15974,28 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn svgload_buffer(buffer: &[u8]) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "svgload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -16009,27 +16030,28 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn svgload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "svgload_buffer",
             option
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -16354,20 +16376,21 @@ impl VipsImage {
     ///
     /// width: `i32` -> Size to this width
     pub fn thumbnail_buffer(buffer: &[u8], width: i32) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "thumbnail_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
@@ -16378,7 +16401,7 @@ impl VipsImage {
                     width,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -16419,20 +16442,21 @@ impl VipsImage {
         width: i32,
         option: VOption,
     ) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "thumbnail_buffer",
             option
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
@@ -16443,7 +16467,7 @@ impl VipsImage {
                     width,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -16694,27 +16718,28 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn tiffload_buffer(buffer: &[u8]) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "tiffload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -16749,27 +16774,28 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn tiffload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "tiffload_buffer",
             option
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -17644,27 +17670,28 @@ impl VipsImage {
     ///
     /// buffer: `&[u8]` -> Buffer to load from
     pub fn webpload_buffer(buffer: &[u8]) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "webpload_buffer",
             VOption::new()
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
@@ -17695,27 +17722,28 @@ impl VipsImage {
     ///
     /// revalidate: `bool` -> Don't use a cached result for this operation
     pub fn webpload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
-        let blob = unsafe {
+        let vips_blob = unsafe {
             vips_blob_new(
                 None,
                 buffer.as_ptr() as _,
                 buffer.len() as _,
             )
         };
+        let blob = VipsBlob::from(vips_blob);
         let mut out_out = VipsImage::from(null_mut());
         let vips_op_response = call(
             "webpload_buffer",
             option
                 .set(
                     "buffer",
-                    &VipsBlob::from(blob),
+                    &blob,
                 )
                 .set(
                     "out",
                     &mut out_out,
                 ),
         );
-        unsafe { vips_area_unref(&mut (*blob).area) };
+        blob.area_unref();
         utils::result(
             vips_op_response,
             out_out,
