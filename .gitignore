@@ -3,3 +3,5 @@
 .DS_Store
 /lib
 /tests
+generator/target
+generator/introspect

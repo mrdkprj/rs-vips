@@ -5,7 +5,7 @@
 [Latest Version]: https://img.shields.io/crates/v/rs-vips.svg
 [crates.io]: https://crates.io/crates/rs-vips
 
-Rust bindings for libvips. Generated from `version 8.17.0`.
+Rust bindings for libvips. Generated from `version 8.17.3`.
 
 This is a safe wrapper for [libvips](https://libvips.github.io/libvips/) C library. It is made on top of the C API and based on the introspection API results.
 
@@ -21,6 +21,23 @@ This crate is different from it in that
 - this uses `VOption` for optional arguments of some vips operations instead of structs to prevent unnecessary default values
 - this supports operator overloads
 - this supports some operations to VipsImage like `get_int()` and `set_int()`.
+
+## How the crate was written
+
+As a first step, it runs the bindgen to generate unsafe calls to the C libvips library. After this is generated, a C code is compiled and executed. This code introspects the operations and outputs them as text. This text is parsed and then generates the `ops.rs` modules.
+
+Those are basically safe wrappers on top of the also genereated bindings. Though not widely tested, all the memory cleaning should be working as expected. Important to note that all "vips" prefixes in the naming were removed from the operations's names.
+
+Both the bindings and the generated operations were pushed to crates.io with most of optional dependencies from libvips included. Be careful when calling functions that are dependent on those sub-dependencies (most of them format related).
+
+### Contributing
+
+Everything in ops.rs (and of course bindings.rs) is generated programmatically. You need to make changes for these files to the builder for these. Then, run the following shell scripts from the `generator` directory.
+
+```
+$ ./build.sh     # Builds the libvips-builder docker image
+$ ./generate.sh  # Actually generates the bindings
+```
 
 ## How to use it
 

@@ -8916,286 +8916,6 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadMagickFile (magickload), load file with ImageMagick, priority=-100, untrusted, is_a, get_flags, get_flags_filename, header
-    /// returns `VipsImage` - Output image
-    ///
-    /// filename: `&str` -> Filename to load from
-    pub fn magickload(filename: &str) -> Result<VipsImage> {
-        let mut out_out = VipsImage::from(null_mut());
-        let vips_op_response = call(
-            "magickload",
-            VOption::new()
-                .set(
-                    "filename",
-                    filename,
-                )
-                .set(
-                    "out",
-                    &mut out_out,
-                ),
-        );
-
-        utils::result(
-            vips_op_response,
-            out_out,
-            Error::OperationError("Magickload (vips_magickload) failed".to_string()),
-        )
-    }
-
-    /// VipsForeignLoadMagickFile (magickload), load file with ImageMagick, priority=-100, untrusted, is_a, get_flags, get_flags_filename, header
-    /// returns `VipsImage` - Output image
-    ///
-    /// filename: `&str` -> Filename to load from
-    ///
-    /// <ins>Optional arguments</ins>
-    ///
-    /// density: `&str` -> Canvas resolution for rendering vector formats like SVG
-    ///
-    /// page: `i32` -> First page to load
-    ///
-    /// n: `i32` -> Number of pages to load, -1 for all
-    ///
-    /// flags: [`ForeignFlags`] -> Flags for this file
-    ///
-    /// memory: `bool` -> Force open via memory
-    ///
-    /// access: [`Access`] -> Required access pattern for this file
-    ///
-    /// fail_on: [`FailOn`] -> Error level to fail on
-    ///
-    /// revalidate: `bool` -> Don't use a cached result for this operation
-    pub fn magickload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
-        let mut out_out = VipsImage::from(null_mut());
-        let vips_op_response = call(
-            "magickload",
-            option
-                .set(
-                    "filename",
-                    filename,
-                )
-                .set(
-                    "out",
-                    &mut out_out,
-                ),
-        );
-
-        utils::result(
-            vips_op_response,
-            out_out,
-            Error::OperationError("Magickload (vips_magickload) failed".to_string()),
-        )
-    }
-
-    /// VipsForeignLoadMagickBuffer (magickload_buffer), load buffer with ImageMagick, priority=-100, untrusted, is_a_buffer, get_flags, get_flags_filename, header
-    /// returns `VipsImage` - Output image
-    ///
-    /// buffer: `&[u8]` -> Buffer to load from
-    pub fn magickload_buffer(buffer: &[u8]) -> Result<VipsImage> {
-        let vips_blob = unsafe {
-            vips_blob_new(
-                None,
-                buffer.as_ptr() as _,
-                buffer.len() as _,
-            )
-        };
-        let blob = VipsBlob::from(vips_blob);
-        let mut out_out = VipsImage::from(null_mut());
-        let vips_op_response = call(
-            "magickload_buffer",
-            VOption::new()
-                .set(
-                    "buffer",
-                    &blob,
-                )
-                .set(
-                    "out",
-                    &mut out_out,
-                ),
-        );
-        blob.area_unref();
-        utils::result(
-            vips_op_response,
-            out_out,
-            Error::OperationError("MagickloadBuffer (vips_magickload_buffer) failed".to_string()),
-        )
-    }
-
-    /// VipsForeignLoadMagickBuffer (magickload_buffer), load buffer with ImageMagick, priority=-100, untrusted, is_a_buffer, get_flags, get_flags_filename, header
-    /// returns `VipsImage` - Output image
-    ///
-    /// buffer: `&[u8]` -> Buffer to load from
-    ///
-    /// <ins>Optional arguments</ins>
-    ///
-    /// density: `&str` -> Canvas resolution for rendering vector formats like SVG
-    ///
-    /// page: `i32` -> First page to load
-    ///
-    /// n: `i32` -> Number of pages to load, -1 for all
-    ///
-    /// flags: [`ForeignFlags`] -> Flags for this file
-    ///
-    /// memory: `bool` -> Force open via memory
-    ///
-    /// access: [`Access`] -> Required access pattern for this file
-    ///
-    /// fail_on: [`FailOn`] -> Error level to fail on
-    ///
-    /// revalidate: `bool` -> Don't use a cached result for this operation
-    pub fn magickload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
-        let vips_blob = unsafe {
-            vips_blob_new(
-                None,
-                buffer.as_ptr() as _,
-                buffer.len() as _,
-            )
-        };
-        let blob = VipsBlob::from(vips_blob);
-        let mut out_out = VipsImage::from(null_mut());
-        let vips_op_response = call(
-            "magickload_buffer",
-            option
-                .set(
-                    "buffer",
-                    &blob,
-                )
-                .set(
-                    "out",
-                    &mut out_out,
-                ),
-        );
-        blob.area_unref();
-        utils::result(
-            vips_op_response,
-            out_out,
-            Error::OperationError("MagickloadBuffer (vips_magickload_buffer) failed".to_string()),
-        )
-    }
-
-    /// VipsForeignSaveMagickFile (magicksave), save file with ImageMagick (), priority=-100, untrusted,
-    ///
-    /// filename: `&str` -> Filename to save to
-    pub fn magicksave(&self, filename: &str) -> Result<()> {
-        let vips_op_response = call(
-            "magicksave",
-            VOption::new()
-                .set("in", self)
-                .set(
-                    "filename",
-                    filename,
-                ),
-        );
-
-        utils::result(
-            vips_op_response,
-            (),
-            Error::OperationError("Magicksave (vips_magicksave) failed".to_string()),
-        )
-    }
-
-    /// VipsForeignSaveMagickFile (magicksave), save file with ImageMagick (), priority=-100, untrusted,
-    ///
-    /// filename: `&str` -> Filename to save to
-    ///
-    /// <ins>Optional arguments</ins>
-    ///
-    /// format: `&str` -> Format to save in
-    ///
-    /// quality: `i32` -> Quality to use
-    ///
-    /// optimize_gif_frames: `bool` -> Apply GIF frames optimization
-    ///
-    /// optimize_gif_transparency: `bool` -> Apply GIF transparency optimization
-    ///
-    /// bitdepth: `i32` -> Number of bits per pixel
-    ///
-    /// keep: [`ForeignKeep`] -> Which metadata to retain
-    ///
-    /// background: `&[f64]` -> Background value
-    ///
-    /// page_height: `i32` -> Set page height for multipage save
-    ///
-    /// profile: `&str` -> Filename of ICC profile to embed
-    pub fn magicksave_with_opts(&self, filename: &str, option: VOption) -> Result<()> {
-        let vips_op_response = call(
-            "magicksave",
-            option
-                .set("in", self)
-                .set(
-                    "filename",
-                    filename,
-                ),
-        );
-
-        utils::result(
-            vips_op_response,
-            (),
-            Error::OperationError("Magicksave (vips_magicksave) failed".to_string()),
-        )
-    }
-
-    /// VipsForeignSaveMagickBuffer (magicksave_buffer), save image to magick buffer (), priority=-100, untrusted,
-    /// returns `Vec<u8>` - Buffer to save to
-    pub fn magicksave_buffer(&self) -> Result<Vec<u8>> {
-        let mut buffer_out = VipsBlob::from(null_mut());
-        let vips_op_response = call(
-            "magicksave_buffer",
-            VOption::new()
-                .set("in", self)
-                .set(
-                    "buffer",
-                    &mut buffer_out,
-                ),
-        );
-
-        utils::result(
-            vips_op_response,
-            buffer_out.into(),
-            Error::OperationError("MagicksaveBuffer (vips_magicksave_buffer) failed".to_string()),
-        )
-    }
-
-    /// VipsForeignSaveMagickBuffer (magicksave_buffer), save image to magick buffer (), priority=-100, untrusted,
-    /// returns `Vec<u8>` - Buffer to save to
-    ///
-    /// <ins>Optional arguments</ins>
-    ///
-    /// format: `&str` -> Format to save in
-    ///
-    /// quality: `i32` -> Quality to use
-    ///
-    /// optimize_gif_frames: `bool` -> Apply GIF frames optimization
-    ///
-    /// optimize_gif_transparency: `bool` -> Apply GIF transparency optimization
-    ///
-    /// bitdepth: `i32` -> Number of bits per pixel
-    ///
-    /// keep: [`ForeignKeep`] -> Which metadata to retain
-    ///
-    /// background: `&[f64]` -> Background value
-    ///
-    /// page_height: `i32` -> Set page height for multipage save
-    ///
-    /// profile: `&str` -> Filename of ICC profile to embed
-    pub fn magicksave_buffer_with_opts(&self, option: VOption) -> Result<Vec<u8>> {
-        let mut buffer_out = VipsBlob::from(null_mut());
-        let vips_op_response = call(
-            "magicksave_buffer",
-            option
-                .set("in", self)
-                .set(
-                    "buffer",
-                    &mut buffer_out,
-                ),
-        );
-
-        utils::result(
-            vips_op_response,
-            buffer_out.into(),
-            Error::OperationError("MagicksaveBuffer (vips_magicksave_buffer) failed".to_string()),
-        )
-    }
-
     /// VipsMapim (mapim), resample with a map image
     /// returns `VipsImage` - Output image
     ///
@@ -12663,7 +12383,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveSpngFile (pngsave), save image to file as PNG (.png), priority=0, mono rgb alpha
+    /// VipsForeignSavePngFile (pngsave), save image to png file (.png), priority=0, mono rgb alpha
     ///
     /// filename: `&str` -> Filename to save to
     pub fn pngsave(&self, filename: &str) -> Result<()> {
@@ -12684,7 +12404,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveSpngFile (pngsave), save image to file as PNG (.png), priority=0, mono rgb alpha
+    /// VipsForeignSavePngFile (pngsave), save image to png file (.png), priority=0, mono rgb alpha
     ///
     /// filename: `&str` -> Filename to save to
     ///
@@ -12694,7 +12414,7 @@ impl VipsImage {
     ///
     /// interlace: `bool` -> Interlace image
     ///
-    /// filter: [`ForeignPngFilter`] -> libspng row filter flag(s)
+    /// filter: [`ForeignPngFilter`] -> libpng row filter flag(s)
     ///
     /// palette: `bool` -> Quantise to 8bpp palette
     ///
@@ -12731,7 +12451,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveSpngBuffer (pngsave_buffer), save image to buffer as PNG (.png), priority=0, mono rgb alpha
+    /// VipsForeignSavePngBuffer (pngsave_buffer), save image to png buffer (.png), priority=0, mono rgb alpha
     /// returns `Vec<u8>` - Buffer to save to
     pub fn pngsave_buffer(&self) -> Result<Vec<u8>> {
         let mut buffer_out = VipsBlob::from(null_mut());
@@ -12752,7 +12472,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveSpngBuffer (pngsave_buffer), save image to buffer as PNG (.png), priority=0, mono rgb alpha
+    /// VipsForeignSavePngBuffer (pngsave_buffer), save image to png buffer (.png), priority=0, mono rgb alpha
     /// returns `Vec<u8>` - Buffer to save to
     ///
     /// <ins>Optional arguments</ins>
@@ -12761,7 +12481,7 @@ impl VipsImage {
     ///
     /// interlace: `bool` -> Interlace image
     ///
-    /// filter: [`ForeignPngFilter`] -> libspng row filter flag(s)
+    /// filter: [`ForeignPngFilter`] -> libpng row filter flag(s)
     ///
     /// palette: `bool` -> Quantise to 8bpp palette
     ///
@@ -12799,7 +12519,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveSpngTarget (pngsave_target), save image to target as PNG (.png), priority=0, mono rgb alpha
+    /// VipsForeignSavePngTarget (pngsave_target), save image to target as PNG (.png), priority=0, mono rgb alpha
     ///
     /// target: `&VipsTarget` -> Target to save to
     pub fn pngsave_target(&self, target: &VipsTarget) -> Result<()> {
@@ -12820,7 +12540,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveSpngTarget (pngsave_target), save image to target as PNG (.png), priority=0, mono rgb alpha
+    /// VipsForeignSavePngTarget (pngsave_target), save image to target as PNG (.png), priority=0, mono rgb alpha
     ///
     /// target: `&VipsTarget` -> Target to save to
     ///
@@ -12830,7 +12550,7 @@ impl VipsImage {
     ///
     /// interlace: `bool` -> Interlace image
     ///
-    /// filter: [`ForeignPngFilter`] -> libspng row filter flag(s)
+    /// filter: [`ForeignPngFilter`] -> libpng row filter flag(s)
     ///
     /// palette: `bool` -> Quantise to 8bpp palette
     ///
