@@ -48,8 +48,8 @@ pub fn call_option_string(
 }
 
 pub(crate) fn call_option_string_(
-    operation: *const i8,
-    option_string: *mut i8,
+    operation: *const std::os::raw::c_char,
+    option_string: *mut std::os::raw::c_char,
     option: VOption,
 ) -> std::os::raw::c_int {
     unsafe {
