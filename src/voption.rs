@@ -42,14 +42,14 @@ pub fn call_option_string(
     let option_string = new_c_string(option_string).unwrap();
     call_option_string_(
         operation.as_ptr(),
-        option_string.as_ptr() as _,
+        option_string.as_ptr(),
         option,
     )
 }
 
 pub(crate) fn call_option_string_(
     operation: *const std::os::raw::c_char,
-    option_string: *mut std::os::raw::c_char,
+    option_string: *const std::os::raw::c_char,
     option: VOption,
 ) -> std::os::raw::c_int {
     unsafe {
