@@ -1,7 +1,7 @@
 [package]
 name = "rs-vips"
 description = "Safe bindings for libvips"
-version = "0.3.1"
+version = "0.3.2"
 repository = "https://github.com/mrdkprj/rs-vips"
 readme = "README.md"
 license = "MIT"
