@@ -4847,7 +4847,7 @@ impl VipsImage {
                     height,
                 )
                 .set(
-                    "fractal-dimension",
+                    "fractal_dimension",
                     fractal_dimension,
                 ),
         )?;
@@ -5033,7 +5033,7 @@ impl VipsImage {
                     sigma,
                 )
                 .set(
-                    "min-ampl",
+                    "min_ampl",
                     min_ampl,
                 ),
         )?;
@@ -5071,7 +5071,7 @@ impl VipsImage {
                     sigma,
                 )
                 .set(
-                    "min-ampl",
+                    "min_ampl",
                     min_ampl,
                 ),
         )?;
@@ -5168,7 +5168,7 @@ impl VipsImage {
             VOption::new()
                 .set("in", self)
                 .set(
-                    "out-array",
+                    "out_array",
                     &mut out_array_out,
                 )
                 .set("x", x)
@@ -5199,7 +5199,7 @@ impl VipsImage {
             option
                 .set("in", self)
                 .set(
-                    "out-array",
+                    "out_array",
                     &mut out_array_out,
                 )
                 .set("x", x)
@@ -5867,7 +5867,7 @@ impl VipsImage {
                     &mut out_out,
                 )
                 .set(
-                    "tile-height",
+                    "tile_height",
                     tile_height,
                 )
                 .set(
@@ -6944,7 +6944,7 @@ impl VipsImage {
                     &mut out_out,
                 )
                 .set(
-                    "output-profile",
+                    "output_profile",
                     output_profile,
                 ),
         )?;
@@ -6989,7 +6989,7 @@ impl VipsImage {
                     &mut out_out,
                 )
                 .set(
-                    "output-profile",
+                    "output_profile",
                     output_profile,
                 ),
         )?;
@@ -8866,7 +8866,7 @@ impl VipsImage {
                     sigma,
                 )
                 .set(
-                    "min-ampl",
+                    "min_ampl",
                     min_ampl,
                 ),
         )?;
@@ -8904,7 +8904,7 @@ impl VipsImage {
                     sigma,
                 )
                 .set(
-                    "min-ampl",
+                    "min_ampl",
                     min_ampl,
                 ),
         )?;
@@ -9072,11 +9072,11 @@ impl VipsImage {
                     order,
                 )
                 .set(
-                    "frequency-cutoff",
+                    "frequency_cutoff",
                     frequency_cutoff,
                 )
                 .set(
-                    "amplitude-cutoff",
+                    "amplitude_cutoff",
                     amplitude_cutoff,
                 ),
         )?;
@@ -9139,11 +9139,11 @@ impl VipsImage {
                     order,
                 )
                 .set(
-                    "frequency-cutoff",
+                    "frequency_cutoff",
                     frequency_cutoff,
                 )
                 .set(
-                    "amplitude-cutoff",
+                    "amplitude_cutoff",
                     amplitude_cutoff,
                 ),
         )?;
@@ -9201,11 +9201,11 @@ impl VipsImage {
                     order,
                 )
                 .set(
-                    "frequency-cutoff-x",
+                    "frequency_cutoff_x",
                     frequency_cutoff_x,
                 )
                 .set(
-                    "frequency-cutoff-y",
+                    "frequency_cutoff_y",
                     frequency_cutoff_y,
                 )
                 .set(
@@ -9213,7 +9213,7 @@ impl VipsImage {
                     radius,
                 )
                 .set(
-                    "amplitude-cutoff",
+                    "amplitude_cutoff",
                     amplitude_cutoff,
                 ),
         )?;
@@ -9284,11 +9284,11 @@ impl VipsImage {
                     order,
                 )
                 .set(
-                    "frequency-cutoff-x",
+                    "frequency_cutoff_x",
                     frequency_cutoff_x,
                 )
                 .set(
-                    "frequency-cutoff-y",
+                    "frequency_cutoff_y",
                     frequency_cutoff_y,
                 )
                 .set(
@@ -9296,7 +9296,7 @@ impl VipsImage {
                     radius,
                 )
                 .set(
-                    "amplitude-cutoff",
+                    "amplitude_cutoff",
                     amplitude_cutoff,
                 ),
         )?;
@@ -9353,11 +9353,11 @@ impl VipsImage {
                     order,
                 )
                 .set(
-                    "frequency-cutoff",
+                    "frequency_cutoff",
                     frequency_cutoff,
                 )
                 .set(
-                    "amplitude-cutoff",
+                    "amplitude_cutoff",
                     amplitude_cutoff,
                 )
                 .set(
@@ -9429,11 +9429,11 @@ impl VipsImage {
                     order,
                 )
                 .set(
-                    "frequency-cutoff",
+                    "frequency_cutoff",
                     frequency_cutoff,
                 )
                 .set(
-                    "amplitude-cutoff",
+                    "amplitude_cutoff",
                     amplitude_cutoff,
                 )
                 .set(
@@ -9477,7 +9477,7 @@ impl VipsImage {
                     height,
                 )
                 .set(
-                    "fractal-dimension",
+                    "fractal_dimension",
                     fractal_dimension,
                 ),
         )?;
@@ -9530,7 +9530,7 @@ impl VipsImage {
                     height,
                 )
                 .set(
-                    "fractal-dimension",
+                    "fractal_dimension",
                     fractal_dimension,
                 ),
         )?;
@@ -9575,11 +9575,11 @@ impl VipsImage {
                     height,
                 )
                 .set(
-                    "frequency-cutoff",
+                    "frequency_cutoff",
                     frequency_cutoff,
                 )
                 .set(
-                    "amplitude-cutoff",
+                    "amplitude_cutoff",
                     amplitude_cutoff,
                 ),
         )?;
@@ -9635,11 +9635,11 @@ impl VipsImage {
                     height,
                 )
                 .set(
-                    "frequency-cutoff",
+                    "frequency_cutoff",
                     frequency_cutoff,
                 )
                 .set(
-                    "amplitude-cutoff",
+                    "amplitude_cutoff",
                     amplitude_cutoff,
                 ),
         )?;
@@ -9690,11 +9690,11 @@ impl VipsImage {
                     height,
                 )
                 .set(
-                    "frequency-cutoff-x",
+                    "frequency_cutoff_x",
                     frequency_cutoff_x,
                 )
                 .set(
-                    "frequency-cutoff-y",
+                    "frequency_cutoff_y",
                     frequency_cutoff_y,
                 )
                 .set(
@@ -9702,7 +9702,7 @@ impl VipsImage {
                     radius,
                 )
                 .set(
-                    "amplitude-cutoff",
+                    "amplitude_cutoff",
                     amplitude_cutoff,
                 ),
         )?;
@@ -9764,11 +9764,11 @@ impl VipsImage {
                     height,
                 )
                 .set(
-                    "frequency-cutoff-x",
+                    "frequency_cutoff_x",
                     frequency_cutoff_x,
                 )
                 .set(
-                    "frequency-cutoff-y",
+                    "frequency_cutoff_y",
                     frequency_cutoff_y,
                 )
                 .set(
@@ -9776,7 +9776,7 @@ impl VipsImage {
                     radius,
                 )
                 .set(
-                    "amplitude-cutoff",
+                    "amplitude_cutoff",
                     amplitude_cutoff,
                 ),
         )?;
@@ -9824,11 +9824,11 @@ impl VipsImage {
                     height,
                 )
                 .set(
-                    "frequency-cutoff",
+                    "frequency_cutoff",
                     frequency_cutoff,
                 )
                 .set(
-                    "amplitude-cutoff",
+                    "amplitude_cutoff",
                     amplitude_cutoff,
                 )
                 .set(
@@ -9891,11 +9891,11 @@ impl VipsImage {
                     height,
                 )
                 .set(
-                    "frequency-cutoff",
+                    "frequency_cutoff",
                     frequency_cutoff,
                 )
                 .set(
-                    "amplitude-cutoff",
+                    "amplitude_cutoff",
                     amplitude_cutoff,
                 )
                 .set(
@@ -9937,7 +9937,7 @@ impl VipsImage {
                     height,
                 )
                 .set(
-                    "frequency-cutoff",
+                    "frequency_cutoff",
                     frequency_cutoff,
                 ),
         )?;
@@ -9990,7 +9990,7 @@ impl VipsImage {
                     height,
                 )
                 .set(
-                    "frequency-cutoff",
+                    "frequency_cutoff",
                     frequency_cutoff,
                 ),
         )?;
@@ -10038,11 +10038,11 @@ impl VipsImage {
                     height,
                 )
                 .set(
-                    "frequency-cutoff-x",
+                    "frequency_cutoff_x",
                     frequency_cutoff_x,
                 )
                 .set(
-                    "frequency-cutoff-y",
+                    "frequency_cutoff_y",
                     frequency_cutoff_y,
                 )
                 .set(
@@ -10105,11 +10105,11 @@ impl VipsImage {
                     height,
                 )
                 .set(
-                    "frequency-cutoff-x",
+                    "frequency_cutoff_x",
                     frequency_cutoff_x,
                 )
                 .set(
-                    "frequency-cutoff-y",
+                    "frequency_cutoff_y",
                     frequency_cutoff_y,
                 )
                 .set(
@@ -10158,7 +10158,7 @@ impl VipsImage {
                     height,
                 )
                 .set(
-                    "frequency-cutoff",
+                    "frequency_cutoff",
                     frequency_cutoff,
                 )
                 .set(
@@ -10218,7 +10218,7 @@ impl VipsImage {
                     height,
                 )
                 .set(
-                    "frequency-cutoff",
+                    "frequency_cutoff",
                     frequency_cutoff,
                 )
                 .set(
@@ -14194,11 +14194,11 @@ impl VipsImage {
                     &mut out_out,
                 )
                 .set(
-                    "old-str",
+                    "old_str",
                     old_str,
                 )
                 .set(
-                    "new-str",
+                    "new_str",
                     new_str,
                 ),
         )?;
@@ -15886,7 +15886,7 @@ impl VipsImage {
         let vips_op_response = call(
             "system",
             VOption::new().set(
-                "cmd-format",
+                "cmd_format",
                 cmd_format,
             ),
         )?;
@@ -15917,7 +15917,7 @@ impl VipsImage {
         let vips_op_response = call(
             "system",
             option.set(
-                "cmd-format",
+                "cmd_format",
                 cmd_format,
             ),
         )?;

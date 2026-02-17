@@ -295,7 +295,7 @@ impl Operation {
         format!(
             r#"
                 {}
-                let vips_op_response = call("{}", {});
+                let vips_op_response = call("{}", {})?;
                 {}
                 utils::result(vips_op_response, {}, Error::OperationError("{} (vips_{}) failed".to_string()))
             "#,
@@ -1176,6 +1176,7 @@ fn parse_param(
         )
     };
     let name = if is_kebab_case(&param_name) { param_name.to_snake_case() } else { param_name };
+    let vips_name = if is_kebab_case(&vips_name) { vips_name.to_snake_case() } else { vips_name };
     (
         is_output,
         Parameter {
@@ -1414,7 +1415,6 @@ fn rustfmt_generated_string(source: &str) -> io::Result<String> {
 }
 
 fn add_missiong(methods: &mut String) {
-    // Add add_image for operator overload
     methods.push_str(
         r#"
             // Alias for operator overload
