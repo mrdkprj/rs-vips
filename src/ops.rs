@@ -807,7 +807,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -828,7 +828,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -849,7 +849,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -870,7 +870,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -891,7 +891,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -912,7 +912,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -933,7 +933,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -954,7 +954,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -975,7 +975,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1000,7 +1000,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1021,7 +1021,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1042,7 +1042,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1063,7 +1063,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1084,7 +1084,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1105,7 +1105,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1126,7 +1126,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1147,7 +1147,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1172,7 +1172,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1193,7 +1193,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1214,7 +1214,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1235,7 +1235,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1256,7 +1256,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1286,7 +1286,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1307,7 +1307,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1334,7 +1334,7 @@ impl VipsImage {
                     "matrix",
                     matrix,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1381,7 +1381,7 @@ impl VipsImage {
                     "matrix",
                     matrix,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1407,7 +1407,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1445,7 +1445,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1468,7 +1468,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1507,7 +1507,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1528,7 +1528,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1555,7 +1555,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1576,7 +1576,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1603,7 +1603,7 @@ impl VipsImage {
                     "boolean",
                     boolean as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1624,7 +1624,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1649,7 +1649,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1672,7 +1672,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1696,7 +1696,7 @@ impl VipsImage {
                     &mut out_out,
                 )
                 .set("c", c),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1717,7 +1717,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1740,7 +1740,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1767,7 +1767,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1788,7 +1788,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1813,7 +1813,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1845,7 +1845,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1881,7 +1881,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1917,7 +1917,7 @@ impl VipsImage {
                     "boolean",
                     boolean as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1947,7 +1947,7 @@ impl VipsImage {
                     boolean as i32,
                 )
                 .set("c", c),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1968,7 +1968,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -1989,7 +1989,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2010,7 +2010,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2037,7 +2037,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2067,7 +2067,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2094,7 +2094,7 @@ impl VipsImage {
                     "format",
                     format as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2125,7 +2125,7 @@ impl VipsImage {
                     "format",
                     format as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2146,7 +2146,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2173,7 +2173,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2200,7 +2200,7 @@ impl VipsImage {
                     "space",
                     space as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2235,7 +2235,7 @@ impl VipsImage {
                     "space",
                     space as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2262,7 +2262,7 @@ impl VipsImage {
                     "mask",
                     mask,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2303,7 +2303,7 @@ impl VipsImage {
                     "mask",
                     mask,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2339,7 +2339,7 @@ impl VipsImage {
                     "cmplx",
                     cmplx as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2366,7 +2366,7 @@ impl VipsImage {
                     "cmplx",
                     cmplx as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2396,7 +2396,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2423,7 +2423,7 @@ impl VipsImage {
                     "get",
                     get as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2459,7 +2459,7 @@ impl VipsImage {
                     "mode",
                     mode as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2510,7 +2510,7 @@ impl VipsImage {
                     "mode",
                     mode as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2539,7 +2539,7 @@ impl VipsImage {
                     "mode",
                     mode,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2582,7 +2582,7 @@ impl VipsImage {
                     "mode",
                     mode,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2609,7 +2609,7 @@ impl VipsImage {
                     "mask",
                     mask,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2644,7 +2644,7 @@ impl VipsImage {
                     "mask",
                     mask,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2671,7 +2671,7 @@ impl VipsImage {
                     "mask",
                     mask,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2704,7 +2704,7 @@ impl VipsImage {
                     "mask",
                     mask,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2731,7 +2731,7 @@ impl VipsImage {
                     "mask",
                     mask,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2762,7 +2762,7 @@ impl VipsImage {
                     "mask",
                     mask,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2789,7 +2789,7 @@ impl VipsImage {
                     "mask",
                     mask,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2816,7 +2816,7 @@ impl VipsImage {
                     "mask",
                     mask,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2843,7 +2843,7 @@ impl VipsImage {
                     "mask",
                     mask,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2878,7 +2878,7 @@ impl VipsImage {
                     "mask",
                     mask,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2899,7 +2899,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2942,7 +2942,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2969,7 +2969,7 @@ impl VipsImage {
                     "direction",
                     direction as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -2995,7 +2995,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3041,7 +3041,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3067,7 +3067,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3113,7 +3113,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3134,7 +3134,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3167,7 +3167,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3188,7 +3188,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3221,7 +3221,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3251,7 +3251,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3281,7 +3281,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3311,7 +3311,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3332,7 +3332,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3362,7 +3362,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3395,7 +3395,7 @@ impl VipsImage {
                     "radius",
                     radius,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3439,7 +3439,7 @@ impl VipsImage {
                     "radius",
                     radius,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3466,7 +3466,7 @@ impl VipsImage {
                 .set("ink", ink)
                 .set("x", x)
                 .set("y", y),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3507,7 +3507,7 @@ impl VipsImage {
                 .set("ink", ink)
                 .set("x", x)
                 .set("y", y),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3534,7 +3534,7 @@ impl VipsImage {
                 .set("sub", sub)
                 .set("x", x)
                 .set("y", y),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3571,7 +3571,7 @@ impl VipsImage {
                 .set("sub", sub)
                 .set("x", x)
                 .set("y", y),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3604,7 +3604,7 @@ impl VipsImage {
                 .set("y1", y1)
                 .set("x2", x2)
                 .set("y2", y2),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3637,7 +3637,7 @@ impl VipsImage {
                 )
                 .set("x", x)
                 .set("y", y),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3686,7 +3686,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3740,7 +3740,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3779,7 +3779,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3800,7 +3800,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3859,7 +3859,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3880,7 +3880,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3939,7 +3939,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -3960,7 +3960,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4019,7 +4019,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4058,7 +4058,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4110,7 +4110,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4155,7 +4155,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4200,7 +4200,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4227,7 +4227,7 @@ impl VipsImage {
                     "band",
                     band,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4258,7 +4258,7 @@ impl VipsImage {
                     "band",
                     band,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4290,7 +4290,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4328,7 +4328,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4349,7 +4349,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4375,7 +4375,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4396,7 +4396,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4421,7 +4421,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4469,7 +4469,7 @@ impl VipsImage {
                     "height",
                     &mut height_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4531,7 +4531,7 @@ impl VipsImage {
                     "height",
                     &mut height_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4562,7 +4562,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4600,7 +4600,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4626,7 +4626,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4664,7 +4664,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4685,7 +4685,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4716,7 +4716,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4737,7 +4737,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4764,7 +4764,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4791,7 +4791,7 @@ impl VipsImage {
                     "direction",
                     direction as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4812,7 +4812,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4850,7 +4850,7 @@ impl VipsImage {
                     "fractal-dimension",
                     fractal_dimension,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4877,7 +4877,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4898,7 +4898,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4919,7 +4919,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4944,7 +4944,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -4971,7 +4971,7 @@ impl VipsImage {
                     "sigma",
                     sigma,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5004,7 +5004,7 @@ impl VipsImage {
                     "sigma",
                     sigma,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5036,7 +5036,7 @@ impl VipsImage {
                     "min-ampl",
                     min_ampl,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5074,7 +5074,7 @@ impl VipsImage {
                     "min-ampl",
                     min_ampl,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5106,7 +5106,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5146,7 +5146,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5173,7 +5173,7 @@ impl VipsImage {
                 )
                 .set("x", x)
                 .set("y", y),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5204,7 +5204,7 @@ impl VipsImage {
                 )
                 .set("x", x)
                 .set("y", y),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5230,7 +5230,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5272,7 +5272,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5306,7 +5306,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -5356,7 +5356,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -5382,7 +5382,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5424,7 +5424,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5445,7 +5445,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5492,7 +5492,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5513,7 +5513,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5560,7 +5560,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5581,7 +5581,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5628,7 +5628,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5649,7 +5649,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5676,7 +5676,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5720,7 +5720,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5771,7 +5771,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5803,7 +5803,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5839,7 +5839,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5878,7 +5878,7 @@ impl VipsImage {
                     "down",
                     down,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5904,7 +5904,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5950,7 +5950,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -5984,7 +5984,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -6038,7 +6038,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -6064,7 +6064,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6110,7 +6110,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6131,7 +6131,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6176,7 +6176,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6197,7 +6197,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6242,7 +6242,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6263,7 +6263,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6308,7 +6308,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6329,7 +6329,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6350,7 +6350,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6371,7 +6371,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6396,7 +6396,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6417,7 +6417,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6442,7 +6442,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6469,7 +6469,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6504,7 +6504,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6525,7 +6525,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6550,7 +6550,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6571,7 +6571,7 @@ impl VipsImage {
                     "monotonic",
                     &mut monotonic_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6604,7 +6604,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6646,7 +6646,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6672,7 +6672,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6693,7 +6693,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6714,7 +6714,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6735,7 +6735,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6764,7 +6764,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6785,7 +6785,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6812,7 +6812,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6833,7 +6833,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6866,7 +6866,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6887,7 +6887,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6920,7 +6920,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6947,7 +6947,7 @@ impl VipsImage {
                     "output-profile",
                     output_profile,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -6992,7 +6992,7 @@ impl VipsImage {
                     "output-profile",
                     output_profile,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7011,7 +7011,7 @@ impl VipsImage {
                 "out",
                 &mut out_out,
             ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7038,7 +7038,7 @@ impl VipsImage {
                 "out",
                 &mut out_out,
             ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7068,7 +7068,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7107,7 +7107,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7140,7 +7140,7 @@ impl VipsImage {
                 )
                 .set("x", x)
                 .set("y", y),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7185,7 +7185,7 @@ impl VipsImage {
                 )
                 .set("x", x)
                 .set("y", y),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7206,7 +7206,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7227,7 +7227,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7252,7 +7252,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7273,7 +7273,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7298,7 +7298,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7330,7 +7330,7 @@ impl VipsImage {
                     "direction",
                     direction as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7377,7 +7377,7 @@ impl VipsImage {
                     "direction",
                     direction as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7403,7 +7403,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7445,7 +7445,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7479,7 +7479,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -7529,7 +7529,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -7555,7 +7555,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7597,7 +7597,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7618,7 +7618,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7659,7 +7659,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7680,7 +7680,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7721,7 +7721,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7742,7 +7742,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7783,7 +7783,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7809,7 +7809,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7853,7 +7853,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -7887,7 +7887,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -7939,7 +7939,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -7965,7 +7965,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8009,7 +8009,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8030,7 +8030,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8079,7 +8079,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8100,7 +8100,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8149,7 +8149,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8163,7 +8163,7 @@ impl VipsImage {
         let vips_op_response = call(
             "jpegsave_mime",
             VOption::new().set("in", self),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8205,7 +8205,7 @@ impl VipsImage {
         let vips_op_response = call(
             "jpegsave_mime",
             option.set("in", self),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8226,7 +8226,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8275,7 +8275,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8301,7 +8301,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8343,7 +8343,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8377,7 +8377,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -8427,7 +8427,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -8453,7 +8453,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8495,7 +8495,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8516,7 +8516,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8557,7 +8557,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8578,7 +8578,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8619,7 +8619,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8640,7 +8640,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8681,7 +8681,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8702,7 +8702,7 @@ impl VipsImage {
                     "mask",
                     &mut mask_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8727,7 +8727,7 @@ impl VipsImage {
                     "mask",
                     &mut mask_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8754,7 +8754,7 @@ impl VipsImage {
                 )
                 .set("a", a)
                 .set("b", b),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8785,7 +8785,7 @@ impl VipsImage {
                 )
                 .set("a", a)
                 .set("b", b),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8806,7 +8806,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8837,7 +8837,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8869,7 +8869,7 @@ impl VipsImage {
                     "min-ampl",
                     min_ampl,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8907,7 +8907,7 @@ impl VipsImage {
                     "min-ampl",
                     min_ampl,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8934,7 +8934,7 @@ impl VipsImage {
                     "index",
                     index,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8971,7 +8971,7 @@ impl VipsImage {
                     "index",
                     index,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -8995,7 +8995,7 @@ impl VipsImage {
                     &mut out_out,
                 )
                 .set("lut", lut),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -9023,7 +9023,7 @@ impl VipsImage {
                     &mut out_out,
                 )
                 .set("lut", lut),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -9079,7 +9079,7 @@ impl VipsImage {
                     "amplitude-cutoff",
                     amplitude_cutoff,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -9146,7 +9146,7 @@ impl VipsImage {
                     "amplitude-cutoff",
                     amplitude_cutoff,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -9216,7 +9216,7 @@ impl VipsImage {
                     "amplitude-cutoff",
                     amplitude_cutoff,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -9299,7 +9299,7 @@ impl VipsImage {
                     "amplitude-cutoff",
                     amplitude_cutoff,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -9364,7 +9364,7 @@ impl VipsImage {
                     "ringwidth",
                     ringwidth,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -9440,7 +9440,7 @@ impl VipsImage {
                     "ringwidth",
                     ringwidth,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -9480,7 +9480,7 @@ impl VipsImage {
                     "fractal-dimension",
                     fractal_dimension,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -9533,7 +9533,7 @@ impl VipsImage {
                     "fractal-dimension",
                     fractal_dimension,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -9582,7 +9582,7 @@ impl VipsImage {
                     "amplitude-cutoff",
                     amplitude_cutoff,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -9642,7 +9642,7 @@ impl VipsImage {
                     "amplitude-cutoff",
                     amplitude_cutoff,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -9705,7 +9705,7 @@ impl VipsImage {
                     "amplitude-cutoff",
                     amplitude_cutoff,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -9779,7 +9779,7 @@ impl VipsImage {
                     "amplitude-cutoff",
                     amplitude_cutoff,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -9835,7 +9835,7 @@ impl VipsImage {
                     "ringwidth",
                     ringwidth,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -9902,7 +9902,7 @@ impl VipsImage {
                     "ringwidth",
                     ringwidth,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -9940,7 +9940,7 @@ impl VipsImage {
                     "frequency-cutoff",
                     frequency_cutoff,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -9993,7 +9993,7 @@ impl VipsImage {
                     "frequency-cutoff",
                     frequency_cutoff,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10049,7 +10049,7 @@ impl VipsImage {
                     "radius",
                     radius,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10116,7 +10116,7 @@ impl VipsImage {
                     "radius",
                     radius,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10165,7 +10165,7 @@ impl VipsImage {
                     "ringwidth",
                     ringwidth,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10225,7 +10225,7 @@ impl VipsImage {
                     "ringwidth",
                     ringwidth,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10286,7 +10286,7 @@ impl VipsImage {
                 .set("yr2", yr2)
                 .set("xs2", xs2)
                 .set("ys2", ys2),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10358,7 +10358,7 @@ impl VipsImage {
                 .set("yr2", yr2)
                 .set("xs2", xs2)
                 .set("ys2", ys2),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10394,7 +10394,7 @@ impl VipsImage {
                     "math2",
                     math2 as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10424,7 +10424,7 @@ impl VipsImage {
                     math2 as i32,
                 )
                 .set("c", c),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10451,7 +10451,7 @@ impl VipsImage {
                     "math",
                     math as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10477,7 +10477,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10515,7 +10515,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10536,7 +10536,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10562,7 +10562,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10600,7 +10600,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10626,7 +10626,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10664,7 +10664,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10694,7 +10694,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10708,7 +10708,7 @@ impl VipsImage {
         let vips_op_response = call(
             "matrixprint",
             VOption::new().set("in", self),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10732,7 +10732,7 @@ impl VipsImage {
         let vips_op_response = call(
             "matrixprint",
             option.set("in", self),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10753,7 +10753,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10784,7 +10784,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10805,7 +10805,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10836,7 +10836,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10857,7 +10857,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10892,7 +10892,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10922,7 +10922,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10949,7 +10949,7 @@ impl VipsImage {
                 )
                 .set("h", h)
                 .set("v", v),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -10986,7 +10986,7 @@ impl VipsImage {
                 )
                 .set("h", h)
                 .set("v", v),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11030,7 +11030,7 @@ impl VipsImage {
                 )
                 .set("dx", dx)
                 .set("dy", dy),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11079,7 +11079,7 @@ impl VipsImage {
                 )
                 .set("dx", dx)
                 .set("dy", dy),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11100,7 +11100,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11135,7 +11135,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11165,7 +11165,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11198,7 +11198,7 @@ impl VipsImage {
                     "morph",
                     morph as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11266,7 +11266,7 @@ impl VipsImage {
                 .set("yr2", yr2)
                 .set("xs2", xs2)
                 .set("ys2", ys2),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11347,7 +11347,7 @@ impl VipsImage {
                 .set("yr2", yr2)
                 .set("xs2", xs2)
                 .set("ys2", ys2),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11411,7 +11411,7 @@ impl VipsImage {
                     "ysec",
                     ysec,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11498,7 +11498,7 @@ impl VipsImage {
                     "ysec",
                     ysec,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11519,7 +11519,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11544,7 +11544,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11574,7 +11574,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11600,7 +11600,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11638,7 +11638,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11664,7 +11664,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11712,7 +11712,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11738,7 +11738,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11791,7 +11791,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11819,7 +11819,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11869,7 +11869,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -11903,7 +11903,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -11961,7 +11961,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -11987,7 +11987,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12037,7 +12037,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12064,7 +12064,7 @@ impl VipsImage {
                     "threshold",
                     &mut threshold_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12096,7 +12096,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12136,7 +12136,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12160,7 +12160,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12186,7 +12186,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12226,7 +12226,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12260,7 +12260,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -12308,7 +12308,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -12334,7 +12334,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12374,7 +12374,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12395,7 +12395,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12442,7 +12442,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12463,7 +12463,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12510,7 +12510,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12531,7 +12531,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12578,7 +12578,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12604,7 +12604,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12642,7 +12642,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12676,7 +12676,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -12722,7 +12722,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -12748,7 +12748,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12786,7 +12786,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12807,7 +12807,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12844,7 +12844,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12865,7 +12865,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12902,7 +12902,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12923,7 +12923,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12948,7 +12948,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -12969,7 +12969,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13003,7 +13003,7 @@ impl VipsImage {
                     "rows",
                     &mut rows_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13032,7 +13032,7 @@ impl VipsImage {
                     "profile",
                     &mut profile_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13066,7 +13066,7 @@ impl VipsImage {
                     "rows",
                     &mut rows_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13096,7 +13096,7 @@ impl VipsImage {
                     "coeff",
                     coeff,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13127,7 +13127,7 @@ impl VipsImage {
                     "coeff",
                     coeff,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13148,7 +13148,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13174,7 +13174,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13212,7 +13212,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13246,7 +13246,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -13292,7 +13292,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -13318,7 +13318,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13356,7 +13356,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13377,7 +13377,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13408,7 +13408,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13429,7 +13429,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13460,7 +13460,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13481,7 +13481,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13512,7 +13512,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13551,7 +13551,7 @@ impl VipsImage {
                     "index",
                     index,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13595,7 +13595,7 @@ impl VipsImage {
                     "bands",
                     bands,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13663,7 +13663,7 @@ impl VipsImage {
                     "bands",
                     bands,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13684,7 +13684,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13715,7 +13715,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13736,7 +13736,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13767,7 +13767,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13788,7 +13788,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13819,7 +13819,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13843,7 +13843,7 @@ impl VipsImage {
                     &mut out_out,
                 )
                 .set("m", m),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13876,7 +13876,7 @@ impl VipsImage {
                     "vshrink",
                     vshrink,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13920,7 +13920,7 @@ impl VipsImage {
                     "vshrink",
                     vshrink,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13947,7 +13947,7 @@ impl VipsImage {
                     "hshrink",
                     hshrink,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -13980,7 +13980,7 @@ impl VipsImage {
                     "hshrink",
                     hshrink,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14007,7 +14007,7 @@ impl VipsImage {
                     "vshrink",
                     vshrink,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14040,7 +14040,7 @@ impl VipsImage {
                     "vshrink",
                     vshrink,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14080,7 +14080,7 @@ impl VipsImage {
                     "relational",
                     relational as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14114,7 +14114,7 @@ impl VipsImage {
                     relational as i32,
                 )
                 .set("c", c),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14144,7 +14144,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14168,7 +14168,7 @@ impl VipsImage {
                     &mut out_out,
                 )
                 .set("c", c),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14201,7 +14201,7 @@ impl VipsImage {
                     "new-str",
                     new_str,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14234,7 +14234,7 @@ impl VipsImage {
                     "down",
                     down,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14261,7 +14261,7 @@ impl VipsImage {
                     "scale",
                     scale,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14296,7 +14296,7 @@ impl VipsImage {
                     "scale",
                     scale,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14317,7 +14317,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14342,7 +14342,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14369,7 +14369,7 @@ impl VipsImage {
                     "angle",
                     angle as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14396,7 +14396,7 @@ impl VipsImage {
                     "angle",
                     angle,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14437,7 +14437,7 @@ impl VipsImage {
                     "angle",
                     angle,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14464,7 +14464,7 @@ impl VipsImage {
                     "round",
                     round as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14485,7 +14485,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14506,7 +14506,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14527,7 +14527,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14552,7 +14552,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14573,7 +14573,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14594,7 +14594,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14619,7 +14619,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14640,7 +14640,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14667,7 +14667,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14688,7 +14688,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14726,7 +14726,7 @@ impl VipsImage {
                     "shape",
                     shape as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14779,7 +14779,7 @@ impl VipsImage {
                     "shape",
                     shape as i32,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14800,7 +14800,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14825,7 +14825,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14846,7 +14846,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14881,7 +14881,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14914,7 +14914,7 @@ impl VipsImage {
                     "vshrink",
                     vshrink,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14956,7 +14956,7 @@ impl VipsImage {
                     "vshrink",
                     vshrink,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -14983,7 +14983,7 @@ impl VipsImage {
                     "hshrink",
                     hshrink,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15014,7 +15014,7 @@ impl VipsImage {
                     "hshrink",
                     hshrink,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15041,7 +15041,7 @@ impl VipsImage {
                     "vshrink",
                     vshrink,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15072,7 +15072,7 @@ impl VipsImage {
                     "vshrink",
                     vshrink,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15093,7 +15093,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15114,7 +15114,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15153,7 +15153,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15185,7 +15185,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15225,7 +15225,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15261,7 +15261,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15312,7 +15312,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15333,7 +15333,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15359,7 +15359,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15380,7 +15380,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15401,7 +15401,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15434,7 +15434,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15477,7 +15477,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15513,7 +15513,7 @@ impl VipsImage {
                     "yfac",
                     yfac,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15553,7 +15553,7 @@ impl VipsImage {
                     "yfac",
                     yfac,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15583,7 +15583,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15606,7 +15606,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15632,7 +15632,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15680,7 +15680,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15714,7 +15714,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -15770,7 +15770,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -15796,7 +15796,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15844,7 +15844,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15870,7 +15870,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15889,7 +15889,7 @@ impl VipsImage {
                 "cmd-format",
                 cmd_format,
             ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15920,7 +15920,7 @@ impl VipsImage {
                 "cmd-format",
                 cmd_format,
             ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15946,7 +15946,7 @@ impl VipsImage {
                     "text",
                     text,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -15996,7 +15996,7 @@ impl VipsImage {
                     "text",
                     text,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -16028,7 +16028,7 @@ impl VipsImage {
                     "width",
                     width,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -16080,7 +16080,7 @@ impl VipsImage {
                     "width",
                     width,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -16120,7 +16120,7 @@ impl VipsImage {
                     "width",
                     width,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -16186,7 +16186,7 @@ impl VipsImage {
                     "width",
                     width,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -16213,7 +16213,7 @@ impl VipsImage {
                     "width",
                     width,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -16260,7 +16260,7 @@ impl VipsImage {
                     "width",
                     width,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -16292,7 +16292,7 @@ impl VipsImage {
                     "width",
                     width,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -16350,7 +16350,7 @@ impl VipsImage {
                     "width",
                     width,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -16376,7 +16376,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -16424,7 +16424,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -16458,7 +16458,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -16514,7 +16514,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -16540,7 +16540,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -16588,7 +16588,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -16609,7 +16609,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -16680,7 +16680,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -16701,7 +16701,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -16772,7 +16772,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -16793,7 +16793,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -16864,7 +16864,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -16885,7 +16885,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -16920,7 +16920,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -16939,7 +16939,7 @@ impl VipsImage {
                 "out",
                 &mut out_out,
             ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -16980,7 +16980,7 @@ impl VipsImage {
                 "out",
                 &mut out_out,
             ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17001,7 +17001,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17026,7 +17026,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17047,7 +17047,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17074,7 +17074,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17100,7 +17100,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17138,7 +17138,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17164,7 +17164,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17202,7 +17202,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17223,7 +17223,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17254,7 +17254,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17275,7 +17275,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17306,7 +17306,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17332,7 +17332,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17376,7 +17376,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17410,7 +17410,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -17462,7 +17462,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
         blob.area_unref();
         utils::result(
             vips_op_response,
@@ -17488,7 +17488,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17532,7 +17532,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17553,7 +17553,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17612,7 +17612,7 @@ impl VipsImage {
                     "filename",
                     filename,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17633,7 +17633,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17692,7 +17692,7 @@ impl VipsImage {
                     "buffer",
                     &mut buffer_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17706,7 +17706,7 @@ impl VipsImage {
         let vips_op_response = call(
             "webpsave_mime",
             VOption::new().set("in", self),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17758,7 +17758,7 @@ impl VipsImage {
         let vips_op_response = call(
             "webpsave_mime",
             option.set("in", self),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17779,7 +17779,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17838,7 +17838,7 @@ impl VipsImage {
                     "target",
                     target,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17870,7 +17870,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17908,7 +17908,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17929,7 +17929,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17956,7 +17956,7 @@ impl VipsImage {
                     "out",
                     &mut out_out,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -17988,7 +17988,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -18028,7 +18028,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -18060,7 +18060,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -18096,7 +18096,7 @@ impl VipsImage {
                     "height",
                     height,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,
@@ -18132,7 +18132,7 @@ impl VipsImage {
                     "yfac",
                     yfac,
                 ),
-        );
+        )?;
 
         utils::result(
             vips_op_response,

@@ -12,11 +12,6 @@ use crate::{
 };
 use std::ops::{Add, BitAnd, BitOr, BitXor, Div, Mul, Rem, Shl, Shr, Sub};
 
-pub trait Index<Idx> {
-    type Output: ?Sized;
-    fn at(&self, index: Idx) -> Self::Output;
-}
-
 fn invert(vector: &[f64]) -> Vec<f64> {
     let mut new_vector = Vec::with_capacity(vector.len());
 
@@ -37,6 +32,11 @@ fn negate(vector: &[f64]) -> Vec<f64> {
     new_vector
 }
 
+pub trait Index<Idx> {
+    type Output: ?Sized;
+    fn at(&self, index: Idx) -> Self::Output;
+}
+
 // index
 impl Index<i32> for VipsImage {
     type Output = VipsImage;
@@ -49,7 +49,7 @@ impl Index<i32> for VipsImage {
 // add
 impl Add for VipsImage {
     type Output = VipsImage;
-    fn add(self, b: VipsImage) -> VipsImage {
+    fn add(self, b: VipsImage) -> Self::Output {
         self.add_image(&b)
             .unwrap()
     }
@@ -57,7 +57,7 @@ impl Add for VipsImage {
 
 impl Add<VipsImage> for f64 {
     type Output = VipsImage;
-    fn add(self, b: VipsImage) -> VipsImage {
+    fn add(self, b: VipsImage) -> Self::Output {
         b.linear(
             &[1.0],
             &[self],
@@ -68,7 +68,7 @@ impl Add<VipsImage> for f64 {
 
 impl Add<f64> for VipsImage {
     type Output = VipsImage;
-    fn add(self, b: f64) -> VipsImage {
+    fn add(self, b: f64) -> Self::Output {
         self.linear(
             &[1.0],
             &[b],
@@ -79,7 +79,7 @@ impl Add<f64> for VipsImage {
 
 impl Add<VipsImage> for &[f64] {
     type Output = VipsImage;
-    fn add(self, b: VipsImage) -> VipsImage {
+    fn add(self, b: VipsImage) -> Self::Output {
         b.linear(
             &[1.0],
             self,
@@ -90,7 +90,7 @@ impl Add<VipsImage> for &[f64] {
 
 impl Add<&[f64]> for VipsImage {
     type Output = VipsImage;
-    fn add(self, b: &[f64]) -> VipsImage {
+    fn add(self, b: &[f64]) -> Self::Output {
         self.linear(&[1.0], b)
             .unwrap()
     }
@@ -98,7 +98,7 @@ impl Add<&[f64]> for VipsImage {
 
 impl<const N: usize> Add<VipsImage> for &[f64; N] {
     type Output = VipsImage;
-    fn add(self, b: VipsImage) -> VipsImage {
+    fn add(self, b: VipsImage) -> Self::Output {
         b.linear(
             &[1.0],
             self,
@@ -109,7 +109,7 @@ impl<const N: usize> Add<VipsImage> for &[f64; N] {
 
 impl<const N: usize> Add<&[f64; N]> for VipsImage {
     type Output = VipsImage;
-    fn add(self, b: &[f64; N]) -> VipsImage {
+    fn add(self, b: &[f64; N]) -> Self::Output {
         self.linear(&[1.0], b)
             .unwrap()
     }
@@ -118,7 +118,7 @@ impl<const N: usize> Add<&[f64; N]> for VipsImage {
 // add ref
 impl Add for &VipsImage {
     type Output = VipsImage;
-    fn add(self, b: &VipsImage) -> VipsImage {
+    fn add(self, b: &VipsImage) -> Self::Output {
         self.add_image(b)
             .unwrap()
     }
@@ -126,7 +126,7 @@ impl Add for &VipsImage {
 
 impl Add<&VipsImage> for f64 {
     type Output = VipsImage;
-    fn add(self, b: &VipsImage) -> VipsImage {
+    fn add(self, b: &VipsImage) -> Self::Output {
         b.linear(
             &[1.0],
             &[self],
@@ -137,7 +137,7 @@ impl Add<&VipsImage> for f64 {
 
 impl Add<f64> for &VipsImage {
     type Output = VipsImage;
-    fn add(self, b: f64) -> VipsImage {
+    fn add(self, b: f64) -> Self::Output {
         self.linear(
             &[1.0],
             &[b],
@@ -148,7 +148,7 @@ impl Add<f64> for &VipsImage {
 
 impl Add<&VipsImage> for &[f64] {
     type Output = VipsImage;
-    fn add(self, b: &VipsImage) -> VipsImage {
+    fn add(self, b: &VipsImage) -> Self::Output {
         b.linear(
             &[1.0],
             self,
@@ -159,7 +159,7 @@ impl Add<&VipsImage> for &[f64] {
 
 impl Add<&[f64]> for &VipsImage {
     type Output = VipsImage;
-    fn add(self, b: &[f64]) -> VipsImage {
+    fn add(self, b: &[f64]) -> Self::Output {
         self.linear(&[1.0], b)
             .unwrap()
     }
@@ -167,7 +167,7 @@ impl Add<&[f64]> for &VipsImage {
 
 impl<const N: usize> Add<&VipsImage> for &[f64; N] {
     type Output = VipsImage;
-    fn add(self, b: &VipsImage) -> VipsImage {
+    fn add(self, b: &VipsImage) -> Self::Output {
         b.linear(
             &[1.0],
             self,
@@ -178,7 +178,7 @@ impl<const N: usize> Add<&VipsImage> for &[f64; N] {
 
 impl<const N: usize> Add<&[f64; N]> for &VipsImage {
     type Output = VipsImage;
-    fn add(self, b: &[f64; N]) -> VipsImage {
+    fn add(self, b: &[f64; N]) -> Self::Output {
         self.linear(&[1.0], b)
             .unwrap()
     }
@@ -217,7 +217,7 @@ impl Sub<f64> for VipsImage {
 
 impl Sub<VipsImage> for &[f64] {
     type Output = VipsImage;
-    fn sub(self, b: VipsImage) -> VipsImage {
+    fn sub(self, b: VipsImage) -> Self::Output {
         b.linear(
             &[-1.0],
             self,
@@ -228,7 +228,7 @@ impl Sub<VipsImage> for &[f64] {
 
 impl Sub<&[f64]> for VipsImage {
     type Output = VipsImage;
-    fn sub(self, b: &[f64]) -> VipsImage {
+    fn sub(self, b: &[f64]) -> Self::Output {
         self.linear(
             &[1.0],
             &negate(b),
@@ -239,7 +239,7 @@ impl Sub<&[f64]> for VipsImage {
 
 impl<const N: usize> Sub<VipsImage> for &[f64; N] {
     type Output = VipsImage;
-    fn sub(self, b: VipsImage) -> VipsImage {
+    fn sub(self, b: VipsImage) -> Self::Output {
         b.linear(
             &[-1.0],
             self,
@@ -250,7 +250,7 @@ impl<const N: usize> Sub<VipsImage> for &[f64; N] {
 
 impl<const N: usize> Sub<&[f64; N]> for VipsImage {
     type Output = VipsImage;
-    fn sub(self, b: &[f64; N]) -> VipsImage {
+    fn sub(self, b: &[f64; N]) -> Self::Output {
         self.linear(
             &[1.0],
             &negate(b),
@@ -292,7 +292,7 @@ impl Sub<f64> for &VipsImage {
 
 impl Sub<&VipsImage> for &[f64] {
     type Output = VipsImage;
-    fn sub(self, b: &VipsImage) -> VipsImage {
+    fn sub(self, b: &VipsImage) -> Self::Output {
         b.linear(
             &[-1.0],
             self,
@@ -303,7 +303,7 @@ impl Sub<&VipsImage> for &[f64] {
 
 impl Sub<&[f64]> for &VipsImage {
     type Output = VipsImage;
-    fn sub(self, b: &[f64]) -> VipsImage {
+    fn sub(self, b: &[f64]) -> Self::Output {
         self.linear(
             &[1.0],
             &negate(b),
@@ -314,7 +314,7 @@ impl Sub<&[f64]> for &VipsImage {
 
 impl<const N: usize> Sub<&VipsImage> for &[f64; N] {
     type Output = VipsImage;
-    fn sub(self, b: &VipsImage) -> VipsImage {
+    fn sub(self, b: &VipsImage) -> Self::Output {
         b.linear(
             &[-1.0],
             self,
@@ -325,7 +325,7 @@ impl<const N: usize> Sub<&VipsImage> for &[f64; N] {
 
 impl<const N: usize> Sub<&[f64; N]> for &VipsImage {
     type Output = VipsImage;
-    fn sub(self, b: &[f64; N]) -> VipsImage {
+    fn sub(self, b: &[f64; N]) -> Self::Output {
         self.linear(
             &[1.0],
             &negate(b),
@@ -337,7 +337,7 @@ impl<const N: usize> Sub<&[f64; N]> for &VipsImage {
 // multiply
 impl Mul for VipsImage {
     type Output = VipsImage;
-    fn mul(self, b: VipsImage) -> VipsImage {
+    fn mul(self, b: VipsImage) -> Self::Output {
         self.multiply(&b)
             .unwrap()
     }
@@ -345,7 +345,7 @@ impl Mul for VipsImage {
 
 impl Mul<VipsImage> for f64 {
     type Output = VipsImage;
-    fn mul(self, b: VipsImage) -> VipsImage {
+    fn mul(self, b: VipsImage) -> Self::Output {
         b.linear(
             &[self],
             &[0.0],
@@ -356,7 +356,7 @@ impl Mul<VipsImage> for f64 {
 
 impl Mul<f64> for VipsImage {
     type Output = VipsImage;
-    fn mul(self, b: f64) -> VipsImage {
+    fn mul(self, b: f64) -> Self::Output {
         self.linear(
             &[b],
             &[0.0],
@@ -367,7 +367,7 @@ impl Mul<f64> for VipsImage {
 
 impl Mul<VipsImage> for &[f64] {
     type Output = VipsImage;
-    fn mul(self, b: VipsImage) -> VipsImage {
+    fn mul(self, b: VipsImage) -> Self::Output {
         b.linear(
             self,
             &[0.0],
@@ -378,7 +378,7 @@ impl Mul<VipsImage> for &[f64] {
 
 impl Mul<&[f64]> for VipsImage {
     type Output = VipsImage;
-    fn mul(self, b: &[f64]) -> VipsImage {
+    fn mul(self, b: &[f64]) -> Self::Output {
         self.linear(b, &[0.0])
             .unwrap()
     }
@@ -386,7 +386,7 @@ impl Mul<&[f64]> for VipsImage {
 
 impl<const N: usize> Mul<VipsImage> for &[f64; N] {
     type Output = VipsImage;
-    fn mul(self, b: VipsImage) -> VipsImage {
+    fn mul(self, b: VipsImage) -> Self::Output {
         b.linear(
             self,
             &[0.0],
@@ -397,7 +397,7 @@ impl<const N: usize> Mul<VipsImage> for &[f64; N] {
 
 impl<const N: usize> Mul<&[f64; N]> for VipsImage {
     type Output = VipsImage;
-    fn mul(self, b: &[f64; N]) -> VipsImage {
+    fn mul(self, b: &[f64; N]) -> Self::Output {
         self.linear(b, &[0.0])
             .unwrap()
     }
@@ -406,7 +406,7 @@ impl<const N: usize> Mul<&[f64; N]> for VipsImage {
 // multiply ref
 impl Mul for &VipsImage {
     type Output = VipsImage;
-    fn mul(self, b: &VipsImage) -> VipsImage {
+    fn mul(self, b: &VipsImage) -> Self::Output {
         self.multiply(b)
             .unwrap()
     }
@@ -414,7 +414,7 @@ impl Mul for &VipsImage {
 
 impl Mul<&VipsImage> for f64 {
     type Output = VipsImage;
-    fn mul(self, b: &VipsImage) -> VipsImage {
+    fn mul(self, b: &VipsImage) -> Self::Output {
         b.linear(
             &[self],
             &[0.0],
@@ -425,7 +425,7 @@ impl Mul<&VipsImage> for f64 {
 
 impl Mul<f64> for &VipsImage {
     type Output = VipsImage;
-    fn mul(self, b: f64) -> VipsImage {
+    fn mul(self, b: f64) -> Self::Output {
         self.linear(
             &[b],
             &[0.0],
@@ -436,7 +436,7 @@ impl Mul<f64> for &VipsImage {
 
 impl Mul<&VipsImage> for &[f64] {
     type Output = VipsImage;
-    fn mul(self, b: &VipsImage) -> VipsImage {
+    fn mul(self, b: &VipsImage) -> Self::Output {
         b.linear(
             self,
             &[0.0],
@@ -447,7 +447,7 @@ impl Mul<&VipsImage> for &[f64] {
 
 impl Mul<&[f64]> for &VipsImage {
     type Output = VipsImage;
-    fn mul(self, b: &[f64]) -> VipsImage {
+    fn mul(self, b: &[f64]) -> Self::Output {
         self.linear(b, &[0.0])
             .unwrap()
     }
@@ -455,7 +455,7 @@ impl Mul<&[f64]> for &VipsImage {
 
 impl<const N: usize> Mul<&VipsImage> for &[f64; N] {
     type Output = VipsImage;
-    fn mul(self, b: &VipsImage) -> VipsImage {
+    fn mul(self, b: &VipsImage) -> Self::Output {
         b.linear(
             self,
             &[0.0],
@@ -466,7 +466,7 @@ impl<const N: usize> Mul<&VipsImage> for &[f64; N] {
 
 impl<const N: usize> Mul<&[f64; N]> for &VipsImage {
     type Output = VipsImage;
-    fn mul(self, b: &[f64; N]) -> VipsImage {
+    fn mul(self, b: &[f64; N]) -> Self::Output {
         self.linear(b, &[0.0])
             .unwrap()
     }
@@ -475,7 +475,7 @@ impl<const N: usize> Mul<&[f64; N]> for &VipsImage {
 // div
 impl Div for VipsImage {
     type Output = VipsImage;
-    fn div(self, b: VipsImage) -> VipsImage {
+    fn div(self, b: VipsImage) -> Self::Output {
         self.divide(&b)
             .unwrap()
     }
@@ -483,7 +483,7 @@ impl Div for VipsImage {
 
 impl Div<VipsImage> for f64 {
     type Output = VipsImage;
-    fn div(self, b: VipsImage) -> VipsImage {
+    fn div(self, b: VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::Eor,
             &[-1.0],
@@ -499,7 +499,7 @@ impl Div<VipsImage> for f64 {
 
 impl Div<f64> for VipsImage {
     type Output = VipsImage;
-    fn div(self, b: f64) -> VipsImage {
+    fn div(self, b: f64) -> Self::Output {
         self.linear(
             &[1.0 / b],
             &[0.0],
@@ -510,7 +510,7 @@ impl Div<f64> for VipsImage {
 
 impl Div<VipsImage> for &[f64] {
     type Output = VipsImage;
-    fn div(self, b: VipsImage) -> VipsImage {
+    fn div(self, b: VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::Eor,
             &[-1.0],
@@ -526,7 +526,7 @@ impl Div<VipsImage> for &[f64] {
 
 impl Div<&[f64]> for VipsImage {
     type Output = VipsImage;
-    fn div(self, b: &[f64]) -> VipsImage {
+    fn div(self, b: &[f64]) -> Self::Output {
         self.linear(
             &invert(b),
             &[0.0],
@@ -537,7 +537,7 @@ impl Div<&[f64]> for VipsImage {
 
 impl<const N: usize> Div<VipsImage> for &[f64; N] {
     type Output = VipsImage;
-    fn div(self, b: VipsImage) -> VipsImage {
+    fn div(self, b: VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::Eor,
             &[-1.0],
@@ -553,7 +553,7 @@ impl<const N: usize> Div<VipsImage> for &[f64; N] {
 
 impl<const N: usize> Div<&[f64; N]> for VipsImage {
     type Output = VipsImage;
-    fn div(self, b: &[f64; N]) -> VipsImage {
+    fn div(self, b: &[f64; N]) -> Self::Output {
         self.linear(
             &invert(b),
             &[0.0],
@@ -565,7 +565,7 @@ impl<const N: usize> Div<&[f64; N]> for VipsImage {
 // div ref
 impl Div for &VipsImage {
     type Output = VipsImage;
-    fn div(self, b: &VipsImage) -> VipsImage {
+    fn div(self, b: &VipsImage) -> Self::Output {
         self.divide(b)
             .unwrap()
     }
@@ -573,7 +573,7 @@ impl Div for &VipsImage {
 
 impl Div<&VipsImage> for f64 {
     type Output = VipsImage;
-    fn div(self, b: &VipsImage) -> VipsImage {
+    fn div(self, b: &VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::Eor,
             &[-1.0],
@@ -589,7 +589,7 @@ impl Div<&VipsImage> for f64 {
 
 impl Div<f64> for &VipsImage {
     type Output = VipsImage;
-    fn div(self, b: f64) -> VipsImage {
+    fn div(self, b: f64) -> Self::Output {
         self.linear(
             &[1.0 / b],
             &[0.0],
@@ -600,7 +600,7 @@ impl Div<f64> for &VipsImage {
 
 impl Div<&VipsImage> for &[f64] {
     type Output = VipsImage;
-    fn div(self, b: &VipsImage) -> VipsImage {
+    fn div(self, b: &VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::Eor,
             &[-1.0],
@@ -616,7 +616,7 @@ impl Div<&VipsImage> for &[f64] {
 
 impl Div<&[f64]> for &VipsImage {
     type Output = VipsImage;
-    fn div(self, b: &[f64]) -> VipsImage {
+    fn div(self, b: &[f64]) -> Self::Output {
         self.linear(
             &invert(b),
             &[0.0],
@@ -627,7 +627,7 @@ impl Div<&[f64]> for &VipsImage {
 
 impl<const N: usize> Div<&VipsImage> for &[f64; N] {
     type Output = VipsImage;
-    fn div(self, b: &VipsImage) -> VipsImage {
+    fn div(self, b: &VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::Eor,
             &[-1.0],
@@ -643,7 +643,7 @@ impl<const N: usize> Div<&VipsImage> for &[f64; N] {
 
 impl<const N: usize> Div<&[f64; N]> for &VipsImage {
     type Output = VipsImage;
-    fn div(self, b: &[f64; N]) -> VipsImage {
+    fn div(self, b: &[f64; N]) -> Self::Output {
         self.linear(
             &invert(b),
             &[0.0],
@@ -655,7 +655,7 @@ impl<const N: usize> Div<&[f64; N]> for &VipsImage {
 // rem
 impl Rem for VipsImage {
     type Output = VipsImage;
-    fn rem(self, b: VipsImage) -> VipsImage {
+    fn rem(self, b: VipsImage) -> Self::Output {
         self.remainder(&b)
             .unwrap()
     }
@@ -663,7 +663,7 @@ impl Rem for VipsImage {
 
 impl Rem<f64> for VipsImage {
     type Output = VipsImage;
-    fn rem(self, b: f64) -> VipsImage {
+    fn rem(self, b: f64) -> Self::Output {
         self.remainder_const(&[b])
             .unwrap()
     }
@@ -671,7 +671,7 @@ impl Rem<f64> for VipsImage {
 
 impl Rem<&[f64]> for VipsImage {
     type Output = VipsImage;
-    fn rem(self, b: &[f64]) -> VipsImage {
+    fn rem(self, b: &[f64]) -> Self::Output {
         self.remainder_const(b)
             .unwrap()
     }
@@ -679,7 +679,7 @@ impl Rem<&[f64]> for VipsImage {
 
 impl<const N: usize> Rem<&[f64; N]> for VipsImage {
     type Output = VipsImage;
-    fn rem(self, b: &[f64; N]) -> VipsImage {
+    fn rem(self, b: &[f64; N]) -> Self::Output {
         self.remainder_const(b)
             .unwrap()
     }
@@ -688,7 +688,7 @@ impl<const N: usize> Rem<&[f64; N]> for VipsImage {
 // BitAnd
 impl BitAnd for VipsImage {
     type Output = VipsImage;
-    fn bitand(self, b: VipsImage) -> VipsImage {
+    fn bitand(self, b: VipsImage) -> Self::Output {
         self.boolean(
             &b,
             OperationBoolean::And,
@@ -699,7 +699,7 @@ impl BitAnd for VipsImage {
 
 impl BitAnd<VipsImage> for f64 {
     type Output = VipsImage;
-    fn bitand(self, b: VipsImage) -> VipsImage {
+    fn bitand(self, b: VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::And,
             &[self],
@@ -710,7 +710,7 @@ impl BitAnd<VipsImage> for f64 {
 
 impl BitAnd<f64> for VipsImage {
     type Output = VipsImage;
-    fn bitand(self, b: f64) -> VipsImage {
+    fn bitand(self, b: f64) -> Self::Output {
         self.boolean_const(
             OperationBoolean::And,
             &[b],
@@ -721,7 +721,7 @@ impl BitAnd<f64> for VipsImage {
 
 impl BitAnd<VipsImage> for &[f64] {
     type Output = VipsImage;
-    fn bitand(self, b: VipsImage) -> VipsImage {
+    fn bitand(self, b: VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::And,
             self,
@@ -732,7 +732,7 @@ impl BitAnd<VipsImage> for &[f64] {
 
 impl BitAnd<&[f64]> for VipsImage {
     type Output = VipsImage;
-    fn bitand(self, b: &[f64]) -> VipsImage {
+    fn bitand(self, b: &[f64]) -> Self::Output {
         self.boolean_const(
             OperationBoolean::And,
             b,
@@ -743,7 +743,7 @@ impl BitAnd<&[f64]> for VipsImage {
 
 impl<const N: usize> BitAnd<VipsImage> for &[f64; N] {
     type Output = VipsImage;
-    fn bitand(self, b: VipsImage) -> VipsImage {
+    fn bitand(self, b: VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::And,
             self,
@@ -754,7 +754,7 @@ impl<const N: usize> BitAnd<VipsImage> for &[f64; N] {
 
 impl<const N: usize> BitAnd<&[f64; N]> for VipsImage {
     type Output = VipsImage;
-    fn bitand(self, b: &[f64; N]) -> VipsImage {
+    fn bitand(self, b: &[f64; N]) -> Self::Output {
         self.boolean_const(
             OperationBoolean::And,
             b,
@@ -766,7 +766,7 @@ impl<const N: usize> BitAnd<&[f64; N]> for VipsImage {
 // BitAnd ref
 impl BitAnd for &VipsImage {
     type Output = VipsImage;
-    fn bitand(self, b: &VipsImage) -> VipsImage {
+    fn bitand(self, b: &VipsImage) -> Self::Output {
         self.boolean(
             b,
             OperationBoolean::And,
@@ -777,7 +777,7 @@ impl BitAnd for &VipsImage {
 
 impl BitAnd<&VipsImage> for f64 {
     type Output = VipsImage;
-    fn bitand(self, b: &VipsImage) -> VipsImage {
+    fn bitand(self, b: &VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::And,
             &[self],
@@ -788,7 +788,7 @@ impl BitAnd<&VipsImage> for f64 {
 
 impl BitAnd<f64> for &VipsImage {
     type Output = VipsImage;
-    fn bitand(self, b: f64) -> VipsImage {
+    fn bitand(self, b: f64) -> Self::Output {
         self.boolean_const(
             OperationBoolean::And,
             &[b],
@@ -799,7 +799,7 @@ impl BitAnd<f64> for &VipsImage {
 
 impl BitAnd<&VipsImage> for &[f64] {
     type Output = VipsImage;
-    fn bitand(self, b: &VipsImage) -> VipsImage {
+    fn bitand(self, b: &VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::And,
             self,
@@ -810,7 +810,7 @@ impl BitAnd<&VipsImage> for &[f64] {
 
 impl BitAnd<&[f64]> for &VipsImage {
     type Output = VipsImage;
-    fn bitand(self, b: &[f64]) -> VipsImage {
+    fn bitand(self, b: &[f64]) -> Self::Output {
         self.boolean_const(
             OperationBoolean::And,
             b,
@@ -821,7 +821,7 @@ impl BitAnd<&[f64]> for &VipsImage {
 
 impl<const N: usize> BitAnd<&VipsImage> for &[f64; N] {
     type Output = VipsImage;
-    fn bitand(self, b: &VipsImage) -> VipsImage {
+    fn bitand(self, b: &VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::And,
             self,
@@ -832,7 +832,7 @@ impl<const N: usize> BitAnd<&VipsImage> for &[f64; N] {
 
 impl<const N: usize> BitAnd<&[f64; N]> for &VipsImage {
     type Output = VipsImage;
-    fn bitand(self, b: &[f64; N]) -> VipsImage {
+    fn bitand(self, b: &[f64; N]) -> Self::Output {
         self.boolean_const(
             OperationBoolean::And,
             b,
@@ -844,7 +844,7 @@ impl<const N: usize> BitAnd<&[f64; N]> for &VipsImage {
 // BitOr
 impl BitOr for VipsImage {
     type Output = VipsImage;
-    fn bitor(self, b: VipsImage) -> VipsImage {
+    fn bitor(self, b: VipsImage) -> Self::Output {
         self.boolean(
             &b,
             OperationBoolean::Or,
@@ -855,7 +855,7 @@ impl BitOr for VipsImage {
 
 impl BitOr<VipsImage> for f64 {
     type Output = VipsImage;
-    fn bitor(self, b: VipsImage) -> VipsImage {
+    fn bitor(self, b: VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::Or,
             &[self],
@@ -866,7 +866,7 @@ impl BitOr<VipsImage> for f64 {
 
 impl BitOr<f64> for VipsImage {
     type Output = VipsImage;
-    fn bitor(self, b: f64) -> VipsImage {
+    fn bitor(self, b: f64) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Or,
             &[b],
@@ -877,7 +877,7 @@ impl BitOr<f64> for VipsImage {
 
 impl BitOr<VipsImage> for &[f64] {
     type Output = VipsImage;
-    fn bitor(self, b: VipsImage) -> VipsImage {
+    fn bitor(self, b: VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::Or,
             self,
@@ -888,7 +888,7 @@ impl BitOr<VipsImage> for &[f64] {
 
 impl BitOr<&[f64]> for VipsImage {
     type Output = VipsImage;
-    fn bitor(self, b: &[f64]) -> VipsImage {
+    fn bitor(self, b: &[f64]) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Or,
             b,
@@ -899,7 +899,7 @@ impl BitOr<&[f64]> for VipsImage {
 
 impl<const N: usize> BitOr<VipsImage> for &[f64; N] {
     type Output = VipsImage;
-    fn bitor(self, b: VipsImage) -> VipsImage {
+    fn bitor(self, b: VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::Or,
             self,
@@ -910,7 +910,7 @@ impl<const N: usize> BitOr<VipsImage> for &[f64; N] {
 
 impl<const N: usize> BitOr<&[f64; N]> for VipsImage {
     type Output = VipsImage;
-    fn bitor(self, b: &[f64; N]) -> VipsImage {
+    fn bitor(self, b: &[f64; N]) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Or,
             b,
@@ -922,7 +922,7 @@ impl<const N: usize> BitOr<&[f64; N]> for VipsImage {
 // BitOr ref
 impl BitOr for &VipsImage {
     type Output = VipsImage;
-    fn bitor(self, b: &VipsImage) -> VipsImage {
+    fn bitor(self, b: &VipsImage) -> Self::Output {
         self.boolean(
             b,
             OperationBoolean::Or,
@@ -933,7 +933,7 @@ impl BitOr for &VipsImage {
 
 impl BitOr<&VipsImage> for f64 {
     type Output = VipsImage;
-    fn bitor(self, b: &VipsImage) -> VipsImage {
+    fn bitor(self, b: &VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::Or,
             &[self],
@@ -944,7 +944,7 @@ impl BitOr<&VipsImage> for f64 {
 
 impl BitOr<f64> for &VipsImage {
     type Output = VipsImage;
-    fn bitor(self, b: f64) -> VipsImage {
+    fn bitor(self, b: f64) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Or,
             &[b],
@@ -955,7 +955,7 @@ impl BitOr<f64> for &VipsImage {
 
 impl BitOr<&VipsImage> for &[f64] {
     type Output = VipsImage;
-    fn bitor(self, b: &VipsImage) -> VipsImage {
+    fn bitor(self, b: &VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::Or,
             self,
@@ -966,7 +966,7 @@ impl BitOr<&VipsImage> for &[f64] {
 
 impl BitOr<&[f64]> for &VipsImage {
     type Output = VipsImage;
-    fn bitor(self, b: &[f64]) -> VipsImage {
+    fn bitor(self, b: &[f64]) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Or,
             b,
@@ -977,7 +977,7 @@ impl BitOr<&[f64]> for &VipsImage {
 
 impl<const N: usize> BitOr<&VipsImage> for &[f64; N] {
     type Output = VipsImage;
-    fn bitor(self, b: &VipsImage) -> VipsImage {
+    fn bitor(self, b: &VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::Or,
             self,
@@ -988,7 +988,7 @@ impl<const N: usize> BitOr<&VipsImage> for &[f64; N] {
 
 impl<const N: usize> BitOr<&[f64; N]> for &VipsImage {
     type Output = VipsImage;
-    fn bitor(self, b: &[f64; N]) -> VipsImage {
+    fn bitor(self, b: &[f64; N]) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Or,
             b,
@@ -1000,7 +1000,7 @@ impl<const N: usize> BitOr<&[f64; N]> for &VipsImage {
 // BitXor
 impl BitXor for VipsImage {
     type Output = VipsImage;
-    fn bitxor(self, b: VipsImage) -> VipsImage {
+    fn bitxor(self, b: VipsImage) -> Self::Output {
         self.boolean(
             &b,
             OperationBoolean::Eor,
@@ -1011,7 +1011,7 @@ impl BitXor for VipsImage {
 
 impl BitXor<VipsImage> for f64 {
     type Output = VipsImage;
-    fn bitxor(self, b: VipsImage) -> VipsImage {
+    fn bitxor(self, b: VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::Eor,
             &[self],
@@ -1022,7 +1022,7 @@ impl BitXor<VipsImage> for f64 {
 
 impl BitXor<f64> for VipsImage {
     type Output = VipsImage;
-    fn bitxor(self, b: f64) -> VipsImage {
+    fn bitxor(self, b: f64) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Eor,
             &[b],
@@ -1033,7 +1033,7 @@ impl BitXor<f64> for VipsImage {
 
 impl BitXor<VipsImage> for &[f64] {
     type Output = VipsImage;
-    fn bitxor(self, b: VipsImage) -> VipsImage {
+    fn bitxor(self, b: VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::Eor,
             self,
@@ -1044,7 +1044,7 @@ impl BitXor<VipsImage> for &[f64] {
 
 impl BitXor<&[f64]> for VipsImage {
     type Output = VipsImage;
-    fn bitxor(self, b: &[f64]) -> VipsImage {
+    fn bitxor(self, b: &[f64]) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Eor,
             b,
@@ -1055,7 +1055,7 @@ impl BitXor<&[f64]> for VipsImage {
 
 impl<const N: usize> BitXor<VipsImage> for &[f64; N] {
     type Output = VipsImage;
-    fn bitxor(self, b: VipsImage) -> VipsImage {
+    fn bitxor(self, b: VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::Eor,
             self,
@@ -1066,7 +1066,7 @@ impl<const N: usize> BitXor<VipsImage> for &[f64; N] {
 
 impl<const N: usize> BitXor<&[f64; N]> for VipsImage {
     type Output = VipsImage;
-    fn bitxor(self, b: &[f64; N]) -> VipsImage {
+    fn bitxor(self, b: &[f64; N]) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Eor,
             b,
@@ -1078,7 +1078,7 @@ impl<const N: usize> BitXor<&[f64; N]> for VipsImage {
 // BitXor ref
 impl BitXor for &VipsImage {
     type Output = VipsImage;
-    fn bitxor(self, b: &VipsImage) -> VipsImage {
+    fn bitxor(self, b: &VipsImage) -> Self::Output {
         self.boolean(
             b,
             OperationBoolean::Eor,
@@ -1089,7 +1089,7 @@ impl BitXor for &VipsImage {
 
 impl BitXor<&VipsImage> for f64 {
     type Output = VipsImage;
-    fn bitxor(self, b: &VipsImage) -> VipsImage {
+    fn bitxor(self, b: &VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::Eor,
             &[self],
@@ -1100,7 +1100,7 @@ impl BitXor<&VipsImage> for f64 {
 
 impl BitXor<f64> for &VipsImage {
     type Output = VipsImage;
-    fn bitxor(self, b: f64) -> VipsImage {
+    fn bitxor(self, b: f64) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Eor,
             &[b],
@@ -1111,7 +1111,7 @@ impl BitXor<f64> for &VipsImage {
 
 impl BitXor<&VipsImage> for &[f64] {
     type Output = VipsImage;
-    fn bitxor(self, b: &VipsImage) -> VipsImage {
+    fn bitxor(self, b: &VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::Eor,
             self,
@@ -1122,7 +1122,7 @@ impl BitXor<&VipsImage> for &[f64] {
 
 impl BitXor<&[f64]> for &VipsImage {
     type Output = VipsImage;
-    fn bitxor(self, b: &[f64]) -> VipsImage {
+    fn bitxor(self, b: &[f64]) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Eor,
             b,
@@ -1133,7 +1133,7 @@ impl BitXor<&[f64]> for &VipsImage {
 
 impl<const N: usize> BitXor<&VipsImage> for &[f64; N] {
     type Output = VipsImage;
-    fn bitxor(self, b: &VipsImage) -> VipsImage {
+    fn bitxor(self, b: &VipsImage) -> Self::Output {
         b.boolean_const(
             OperationBoolean::Eor,
             self,
@@ -1144,7 +1144,7 @@ impl<const N: usize> BitXor<&VipsImage> for &[f64; N] {
 
 impl<const N: usize> BitXor<&[f64; N]> for &VipsImage {
     type Output = VipsImage;
-    fn bitxor(self, b: &[f64; N]) -> VipsImage {
+    fn bitxor(self, b: &[f64; N]) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Eor,
             b,
@@ -1156,7 +1156,7 @@ impl<const N: usize> BitXor<&[f64; N]> for &VipsImage {
 // Shl
 impl Shl for VipsImage {
     type Output = VipsImage;
-    fn shl(self, b: VipsImage) -> VipsImage {
+    fn shl(self, b: VipsImage) -> Self::Output {
         self.boolean(
             &b,
             OperationBoolean::Lshift,
@@ -1167,7 +1167,7 @@ impl Shl for VipsImage {
 
 impl Shl<f64> for VipsImage {
     type Output = VipsImage;
-    fn shl(self, b: f64) -> VipsImage {
+    fn shl(self, b: f64) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Lshift,
             &[b],
@@ -1178,7 +1178,7 @@ impl Shl<f64> for VipsImage {
 
 impl Shl<&[f64]> for VipsImage {
     type Output = VipsImage;
-    fn shl(self, b: &[f64]) -> VipsImage {
+    fn shl(self, b: &[f64]) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Lshift,
             b,
@@ -1189,7 +1189,7 @@ impl Shl<&[f64]> for VipsImage {
 
 impl<const N: usize> Shl<&[f64; N]> for VipsImage {
     type Output = VipsImage;
-    fn shl(self, b: &[f64; N]) -> VipsImage {
+    fn shl(self, b: &[f64; N]) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Lshift,
             b,
@@ -1201,7 +1201,7 @@ impl<const N: usize> Shl<&[f64; N]> for VipsImage {
 // Shl ref
 impl Shl for &VipsImage {
     type Output = VipsImage;
-    fn shl(self, b: &VipsImage) -> VipsImage {
+    fn shl(self, b: &VipsImage) -> Self::Output {
         self.boolean(
             b,
             OperationBoolean::Lshift,
@@ -1212,7 +1212,7 @@ impl Shl for &VipsImage {
 
 impl Shl<f64> for &VipsImage {
     type Output = VipsImage;
-    fn shl(self, b: f64) -> VipsImage {
+    fn shl(self, b: f64) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Lshift,
             &[b],
@@ -1223,7 +1223,7 @@ impl Shl<f64> for &VipsImage {
 
 impl Shl<&[f64]> for &VipsImage {
     type Output = VipsImage;
-    fn shl(self, b: &[f64]) -> VipsImage {
+    fn shl(self, b: &[f64]) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Lshift,
             b,
@@ -1234,7 +1234,7 @@ impl Shl<&[f64]> for &VipsImage {
 
 impl<const N: usize> Shl<&[f64; N]> for &VipsImage {
     type Output = VipsImage;
-    fn shl(self, b: &[f64; N]) -> VipsImage {
+    fn shl(self, b: &[f64; N]) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Lshift,
             b,
@@ -1246,7 +1246,7 @@ impl<const N: usize> Shl<&[f64; N]> for &VipsImage {
 // Shr
 impl Shr for VipsImage {
     type Output = VipsImage;
-    fn shr(self, b: VipsImage) -> VipsImage {
+    fn shr(self, b: VipsImage) -> Self::Output {
         self.boolean(
             &b,
             OperationBoolean::Rshift,
@@ -1257,7 +1257,7 @@ impl Shr for VipsImage {
 
 impl Shr<f64> for VipsImage {
     type Output = VipsImage;
-    fn shr(self, b: f64) -> VipsImage {
+    fn shr(self, b: f64) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Rshift,
             &[b],
@@ -1268,7 +1268,7 @@ impl Shr<f64> for VipsImage {
 
 impl Shr<&[f64]> for VipsImage {
     type Output = VipsImage;
-    fn shr(self, b: &[f64]) -> VipsImage {
+    fn shr(self, b: &[f64]) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Rshift,
             b,
@@ -1279,7 +1279,7 @@ impl Shr<&[f64]> for VipsImage {
 
 impl<const N: usize> Shr<&[f64; N]> for VipsImage {
     type Output = VipsImage;
-    fn shr(self, b: &[f64; N]) -> VipsImage {
+    fn shr(self, b: &[f64; N]) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Rshift,
             b,
@@ -1291,7 +1291,7 @@ impl<const N: usize> Shr<&[f64; N]> for VipsImage {
 // Shr ref
 impl Shr for &VipsImage {
     type Output = VipsImage;
-    fn shr(self, b: &VipsImage) -> VipsImage {
+    fn shr(self, b: &VipsImage) -> Self::Output {
         self.boolean(
             b,
             OperationBoolean::Rshift,
@@ -1302,7 +1302,7 @@ impl Shr for &VipsImage {
 
 impl Shr<f64> for &VipsImage {
     type Output = VipsImage;
-    fn shr(self, b: f64) -> VipsImage {
+    fn shr(self, b: f64) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Rshift,
             &[b],
@@ -1313,7 +1313,7 @@ impl Shr<f64> for &VipsImage {
 
 impl Shr<&[f64]> for &VipsImage {
     type Output = VipsImage;
-    fn shr(self, b: &[f64]) -> VipsImage {
+    fn shr(self, b: &[f64]) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Rshift,
             b,
@@ -1324,7 +1324,7 @@ impl Shr<&[f64]> for &VipsImage {
 
 impl<const N: usize> Shr<&[f64; N]> for &VipsImage {
     type Output = VipsImage;
-    fn shr(self, b: &[f64; N]) -> VipsImage {
+    fn shr(self, b: &[f64; N]) -> Self::Output {
         self.boolean_const(
             OperationBoolean::Rshift,
             b,

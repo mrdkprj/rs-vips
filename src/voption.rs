@@ -20,11 +20,15 @@ use crate::{
         get_g_type, new_c_string, G_TYPE_BOOLEAN, G_TYPE_DOUBLE, G_TYPE_INT, G_TYPE_STRING,
         G_TYPE_UINT64,
     },
+    Result,
 };
-use std::{mem::MaybeUninit, os::raw::c_void};
+use std::{
+    ffi::{c_char, c_int, c_void},
+    mem::MaybeUninit,
+};
 
 /// Runs the vips operation with options
-pub fn call(operation: &str, option: VOption) -> std::os::raw::c_int {
+pub fn call(operation: &str, option: VOption) -> Result<c_int> {
     call_option_string(
         operation,
         "",
@@ -33,13 +37,9 @@ pub fn call(operation: &str, option: VOption) -> std::os::raw::c_int {
 }
 
 /// Runs the vips operation with options
-pub fn call_option_string(
-    operation: &str,
-    option_string: &str,
-    option: VOption,
-) -> std::os::raw::c_int {
-    let operation = new_c_string(operation).unwrap();
-    let option_string = new_c_string(option_string).unwrap();
+pub fn call_option_string(operation: &str, option_string: &str, option: VOption) -> Result<c_int> {
+    let operation = new_c_string(operation)?;
+    let option_string = new_c_string(option_string)?;
     call_option_string_(
         operation.as_ptr(),
         option_string.as_ptr(),
@@ -48,45 +48,45 @@ pub fn call_option_string(
 }
 
 pub(crate) fn call_option_string_(
-    operation: *const std::os::raw::c_char,
-    option_string: *const std::os::raw::c_char,
+    operation: *const c_char,
+    option_string: *const c_char,
     option: VOption,
-) -> std::os::raw::c_int {
+) -> Result<c_int> {
     unsafe {
         let mut vips_operation = vips_operation_new(operation);
 
         if !option_string.is_null()
             && vips_object_set_from_string(
-                vips_operation as _,
+                vips_operation as *mut VipsObject,
                 option_string,
             ) < 0
         {
-            vips_object_unref_outputs(vips_operation as _);
-            g_object_unref(vips_operation as _);
-            return 1;
+            vips_object_unref_outputs(vips_operation as *mut VipsObject);
+            g_object_unref(vips_operation as *mut c_void);
+            return Ok(1);
         }
 
         set_opreration(
             vips_operation,
             &option,
-        );
+        )?;
 
         let result = vips_cache_operation_buildp(&mut vips_operation);
 
         if result < 0 {
-            vips_object_unref_outputs(vips_operation as _);
-            g_object_unref(vips_operation as _);
-            return 1;
+            vips_object_unref_outputs(vips_operation as *mut VipsObject);
+            g_object_unref(vips_operation as *mut c_void);
+            return Ok(1);
         }
 
         get_operation(
             vips_operation,
             option,
-        );
+        )?;
 
-        g_object_unref(vips_operation as _);
+        g_object_unref(vips_operation as *mut c_void);
 
-        result
+        Ok(result)
     }
 }
 
@@ -99,6 +99,7 @@ enum VipsValue<'a> {
     Double(f64),
     MutDouble(&'a mut f64),
     Str(&'a str),
+    CStr(*mut c_char),
     Image(&'a crate::VipsImage),
     MutImage(&'a mut crate::VipsImage),
     IntArray(&'a [i32]),
@@ -151,22 +152,22 @@ impl<'a> VOption<'a> {
     }
 }
 
-fn get_operation(vips_operation: *mut VipsOperation, option: VOption) {
+fn get_operation(vips_operation: *mut VipsOperation, option: VOption) -> Result<()> {
     unsafe {
-        for opt in option.options {
-            if opt.input {
+        for pair in option.options {
+            if pair.input {
                 continue;
             }
 
             let mut gvalue = MaybeUninit::<GValue>::zeroed();
             let gvalue_ptr = gvalue.as_mut_ptr();
-            let name = new_c_string(opt.name).unwrap();
+            let name = new_c_string(pair.name)?;
 
-            match opt.value {
+            match pair.value {
                 VipsValue::MutBool(out) => {
                     g_value_init(
                         gvalue_ptr,
-                        get_g_type(G_TYPE_BOOLEAN),
+                        get_g_type(G_TYPE_BOOLEAN)?,
                     );
                     g_object_get_property(
                         vips_operation.cast(),
@@ -178,7 +179,7 @@ fn get_operation(vips_operation: *mut VipsOperation, option: VOption) {
                 VipsValue::MutInt(out) => {
                     g_value_init(
                         gvalue_ptr,
-                        get_g_type(G_TYPE_INT),
+                        get_g_type(G_TYPE_INT)?,
                     );
                     g_object_get_property(
                         vips_operation.cast(),
@@ -190,7 +191,7 @@ fn get_operation(vips_operation: *mut VipsOperation, option: VOption) {
                 VipsValue::MutDouble(out) => {
                     g_value_init(
                         gvalue_ptr,
-                        get_g_type(G_TYPE_DOUBLE),
+                        get_g_type(G_TYPE_DOUBLE)?,
                     );
                     g_object_get_property(
                         vips_operation.cast(),
@@ -209,7 +210,7 @@ fn get_operation(vips_operation: *mut VipsOperation, option: VOption) {
                         name.as_ptr(),
                         gvalue_ptr,
                     );
-                    let mut len: i32 = 0;
+                    let mut len = 0;
                     let array = vips_value_get_array_double(
                         gvalue_ptr,
                         &mut len,
@@ -251,9 +252,11 @@ fn get_operation(vips_operation: *mut VipsOperation, option: VOption) {
             g_value_unset(gvalue_ptr);
         }
     }
+
+    Ok(())
 }
 
-fn set_opreration(operation: *mut VipsOperation, option: &VOption) {
+fn set_opreration(operation: *mut VipsOperation, option: &VOption) -> Result<()> {
     unsafe {
         for pair in &option.options {
             if !pair.input {
@@ -267,7 +270,7 @@ fn set_opreration(operation: *mut VipsOperation, option: &VOption) {
                 VipsValue::Bool(value) => {
                     g_value_init(
                         gvalue_ptr,
-                        get_g_type(G_TYPE_BOOLEAN),
+                        get_g_type(G_TYPE_BOOLEAN)?,
                     );
                     g_value_set_boolean(
                         gvalue_ptr,
@@ -277,7 +280,7 @@ fn set_opreration(operation: *mut VipsOperation, option: &VOption) {
                 VipsValue::Int(value) => {
                     g_value_init(
                         gvalue_ptr,
-                        get_g_type(G_TYPE_INT),
+                        get_g_type(G_TYPE_INT)?,
                     );
                     g_value_set_int(
                         gvalue_ptr,
@@ -287,7 +290,7 @@ fn set_opreration(operation: *mut VipsOperation, option: &VOption) {
                 VipsValue::Uint(value) => {
                     g_value_init(
                         gvalue_ptr,
-                        get_g_type(G_TYPE_UINT64),
+                        get_g_type(G_TYPE_UINT64)?,
                     );
                     g_value_set_uint64(
                         gvalue_ptr,
@@ -297,7 +300,7 @@ fn set_opreration(operation: *mut VipsOperation, option: &VOption) {
                 VipsValue::Double(value) => {
                     g_value_init(
                         gvalue_ptr,
-                        get_g_type(G_TYPE_DOUBLE),
+                        get_g_type(G_TYPE_DOUBLE)?,
                     );
                     g_value_set_double(
                         gvalue_ptr,
@@ -305,14 +308,24 @@ fn set_opreration(operation: *mut VipsOperation, option: &VOption) {
                     );
                 }
                 VipsValue::Str(value) => {
-                    let str = new_c_string(value).unwrap();
+                    let str = new_c_string(value)?;
                     g_value_init(
                         gvalue_ptr,
-                        get_g_type(G_TYPE_STRING),
+                        get_g_type(G_TYPE_STRING)?,
                     );
                     g_value_set_string(
                         gvalue_ptr,
                         str.as_ptr(),
+                    );
+                }
+                VipsValue::CStr(value) => {
+                    g_value_init(
+                        gvalue_ptr,
+                        get_g_type(G_TYPE_STRING)?,
+                    );
+                    g_value_set_string(
+                        gvalue_ptr,
+                        value,
                     );
                 }
                 VipsValue::IntArray(value) => {
@@ -323,7 +336,7 @@ fn set_opreration(operation: *mut VipsOperation, option: &VOption) {
                     vips_value_set_array_int(
                         gvalue_ptr,
                         value.as_ptr(),
-                        value.len() as _,
+                        value.len() as c_int,
                     );
                 }
                 VipsValue::DoubleArray(value) => {
@@ -334,7 +347,7 @@ fn set_opreration(operation: *mut VipsOperation, option: &VOption) {
                     vips_value_set_array_double(
                         gvalue_ptr,
                         value.as_ptr(),
-                        value.len() as _,
+                        value.len() as c_int,
                     );
                 }
                 VipsValue::Image(value) => {
@@ -354,7 +367,7 @@ fn set_opreration(operation: *mut VipsOperation, option: &VOption) {
                     );
                     vips_value_set_array_image(
                         gvalue_ptr,
-                        value.len() as _,
+                        value.len() as c_int,
                     );
                     let array = vips_value_get_array_image(
                         gvalue_ptr,
@@ -362,10 +375,10 @@ fn set_opreration(operation: *mut VipsOperation, option: &VOption) {
                     );
                     let array = std::slice::from_raw_parts_mut(
                         array,
-                        value.len() as _,
+                        value.len(),
                     );
                     for i in 0..value.len() {
-                        g_object_ref(value[i].ctx as _);
+                        g_object_ref(value[i].ctx as *mut c_void);
                         array[i] = value[i].ctx;
                     }
                 }
@@ -416,16 +429,18 @@ fn set_opreration(operation: *mut VipsOperation, option: &VOption) {
                 operation,
                 &pair.name,
                 gvalue_ptr,
-            );
+            )?;
             g_value_unset(gvalue_ptr);
         }
     }
+
+    Ok(())
 }
 
-fn set_property(operation: *mut VipsOperation, name: &str, value: *mut GValue) {
+fn set_property(operation: *mut VipsOperation, name: &str, value: *mut GValue) -> Result<()> {
     unsafe {
         let object: *mut VipsObject = operation.cast();
-        let name = new_c_string(name).unwrap();
+        let name = new_c_string(name)?;
 
         let mut pspec: *mut GParamSpec = std::ptr::null_mut();
         let mut argument_class: *mut VipsArgumentClass = std::ptr::null_mut();
@@ -438,17 +453,17 @@ fn set_property(operation: *mut VipsOperation, name: &str, value: *mut GValue) {
             &mut argument_instance,
         ) < 0
         {
-            g_warning();
+            g_warning()?;
             vips_error_clear();
-            return;
+            return Ok(());
         }
 
         let is_param_spec_enum = g_type_check_instance_is_a(
             pspec as *mut GTypeInstance,
-            get_g_type("GParamEnum"),
+            get_g_type("GParamEnum")?,
         ) != 0;
 
-        if is_param_spec_enum && (*value).g_type == get_g_type(G_TYPE_STRING) {
+        if is_param_spec_enum && (*value).g_type == get_g_type(G_TYPE_STRING)? {
             let pspec_type = (*pspec).value_type;
             let enum_value = vips_enum_from_nick(
                 (*object).nickname,
@@ -456,9 +471,9 @@ fn set_property(operation: *mut VipsOperation, name: &str, value: *mut GValue) {
                 g_value_get_string(value),
             );
             if enum_value < 0 {
-                g_warning();
+                g_warning()?;
                 vips_error_clear();
-                return;
+                return Ok(());
             }
 
             let mut gvalue = MaybeUninit::<GValue>::zeroed();
@@ -485,11 +500,13 @@ fn set_property(operation: *mut VipsOperation, name: &str, value: *mut GValue) {
             );
         }
     }
+
+    Ok(())
 }
 
-fn g_warning() {
-    let domain = new_c_string("GLib-GObject").unwrap();
-    let format = new_c_string("%s").unwrap();
+fn g_warning() -> Result<()> {
+    let domain = new_c_string("GLib-GObject")?;
+    let format = new_c_string("%s")?;
     unsafe {
         g_log(
             domain.as_ptr(),
@@ -498,6 +515,7 @@ fn g_warning() {
             vips_error_buffer(),
         )
     };
+    Ok(())
 }
 
 /// Set the value of a name-value pair of VOption
@@ -638,6 +656,29 @@ impl<'a> Setter<'a, &'a String> for VOption<'a> {
                 Pair::input(
                     name,
                     VipsValue::Str(value),
+                ),
+            );
+    }
+}
+
+// input c_char
+impl<'a> Setter<'a, *mut c_char> for VOption<'a> {
+    fn set(mut self, name: &str, value: *mut c_char) -> VOption<'a> {
+        self.options
+            .push(
+                Pair::input(
+                    name,
+                    VipsValue::CStr(value),
+                ),
+            );
+        self
+    }
+    fn add(&mut self, name: &str, value: *mut c_char) {
+        self.options
+            .push(
+                Pair::input(
+                    name,
+                    VipsValue::CStr(value),
                 ),
             );
     }

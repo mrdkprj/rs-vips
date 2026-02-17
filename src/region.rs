@@ -1,6 +1,7 @@
 // (c) Copyright 2019-2025 OLX
 // (c) Copyright 2025 mrdkprj
 use crate::bindings::{self, vips_area_unref};
+use std::ffi::c_void;
 
 #[derive(Debug, Clone)]
 pub struct VipsBlob {
@@ -14,7 +15,7 @@ impl Drop for VipsBlob {
                 .ctx
                 .is_null()
             {
-                bindings::g_object_unref(self.ctx as _);
+                bindings::g_object_unref(self.ctx as *mut c_void);
             }
         }
     }

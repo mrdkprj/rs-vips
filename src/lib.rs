@@ -31,7 +31,7 @@ use error::Error;
 pub use image::*;
 pub use interpolate::*;
 pub use region::*;
-use std::ffi::*;
+use std::ffi::CStr;
 pub type Result<T> = std::result::Result<T, error::Error>;
 
 pub struct Vips;
