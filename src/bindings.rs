@@ -1101,19 +1101,17 @@ pub const VIPS_PATH_MAX: u32 = 4096;
 pub const VIPS_TARGET_BUFFER_SIZE: u32 = 8500;
 pub const VIPS_TARGET_CUSTOM_BUFFER_SIZE: u32 = 4096;
 pub const VIPS_SBUF_BUFFER_SIZE: u32 = 4096;
-pub const VIPS_VERSION: &[u8; 7] = b"8.17.3\0";
-pub const VIPS_VERSION_STRING: &[u8; 7] = b"8.17.3\0";
+pub const VIPS_VERSION: &[u8; 7] = b"8.18.1\0";
+pub const VIPS_VERSION_STRING: &[u8; 7] = b"8.18.1\0";
 pub const VIPS_MAJOR_VERSION: u32 = 8;
-pub const VIPS_MINOR_VERSION: u32 = 17;
-pub const VIPS_MICRO_VERSION: u32 = 3;
-pub const VIPS_LIBRARY_CURRENT: u32 = 61;
-pub const VIPS_LIBRARY_REVISION: u32 = 3;
-pub const VIPS_LIBRARY_AGE: u32 = 19;
-pub const VIPS_CONFIG : & [u8 ; 1171] = b"enable debug: false\nenable deprecated: true\nenable modules: true\nenable C++ binding: true\nenable RAD load/save: true\nenable Analyze7 load: true\nenable PPM load/save: true\nenable GIF load: true\nFFTs with fftw3: true\nSIMD support with libhwy: true\nICC profile support with lcms2: true\ndeflate compression with zlib: true\ntext rendering with pangocairo: true\nfont file support with fontconfig: true\nEXIF metadata support with libexif: true\nJPEG load/save with libjpeg: true\nJXL load/save with libjxl: true (dynamic module: true)\nJPEG2000 load/save with libopenjp2: true\nPNG load/save with libpng: true\nimage quantisation with imagequant: true\nTIFF load/save with libtiff-4: true\nimage pyramid save with libarchive: true\nHEIC/AVIF load/save with libheif: true (dynamic module: true)\nWebP load/save with libwebp: true\nPDF load with poppler-glib: true (dynamic module: true)\nSVG load with librsvg-2.0: true\nEXR load with OpenEXR: true\nWSI load with openslide: true (dynamic module: true)\nMatlab load with matio: true\nNIfTI load/save with libnifti: false\nFITS load/save with cfitsio: true\nGIF save with cgif: true\nMagick load/save with MagickCore: false (dynamic module: false)\0" ;
+pub const VIPS_MINOR_VERSION: u32 = 18;
+pub const VIPS_MICRO_VERSION: u32 = 1;
+pub const VIPS_LIBRARY_CURRENT: u32 = 62;
+pub const VIPS_LIBRARY_REVISION: u32 = 1;
+pub const VIPS_LIBRARY_AGE: u32 = 20;
+pub const VIPS_CONFIG : & [u8 ; 1234] = b"enable debug: false\nenable deprecated: true\nenable modules: true\nenable C++ binding: true\nenable RAD load/save: true\nenable Analyze7 load: true\nenable PPM load/save: true\nenable GIF load: true\nFFTs with fftw3: true\nSIMD support with libhwy: true\nICC profile support with lcms2: true\ndeflate compression with zlib: true\ntext rendering with pangocairo: true\nfont file support with fontconfig: true\nEXIF metadata support with libexif: true\nJPEG load/save with libjpeg: true\nUHDR load/save with libuhdr: true\nJXL load/save with libjxl: true (dynamic module: true)\nJPEG2000 load/save with libopenjp2: true\nPNG load/save with libpng: true\nimage quantisation with imagequant: true\nTIFF load/save with libtiff-4: true\nimage pyramid save with libarchive: true\nHEIC/AVIF load/save with libheif: true (dynamic module: true)\nWebP load/save with libwebp: true\nPDF load with poppler-glib: true (dynamic module: true)\nSVG load with librsvg-2.0: true\nEXR load with OpenEXR: true\nWSI load with openslide: true (dynamic module: true)\nMatlab load with matio: true\nNIfTI load/save with libnifti: false\nFITS load/save with cfitsio: true\nGIF save with cgif: true\nRAW load with libraw_r: true\nMagick load/save with MagickCore: false (dynamic module: false)\0" ;
 pub const VIPS_ENABLE_DEPRECATED: u32 = 1;
 pub const VIPS_SPARE: u32 = 8;
-pub const VIPS__WINDOW_MARGIN_PIXELS: u32 = 128;
-pub const VIPS__WINDOW_MARGIN_BYTES: u32 = 10485760;
 pub const VIPS_SIZEOF_HEADER: u32 = 64;
 pub const VIPS__TILE_WIDTH: u32 = 128;
 pub const VIPS__TILE_HEIGHT: u32 = 128;
@@ -1142,6 +1140,8 @@ pub const VIPS_META_PAGE_HEIGHT: &[u8; 12] = b"page-height\0";
 pub const VIPS_META_N_PAGES: &[u8; 8] = b"n-pages\0";
 pub const VIPS_META_N_SUBIFDS: &[u8; 10] = b"n-subifds\0";
 pub const VIPS_META_CONCURRENCY: &[u8; 12] = b"concurrency\0";
+pub const VIPS_META_TILE_WIDTH: &[u8; 11] = b"tile-width\0";
+pub const VIPS_META_TILE_HEIGHT: &[u8; 12] = b"tile-height\0";
 pub const VIPS_D93_X0: f64 = 89.74;
 pub const VIPS_D93_Y0: f64 = 100.0;
 pub const VIPS_D93_Z0: f64 = 130.77;
@@ -1207,10 +1207,10 @@ pub const IM_PI: f64 = 3.141592653589793;
 pub const IM_META_EXIF_NAME: &[u8; 10] = b"exif-data\0";
 pub const IM_META_ICC_NAME: &[u8; 17] = b"icc-profile-data\0";
 pub const IM_META_RESOLUTION_UNIT: &[u8; 16] = b"resolution-unit\0";
-pub const IM_VERSION_STRING: &[u8; 7] = b"8.17.3\0";
+pub const IM_VERSION_STRING: &[u8; 7] = b"8.18.1\0";
 pub const IM_MAJOR_VERSION: u32 = 8;
-pub const IM_MINOR_VERSION: u32 = 17;
-pub const IM_MICRO_VERSION: u32 = 3;
+pub const IM_MINOR_VERSION: u32 = 18;
+pub const IM_MICRO_VERSION: u32 = 1;
 pub const VIPS_EXEEXT: &[u8; 1] = b"\0";
 pub const IM_EXEEXT: &[u8; 1] = b"\0";
 pub const IM_SIZEOF_HEADER: u32 = 64;
@@ -71829,6 +71829,9 @@ extern "C" {
 extern "C" {
     pub fn vips__temp_name(format: *const ::std::os::raw::c_char) -> *mut ::std::os::raw::c_char;
 }
+extern "C" {
+    pub fn vips__win32_terminate(ret: ::std::os::raw::c_int);
+}
 pub const VipsRegionShrink_VIPS_REGION_SHRINK_MEAN: VipsRegionShrink = 0;
 pub const VipsRegionShrink_VIPS_REGION_SHRINK_MEDIAN: VipsRegionShrink = 1;
 pub const VipsRegionShrink_VIPS_REGION_SHRINK_MODE: VipsRegionShrink = 2;
@@ -72170,7 +72173,9 @@ pub const VipsInterpretation_VIPS_INTERPRETATION_GREY16: VipsInterpretation = 26
 pub const VipsInterpretation_VIPS_INTERPRETATION_MATRIX: VipsInterpretation = 27;
 pub const VipsInterpretation_VIPS_INTERPRETATION_scRGB: VipsInterpretation = 28;
 pub const VipsInterpretation_VIPS_INTERPRETATION_HSV: VipsInterpretation = 29;
-pub const VipsInterpretation_VIPS_INTERPRETATION_LAST: VipsInterpretation = 30;
+pub const VipsInterpretation_VIPS_INTERPRETATION_OKLAB: VipsInterpretation = 30;
+pub const VipsInterpretation_VIPS_INTERPRETATION_OKLCH: VipsInterpretation = 31;
+pub const VipsInterpretation_VIPS_INTERPRETATION_LAST: VipsInterpretation = 32;
 pub type VipsInterpretation = ::std::os::raw::c_int;
 pub const VipsBandFormat_VIPS_FORMAT_NOTSET: VipsBandFormat = -1;
 pub const VipsBandFormat_VIPS_FORMAT_UCHAR: VipsBandFormat = 0;
@@ -74230,7 +74235,7 @@ pub struct VipsSemaphore {
     pub name: *mut ::std::os::raw::c_char,
     pub v: ::std::os::raw::c_int,
     pub mutex: GMutex,
-    pub cond: *mut GCond,
+    pub cond: GCond,
 }
 #[test]
 fn bindgen_test_layout_VipsSemaphore() {
@@ -74238,7 +74243,7 @@ fn bindgen_test_layout_VipsSemaphore() {
     let ptr = UNINIT.as_ptr();
     assert_eq!(
         ::std::mem::size_of::<VipsSemaphore>(),
-        32usize,
+        40usize,
         concat!(
             "Size of: ",
             stringify!(VipsSemaphore)
@@ -74594,6 +74599,9 @@ extern "C" {
     pub fn vips_interpretation_max_alpha(interpretation: VipsInterpretation) -> f64;
 }
 extern "C" {
+    pub fn vips_interpretation_bands(interpretation: VipsInterpretation) -> ::std::os::raw::c_int;
+}
+extern "C" {
     pub fn vips_image_get_width(image: *const VipsImage) -> ::std::os::raw::c_int;
 }
 extern "C" {
@@ -74664,6 +74672,15 @@ extern "C" {
         image: *mut VipsImage,
         default_concurrency: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn vips_image_get_tile_width(image: *mut VipsImage) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn vips_image_get_tile_height(image: *mut VipsImage) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn vips_image_get_gainmap(image: *mut VipsImage) -> *mut VipsImage;
 }
 extern "C" {
     pub fn vips_image_get_data(image: *mut VipsImage) -> *const ::std::os::raw::c_void;
@@ -75661,7 +75678,8 @@ pub const VipsForeignKeep_VIPS_FOREIGN_KEEP_XMP: VipsForeignKeep = 2;
 pub const VipsForeignKeep_VIPS_FOREIGN_KEEP_IPTC: VipsForeignKeep = 4;
 pub const VipsForeignKeep_VIPS_FOREIGN_KEEP_ICC: VipsForeignKeep = 8;
 pub const VipsForeignKeep_VIPS_FOREIGN_KEEP_OTHER: VipsForeignKeep = 16;
-pub const VipsForeignKeep_VIPS_FOREIGN_KEEP_ALL: VipsForeignKeep = 31;
+pub const VipsForeignKeep_VIPS_FOREIGN_KEEP_GAINMAP: VipsForeignKeep = 32;
+pub const VipsForeignKeep_VIPS_FOREIGN_KEEP_ALL: VipsForeignKeep = 63;
 pub type VipsForeignKeep = ::std::os::raw::c_uint;
 #[repr(C)]
 pub struct _VipsForeignSave {
@@ -76243,6 +76261,13 @@ extern "C" {
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
+    pub fn vips_magickload_source(
+        source: *mut VipsSource,
+        out: *mut *mut VipsImage,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
     pub fn vips_magicksave(
         in_: *mut VipsImage,
         filename: *const ::std::os::raw::c_char,
@@ -76402,6 +76427,13 @@ extern "C" {
         ...
     ) -> ::std::os::raw::c_int;
 }
+pub const VipsForeignPdfPageBox_VIPS_FOREIGN_PDF_PAGE_BOX_MEDIA: VipsForeignPdfPageBox = 0;
+pub const VipsForeignPdfPageBox_VIPS_FOREIGN_PDF_PAGE_BOX_CROP: VipsForeignPdfPageBox = 1;
+pub const VipsForeignPdfPageBox_VIPS_FOREIGN_PDF_PAGE_BOX_TRIM: VipsForeignPdfPageBox = 2;
+pub const VipsForeignPdfPageBox_VIPS_FOREIGN_PDF_PAGE_BOX_BLEED: VipsForeignPdfPageBox = 3;
+pub const VipsForeignPdfPageBox_VIPS_FOREIGN_PDF_PAGE_BOX_ART: VipsForeignPdfPageBox = 4;
+pub const VipsForeignPdfPageBox_VIPS_FOREIGN_PDF_PAGE_BOX_LAST: VipsForeignPdfPageBox = 5;
+pub type VipsForeignPdfPageBox = ::std::os::raw::c_uint;
 extern "C" {
     pub fn vips_pdfload(
         filename: *const ::std::os::raw::c_char,
@@ -76492,6 +76524,72 @@ extern "C" {
 }
 extern "C" {
     pub fn vips_gifsave_target(
+        in_: *mut VipsImage,
+        target: *mut VipsTarget,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn vips_dcrawload(
+        filename: *const ::std::os::raw::c_char,
+        out: *mut *mut VipsImage,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn vips_dcrawload_buffer(
+        buf: *mut ::std::os::raw::c_void,
+        len: size_t,
+        out: *mut *mut VipsImage,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn vips_dcrawload_source(
+        source: *mut VipsSource,
+        out: *mut *mut VipsImage,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn vips_uhdrload(
+        filename: *const ::std::os::raw::c_char,
+        out: *mut *mut VipsImage,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn vips_uhdrload_buffer(
+        buf: *mut ::std::os::raw::c_void,
+        len: size_t,
+        out: *mut *mut VipsImage,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn vips_uhdrload_source(
+        source: *mut VipsSource,
+        out: *mut *mut VipsImage,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn vips_uhdrsave(
+        in_: *mut VipsImage,
+        filename: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn vips_uhdrsave_buffer(
+        in_: *mut VipsImage,
+        buf: *mut *mut ::std::os::raw::c_void,
+        len: *mut size_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn vips_uhdrsave_target(
         in_: *mut VipsImage,
         target: *mut VipsTarget,
         ...
@@ -76814,6 +76912,9 @@ extern "C" {
 }
 extern "C" {
     pub fn vips_foreign_ppm_format_get_type() -> GType;
+}
+extern "C" {
+    pub fn vips_foreign_pdf_page_box_get_type() -> GType;
 }
 extern "C" {
     pub fn vips_foreign_dz_layout_get_type() -> GType;
@@ -78961,6 +79062,41 @@ extern "C" {
 }
 extern "C" {
     pub fn vips_XYZ2CMYK(
+        in_: *mut VipsImage,
+        out: *mut *mut VipsImage,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn vips_Oklab2XYZ(
+        in_: *mut VipsImage,
+        out: *mut *mut VipsImage,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn vips_XYZ2Oklab(
+        in_: *mut VipsImage,
+        out: *mut *mut VipsImage,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn vips_Oklch2Oklab(
+        in_: *mut VipsImage,
+        out: *mut *mut VipsImage,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn vips_Oklab2Oklch(
+        in_: *mut VipsImage,
+        out: *mut *mut VipsImage,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn vips_uhdr2scRGB(
         in_: *mut VipsImage,
         out: *mut *mut VipsImage,
         ...

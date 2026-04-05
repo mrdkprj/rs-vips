@@ -1,18 +1,20 @@
 FROM rust:1.92.0-slim
 
-ENV VIPS_VERSION=8.17.3
+ENV VIPS_VERSION=8.18.1
 
 RUN apt-get update -qq && apt-get install -qq -y \
   build-essential \
   wget \
   pkg-config \
-  libclang-dev \
+  clang \
   meson \
   ninja-build \
+  gobject-introspection \
+  git \
+  cmake \
   libfftw3-dev \
   libcgif-dev \
   libexpat-dev \
-  gobject-introspection \
   liblcms2-dev \
   libexif-dev \
   libheif-dev \
@@ -29,7 +31,19 @@ RUN apt-get update -qq && apt-get install -qq -y \
   libpoppler-glib-dev \
   libmatio-dev \
   libopenslide-dev \
+  libraw-dev \
+  libjpeg-dev \
   && rm -rf /var/lib/apt/lists/*
+
+RUN git clone https://github.com/google/libultrahdr.git \
+  && cd libultrahdr \
+  && mkdir build_directory \
+  && cd build_directory \
+  && cmake -G Ninja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DUHDR_BUILD_EXAMPLES=0 ../ \
+  && ninja \
+  && ninja install \
+  && cd ../.. \
+  && rm -rf ./libultrahdr
 
 RUN wget -q https://github.com/libvips/libvips/releases/download/v${VIPS_VERSION}/vips-${VIPS_VERSION}.tar.xz \
   && mkdir vips \

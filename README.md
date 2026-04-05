@@ -5,7 +5,7 @@
 [Latest Version]: https://img.shields.io/crates/v/rs-vips.svg
 [crates.io]: https://crates.io/crates/rs-vips
 
-Rust bindings for libvips. Generated from `version 8.17.3`.
+Rust bindings for libvips. Generated from `version 8.18.1`.
 
 This is a safe wrapper for [libvips](https://libvips.github.io/libvips/) C library. It is made on top of the C API and based on the introspection API results.
 

@@ -542,6 +542,29 @@ impl VipsImage {
         }
     }
 
+    pub fn get_tile_width(&self) -> i32 {
+        unsafe { bindings::vips_image_get_tile_width(self.ctx) }
+    }
+
+    pub fn get_tile_height(&self) -> i32 {
+        unsafe { bindings::vips_image_get_tile_height(self.ctx) }
+    }
+
+    pub fn get_gainmap(&self) -> Option<VipsImage> {
+        unsafe {
+            let ctx = bindings::vips_image_get_gainmap(self.ctx);
+            if ctx.is_null() {
+                None
+            } else {
+                Some(
+                    VipsImage {
+                        ctx,
+                    },
+                )
+            }
+        }
+    }
+
     pub fn iskilled(&self) -> bool {
         unsafe { bindings::vips_image_iskilled(self.ctx) == 1 }
     }

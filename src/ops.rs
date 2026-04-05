@@ -24,8 +24,6 @@ pub enum Access {
     Sequential = 1,
     ///  `SequentialUnbuffered` -> VIPS_ACCESS_SEQUENTIAL_UNBUFFERED = 2
     SequentialUnbuffered = 2,
-    ///  `Last` -> VIPS_ACCESS_LAST = 3
-    Last = 3,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -36,8 +34,6 @@ pub enum Align {
     Centre = 1,
     ///  `High` -> VIPS_ALIGN_HIGH = 2
     High = 2,
-    ///  `Last` -> VIPS_ALIGN_LAST = 3
-    Last = 3,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -50,8 +46,6 @@ pub enum Angle {
     D180 = 2,
     ///  `D270` -> VIPS_ANGLE_D270 = 3
     D270 = 3,
-    ///  `Last` -> VIPS_ANGLE_LAST = 4
-    Last = 4,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -72,8 +66,6 @@ pub enum Angle45 {
     D270 = 6,
     ///  `D315` -> VIPS_ANGLE45_D315 = 7
     D315 = 7,
-    ///  `Last` -> VIPS_ANGLE45_LAST = 8
-    Last = 8,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -100,8 +92,6 @@ pub enum BandFormat {
     Double = 8,
     ///  `Dpcomplex` -> VIPS_FORMAT_DPCOMPLEX = 9
     Dpcomplex = 9,
-    ///  `Last` -> VIPS_FORMAT_LAST = 10
-    Last = 10,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -156,8 +146,6 @@ pub enum BlendMode {
     Difference = 23,
     ///  `Exclusion` -> VIPS_BLEND_MODE_EXCLUSION = 24
     Exclusion = 24,
-    ///  `Last` -> VIPS_BLEND_MODE_LAST = 25
-    Last = 25,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -170,8 +158,6 @@ pub enum Coding {
     Labq = 2,
     ///  `Rad` -> VIPS_CODING_RAD = 6
     Rad = 6,
-    ///  `Last` -> VIPS_CODING_LAST = 7
-    Last = 7,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -182,8 +168,6 @@ pub enum Combine {
     Sum = 1,
     ///  `Min` -> VIPS_COMBINE_MIN = 2
     Min = 2,
-    ///  `Last` -> VIPS_COMBINE_LAST = 3
-    Last = 3,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -192,8 +176,6 @@ pub enum CombineMode {
     Set = 0,
     ///  `Add` -> VIPS_COMBINE_MODE_ADD = 1
     Add = 1,
-    ///  `Last` -> VIPS_COMBINE_MODE_LAST = 2
-    Last = 2,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -216,8 +198,6 @@ pub enum CompassDirection {
     SouthWest = 7,
     ///  `NorthWest` -> VIPS_COMPASS_DIRECTION_NORTH_WEST = 8
     NorthWest = 8,
-    ///  `Last` -> VIPS_COMPASS_DIRECTION_LAST = 9
-    Last = 9,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -226,8 +206,6 @@ pub enum Direction {
     Horizontal = 0,
     ///  `Vertical` -> VIPS_DIRECTION_VERTICAL = 1
     Vertical = 1,
-    ///  `Last` -> VIPS_DIRECTION_LAST = 2
-    Last = 2,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -244,8 +222,6 @@ pub enum Extend {
     White = 4,
     ///  `Background` -> VIPS_EXTEND_BACKGROUND = 5
     Background = 5,
-    ///  `Last` -> VIPS_EXTEND_LAST = 6
-    Last = 6,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -258,8 +234,6 @@ pub enum FailOn {
     Error = 2,
     ///  `Warning` -> VIPS_FAIL_ON_WARNING = 3
     Warning = 3,
-    ///  `Last` -> VIPS_FAIL_ON_LAST = 4
-    Last = 4,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -270,8 +244,6 @@ pub enum ForeignDzContainer {
     Zip = 1,
     ///  `Szi` -> VIPS_FOREIGN_DZ_CONTAINER_SZI = 2
     Szi = 2,
-    ///  `Last` -> VIPS_FOREIGN_DZ_CONTAINER_LAST = 3
-    Last = 3,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -282,8 +254,6 @@ pub enum ForeignDzDepth {
     Onetile = 1,
     ///  `One` -> VIPS_FOREIGN_DZ_DEPTH_ONE = 2
     One = 2,
-    ///  `Last` -> VIPS_FOREIGN_DZ_DEPTH_LAST = 3
-    Last = 3,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -298,8 +268,6 @@ pub enum ForeignDzLayout {
     Iiif = 3,
     ///  `Iiif3` -> VIPS_FOREIGN_DZ_LAYOUT_IIIF3 = 4
     Iiif3 = 4,
-    ///  `Last` -> VIPS_FOREIGN_DZ_LAYOUT_LAST = 5
-    Last = 5,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -326,8 +294,6 @@ pub enum ForeignHeifCompression {
     Jpeg = 3,
     ///  `Av1` -> VIPS_FOREIGN_HEIF_COMPRESSION_AV1 = 4
     Av1 = 4,
-    ///  `Last` -> VIPS_FOREIGN_HEIF_COMPRESSION_LAST = 5
-    Last = 5,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -342,8 +308,6 @@ pub enum ForeignHeifEncoder {
     Svt = 3,
     ///  `X265` -> VIPS_FOREIGN_HEIF_ENCODER_X265 = 4
     X265 = 4,
-    ///  `Last` -> VIPS_FOREIGN_HEIF_ENCODER_LAST = 5
-    Last = 5,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -360,8 +324,24 @@ pub enum ForeignKeep {
     Icc = 8,
     ///  `Other` -> VIPS_FOREIGN_KEEP_OTHER = 16
     Other = 16,
-    ///  `All` -> VIPS_FOREIGN_KEEP_ALL = 31
-    All = 31,
+    ///  `Gainmap` -> VIPS_FOREIGN_KEEP_GAINMAP = 32
+    Gainmap = 32,
+    ///  `All` -> VIPS_FOREIGN_KEEP_ALL = 63
+    All = 63,
+}
+
+#[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
+pub enum ForeignPdfPageBox {
+    ///  `Medum` -> VIPS_FOREIGN_PDF_PAGE_BOX_MEDIA = 0
+    Medum = 0,
+    ///  `Crop` -> VIPS_FOREIGN_PDF_PAGE_BOX_CROP = 1
+    Crop = 1,
+    ///  `Trim` -> VIPS_FOREIGN_PDF_PAGE_BOX_TRIM = 2
+    Trim = 2,
+    ///  `Bleed` -> VIPS_FOREIGN_PDF_PAGE_BOX_BLEED = 3
+    Bleed = 3,
+    ///  `Art` -> VIPS_FOREIGN_PDF_PAGE_BOX_ART = 4
+    Art = 4,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -392,8 +372,6 @@ pub enum ForeignPpmFormat {
     Pfm = 3,
     ///  `Pnm` -> VIPS_FOREIGN_PPM_FORMAT_PNM = 4
     Pnm = 4,
-    ///  `Last` -> VIPS_FOREIGN_PPM_FORMAT_LAST = 5
-    Last = 5,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -404,8 +382,6 @@ pub enum ForeignSubsample {
     On = 1,
     ///  `Off` -> VIPS_FOREIGN_SUBSAMPLE_OFF = 2
     Off = 2,
-    ///  `Last` -> VIPS_FOREIGN_SUBSAMPLE_LAST = 3
-    Last = 3,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -428,8 +404,6 @@ pub enum ForeignTiffCompression {
     Zstd = 7,
     ///  `Jp2K` -> VIPS_FOREIGN_TIFF_COMPRESSION_JP2K = 8
     Jp2K = 8,
-    ///  `Last` -> VIPS_FOREIGN_TIFF_COMPRESSION_LAST = 9
-    Last = 9,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -440,8 +414,6 @@ pub enum ForeignTiffPredictor {
     Horizontal = 2,
     ///  `Float` -> VIPS_FOREIGN_TIFF_PREDICTOR_FLOAT = 3
     Float = 3,
-    ///  `Last` -> VIPS_FOREIGN_TIFF_PREDICTOR_LAST = 4
-    Last = 4,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -450,8 +422,6 @@ pub enum ForeignTiffResunit {
     Cm = 0,
     ///  `Inch` -> VIPS_FOREIGN_TIFF_RESUNIT_INCH = 1
     Inch = 1,
-    ///  `Last` -> VIPS_FOREIGN_TIFF_RESUNIT_LAST = 2
-    Last = 2,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -468,8 +438,6 @@ pub enum ForeignWebpPreset {
     Icon = 4,
     ///  `Text` -> VIPS_FOREIGN_WEBP_PRESET_TEXT = 5
     Text = 5,
-    ///  `Last` -> VIPS_FOREIGN_WEBP_PRESET_LAST = 6
-    Last = 6,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -484,8 +452,6 @@ pub enum Intent {
     Absolute = 3,
     ///  `Auto` -> VIPS_INTENT_AUTO = 32
     Auto = 32,
-    ///  `Last` -> VIPS_INTENT_LAST = 33
-    Last = 33,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -504,8 +470,6 @@ pub enum Interesting {
     High = 5,
     ///  `All` -> VIPS_INTERESTING_ALL = 6
     All = 6,
-    ///  `Last` -> VIPS_INTERESTING_LAST = 7
-    Last = 7,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -550,8 +514,10 @@ pub enum Interpretation {
     Scrgb = 28,
     ///  `Hsv` -> VIPS_INTERPRETATION_HSV = 29
     Hsv = 29,
-    ///  `Last` -> VIPS_INTERPRETATION_LAST = 30
-    Last = 30,
+    ///  `Oklab` -> VIPS_INTERPRETATION_OKLAB = 30
+    Oklab = 30,
+    ///  `Oklch` -> VIPS_INTERPRETATION_OKLCH = 31
+    Oklch = 31,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -572,8 +538,6 @@ pub enum Kernel {
     Mks2013 = 6,
     ///  `Mks2021` -> VIPS_KERNEL_MKS2021 = 7
     Mks2021 = 7,
-    ///  `Last` -> VIPS_KERNEL_LAST = 8
-    Last = 8,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -588,8 +552,6 @@ pub enum OperationBoolean {
     Lshift = 3,
     ///  `Rshift` -> VIPS_OPERATION_BOOLEAN_RSHIFT = 4
     Rshift = 4,
-    ///  `Last` -> VIPS_OPERATION_BOOLEAN_LAST = 5
-    Last = 5,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -600,16 +562,12 @@ pub enum OperationComplex {
     Rect = 1,
     ///  `Conj` -> VIPS_OPERATION_COMPLEX_CONJ = 2
     Conj = 2,
-    ///  `Last` -> VIPS_OPERATION_COMPLEX_LAST = 3
-    Last = 3,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
 pub enum OperationComplex2 {
     ///  `CrossPhase` -> VIPS_OPERATION_COMPLEX2_CROSS_PHASE = 0
     CrossPhase = 0,
-    ///  `Last` -> VIPS_OPERATION_COMPLEX2_LAST = 1
-    Last = 1,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -618,8 +576,6 @@ pub enum OperationComplexget {
     Real = 0,
     ///  `Imag` -> VIPS_OPERATION_COMPLEXGET_IMAG = 1
     Imag = 1,
-    ///  `Last` -> VIPS_OPERATION_COMPLEXGET_LAST = 2
-    Last = 2,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -656,8 +612,6 @@ pub enum OperationMath {
     Acosh = 14,
     ///  `Atanh` -> VIPS_OPERATION_MATH_ATANH = 15
     Atanh = 15,
-    ///  `Last` -> VIPS_OPERATION_MATH_LAST = 16
-    Last = 16,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -668,8 +622,6 @@ pub enum OperationMath2 {
     Wop = 1,
     ///  `Atan2` -> VIPS_OPERATION_MATH2_ATAN2 = 2
     Atan2 = 2,
-    ///  `Last` -> VIPS_OPERATION_MATH2_LAST = 3
-    Last = 3,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -678,8 +630,6 @@ pub enum OperationMorphology {
     Erode = 0,
     ///  `Dilate` -> VIPS_OPERATION_MORPHOLOGY_DILATE = 1
     Dilate = 1,
-    ///  `Last` -> VIPS_OPERATION_MORPHOLOGY_LAST = 2
-    Last = 2,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -696,8 +646,6 @@ pub enum OperationRelational {
     More = 4,
     ///  `Moreeq` -> VIPS_OPERATION_RELATIONAL_MOREEQ = 5
     Moreeq = 5,
-    ///  `Last` -> VIPS_OPERATION_RELATIONAL_LAST = 6
-    Last = 6,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -708,8 +656,6 @@ pub enum OperationRound {
     Ceil = 1,
     ///  `Floor` -> VIPS_OPERATION_ROUND_FLOOR = 2
     Floor = 2,
-    ///  `Last` -> VIPS_OPERATION_ROUND_LAST = 3
-    Last = 3,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -718,8 +664,6 @@ pub enum PCS {
     Lab = 0,
     ///  `Xyz` -> VIPS_PCS_XYZ = 1
     Xyz = 1,
-    ///  `Last` -> VIPS_PCS_LAST = 2
-    Last = 2,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -730,8 +674,6 @@ pub enum Precision {
     Float = 1,
     ///  `Approximate` -> VIPS_PRECISION_APPROXIMATE = 2
     Approximate = 2,
-    ///  `Last` -> VIPS_PRECISION_LAST = 3
-    Last = 3,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -748,8 +690,6 @@ pub enum RegionShrink {
     Min = 4,
     ///  `Nearest` -> VIPS_REGION_SHRINK_NEAREST = 5
     Nearest = 5,
-    ///  `Last` -> VIPS_REGION_SHRINK_LAST = 6
-    Last = 6,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -762,8 +702,6 @@ pub enum SdfShape {
     RoundedBox = 2,
     ///  `Line` -> VIPS_SDF_SHAPE_LINE = 3
     Line = 3,
-    ///  `Last` -> VIPS_SDF_SHAPE_LAST = 4
-    Last = 4,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -776,8 +714,6 @@ pub enum Size {
     Down = 2,
     ///  `Force` -> VIPS_SIZE_FORCE = 3
     Force = 3,
-    ///  `Last` -> VIPS_SIZE_LAST = 4
-    Last = 4,
 }
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]
@@ -790,8 +726,6 @@ pub enum TextWrap {
     WordChar = 2,
     ///  `None` -> VIPS_TEXT_WRAP_NONE = 3
     None = 3,
-    ///  `Last` -> VIPS_TEXT_WRAP_LAST = 4
-    Last = 4,
 }
 
 impl VipsImage {
@@ -1114,6 +1048,69 @@ impl VipsImage {
         )
     }
 
+    /// VipsOklab2Oklch (Oklab2Oklch), transform Oklab to Oklch
+    /// returns `VipsImage` - Output image
+    pub fn Oklab2Oklch(&self) -> Result<VipsImage> {
+        let mut out_out = VipsImage::from(null_mut());
+        let vips_op_response = call(
+            "Oklab2Oklch",
+            VOption::new()
+                .set("in", self)
+                .set(
+                    "out",
+                    &mut out_out,
+                ),
+        )?;
+
+        utils::result(
+            vips_op_response,
+            out_out,
+            Error::OperationError("Oklab2Oklch (vips_Oklab2Oklch) failed".to_string()),
+        )
+    }
+
+    /// VipsOklab2XYZ (Oklab2XYZ), transform Oklab to XYZ
+    /// returns `VipsImage` - Output image
+    pub fn Oklab2XYZ(&self) -> Result<VipsImage> {
+        let mut out_out = VipsImage::from(null_mut());
+        let vips_op_response = call(
+            "Oklab2XYZ",
+            VOption::new()
+                .set("in", self)
+                .set(
+                    "out",
+                    &mut out_out,
+                ),
+        )?;
+
+        utils::result(
+            vips_op_response,
+            out_out,
+            Error::OperationError("Oklab2Xyz (vips_Oklab2XYZ) failed".to_string()),
+        )
+    }
+
+    /// VipsOklch2Oklab (Oklch2Oklab), transform Oklch to Oklab
+    /// returns `VipsImage` - Output image
+    pub fn Oklch2Oklab(&self) -> Result<VipsImage> {
+        let mut out_out = VipsImage::from(null_mut());
+        let vips_op_response = call(
+            "Oklch2Oklab",
+            VOption::new()
+                .set("in", self)
+                .set(
+                    "out",
+                    &mut out_out,
+                ),
+        )?;
+
+        utils::result(
+            vips_op_response,
+            out_out,
+            Error::OperationError("Oklch2Oklab (vips_Oklch2Oklab) failed".to_string()),
+        )
+    }
+
     /// VipsXYZ2CMYK (XYZ2CMYK), transform XYZ to CMYK
     /// returns `VipsImage` - Output image
     pub fn XYZ2CMYK(&self) -> Result<VipsImage> {
@@ -1178,6 +1175,27 @@ impl VipsImage {
             vips_op_response,
             out_out,
             Error::OperationError("Xyz2Lab (vips_XYZ2Lab) failed".to_string()),
+        )
+    }
+
+    /// VipsXYZ2Oklab (XYZ2Oklab), transform XYZ to Oklab
+    /// returns `VipsImage` - Output image
+    pub fn XYZ2Oklab(&self) -> Result<VipsImage> {
+        let mut out_out = VipsImage::from(null_mut());
+        let vips_op_response = call(
+            "XYZ2Oklab",
+            VOption::new()
+                .set("in", self)
+                .set(
+                    "out",
+                    &mut out_out,
+                ),
+        )?;
+
+        utils::result(
+            vips_op_response,
+            out_out,
+            Error::OperationError("Xyz2Oklab (vips_XYZ2Oklab) failed".to_string()),
         )
     }
 
@@ -2887,7 +2905,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsCopy (copy), copy an image
+    /// VipsCopy (copy), copy an image, nocache
     /// returns `VipsImage` - Output image
     pub fn copy(&self) -> Result<VipsImage> {
         let mut out_out = VipsImage::from(null_mut());
@@ -2908,7 +2926,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsCopy (copy), copy an image
+    /// VipsCopy (copy), copy an image, nocache
     /// returns `VipsImage` - Output image
     ///
     /// <ins>Optional arguments</ins>
@@ -3050,7 +3068,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadCsvSource (csvload_source), load csv, priority=0, untrusted, is_a_source, get_flags, header, load
+    /// VipsForeignLoadCsvSource (csvload_source), load csv, nocache, priority=0, untrusted, is_a_source, get_flags, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -3076,7 +3094,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadCsvSource (csvload_source), load csv, priority=0, untrusted, is_a_source, get_flags, header, load
+    /// VipsForeignLoadCsvSource (csvload_source), load csv, nocache, priority=0, untrusted, is_a_source, get_flags, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -3122,7 +3140,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveCsvFile (csvsave), save image to csv (.csv), priority=0, mono
+    /// VipsForeignSaveCsvFile (csvsave), save image to csv, nocache (.csv), priority=0, mono
     ///
     /// filename: `&str` -> Filename to save to
     pub fn csvsave(&self, filename: &str) -> Result<()> {
@@ -3143,7 +3161,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveCsvFile (csvsave), save image to csv (.csv), priority=0, mono
+    /// VipsForeignSaveCsvFile (csvsave), save image to csv, nocache (.csv), priority=0, mono
     ///
     /// filename: `&str` -> Filename to save to
     ///
@@ -3176,7 +3194,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveCsvTarget (csvsave_target), save image to csv (.csv), priority=0, mono
+    /// VipsForeignSaveCsvTarget (csvsave_target), save image to csv, nocache (.csv), priority=0, mono
     ///
     /// target: `&VipsTarget` -> Target to save to
     pub fn csvsave_target(&self, target: &VipsTarget) -> Result<()> {
@@ -3197,7 +3215,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveCsvTarget (csvsave_target), save image to csv (.csv), priority=0, mono
+    /// VipsForeignSaveCsvTarget (csvsave_target), save image to csv, nocache (.csv), priority=0, mono
     ///
     /// target: `&VipsTarget` -> Target to save to
     ///
@@ -3320,6 +3338,220 @@ impl VipsImage {
         )
     }
 
+    /// VipsForeignLoadDcRawFile (dcrawload), load RAW camera files (.3fr, .ari, .arw, .cap, .cin, .cr2, .cr3, .crw, .dcr, .dng, .erf, .fff, .iiq, .k25, .kdc, .mdc, .mos, .mrw, .nef, .nrw, .orf, .ori, .pef, .pxn, .raf, .raw, .rw2, .rwl, .sr2, .srf, .srw, .x3f), priority=100, untrusted, get_flags, get_flags_filename, header, load
+    /// returns `VipsImage` - Output image
+    ///
+    /// filename: `&str` -> Filename to load from
+    pub fn dcrawload(filename: &str) -> Result<VipsImage> {
+        let mut out_out = VipsImage::from(null_mut());
+        let vips_op_response = call(
+            "dcrawload",
+            VOption::new()
+                .set(
+                    "filename",
+                    filename,
+                )
+                .set(
+                    "out",
+                    &mut out_out,
+                ),
+        )?;
+
+        utils::result(
+            vips_op_response,
+            out_out,
+            Error::OperationError("Dcrawload (vips_dcrawload) failed".to_string()),
+        )
+    }
+
+    /// VipsForeignLoadDcRawFile (dcrawload), load RAW camera files (.3fr, .ari, .arw, .cap, .cin, .cr2, .cr3, .crw, .dcr, .dng, .erf, .fff, .iiq, .k25, .kdc, .mdc, .mos, .mrw, .nef, .nrw, .orf, .ori, .pef, .pxn, .raf, .raw, .rw2, .rwl, .sr2, .srf, .srw, .x3f), priority=100, untrusted, get_flags, get_flags_filename, header, load
+    /// returns `VipsImage` - Output image
+    ///
+    /// filename: `&str` -> Filename to load from
+    ///
+    /// <ins>Optional arguments</ins>
+    ///
+    /// bitdepth: `i32` -> Number of bits per pixel
+    ///
+    /// flags: [`ForeignFlags`] -> Flags for this file
+    ///
+    /// memory: `bool` -> Force open via memory
+    ///
+    /// access: [`Access`] -> Required access pattern for this file
+    ///
+    /// fail_on: [`FailOn`] -> Error level to fail on
+    ///
+    /// revalidate: `bool` -> Don't use a cached result for this operation
+    pub fn dcrawload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
+        let mut out_out = VipsImage::from(null_mut());
+        let vips_op_response = call(
+            "dcrawload",
+            option
+                .set(
+                    "filename",
+                    filename,
+                )
+                .set(
+                    "out",
+                    &mut out_out,
+                ),
+        )?;
+
+        utils::result(
+            vips_op_response,
+            out_out,
+            Error::OperationError("Dcrawload (vips_dcrawload) failed".to_string()),
+        )
+    }
+
+    /// VipsForeignLoadDcRawBuffer (dcrawload_buffer), load RAW camera files, priority=100, untrusted, is_a_buffer, get_flags, header, load
+    /// returns `VipsImage` - Output image
+    ///
+    /// buffer: `&[u8]` -> Buffer to load from
+    pub fn dcrawload_buffer(buffer: &[u8]) -> Result<VipsImage> {
+        let vips_blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
+        let blob = VipsBlob::from(vips_blob);
+        let mut out_out = VipsImage::from(null_mut());
+        let vips_op_response = call(
+            "dcrawload_buffer",
+            VOption::new()
+                .set(
+                    "buffer",
+                    &blob,
+                )
+                .set(
+                    "out",
+                    &mut out_out,
+                ),
+        )?;
+        blob.area_unref();
+        utils::result(
+            vips_op_response,
+            out_out,
+            Error::OperationError("DcrawloadBuffer (vips_dcrawload_buffer) failed".to_string()),
+        )
+    }
+
+    /// VipsForeignLoadDcRawBuffer (dcrawload_buffer), load RAW camera files, priority=100, untrusted, is_a_buffer, get_flags, header, load
+    /// returns `VipsImage` - Output image
+    ///
+    /// buffer: `&[u8]` -> Buffer to load from
+    ///
+    /// <ins>Optional arguments</ins>
+    ///
+    /// bitdepth: `i32` -> Number of bits per pixel
+    ///
+    /// flags: [`ForeignFlags`] -> Flags for this file
+    ///
+    /// memory: `bool` -> Force open via memory
+    ///
+    /// access: [`Access`] -> Required access pattern for this file
+    ///
+    /// fail_on: [`FailOn`] -> Error level to fail on
+    ///
+    /// revalidate: `bool` -> Don't use a cached result for this operation
+    pub fn dcrawload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
+        let vips_blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
+        let blob = VipsBlob::from(vips_blob);
+        let mut out_out = VipsImage::from(null_mut());
+        let vips_op_response = call(
+            "dcrawload_buffer",
+            option
+                .set(
+                    "buffer",
+                    &blob,
+                )
+                .set(
+                    "out",
+                    &mut out_out,
+                ),
+        )?;
+        blob.area_unref();
+        utils::result(
+            vips_op_response,
+            out_out,
+            Error::OperationError("DcrawloadBuffer (vips_dcrawload_buffer) failed".to_string()),
+        )
+    }
+
+    /// VipsForeignLoadDcRawSource (dcrawload_source), load RAW camera files, nocache, priority=100, untrusted, is_a_source, get_flags, header, load
+    /// returns `VipsImage` - Output image
+    ///
+    /// source: `&VipsSource` -> Source to load from
+    pub fn dcrawload_source(source: &VipsSource) -> Result<VipsImage> {
+        let mut out_out = VipsImage::from(null_mut());
+        let vips_op_response = call(
+            "dcrawload_source",
+            VOption::new()
+                .set(
+                    "source",
+                    source,
+                )
+                .set(
+                    "out",
+                    &mut out_out,
+                ),
+        )?;
+
+        utils::result(
+            vips_op_response,
+            out_out,
+            Error::OperationError("DcrawloadSource (vips_dcrawload_source) failed".to_string()),
+        )
+    }
+
+    /// VipsForeignLoadDcRawSource (dcrawload_source), load RAW camera files, nocache, priority=100, untrusted, is_a_source, get_flags, header, load
+    /// returns `VipsImage` - Output image
+    ///
+    /// source: `&VipsSource` -> Source to load from
+    ///
+    /// <ins>Optional arguments</ins>
+    ///
+    /// bitdepth: `i32` -> Number of bits per pixel
+    ///
+    /// flags: [`ForeignFlags`] -> Flags for this file
+    ///
+    /// memory: `bool` -> Force open via memory
+    ///
+    /// access: [`Access`] -> Required access pattern for this file
+    ///
+    /// fail_on: [`FailOn`] -> Error level to fail on
+    ///
+    /// revalidate: `bool` -> Don't use a cached result for this operation
+    pub fn dcrawload_source_with_opts(source: &VipsSource, option: VOption) -> Result<VipsImage> {
+        let mut out_out = VipsImage::from(null_mut());
+        let vips_op_response = call(
+            "dcrawload_source",
+            option
+                .set(
+                    "source",
+                    source,
+                )
+                .set(
+                    "out",
+                    &mut out_out,
+                ),
+        )?;
+
+        utils::result(
+            vips_op_response,
+            out_out,
+            Error::OperationError("DcrawloadSource (vips_dcrawload_source) failed".to_string()),
+        )
+    }
+
     /// VipsDeviate (deviate), find image standard deviation
     /// returns `f64` - Output value
     pub fn deviate(&self) -> Result<f64> {
@@ -3371,7 +3603,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsDrawCircle (draw_circle), draw a circle on an image
+    /// VipsDrawCircle (draw_circle), draw a circle on an image, nocache
     ///
     /// ink: `&[f64]` -> Color for pixels
     ///
@@ -3404,7 +3636,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsDrawCircle (draw_circle), draw a circle on an image
+    /// VipsDrawCircle (draw_circle), draw a circle on an image, nocache
     ///
     /// ink: `&[f64]` -> Color for pixels
     ///
@@ -3448,7 +3680,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsDrawFlood (draw_flood), flood-fill an area
+    /// VipsDrawFlood (draw_flood), flood-fill an area, nocache
     ///
     /// ink: `&[f64]` -> Color for pixels
     ///
@@ -3475,7 +3707,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsDrawFlood (draw_flood), flood-fill an area
+    /// VipsDrawFlood (draw_flood), flood-fill an area, nocache
     ///
     /// ink: `&[f64]` -> Color for pixels
     ///
@@ -3516,7 +3748,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsDrawImage (draw_image), paint an image into another image
+    /// VipsDrawImage (draw_image), paint an image into another image, nocache
     ///
     /// sub: `&VipsImage` -> Sub-image to insert into main image
     ///
@@ -3543,7 +3775,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsDrawImage (draw_image), paint an image into another image
+    /// VipsDrawImage (draw_image), paint an image into another image, nocache
     ///
     /// sub: `&VipsImage` -> Sub-image to insert into main image
     ///
@@ -3580,7 +3812,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsDrawLine (draw_line), draw a line on an image
+    /// VipsDrawLine (draw_line), draw a line on an image, nocache
     ///
     /// ink: `&[f64]` -> Color for pixels
     ///
@@ -3613,7 +3845,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsDrawMask (draw_mask), draw a mask on an image
+    /// VipsDrawMask (draw_mask), draw a mask on an image, nocache
     ///
     /// ink: `&[f64]` -> Color for pixels
     ///
@@ -3646,7 +3878,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsDrawRect (draw_rect), paint a rectangle on an image
+    /// VipsDrawRect (draw_rect), paint a rectangle on an image, nocache
     ///
     /// ink: `&[f64]` -> Color for pixels
     ///
@@ -3695,7 +3927,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsDrawRect (draw_rect), paint a rectangle on an image
+    /// VipsDrawRect (draw_rect), paint a rectangle on an image, nocache
     ///
     /// ink: `&[f64]` -> Color for pixels
     ///
@@ -3749,7 +3981,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsDrawSmudge (draw_smudge), blur a rectangle on an image
+    /// VipsDrawSmudge (draw_smudge), blur a rectangle on an image, nocache
     ///
     /// left: `i32` -> Rect to fill
     ///
@@ -3788,7 +4020,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveDzFile (dzsave), save image to deepzoom file (.dz, .szi), priority=0,
+    /// VipsForeignSaveDzFile (dzsave), save image to deepzoom file, nocache (.dz, .szi), priority=0,
     ///
     /// filename: `&str` -> Filename to save to
     pub fn dzsave(&self, filename: &str) -> Result<()> {
@@ -3809,7 +4041,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveDzFile (dzsave), save image to deepzoom file (.dz, .szi), priority=0,
+    /// VipsForeignSaveDzFile (dzsave), save image to deepzoom file, nocache (.dz, .szi), priority=0,
     ///
     /// filename: `&str` -> Filename to save to
     ///
@@ -3868,7 +4100,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveDzBuffer (dzsave_buffer), save image to dz buffer (.dz, .szi), priority=0,
+    /// VipsForeignSaveDzBuffer (dzsave_buffer), save image to dz buffer, nocache (.dz, .szi), priority=0,
     /// returns `Vec<u8>` - Buffer to save to
     pub fn dzsave_buffer(&self) -> Result<Vec<u8>> {
         let mut buffer_out = VipsBlob::from(null_mut());
@@ -3889,7 +4121,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveDzBuffer (dzsave_buffer), save image to dz buffer (.dz, .szi), priority=0,
+    /// VipsForeignSaveDzBuffer (dzsave_buffer), save image to dz buffer, nocache (.dz, .szi), priority=0,
     /// returns `Vec<u8>` - Buffer to save to
     ///
     /// <ins>Optional arguments</ins>
@@ -3948,7 +4180,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveDzTarget (dzsave_target), save image to deepzoom target (.dz, .szi), priority=0,
+    /// VipsForeignSaveDzTarget (dzsave_target), save image to deepzoom target, nocache (.dz, .szi), priority=0,
     ///
     /// target: `&VipsTarget` -> Target to save to
     pub fn dzsave_target(&self, target: &VipsTarget) -> Result<()> {
@@ -3969,7 +4201,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveDzTarget (dzsave_target), save image to deepzoom target (.dz, .szi), priority=0,
+    /// VipsForeignSaveDzTarget (dzsave_target), save image to deepzoom target, nocache (.dz, .szi), priority=0,
     ///
     /// target: `&VipsTarget` -> Target to save to
     ///
@@ -4609,7 +4841,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadFitsSource (fitsload_source), load FITS from a source, priority=-50, untrusted, is_a, is_a_source, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadFitsSource (fitsload_source), load FITS from a source, nocache, priority=-50, untrusted, is_a, is_a_source, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -4635,7 +4867,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadFitsSource (fitsload_source), load FITS from a source, priority=-50, untrusted, is_a, is_a_source, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadFitsSource (fitsload_source), load FITS from a source, nocache, priority=-50, untrusted, is_a, is_a_source, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -4673,7 +4905,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveFits (fitssave), save image to fits file (.fits, .fit, .fts), priority=0, untrusted,
+    /// VipsForeignSaveFits (fitssave), save image to fits file, nocache (.fits, .fit, .fts), priority=0, untrusted,
     ///
     /// filename: `&str` -> Filename to save to
     pub fn fitssave(&self, filename: &str) -> Result<()> {
@@ -4694,7 +4926,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveFits (fitssave), save image to fits file (.fits, .fit, .fts), priority=0, untrusted,
+    /// VipsForeignSaveFits (fitssave), save image to fits file, nocache (.fits, .fit, .fts), priority=0, untrusted,
     ///
     /// filename: `&str` -> Filename to save to
     ///
@@ -5083,7 +5315,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsGaussnoise (gaussnoise), make a gaussnoise image
+    /// VipsGaussnoise (gaussnoise), make a gaussnoise image, nocache
     /// returns `VipsImage` - Output image
     ///
     /// width: `i32` -> Image width in pixels
@@ -5115,7 +5347,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsGaussnoise (gaussnoise), make a gaussnoise image
+    /// VipsGaussnoise (gaussnoise), make a gaussnoise image, nocache
     /// returns `VipsImage` - Output image
     ///
     /// width: `i32` -> Image width in pixels
@@ -5365,7 +5597,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadNsgifSource (gifload_source), load gif from source, priority=50, is_a_source, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadNsgifSource (gifload_source), load gif from source, nocache, priority=50, is_a_source, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -5391,7 +5623,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadNsgifSource (gifload_source), load gif from source, priority=50, is_a_source, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadNsgifSource (gifload_source), load gif from source, nocache, priority=50, is_a_source, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -5433,7 +5665,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveCgifFile (gifsave), save as gif (.gif), priority=0, rgb alpha
+    /// VipsForeignSaveCgifFile (gifsave), save as gif, nocache (.gif), priority=0, rgb alpha
     ///
     /// filename: `&str` -> Filename to save to
     pub fn gifsave(&self, filename: &str) -> Result<()> {
@@ -5454,7 +5686,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveCgifFile (gifsave), save as gif (.gif), priority=0, rgb alpha
+    /// VipsForeignSaveCgifFile (gifsave), save as gif, nocache (.gif), priority=0, rgb alpha
     ///
     /// filename: `&str` -> Filename to save to
     ///
@@ -5501,7 +5733,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveCgifBuffer (gifsave_buffer), save as gif (.gif), priority=0, rgb alpha
+    /// VipsForeignSaveCgifBuffer (gifsave_buffer), save as gif, nocache (.gif), priority=0, rgb alpha
     /// returns `Vec<u8>` - Buffer to save to
     pub fn gifsave_buffer(&self) -> Result<Vec<u8>> {
         let mut buffer_out = VipsBlob::from(null_mut());
@@ -5522,7 +5754,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveCgifBuffer (gifsave_buffer), save as gif (.gif), priority=0, rgb alpha
+    /// VipsForeignSaveCgifBuffer (gifsave_buffer), save as gif, nocache (.gif), priority=0, rgb alpha
     /// returns `Vec<u8>` - Buffer to save to
     ///
     /// <ins>Optional arguments</ins>
@@ -5569,7 +5801,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveCgifTarget (gifsave_target), save as gif (.gif), priority=0, rgb alpha
+    /// VipsForeignSaveCgifTarget (gifsave_target), save as gif, nocache (.gif), priority=0, rgb alpha
     ///
     /// target: `&VipsTarget` -> Target to save to
     pub fn gifsave_target(&self, target: &VipsTarget) -> Result<()> {
@@ -5590,7 +5822,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveCgifTarget (gifsave_target), save as gif (.gif), priority=0, rgb alpha
+    /// VipsForeignSaveCgifTarget (gifsave_target), save as gif, nocache (.gif), priority=0, rgb alpha
     ///
     /// target: `&VipsTarget` -> Target to save to
     ///
@@ -6047,7 +6279,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadHeifSource (heifload_source), load a HEIF image, priority=0, is_a_source, get_flags, header, load
+    /// VipsForeignLoadHeifSource (heifload_source), load a HEIF image, nocache, priority=0, is_a_source, get_flags, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -6073,7 +6305,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadHeifSource (heifload_source), load a HEIF image, priority=0, is_a_source, get_flags, header, load
+    /// VipsForeignLoadHeifSource (heifload_source), load a HEIF image, nocache, priority=0, is_a_source, get_flags, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -6119,7 +6351,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveHeifFile (heifsave), save image in HEIF format (.heic, .heif, .avif), priority=0, rgb alpha
+    /// VipsForeignSaveHeifFile (heifsave), save image in HEIF format, nocache (.heic, .heif, .avif), priority=0, rgb alpha
     ///
     /// filename: `&str` -> Filename to save to
     pub fn heifsave(&self, filename: &str) -> Result<()> {
@@ -6140,7 +6372,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveHeifFile (heifsave), save image in HEIF format (.heic, .heif, .avif), priority=0, rgb alpha
+    /// VipsForeignSaveHeifFile (heifsave), save image in HEIF format, nocache (.heic, .heif, .avif), priority=0, rgb alpha
     ///
     /// filename: `&str` -> Filename to save to
     ///
@@ -6159,6 +6391,8 @@ impl VipsImage {
     /// subsample_mode: [`ForeignSubsample`] -> Select chroma subsample operation mode
     ///
     /// encoder: [`ForeignHeifEncoder`] -> Select encoder to use
+    ///
+    /// tune: `&str` -> Tuning parameters
     ///
     /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
@@ -6185,7 +6419,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveHeifBuffer (heifsave_buffer), save image in HEIF format (.heic, .heif), priority=0, rgb alpha
+    /// VipsForeignSaveHeifBuffer (heifsave_buffer), save image in HEIF format, nocache (.heic, .heif), priority=0, rgb alpha
     /// returns `Vec<u8>` - Buffer to save to
     pub fn heifsave_buffer(&self) -> Result<Vec<u8>> {
         let mut buffer_out = VipsBlob::from(null_mut());
@@ -6206,7 +6440,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveHeifBuffer (heifsave_buffer), save image in HEIF format (.heic, .heif), priority=0, rgb alpha
+    /// VipsForeignSaveHeifBuffer (heifsave_buffer), save image in HEIF format, nocache (.heic, .heif), priority=0, rgb alpha
     /// returns `Vec<u8>` - Buffer to save to
     ///
     /// <ins>Optional arguments</ins>
@@ -6224,6 +6458,8 @@ impl VipsImage {
     /// subsample_mode: [`ForeignSubsample`] -> Select chroma subsample operation mode
     ///
     /// encoder: [`ForeignHeifEncoder`] -> Select encoder to use
+    ///
+    /// tune: `&str` -> Tuning parameters
     ///
     /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
@@ -6251,7 +6487,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveHeifTarget (heifsave_target), save image in HEIF format (.heic, .heif), priority=0, rgb alpha
+    /// VipsForeignSaveHeifTarget (heifsave_target), save image in HEIF format, nocache (.heic, .heif), priority=0, rgb alpha
     ///
     /// target: `&VipsTarget` -> Target to save to
     pub fn heifsave_target(&self, target: &VipsTarget) -> Result<()> {
@@ -6272,7 +6508,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveHeifTarget (heifsave_target), save image in HEIF format (.heic, .heif), priority=0, rgb alpha
+    /// VipsForeignSaveHeifTarget (heifsave_target), save image in HEIF format, nocache (.heic, .heif), priority=0, rgb alpha
     ///
     /// target: `&VipsTarget` -> Target to save to
     ///
@@ -6291,6 +6527,8 @@ impl VipsImage {
     /// subsample_mode: [`ForeignSubsample`] -> Select chroma subsample operation mode
     ///
     /// encoder: [`ForeignHeifEncoder`] -> Select encoder to use
+    ///
+    /// tune: `&str` -> Tuning parameters
     ///
     /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
@@ -7538,7 +7776,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadJp2kSource (jp2kload_source), load JPEG2000 image, priority=0, untrusted, is_a_source, get_flags, header, load
+    /// VipsForeignLoadJp2kSource (jp2kload_source), load JPEG2000 image, nocache, priority=0, untrusted, is_a_source, get_flags, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -7564,7 +7802,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadJp2kSource (jp2kload_source), load JPEG2000 image, priority=0, untrusted, is_a_source, get_flags, header, load
+    /// VipsForeignLoadJp2kSource (jp2kload_source), load JPEG2000 image, nocache, priority=0, untrusted, is_a_source, get_flags, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -7606,7 +7844,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveJp2kFile (jp2ksave), save image in JPEG2000 format (.j2k, .jp2, .jpt, .j2c, .jpc), priority=0,
+    /// VipsForeignSaveJp2kFile (jp2ksave), save image in JPEG2000 format, nocache (.j2k, .jp2, .jpt, .j2c, .jpc), priority=0,
     ///
     /// filename: `&str` -> Filename to save to
     pub fn jp2ksave(&self, filename: &str) -> Result<()> {
@@ -7627,7 +7865,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveJp2kFile (jp2ksave), save image in JPEG2000 format (.j2k, .jp2, .jpt, .j2c, .jpc), priority=0,
+    /// VipsForeignSaveJp2kFile (jp2ksave), save image in JPEG2000 format, nocache (.j2k, .jp2, .jpt, .j2c, .jpc), priority=0,
     ///
     /// filename: `&str` -> Filename to save to
     ///
@@ -7668,7 +7906,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveJp2kBuffer (jp2ksave_buffer), save image in JPEG2000 format (.j2k, .jp2, .jpt, .j2c, .jpc), priority=0,
+    /// VipsForeignSaveJp2kBuffer (jp2ksave_buffer), save image in JPEG2000 format, nocache (.j2k, .jp2, .jpt, .j2c, .jpc), priority=0,
     /// returns `Vec<u8>` - Buffer to save to
     pub fn jp2ksave_buffer(&self) -> Result<Vec<u8>> {
         let mut buffer_out = VipsBlob::from(null_mut());
@@ -7689,7 +7927,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveJp2kBuffer (jp2ksave_buffer), save image in JPEG2000 format (.j2k, .jp2, .jpt, .j2c, .jpc), priority=0,
+    /// VipsForeignSaveJp2kBuffer (jp2ksave_buffer), save image in JPEG2000 format, nocache (.j2k, .jp2, .jpt, .j2c, .jpc), priority=0,
     /// returns `Vec<u8>` - Buffer to save to
     ///
     /// <ins>Optional arguments</ins>
@@ -7730,7 +7968,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveJp2kTarget (jp2ksave_target), save image in JPEG2000 format (.j2k, .jp2, .jpt, .j2c, .jpc), priority=0,
+    /// VipsForeignSaveJp2kTarget (jp2ksave_target), save image in JPEG2000 format, nocache (.j2k, .jp2, .jpt, .j2c, .jpc), priority=0,
     ///
     /// target: `&VipsTarget` -> Target to save to
     pub fn jp2ksave_target(&self, target: &VipsTarget) -> Result<()> {
@@ -7751,7 +7989,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveJp2kTarget (jp2ksave_target), save image in JPEG2000 format (.j2k, .jp2, .jpt, .j2c, .jpc), priority=0,
+    /// VipsForeignSaveJp2kTarget (jp2ksave_target), save image in JPEG2000 format, nocache (.j2k, .jp2, .jpt, .j2c, .jpc), priority=0,
     ///
     /// target: `&VipsTarget` -> Target to save to
     ///
@@ -7948,7 +8186,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadJpegSource (jpegload_source), load image from jpeg source, priority=50, is_a_source, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadJpegSource (jpegload_source), load image from jpeg source, nocache, priority=50, is_a_source, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -7974,7 +8212,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadJpegSource (jpegload_source), load image from jpeg source, priority=50, is_a_source, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadJpegSource (jpegload_source), load image from jpeg source, nocache, priority=50, is_a_source, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -8018,7 +8256,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveJpegFile (jpegsave), save image to jpeg file (.jpg, .jpeg, .jpe, .jfif), priority=0, mono rgb cmyk
+    /// VipsForeignSaveJpegFile (jpegsave), save as jpeg, nocache (.jpg, .jpeg, .jpe, .jfif), priority=0,
     ///
     /// filename: `&str` -> Filename to save to
     pub fn jpegsave(&self, filename: &str) -> Result<()> {
@@ -8039,7 +8277,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveJpegFile (jpegsave), save image to jpeg file (.jpg, .jpeg, .jpe, .jfif), priority=0, mono rgb cmyk
+    /// VipsForeignSaveJpegFile (jpegsave), save as jpeg, nocache (.jpg, .jpeg, .jpe, .jfif), priority=0,
     ///
     /// filename: `&str` -> Filename to save to
     ///
@@ -8088,7 +8326,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveJpegBuffer (jpegsave_buffer), save image to jpeg buffer (.jpg, .jpeg, .jpe, .jfif), priority=0, mono rgb cmyk
+    /// VipsForeignSaveJpegBuffer (jpegsave_buffer), save as jpeg, nocache (.jpg, .jpeg, .jpe, .jfif), priority=0,
     /// returns `Vec<u8>` - Buffer to save to
     pub fn jpegsave_buffer(&self) -> Result<Vec<u8>> {
         let mut buffer_out = VipsBlob::from(null_mut());
@@ -8109,7 +8347,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveJpegBuffer (jpegsave_buffer), save image to jpeg buffer (.jpg, .jpeg, .jpe, .jfif), priority=0, mono rgb cmyk
+    /// VipsForeignSaveJpegBuffer (jpegsave_buffer), save as jpeg, nocache (.jpg, .jpeg, .jpe, .jfif), priority=0,
     /// returns `Vec<u8>` - Buffer to save to
     ///
     /// <ins>Optional arguments</ins>
@@ -8158,7 +8396,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveJpegMime (jpegsave_mime), save image to jpeg mime (.jpg, .jpeg, .jpe, .jfif), priority=0, mono rgb cmyk
+    /// VipsForeignSaveJpegMime (jpegsave_mime), save image to jpeg mime, nocache (.jpg, .jpeg, .jpe, .jfif), priority=0,
     pub fn jpegsave_mime(&self) -> Result<()> {
         let vips_op_response = call(
             "jpegsave_mime",
@@ -8172,7 +8410,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveJpegMime (jpegsave_mime), save image to jpeg mime (.jpg, .jpeg, .jpe, .jfif), priority=0, mono rgb cmyk
+    /// VipsForeignSaveJpegMime (jpegsave_mime), save image to jpeg mime, nocache (.jpg, .jpeg, .jpe, .jfif), priority=0,
     ///
     /// <ins>Optional arguments</ins>
     ///
@@ -8214,7 +8452,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveJpegTarget (jpegsave_target), save image to jpeg target (.jpg, .jpeg, .jpe, .jfif), priority=0, mono rgb cmyk
+    /// VipsForeignSaveJpegTarget (jpegsave_target), save as jpeg, nocache (.jpg, .jpeg, .jpe, .jfif), priority=0,
     ///
     /// target: `&VipsTarget` -> Target to save to
     pub fn jpegsave_target(&self, target: &VipsTarget) -> Result<()> {
@@ -8235,7 +8473,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveJpegTarget (jpegsave_target), save image to jpeg target (.jpg, .jpeg, .jpe, .jfif), priority=0, mono rgb cmyk
+    /// VipsForeignSaveJpegTarget (jpegsave_target), save as jpeg, nocache (.jpg, .jpeg, .jpe, .jfif), priority=0,
     ///
     /// target: `&VipsTarget` -> Target to save to
     ///
@@ -8436,7 +8674,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadJxlSource (jxlload_source), load JPEG-XL image, priority=0, untrusted, is_a_source, get_flags, header, load
+    /// VipsForeignLoadJxlSource (jxlload_source), load JPEG-XL image, nocache, priority=0, untrusted, is_a_source, get_flags, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -8462,7 +8700,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadJxlSource (jxlload_source), load JPEG-XL image, priority=0, untrusted, is_a_source, get_flags, header, load
+    /// VipsForeignLoadJxlSource (jxlload_source), load JPEG-XL image, nocache, priority=0, untrusted, is_a_source, get_flags, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -8504,7 +8742,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveJxlFile (jxlsave), save image in JPEG-XL format (.jxl), priority=0, untrusted,
+    /// VipsForeignSaveJxlFile (jxlsave), save image in JPEG-XL format, nocache (.jxl), priority=0, untrusted,
     ///
     /// filename: `&str` -> Filename to save to
     pub fn jxlsave(&self, filename: &str) -> Result<()> {
@@ -8525,7 +8763,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveJxlFile (jxlsave), save image in JPEG-XL format (.jxl), priority=0, untrusted,
+    /// VipsForeignSaveJxlFile (jxlsave), save image in JPEG-XL format, nocache (.jxl), priority=0, untrusted,
     ///
     /// filename: `&str` -> Filename to save to
     ///
@@ -8540,6 +8778,8 @@ impl VipsImage {
     /// lossless: `bool` -> Enable lossless compression
     ///
     /// Q: `i32` -> Quality factor
+    ///
+    /// bitdepth: `i32` -> Bit depth
     ///
     /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
@@ -8566,7 +8806,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveJxlBuffer (jxlsave_buffer), save image in JPEG-XL format (.jxl), priority=0, untrusted,
+    /// VipsForeignSaveJxlBuffer (jxlsave_buffer), save image in JPEG-XL format, nocache (.jxl), priority=0, untrusted,
     /// returns `Vec<u8>` - Buffer to save to
     pub fn jxlsave_buffer(&self) -> Result<Vec<u8>> {
         let mut buffer_out = VipsBlob::from(null_mut());
@@ -8587,7 +8827,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveJxlBuffer (jxlsave_buffer), save image in JPEG-XL format (.jxl), priority=0, untrusted,
+    /// VipsForeignSaveJxlBuffer (jxlsave_buffer), save image in JPEG-XL format, nocache (.jxl), priority=0, untrusted,
     /// returns `Vec<u8>` - Buffer to save to
     ///
     /// <ins>Optional arguments</ins>
@@ -8601,6 +8841,8 @@ impl VipsImage {
     /// lossless: `bool` -> Enable lossless compression
     ///
     /// Q: `i32` -> Quality factor
+    ///
+    /// bitdepth: `i32` -> Bit depth
     ///
     /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
@@ -8628,7 +8870,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveJxlTarget (jxlsave_target), save image in JPEG-XL format (.jxl), priority=0, untrusted,
+    /// VipsForeignSaveJxlTarget (jxlsave_target), save image in JPEG-XL format, nocache (.jxl), priority=0, untrusted,
     ///
     /// target: `&VipsTarget` -> Target to save to
     pub fn jxlsave_target(&self, target: &VipsTarget) -> Result<()> {
@@ -8649,7 +8891,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveJxlTarget (jxlsave_target), save image in JPEG-XL format (.jxl), priority=0, untrusted,
+    /// VipsForeignSaveJxlTarget (jxlsave_target), save image in JPEG-XL format, nocache (.jxl), priority=0, untrusted,
     ///
     /// target: `&VipsTarget` -> Target to save to
     ///
@@ -8664,6 +8906,8 @@ impl VipsImage {
     /// lossless: `bool` -> Enable lossless compression
     ///
     /// Q: `i32` -> Quality factor
+    ///
+    /// bitdepth: `i32` -> Bit depth
     ///
     /// keep: [`ForeignKeep`] -> Which metadata to retain
     ///
@@ -10609,7 +10853,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadMatrixSource (matrixload_source), load matrix, priority=0, is_a_source, get_flags, header, load
+    /// VipsForeignLoadMatrixSource (matrixload_source), load matrix, nocache, priority=0, is_a_source, get_flags, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -10635,7 +10879,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadMatrixSource (matrixload_source), load matrix, priority=0, is_a_source, get_flags, header, load
+    /// VipsForeignLoadMatrixSource (matrixload_source), load matrix, nocache, priority=0, is_a_source, get_flags, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -10703,7 +10947,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignPrintMatrix (matrixprint), print matrix (.mat), priority=0, mono
+    /// VipsForeignPrintMatrix (matrixprint), print matrix, nocache (.mat), priority=0, mono
     pub fn matrixprint(&self) -> Result<()> {
         let vips_op_response = call(
             "matrixprint",
@@ -10717,7 +10961,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignPrintMatrix (matrixprint), print matrix (.mat), priority=0, mono
+    /// VipsForeignPrintMatrix (matrixprint), print matrix, nocache (.mat), priority=0, mono
     ///
     /// <ins>Optional arguments</ins>
     ///
@@ -10741,7 +10985,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveMatrixFile (matrixsave), save image to matrix (.mat), priority=0, mono
+    /// VipsForeignSaveMatrixFile (matrixsave), save image to matrix, nocache (.mat), priority=0, mono
     ///
     /// filename: `&str` -> Filename to save to
     pub fn matrixsave(&self, filename: &str) -> Result<()> {
@@ -10762,7 +11006,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveMatrixFile (matrixsave), save image to matrix (.mat), priority=0, mono
+    /// VipsForeignSaveMatrixFile (matrixsave), save image to matrix, nocache (.mat), priority=0, mono
     ///
     /// filename: `&str` -> Filename to save to
     ///
@@ -10793,7 +11037,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveMatrixTarget (matrixsave_target), save image to matrix (.mat), priority=0, mono
+    /// VipsForeignSaveMatrixTarget (matrixsave_target), save image to matrix, nocache (.mat), priority=0, mono
     ///
     /// target: `&VipsTarget` -> Target to save to
     pub fn matrixsave_target(&self, target: &VipsTarget) -> Result<()> {
@@ -10814,7 +11058,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveMatrixTarget (matrixsave_target), save image to matrix (.mat), priority=0, mono
+    /// VipsForeignSaveMatrixTarget (matrixsave_target), save image to matrix, nocache (.mat), priority=0, mono
     ///
     /// target: `&VipsTarget` -> Target to save to
     ///
@@ -11647,7 +11891,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadOpenslideFile (openslideload), load file with OpenSlide (.svs, .vms, .vmu, .ndpi, .scn, .mrxs, .svslide, .tif, .bif), priority=100, untrusted, is_a, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadOpenslideFile (openslideload), load file with OpenSlide (.svs, .vms, .vmu, .ndpi, .scn, .mrxs, .svslide, .tif, .bif, .dcm), priority=100, untrusted, is_a, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// filename: `&str` -> Filename to load from
@@ -11673,7 +11917,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadOpenslideFile (openslideload), load file with OpenSlide (.svs, .vms, .vmu, .ndpi, .scn, .mrxs, .svslide, .tif, .bif), priority=100, untrusted, is_a, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadOpenslideFile (openslideload), load file with OpenSlide (.svs, .vms, .vmu, .ndpi, .scn, .mrxs, .svslide, .tif, .bif, .dcm), priority=100, untrusted, is_a, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// filename: `&str` -> Filename to load from
@@ -11721,7 +11965,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadOpenslideSource (openslideload_source), load source with OpenSlide, priority=100, untrusted, is_a_source, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadOpenslideSource (openslideload_source), load source with OpenSlide, nocache, priority=100, untrusted, is_a_source, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -11749,7 +11993,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadOpenslideSource (openslideload_source), load source with OpenSlide, priority=100, untrusted, is_a_source, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadOpenslideSource (openslideload_source), load source with OpenSlide, nocache, priority=100, untrusted, is_a_source, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -11802,7 +12046,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadPdfFile (pdfload), load PDF from file (.pdf), priority=0, untrusted, is_a, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadPdfFile (pdfload), load PDF from file (poppler) (.pdf), priority=0, untrusted, is_a, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// filename: `&str` -> Filename to load from
@@ -11828,7 +12072,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadPdfFile (pdfload), load PDF from file (.pdf), priority=0, untrusted, is_a, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadPdfFile (pdfload), load PDF from file (poppler) (.pdf), priority=0, untrusted, is_a, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// filename: `&str` -> Filename to load from
@@ -11846,6 +12090,8 @@ impl VipsImage {
     /// background: `&[f64]` -> Background colour
     ///
     /// password: `&str` -> Password to decrypt with
+    ///
+    /// page_box: [`ForeignPdfPageBox`] -> The region of the page to render
     ///
     /// flags: [`ForeignFlags`] -> Flags for this file
     ///
@@ -11878,7 +12124,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadPdfBuffer (pdfload_buffer), load PDF from buffer, priority=0, untrusted, is_a_buffer, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadPdfBuffer (pdfload_buffer), load PDF from buffer (poppler), priority=0, untrusted, is_a_buffer, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// buffer: `&[u8]` -> Buffer to load from
@@ -11912,7 +12158,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadPdfBuffer (pdfload_buffer), load PDF from buffer, priority=0, untrusted, is_a_buffer, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadPdfBuffer (pdfload_buffer), load PDF from buffer (poppler), priority=0, untrusted, is_a_buffer, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// buffer: `&[u8]` -> Buffer to load from
@@ -11930,6 +12176,8 @@ impl VipsImage {
     /// background: `&[f64]` -> Background colour
     ///
     /// password: `&str` -> Password to decrypt with
+    ///
+    /// page_box: [`ForeignPdfPageBox`] -> The region of the page to render
     ///
     /// flags: [`ForeignFlags`] -> Flags for this file
     ///
@@ -11970,7 +12218,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadPdfSource (pdfload_source), load PDF from source, priority=0, untrusted, is_a_source, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadPdfSource (pdfload_source), load PDF from source (poppler), nocache, priority=0, untrusted, is_a_source, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -11996,7 +12244,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadPdfSource (pdfload_source), load PDF from source, priority=0, untrusted, is_a_source, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadPdfSource (pdfload_source), load PDF from source (poppler), nocache, priority=0, untrusted, is_a_source, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -12014,6 +12262,8 @@ impl VipsImage {
     /// background: `&[f64]` -> Background colour
     ///
     /// password: `&str` -> Password to decrypt with
+    ///
+    /// page_box: [`ForeignPdfPageBox`] -> The region of the page to render
     ///
     /// flags: [`ForeignFlags`] -> Flags for this file
     ///
@@ -12317,7 +12567,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadPngSource (pngload_source), load png from source, priority=200, is_a_source, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadPngSource (pngload_source), load png from source, nocache, priority=200, is_a_source, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -12343,7 +12593,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadPngSource (pngload_source), load png from source, priority=200, is_a_source, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadPngSource (pngload_source), load png from source, nocache, priority=200, is_a_source, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -12383,7 +12633,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSavePngFile (pngsave), save image to png file (.png), priority=0, mono rgb alpha
+    /// VipsForeignSavePngFile (pngsave), save image to file as png, nocache (.png), priority=0, mono rgb alpha
     ///
     /// filename: `&str` -> Filename to save to
     pub fn pngsave(&self, filename: &str) -> Result<()> {
@@ -12404,7 +12654,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSavePngFile (pngsave), save image to png file (.png), priority=0, mono rgb alpha
+    /// VipsForeignSavePngFile (pngsave), save image to file as png, nocache (.png), priority=0, mono rgb alpha
     ///
     /// filename: `&str` -> Filename to save to
     ///
@@ -12451,7 +12701,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSavePngBuffer (pngsave_buffer), save image to png buffer (.png), priority=0, mono rgb alpha
+    /// VipsForeignSavePngBuffer (pngsave_buffer), save image to buffer as png, nocache (.png), priority=0, mono rgb alpha
     /// returns `Vec<u8>` - Buffer to save to
     pub fn pngsave_buffer(&self) -> Result<Vec<u8>> {
         let mut buffer_out = VipsBlob::from(null_mut());
@@ -12472,7 +12722,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSavePngBuffer (pngsave_buffer), save image to png buffer (.png), priority=0, mono rgb alpha
+    /// VipsForeignSavePngBuffer (pngsave_buffer), save image to buffer as png, nocache (.png), priority=0, mono rgb alpha
     /// returns `Vec<u8>` - Buffer to save to
     ///
     /// <ins>Optional arguments</ins>
@@ -12519,7 +12769,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSavePngTarget (pngsave_target), save image to target as PNG (.png), priority=0, mono rgb alpha
+    /// VipsForeignSavePngTarget (pngsave_target), save image to target as PNG, nocache (.png), priority=0, mono rgb alpha
     ///
     /// target: `&VipsTarget` -> Target to save to
     pub fn pngsave_target(&self, target: &VipsTarget) -> Result<()> {
@@ -12540,7 +12790,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSavePngTarget (pngsave_target), save image to target as PNG (.png), priority=0, mono rgb alpha
+    /// VipsForeignSavePngTarget (pngsave_target), save image to target as PNG, nocache (.png), priority=0, mono rgb alpha
     ///
     /// target: `&VipsTarget` -> Target to save to
     ///
@@ -12731,7 +12981,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadPpmSource (ppmload_source), load ppm from source (.pbm, .pgm, .ppm, .pfm, .pnm), priority=200, untrusted, is_a_source, get_flags, header, load
+    /// VipsForeignLoadPpmSource (ppmload_source), load ppm from source, nocache (.pbm, .pgm, .ppm, .pfm, .pnm), priority=200, untrusted, is_a_source, get_flags, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -12757,7 +13007,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadPpmSource (ppmload_source), load ppm from source (.pbm, .pgm, .ppm, .pfm, .pnm), priority=200, untrusted, is_a_source, get_flags, header, load
+    /// VipsForeignLoadPpmSource (ppmload_source), load ppm from source, nocache (.pbm, .pgm, .ppm, .pfm, .pnm), priority=200, untrusted, is_a_source, get_flags, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -12795,7 +13045,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSavePpmFile (ppmsave), save image to ppm file (.pbm, .pgm, .ppm, .pfm, .pnm), priority=0,
+    /// VipsForeignSavePpmFile (ppmsave), save image to ppm file, nocache (.pbm, .pgm, .ppm, .pfm, .pnm), priority=0,
     ///
     /// filename: `&str` -> Filename to save to
     pub fn ppmsave(&self, filename: &str) -> Result<()> {
@@ -12816,7 +13066,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSavePpmFile (ppmsave), save image to ppm file (.pbm, .pgm, .ppm, .pfm, .pnm), priority=0,
+    /// VipsForeignSavePpmFile (ppmsave), save image to ppm file, nocache (.pbm, .pgm, .ppm, .pfm, .pnm), priority=0,
     ///
     /// filename: `&str` -> Filename to save to
     ///
@@ -12853,7 +13103,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSavePpmTarget (ppmsave_target), save to ppm (.ppm), priority=0,
+    /// VipsForeignSavePpmTarget (ppmsave_target), save to ppm, nocache (.ppm), priority=0,
     ///
     /// target: `&VipsTarget` -> Target to save to
     pub fn ppmsave_target(&self, target: &VipsTarget) -> Result<()> {
@@ -12874,7 +13124,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSavePpmTarget (ppmsave_target), save to ppm (.ppm), priority=0,
+    /// VipsForeignSavePpmTarget (ppmsave_target), save to ppm, nocache (.ppm), priority=0,
     ///
     /// target: `&VipsTarget` -> Target to save to
     ///
@@ -13301,7 +13551,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadRadSource (radload_source), load rad from source, priority=-50, untrusted, is_a_source, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadRadSource (radload_source), load rad from source, nocache, priority=-50, untrusted, is_a_source, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -13327,7 +13577,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadRadSource (radload_source), load rad from source, priority=-50, untrusted, is_a_source, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadRadSource (radload_source), load rad from source, nocache, priority=-50, untrusted, is_a_source, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -13365,7 +13615,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveRadFile (radsave), save image to Radiance file (.hdr), priority=0, mono rgb
+    /// VipsForeignSaveRadFile (radsave), save image to Radiance file, nocache (.hdr), priority=0, mono rgb
     ///
     /// filename: `&str` -> Filename to save to
     pub fn radsave(&self, filename: &str) -> Result<()> {
@@ -13386,7 +13636,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveRadFile (radsave), save image to Radiance file (.hdr), priority=0, mono rgb
+    /// VipsForeignSaveRadFile (radsave), save image to Radiance file, nocache (.hdr), priority=0, mono rgb
     ///
     /// filename: `&str` -> Filename to save to
     ///
@@ -13417,7 +13667,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveRadBuffer (radsave_buffer), save image to Radiance buffer (.hdr), priority=0, mono rgb
+    /// VipsForeignSaveRadBuffer (radsave_buffer), save image to Radiance buffer, nocache (.hdr), priority=0, mono rgb
     /// returns `Vec<u8>` - Buffer to save to
     pub fn radsave_buffer(&self) -> Result<Vec<u8>> {
         let mut buffer_out = VipsBlob::from(null_mut());
@@ -13438,7 +13688,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveRadBuffer (radsave_buffer), save image to Radiance buffer (.hdr), priority=0, mono rgb
+    /// VipsForeignSaveRadBuffer (radsave_buffer), save image to Radiance buffer, nocache (.hdr), priority=0, mono rgb
     /// returns `Vec<u8>` - Buffer to save to
     ///
     /// <ins>Optional arguments</ins>
@@ -13469,7 +13719,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveRadTarget (radsave_target), save image to Radiance target (.hdr), priority=0, mono rgb
+    /// VipsForeignSaveRadTarget (radsave_target), save image to Radiance target, nocache (.hdr), priority=0, mono rgb
     ///
     /// target: `&VipsTarget` -> Target to save to
     pub fn radsave_target(&self, target: &VipsTarget) -> Result<()> {
@@ -13490,7 +13740,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveRadTarget (radsave_target), save image to Radiance target (.hdr), priority=0, mono rgb
+    /// VipsForeignSaveRadTarget (radsave_target), save image to Radiance target, nocache (.hdr), priority=0, mono rgb
     ///
     /// target: `&VipsTarget` -> Target to save to
     ///
@@ -13672,7 +13922,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveRawFile (rawsave), save image to raw file (.raw), priority=0,
+    /// VipsForeignSaveRawFile (rawsave), save image to raw file, nocache (.raw), priority=0,
     ///
     /// filename: `&str` -> Filename to save to
     pub fn rawsave(&self, filename: &str) -> Result<()> {
@@ -13693,7 +13943,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveRawFile (rawsave), save image to raw file (.raw), priority=0,
+    /// VipsForeignSaveRawFile (rawsave), save image to raw file, nocache (.raw), priority=0,
     ///
     /// filename: `&str` -> Filename to save to
     ///
@@ -13724,7 +13974,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveRawBuffer (rawsave_buffer), write raw image to buffer (.raw), priority=0,
+    /// VipsForeignSaveRawBuffer (rawsave_buffer), write raw image to buffer, nocache (.raw), priority=0,
     /// returns `Vec<u8>` - Buffer to save to
     pub fn rawsave_buffer(&self) -> Result<Vec<u8>> {
         let mut buffer_out = VipsBlob::from(null_mut());
@@ -13745,7 +13995,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveRawBuffer (rawsave_buffer), write raw image to buffer (.raw), priority=0,
+    /// VipsForeignSaveRawBuffer (rawsave_buffer), write raw image to buffer, nocache (.raw), priority=0,
     /// returns `Vec<u8>` - Buffer to save to
     ///
     /// <ins>Optional arguments</ins>
@@ -13776,7 +14026,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveRawTarget (rawsave_target), write raw image to target (.raw), priority=0,
+    /// VipsForeignSaveRawTarget (rawsave_target), write raw image to target, nocache (.raw), priority=0,
     ///
     /// target: `&VipsTarget` -> Target to save to
     pub fn rawsave_target(&self, target: &VipsTarget) -> Result<()> {
@@ -13797,7 +14047,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveRawTarget (rawsave_target), write raw image to target (.raw), priority=0,
+    /// VipsForeignSaveRawTarget (rawsave_target), write raw image to target, nocache (.raw), priority=0,
     ///
     /// target: `&VipsTarget` -> Target to save to
     ///
@@ -15779,7 +16029,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadSvgSource (svgload_source), load svg from source, priority=-5, untrusted, is_a_source, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadSvgSource (svgload_source), load svg from source, nocache, priority=-5, untrusted, is_a_source, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -15805,7 +16055,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadSvgSource (svgload_source), load svg from source, priority=-5, untrusted, is_a_source, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadSvgSource (svgload_source), load svg from source, nocache, priority=-5, untrusted, is_a_source, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -15879,7 +16129,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsSystem (system), run an external command
+    /// VipsSystem (system), run an external command, nocache
     ///
     /// cmd_format: `&str` -> Command to run
     pub fn system(cmd_format: &str) -> Result<()> {
@@ -15898,7 +16148,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsSystem (system), run an external command
+    /// VipsSystem (system), run an external command, nocache
     ///
     /// cmd_format: `&str` -> Command to run
     ///
@@ -15908,11 +16158,13 @@ impl VipsImage {
     ///
     /// out: `&mut VipsImage` -> Output image
     ///
-    /// log: `&str` -> Command log
+    /// in_format: `&str` -> Format for input filename
     ///
     /// out_format: `&str` -> Format for output filename
     ///
-    /// in_format: `&str` -> Format for input filename
+    /// cache: `bool` -> Cache this call
+    ///
+    /// log: `&str` -> Command log
     pub fn system_with_opts(cmd_format: &str, option: VOption) -> Result<()> {
         let vips_op_response = call(
             "system",
@@ -16005,7 +16257,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsThumbnailFile (thumbnail), generate thumbnail from file
+    /// VipsThumbnailFile (thumbnail), generate thumbnail from file, nocache
     /// returns `VipsImage` - Output image
     ///
     /// filename: `&str` -> Filename to read from
@@ -16037,7 +16289,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsThumbnailFile (thumbnail), generate thumbnail from file
+    /// VipsThumbnailFile (thumbnail), generate thumbnail from file, nocache
     /// returns `VipsImage` - Output image
     ///
     /// filename: `&str` -> Filename to read from
@@ -16089,7 +16341,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsThumbnailBuffer (thumbnail_buffer), generate thumbnail from buffer
+    /// VipsThumbnailBuffer (thumbnail_buffer), generate thumbnail from buffer, nocache
     /// returns `VipsImage` - Output image
     ///
     /// buffer: `&[u8]` -> Buffer to load from
@@ -16129,7 +16381,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsThumbnailBuffer (thumbnail_buffer), generate thumbnail from buffer
+    /// VipsThumbnailBuffer (thumbnail_buffer), generate thumbnail from buffer, nocache
     /// returns `VipsImage` - Output image
     ///
     /// buffer: `&[u8]` -> Buffer to load from
@@ -16269,7 +16521,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsThumbnailSource (thumbnail_source), generate thumbnail from source
+    /// VipsThumbnailSource (thumbnail_source), generate thumbnail from source, nocache
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -16301,7 +16553,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsThumbnailSource (thumbnail_source), generate thumbnail from source
+    /// VipsThumbnailSource (thumbnail_source), generate thumbnail from source, nocache
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -16523,7 +16775,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadTiffSource (tiffload_source), load tiff from source, priority=50, is_a_source, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadTiffSource (tiffload_source), load tiff from source, nocache, priority=50, is_a_source, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -16549,7 +16801,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadTiffSource (tiffload_source), load tiff from source, priority=50, is_a_source, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadTiffSource (tiffload_source), load tiff from source, nocache, priority=50, is_a_source, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -16597,7 +16849,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveTiffFile (tiffsave), save image to tiff file (.tif, .tiff), priority=0,
+    /// VipsForeignSaveTiffFile (tiffsave), save image to tiff file, nocache (.tif, .tiff), priority=0,
     ///
     /// filename: `&str` -> Filename to save to
     pub fn tiffsave(&self, filename: &str) -> Result<()> {
@@ -16618,7 +16870,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveTiffFile (tiffsave), save image to tiff file (.tif, .tiff), priority=0,
+    /// VipsForeignSaveTiffFile (tiffsave), save image to tiff file, nocache (.tif, .tiff), priority=0,
     ///
     /// filename: `&str` -> Filename to save to
     ///
@@ -16689,7 +16941,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveTiffBuffer (tiffsave_buffer), save image to tiff buffer (.tif, .tiff), priority=0,
+    /// VipsForeignSaveTiffBuffer (tiffsave_buffer), save image to tiff buffer, nocache (.tif, .tiff), priority=0,
     /// returns `Vec<u8>` - Buffer to save to
     pub fn tiffsave_buffer(&self) -> Result<Vec<u8>> {
         let mut buffer_out = VipsBlob::from(null_mut());
@@ -16710,7 +16962,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveTiffBuffer (tiffsave_buffer), save image to tiff buffer (.tif, .tiff), priority=0,
+    /// VipsForeignSaveTiffBuffer (tiffsave_buffer), save image to tiff buffer, nocache (.tif, .tiff), priority=0,
     /// returns `Vec<u8>` - Buffer to save to
     ///
     /// <ins>Optional arguments</ins>
@@ -16781,7 +17033,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveTiffTarget (tiffsave_target), save image to tiff target (.tif, .tiff), priority=0,
+    /// VipsForeignSaveTiffTarget (tiffsave_target), save image to tiff target, nocache (.tif, .tiff), priority=0,
     ///
     /// target: `&VipsTarget` -> Target to save to
     pub fn tiffsave_target(&self, target: &VipsTarget) -> Result<()> {
@@ -16802,7 +17054,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveTiffTarget (tiffsave_target), save image to tiff target (.tif, .tiff), priority=0,
+    /// VipsForeignSaveTiffTarget (tiffsave_target), save image to tiff target, nocache (.tif, .tiff), priority=0,
     ///
     /// target: `&VipsTarget` -> Target to save to
     ///
@@ -17035,6 +17287,409 @@ impl VipsImage {
         )
     }
 
+    /// VipsUhdr2scRGB (uhdr2scRGB), transform uhdr to scRGB
+    /// returns `VipsImage` - Output image
+    pub fn uhdr2scRGB(&self) -> Result<VipsImage> {
+        let mut out_out = VipsImage::from(null_mut());
+        let vips_op_response = call(
+            "uhdr2scRGB",
+            VOption::new()
+                .set("in", self)
+                .set(
+                    "out",
+                    &mut out_out,
+                ),
+        )?;
+
+        utils::result(
+            vips_op_response,
+            out_out,
+            Error::OperationError("Uhdr2ScRgb (vips_uhdr2scRGB) failed".to_string()),
+        )
+    }
+
+    /// VipsForeignLoadUhdrFile (uhdrload), load a UHDR image (.jpg, .jpeg, .jpe, .jfif), priority=100, is_a, get_flags, header, load
+    /// returns `VipsImage` - Output image
+    ///
+    /// filename: `&str` -> Filename to load from
+    pub fn uhdrload(filename: &str) -> Result<VipsImage> {
+        let mut out_out = VipsImage::from(null_mut());
+        let vips_op_response = call(
+            "uhdrload",
+            VOption::new()
+                .set(
+                    "filename",
+                    filename,
+                )
+                .set(
+                    "out",
+                    &mut out_out,
+                ),
+        )?;
+
+        utils::result(
+            vips_op_response,
+            out_out,
+            Error::OperationError("Uhdrload (vips_uhdrload) failed".to_string()),
+        )
+    }
+
+    /// VipsForeignLoadUhdrFile (uhdrload), load a UHDR image (.jpg, .jpeg, .jpe, .jfif), priority=100, is_a, get_flags, header, load
+    /// returns `VipsImage` - Output image
+    ///
+    /// filename: `&str` -> Filename to load from
+    ///
+    /// <ins>Optional arguments</ins>
+    ///
+    /// shrink: `i32` -> Shrink factor on load
+    ///
+    /// flags: [`ForeignFlags`] -> Flags for this file
+    ///
+    /// memory: `bool` -> Force open via memory
+    ///
+    /// access: [`Access`] -> Required access pattern for this file
+    ///
+    /// fail_on: [`FailOn`] -> Error level to fail on
+    ///
+    /// revalidate: `bool` -> Don't use a cached result for this operation
+    pub fn uhdrload_with_opts(filename: &str, option: VOption) -> Result<VipsImage> {
+        let mut out_out = VipsImage::from(null_mut());
+        let vips_op_response = call(
+            "uhdrload",
+            option
+                .set(
+                    "filename",
+                    filename,
+                )
+                .set(
+                    "out",
+                    &mut out_out,
+                ),
+        )?;
+
+        utils::result(
+            vips_op_response,
+            out_out,
+            Error::OperationError("Uhdrload (vips_uhdrload) failed".to_string()),
+        )
+    }
+
+    /// VipsForeignLoadUhdrBuffer (uhdrload_buffer), load a UHDR image, priority=100, is_a_buffer, get_flags, header, load
+    /// returns `VipsImage` - Output image
+    ///
+    /// buffer: `&[u8]` -> Buffer to load from
+    pub fn uhdrload_buffer(buffer: &[u8]) -> Result<VipsImage> {
+        let vips_blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
+        let blob = VipsBlob::from(vips_blob);
+        let mut out_out = VipsImage::from(null_mut());
+        let vips_op_response = call(
+            "uhdrload_buffer",
+            VOption::new()
+                .set(
+                    "buffer",
+                    &blob,
+                )
+                .set(
+                    "out",
+                    &mut out_out,
+                ),
+        )?;
+        blob.area_unref();
+        utils::result(
+            vips_op_response,
+            out_out,
+            Error::OperationError("UhdrloadBuffer (vips_uhdrload_buffer) failed".to_string()),
+        )
+    }
+
+    /// VipsForeignLoadUhdrBuffer (uhdrload_buffer), load a UHDR image, priority=100, is_a_buffer, get_flags, header, load
+    /// returns `VipsImage` - Output image
+    ///
+    /// buffer: `&[u8]` -> Buffer to load from
+    ///
+    /// <ins>Optional arguments</ins>
+    ///
+    /// shrink: `i32` -> Shrink factor on load
+    ///
+    /// flags: [`ForeignFlags`] -> Flags for this file
+    ///
+    /// memory: `bool` -> Force open via memory
+    ///
+    /// access: [`Access`] -> Required access pattern for this file
+    ///
+    /// fail_on: [`FailOn`] -> Error level to fail on
+    ///
+    /// revalidate: `bool` -> Don't use a cached result for this operation
+    pub fn uhdrload_buffer_with_opts(buffer: &[u8], option: VOption) -> Result<VipsImage> {
+        let vips_blob = unsafe {
+            vips_blob_new(
+                None,
+                buffer.as_ptr() as _,
+                buffer.len() as _,
+            )
+        };
+        let blob = VipsBlob::from(vips_blob);
+        let mut out_out = VipsImage::from(null_mut());
+        let vips_op_response = call(
+            "uhdrload_buffer",
+            option
+                .set(
+                    "buffer",
+                    &blob,
+                )
+                .set(
+                    "out",
+                    &mut out_out,
+                ),
+        )?;
+        blob.area_unref();
+        utils::result(
+            vips_op_response,
+            out_out,
+            Error::OperationError("UhdrloadBuffer (vips_uhdrload_buffer) failed".to_string()),
+        )
+    }
+
+    /// VipsForeignLoadUhdrSource (uhdrload_source), load a UHDR image, nocache, priority=100, is_a_source, get_flags, header, load
+    /// returns `VipsImage` - Output image
+    ///
+    /// source: `&VipsSource` -> Source to load from
+    pub fn uhdrload_source(source: &VipsSource) -> Result<VipsImage> {
+        let mut out_out = VipsImage::from(null_mut());
+        let vips_op_response = call(
+            "uhdrload_source",
+            VOption::new()
+                .set(
+                    "source",
+                    source,
+                )
+                .set(
+                    "out",
+                    &mut out_out,
+                ),
+        )?;
+
+        utils::result(
+            vips_op_response,
+            out_out,
+            Error::OperationError("UhdrloadSource (vips_uhdrload_source) failed".to_string()),
+        )
+    }
+
+    /// VipsForeignLoadUhdrSource (uhdrload_source), load a UHDR image, nocache, priority=100, is_a_source, get_flags, header, load
+    /// returns `VipsImage` - Output image
+    ///
+    /// source: `&VipsSource` -> Source to load from
+    ///
+    /// <ins>Optional arguments</ins>
+    ///
+    /// shrink: `i32` -> Shrink factor on load
+    ///
+    /// flags: [`ForeignFlags`] -> Flags for this file
+    ///
+    /// memory: `bool` -> Force open via memory
+    ///
+    /// access: [`Access`] -> Required access pattern for this file
+    ///
+    /// fail_on: [`FailOn`] -> Error level to fail on
+    ///
+    /// revalidate: `bool` -> Don't use a cached result for this operation
+    pub fn uhdrload_source_with_opts(source: &VipsSource, option: VOption) -> Result<VipsImage> {
+        let mut out_out = VipsImage::from(null_mut());
+        let vips_op_response = call(
+            "uhdrload_source",
+            option
+                .set(
+                    "source",
+                    source,
+                )
+                .set(
+                    "out",
+                    &mut out_out,
+                ),
+        )?;
+
+        utils::result(
+            vips_op_response,
+            out_out,
+            Error::OperationError("UhdrloadSource (vips_uhdrload_source) failed".to_string()),
+        )
+    }
+
+    /// VipsForeignSaveUhdrFile (uhdrsave), save image in UltraHDR format, nocache (), priority=0,
+    ///
+    /// filename: `&str` -> Filename to save to
+    pub fn uhdrsave(&self, filename: &str) -> Result<()> {
+        let vips_op_response = call(
+            "uhdrsave",
+            VOption::new()
+                .set("in", self)
+                .set(
+                    "filename",
+                    filename,
+                ),
+        )?;
+
+        utils::result(
+            vips_op_response,
+            (),
+            Error::OperationError("Uhdrsave (vips_uhdrsave) failed".to_string()),
+        )
+    }
+
+    /// VipsForeignSaveUhdrFile (uhdrsave), save image in UltraHDR format, nocache (), priority=0,
+    ///
+    /// filename: `&str` -> Filename to save to
+    ///
+    /// <ins>Optional arguments</ins>
+    ///
+    /// Q: `i32` -> Q factor
+    ///
+    /// gainmap_scale_factor: `i32` -> The scale factor of base image to gainmap image
+    ///
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
+    ///
+    /// background: `&[f64]` -> Background value
+    ///
+    /// page_height: `i32` -> Set page height for multipage save
+    ///
+    /// profile: `&str` -> Filename of ICC profile to embed
+    pub fn uhdrsave_with_opts(&self, filename: &str, option: VOption) -> Result<()> {
+        let vips_op_response = call(
+            "uhdrsave",
+            option
+                .set("in", self)
+                .set(
+                    "filename",
+                    filename,
+                ),
+        )?;
+
+        utils::result(
+            vips_op_response,
+            (),
+            Error::OperationError("Uhdrsave (vips_uhdrsave) failed".to_string()),
+        )
+    }
+
+    /// VipsForeignSaveUhdrBuffer (uhdrsave_buffer), save image in UltraHDR format, nocache (), priority=0,
+    /// returns `Vec<u8>` - Buffer to save to
+    pub fn uhdrsave_buffer(&self) -> Result<Vec<u8>> {
+        let mut buffer_out = VipsBlob::from(null_mut());
+        let vips_op_response = call(
+            "uhdrsave_buffer",
+            VOption::new()
+                .set("in", self)
+                .set(
+                    "buffer",
+                    &mut buffer_out,
+                ),
+        )?;
+
+        utils::result(
+            vips_op_response,
+            buffer_out.into(),
+            Error::OperationError("UhdrsaveBuffer (vips_uhdrsave_buffer) failed".to_string()),
+        )
+    }
+
+    /// VipsForeignSaveUhdrBuffer (uhdrsave_buffer), save image in UltraHDR format, nocache (), priority=0,
+    /// returns `Vec<u8>` - Buffer to save to
+    ///
+    /// <ins>Optional arguments</ins>
+    ///
+    /// Q: `i32` -> Q factor
+    ///
+    /// gainmap_scale_factor: `i32` -> The scale factor of base image to gainmap image
+    ///
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
+    ///
+    /// background: `&[f64]` -> Background value
+    ///
+    /// page_height: `i32` -> Set page height for multipage save
+    ///
+    /// profile: `&str` -> Filename of ICC profile to embed
+    pub fn uhdrsave_buffer_with_opts(&self, option: VOption) -> Result<Vec<u8>> {
+        let mut buffer_out = VipsBlob::from(null_mut());
+        let vips_op_response = call(
+            "uhdrsave_buffer",
+            option
+                .set("in", self)
+                .set(
+                    "buffer",
+                    &mut buffer_out,
+                ),
+        )?;
+
+        utils::result(
+            vips_op_response,
+            buffer_out.into(),
+            Error::OperationError("UhdrsaveBuffer (vips_uhdrsave_buffer) failed".to_string()),
+        )
+    }
+
+    /// VipsForeignSaveUhdrTarget (uhdrsave_target), save image in UltraHDR format, nocache (), priority=0,
+    ///
+    /// target: `&VipsTarget` -> Target to save to
+    pub fn uhdrsave_target(&self, target: &VipsTarget) -> Result<()> {
+        let vips_op_response = call(
+            "uhdrsave_target",
+            VOption::new()
+                .set("in", self)
+                .set(
+                    "target",
+                    target,
+                ),
+        )?;
+
+        utils::result(
+            vips_op_response,
+            (),
+            Error::OperationError("UhdrsaveTarget (vips_uhdrsave_target) failed".to_string()),
+        )
+    }
+
+    /// VipsForeignSaveUhdrTarget (uhdrsave_target), save image in UltraHDR format, nocache (), priority=0,
+    ///
+    /// target: `&VipsTarget` -> Target to save to
+    ///
+    /// <ins>Optional arguments</ins>
+    ///
+    /// Q: `i32` -> Q factor
+    ///
+    /// gainmap_scale_factor: `i32` -> The scale factor of base image to gainmap image
+    ///
+    /// keep: [`ForeignKeep`] -> Which metadata to retain
+    ///
+    /// background: `&[f64]` -> Background value
+    ///
+    /// page_height: `i32` -> Set page height for multipage save
+    ///
+    /// profile: `&str` -> Filename of ICC profile to embed
+    pub fn uhdrsave_target_with_opts(&self, target: &VipsTarget, option: VOption) -> Result<()> {
+        let vips_op_response = call(
+            "uhdrsave_target",
+            option
+                .set("in", self)
+                .set(
+                    "target",
+                    target,
+                ),
+        )?;
+
+        utils::result(
+            vips_op_response,
+            (),
+            Error::OperationError("UhdrsaveTarget (vips_uhdrsave_target) failed".to_string()),
+        )
+    }
+
     /// VipsUnpremultiply (unpremultiply), unpremultiply image alpha
     /// returns `VipsImage` - Output image
     pub fn unpremultiply(&self) -> Result<VipsImage> {
@@ -17147,7 +17802,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadVipsSource (vipsload_source), load vips from source, priority=200, untrusted, is_a_source, get_flags, get_flags_filename, header
+    /// VipsForeignLoadVipsSource (vipsload_source), load vips from source, nocache, priority=200, untrusted, is_a_source, get_flags, get_flags_filename, header
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -17173,7 +17828,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadVipsSource (vipsload_source), load vips from source, priority=200, untrusted, is_a_source, get_flags, get_flags_filename, header
+    /// VipsForeignLoadVipsSource (vipsload_source), load vips from source, nocache, priority=200, untrusted, is_a_source, get_flags, get_flags_filename, header
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -17211,7 +17866,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveVipsFile (vipssave), save image to file in vips format (.v, .vips), priority=0,
+    /// VipsForeignSaveVipsFile (vipssave), save image to file in vips format, nocache (.v, .vips), priority=0,
     ///
     /// filename: `&str` -> Filename to save to
     pub fn vipssave(&self, filename: &str) -> Result<()> {
@@ -17232,7 +17887,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveVipsFile (vipssave), save image to file in vips format (.v, .vips), priority=0,
+    /// VipsForeignSaveVipsFile (vipssave), save image to file in vips format, nocache (.v, .vips), priority=0,
     ///
     /// filename: `&str` -> Filename to save to
     ///
@@ -17263,7 +17918,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveVipsTarget (vipssave_target), save image to target in vips format (.v, .vips), priority=0,
+    /// VipsForeignSaveVipsTarget (vipssave_target), save image to target in vips format, nocache (.v, .vips), priority=0,
     ///
     /// target: `&VipsTarget` -> Target to save to
     pub fn vipssave_target(&self, target: &VipsTarget) -> Result<()> {
@@ -17284,7 +17939,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveVipsTarget (vipssave_target), save image to target in vips format (.v, .vips), priority=0,
+    /// VipsForeignSaveVipsTarget (vipssave_target), save image to target in vips format, nocache (.v, .vips), priority=0,
     ///
     /// target: `&VipsTarget` -> Target to save to
     ///
@@ -17471,7 +18126,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadWebpSource (webpload_source), load webp from source, priority=200, is_a_source, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadWebpSource (webpload_source), load webp from source, nocache, priority=200, is_a_source, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -17497,7 +18152,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignLoadWebpSource (webpload_source), load webp from source, priority=200, is_a_source, get_flags, get_flags_filename, header, load
+    /// VipsForeignLoadWebpSource (webpload_source), load webp from source, nocache, priority=200, is_a_source, get_flags, get_flags_filename, header, load
     /// returns `VipsImage` - Output image
     ///
     /// source: `&VipsSource` -> Source to load from
@@ -17541,7 +18196,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveWebpFile (webpsave), save as WebP (.webp), priority=0, rgb alpha
+    /// VipsForeignSaveWebpFile (webpsave), save as WebP, nocache (.webp), priority=0, rgb alpha
     ///
     /// filename: `&str` -> Filename to save to
     pub fn webpsave(&self, filename: &str) -> Result<()> {
@@ -17562,7 +18217,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveWebpFile (webpsave), save as WebP (.webp), priority=0, rgb alpha
+    /// VipsForeignSaveWebpFile (webpsave), save as WebP, nocache (.webp), priority=0, rgb alpha
     ///
     /// filename: `&str` -> Filename to save to
     ///
@@ -17571,6 +18226,8 @@ impl VipsImage {
     /// Q: `i32` -> Q factor
     ///
     /// lossless: `bool` -> Enable lossless compression
+    ///
+    /// exact: `bool` -> Preserve color values from transparent pixels
     ///
     /// preset: [`ForeignWebpPreset`] -> Preset for lossy compression
     ///
@@ -17621,7 +18278,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveWebpBuffer (webpsave_buffer), save as WebP (.webp), priority=0, rgb alpha
+    /// VipsForeignSaveWebpBuffer (webpsave_buffer), save as WebP, nocache (.webp), priority=0, rgb alpha
     /// returns `Vec<u8>` - Buffer to save to
     pub fn webpsave_buffer(&self) -> Result<Vec<u8>> {
         let mut buffer_out = VipsBlob::from(null_mut());
@@ -17642,7 +18299,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveWebpBuffer (webpsave_buffer), save as WebP (.webp), priority=0, rgb alpha
+    /// VipsForeignSaveWebpBuffer (webpsave_buffer), save as WebP, nocache (.webp), priority=0, rgb alpha
     /// returns `Vec<u8>` - Buffer to save to
     ///
     /// <ins>Optional arguments</ins>
@@ -17650,6 +18307,8 @@ impl VipsImage {
     /// Q: `i32` -> Q factor
     ///
     /// lossless: `bool` -> Enable lossless compression
+    ///
+    /// exact: `bool` -> Preserve color values from transparent pixels
     ///
     /// preset: [`ForeignWebpPreset`] -> Preset for lossy compression
     ///
@@ -17701,7 +18360,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveWebpMime (webpsave_mime), save image to webp mime (.webp), priority=0, rgb alpha
+    /// VipsForeignSaveWebpMime (webpsave_mime), save image to webp mime, nocache (.webp), priority=0, rgb alpha
     pub fn webpsave_mime(&self) -> Result<()> {
         let vips_op_response = call(
             "webpsave_mime",
@@ -17715,13 +18374,15 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveWebpMime (webpsave_mime), save image to webp mime (.webp), priority=0, rgb alpha
+    /// VipsForeignSaveWebpMime (webpsave_mime), save image to webp mime, nocache (.webp), priority=0, rgb alpha
     ///
     /// <ins>Optional arguments</ins>
     ///
     /// Q: `i32` -> Q factor
     ///
     /// lossless: `bool` -> Enable lossless compression
+    ///
+    /// exact: `bool` -> Preserve color values from transparent pixels
     ///
     /// preset: [`ForeignWebpPreset`] -> Preset for lossy compression
     ///
@@ -17767,7 +18428,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveWebpTarget (webpsave_target), save as WebP (.webp), priority=0, rgb alpha
+    /// VipsForeignSaveWebpTarget (webpsave_target), save as WebP, nocache (.webp), priority=0, rgb alpha
     ///
     /// target: `&VipsTarget` -> Target to save to
     pub fn webpsave_target(&self, target: &VipsTarget) -> Result<()> {
@@ -17788,7 +18449,7 @@ impl VipsImage {
         )
     }
 
-    /// VipsForeignSaveWebpTarget (webpsave_target), save as WebP (.webp), priority=0, rgb alpha
+    /// VipsForeignSaveWebpTarget (webpsave_target), save as WebP, nocache (.webp), priority=0, rgb alpha
     ///
     /// target: `&VipsTarget` -> Target to save to
     ///
@@ -17797,6 +18458,8 @@ impl VipsImage {
     /// Q: `i32` -> Q factor
     ///
     /// lossless: `bool` -> Enable lossless compression
+    ///
+    /// exact: `bool` -> Preserve color values from transparent pixels
     ///
     /// preset: [`ForeignWebpPreset`] -> Preset for lossy compression
     ///
