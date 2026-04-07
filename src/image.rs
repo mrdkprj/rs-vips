@@ -19,7 +19,7 @@ use std::{
 
 const NULL: *const c_void = null_mut();
 
-#[derive(Debug, Clone)]
+#[derive(Debug)]
 pub struct VipsImage {
     pub(crate) ctx: *mut bindings::VipsImage,
 }
@@ -1034,6 +1034,20 @@ impl VipsImage {
         }
     }
 
+    /// Attaches data as a metadata item on image under the name name, taking a copy of the memory area.
+    pub fn set_blob_copy(&mut self, name: impl AsRef<[u8]>, blob: &[u8]) -> Result<()> {
+        unsafe {
+            let name = ensure_null_terminated(name)?;
+            bindings::vips_image_set_blob_copy(
+                self.ctx,
+                name.as_ptr(),
+                blob.as_ptr() as *const c_void,
+                blob.len() as u64,
+            );
+            Ok(())
+        }
+    }
+
     /// Gets an array of int from image under the name.
     pub fn get_array_int(&self, name: impl AsRef<[u8]>) -> Result<Vec<i32>> {
         unsafe {
@@ -1188,6 +1202,19 @@ impl VipsImage {
             (x, y),
             Error::OperationError("maxpos failed".to_string()),
         )
+    }
+}
+
+impl Clone for VipsImage {
+    fn clone(&self) -> Self {
+        // Increase the reference count of ctx
+        unsafe {
+            bindings::g_object_ref(self.ctx as *mut _);
+        }
+
+        Self {
+            ctx: self.ctx,
+        }
     }
 }
 
