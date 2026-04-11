@@ -66,9 +66,9 @@ impl VipsImage {
         option: VOption,
     ) -> Result<VipsImage> {
         unsafe {
-            let f = utils::path_to_cstring(filename)?;
-            let filename_part = bindings::vips_filename_get_filename(f.as_ptr());
-            let string_options = bindings::vips_filename_get_options(f.as_ptr());
+            let filename_c_str = utils::path_to_cstring(filename)?;
+            let filename_part = bindings::vips_filename_get_filename(filename_c_str.as_ptr());
+            let string_options = bindings::vips_filename_get_options(filename_c_str.as_ptr());
 
             let operation = bindings::vips_foreign_find_load(filename_part);
             if operation.is_null() {
@@ -81,17 +81,18 @@ impl VipsImage {
             let mut out_out = VipsImage::from(null_mut());
             call_option_string_(
                 operation,
-                string_options,
+                utils::new_c_string_from_raw(string_options).as_ptr(),
                 option
                     .set(
                         "filename",
-                        filename_part,
+                        utils::new_c_string_from_raw(filename_part).as_ptr(),
                     )
                     .set(
                         "out",
                         &mut out_out,
                     ),
             )?;
+
             vips_image_result_ext(
                 out_out,
                 Error::InitializationError("Could not initialise VipsImage from file".to_string()),
@@ -102,8 +103,8 @@ impl VipsImage {
     /// Opens the named file for simultaneous reading and writing.
     pub fn new_from_file_rw<P: AsRef<Path>>(filename: P) -> Result<VipsImage> {
         unsafe {
-            let f = utils::path_to_cstring(filename)?;
-            let res = bindings::vips_image_new_from_file_RW(f.as_ptr());
+            let filename_c_str = utils::path_to_cstring(filename)?;
+            let res = bindings::vips_image_new_from_file_RW(filename_c_str.as_ptr());
             vips_image_result(
                 res,
                 Error::InitializationError("Could not initialise VipsImage from file".to_string()),
@@ -120,9 +121,9 @@ impl VipsImage {
         offset: u64,
     ) -> Result<VipsImage> {
         unsafe {
-            let f = utils::path_to_cstring(filename)?;
+            let filename_c_str = utils::path_to_cstring(filename)?;
             let res = bindings::vips_image_new_from_file_raw(
-                f.as_ptr(),
+                filename_c_str.as_ptr(),
                 x_size,
                 y_size,
                 bands,
@@ -635,9 +636,9 @@ impl VipsImage {
         option: VOption,
     ) -> Result<()> {
         unsafe {
-            let f = utils::path_to_cstring(filename)?;
-            let filename_part = bindings::vips_filename_get_filename(f.as_ptr());
-            let string_options = bindings::vips_filename_get_options(f.as_ptr());
+            let filename_c_str = utils::path_to_cstring(filename)?;
+            let filename_part = bindings::vips_filename_get_filename(filename_c_str.as_ptr());
+            let string_options = bindings::vips_filename_get_options(filename_c_str.as_ptr());
 
             let operation = bindings::vips_foreign_find_save(filename_part);
             if operation.is_null() {
@@ -650,12 +651,12 @@ impl VipsImage {
 
             let res = call_option_string_(
                 operation,
-                string_options,
+                utils::new_c_string_from_raw(string_options).as_ptr(),
                 option
                     .set("in", self)
                     .set(
                         "filename",
-                        filename_part,
+                        utils::new_c_string_from_raw(filename_part).as_ptr(),
                     ),
             )?;
             utils::result(
@@ -677,9 +678,9 @@ impl VipsImage {
     /// Writes this image to memory.
     pub fn write_to_buffer_with_opts(&self, suffix: &str, option: VOption) -> Result<Vec<u8>> {
         unsafe {
-            let f = utils::new_c_string(suffix)?;
-            let filename = bindings::vips_filename_get_filename(f.as_ptr());
-            let string_options = bindings::vips_filename_get_options(f.as_ptr());
+            let suffix_c_str = utils::new_c_string(suffix)?;
+            let filename = bindings::vips_filename_get_filename(suffix_c_str.as_ptr());
+            let string_options = bindings::vips_filename_get_options(suffix_c_str.as_ptr());
 
             /* Save with the new target API if we can. Fall back to the older
              * mechanism in case the saver we need has not been converted yet.
@@ -694,7 +695,7 @@ impl VipsImage {
                 let target = VipsTarget::new_to_memory()?;
                 let res = call_option_string_(
                     operation,
-                    string_options,
+                    utils::new_c_string_from_raw(string_options).as_ptr(),
                     option
                         .set("in", self)
                         .set(
@@ -726,7 +727,7 @@ impl VipsImage {
             let mut buffer_out = VipsBlob::from(null_mut());
             let res = call_option_string_(
                 operation,
-                string_options,
+                utils::new_c_string_from_raw(string_options).as_ptr(),
                 option
                     .set("in", self)
                     .set(
@@ -759,9 +760,9 @@ impl VipsImage {
         option: VOption,
     ) -> Result<()> {
         unsafe {
-            let f = utils::new_c_string(suffix)?;
-            let filename = bindings::vips_filename_get_filename(f.as_ptr());
-            let string_options = bindings::vips_filename_get_options(f.as_ptr());
+            let suffix_c_str = utils::new_c_string(suffix)?;
+            let filename = bindings::vips_filename_get_filename(suffix_c_str.as_ptr());
+            let string_options = bindings::vips_filename_get_options(suffix_c_str.as_ptr());
 
             let operation = bindings::vips_foreign_find_save_target(filename);
 
@@ -775,7 +776,7 @@ impl VipsImage {
 
             let res = call_option_string_(
                 operation,
-                string_options,
+                utils::new_c_string_from_raw(string_options).as_ptr(),
                 option
                     .set("in", self)
                     .set(

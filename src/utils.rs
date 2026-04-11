@@ -170,6 +170,11 @@ pub(crate) fn new_c_string(string: impl Into<Vec<u8>>) -> Result<CString> {
 }
 
 #[inline]
+pub(crate) fn new_c_string_from_raw(ptr: *mut i8) -> CString {
+    unsafe { CString::from_raw(ptr) }
+}
+
+#[inline]
 pub(crate) fn path_to_cstring<P: AsRef<Path>>(path: P) -> Result<CString> {
     #[cfg(unix)]
     {

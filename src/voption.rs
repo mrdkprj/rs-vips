@@ -99,7 +99,7 @@ enum VipsValue<'a> {
     Double(f64),
     MutDouble(&'a mut f64),
     Str(&'a str),
-    CStr(*mut c_char),
+    CStr(*const c_char),
     Image(&'a crate::VipsImage),
     MutImage(&'a mut crate::VipsImage),
     IntArray(&'a [i32]),
@@ -662,8 +662,8 @@ impl<'a> Setter<'a, &'a String> for VOption<'a> {
 }
 
 // input c_char
-impl<'a> Setter<'a, *mut c_char> for VOption<'a> {
-    fn set(mut self, name: &str, value: *mut c_char) -> VOption<'a> {
+impl<'a> Setter<'a, *const c_char> for VOption<'a> {
+    fn set(mut self, name: &str, value: *const c_char) -> VOption<'a> {
         self.options
             .push(
                 Pair::input(
@@ -673,7 +673,7 @@ impl<'a> Setter<'a, *mut c_char> for VOption<'a> {
             );
         self
     }
-    fn add(&mut self, name: &str, value: *mut c_char) {
+    fn add(&mut self, name: &str, value: *const c_char) {
         self.options
             .push(
                 Pair::input(
