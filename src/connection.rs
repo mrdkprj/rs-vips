@@ -3,7 +3,6 @@
 use crate::{
     bindings,
     error::Error,
-    region::VipsBlob,
     utils::{self, vips_source_result, vips_target_result},
     Result,
 };
@@ -62,7 +61,7 @@ impl VipsConnection {
 
 impl VipsSource {
     /// Create an source attached to a file descriptor. descriptor is closed with close() when source is finalized.
-    pub fn new_from_descriptor(descriptor: i32) -> Result<Self> {
+    pub fn new_from_descriptor(descriptor: i32) -> Result<VipsSource> {
         unsafe {
             let res = bindings::vips_source_new_from_descriptor(descriptor);
             vips_source_result(
@@ -75,7 +74,7 @@ impl VipsSource {
     }
 
     /// Create a source attached to a file.
-    pub fn new_from_file(filename: &str) -> Result<Self> {
+    pub fn new_from_file(filename: &str) -> Result<VipsSource> {
         unsafe {
             let f = utils::new_c_string(filename)?;
             let res = bindings::vips_source_new_from_file(f.as_ptr());
@@ -86,21 +85,8 @@ impl VipsSource {
         }
     }
 
-    // Create a source attached to an area of memory.
-    // not sure if it this is safe
-    // should test before making it public
-    fn new_from_blob(blob: VipsBlob) -> Result<Self> {
-        unsafe {
-            let res = bindings::vips_source_new_from_blob(blob.ctx);
-            vips_source_result(
-                res,
-                Error::InitializationError("Could not initialise VipsSource from blob".to_string()),
-            )
-        }
-    }
-
     /// Create a source attached to an area of memory. You must not free data while the source is active.
-    pub fn new_from_memory(buffer: &[u8]) -> Result<Self> {
+    pub fn new_from_memory(buffer: &[u8]) -> Result<VipsSource> {
         unsafe {
             let res = bindings::vips_source_new_from_memory(
                 buffer.as_ptr() as *const c_void,
@@ -116,7 +102,7 @@ impl VipsSource {
     }
 
     /// Create a source from an option string.
-    pub fn new_from_options(option_str: &str) -> Result<Self> {
+    pub fn new_from_options(option_str: &str) -> Result<VipsSource> {
         unsafe {
             let options = utils::new_c_string(option_str)?;
             let res = bindings::vips_source_new_from_options(options.as_ptr());
@@ -256,7 +242,7 @@ impl<'a> VipsSource {
 
 impl VipsTarget {
     /// Create a target attached to a file descriptor. descriptor is kept open until the target is finalized.
-    pub fn new_to_descriptor(descriptor: i32) -> Result<Self> {
+    pub fn new_to_descriptor(descriptor: i32) -> Result<VipsTarget> {
         unsafe {
             let res = bindings::vips_target_new_to_descriptor(descriptor);
             vips_target_result(
@@ -269,7 +255,7 @@ impl VipsTarget {
     }
 
     /// Create a target attached to a file.
-    pub fn new_to_file(filename: &str) -> Result<Self> {
+    pub fn new_to_file(filename: &str) -> Result<VipsTarget> {
         unsafe {
             let f = utils::new_c_string(filename)?;
             let res = bindings::vips_target_new_to_file(f.as_ptr());
@@ -281,7 +267,7 @@ impl VipsTarget {
     }
 
     /// Create a target which will write to a memory area. Read from blob to get memory.
-    pub fn new_to_memory() -> Result<Self> {
+    pub fn new_to_memory() -> Result<VipsTarget> {
         unsafe {
             let res = bindings::vips_target_new_to_memory();
             vips_target_result(
@@ -365,11 +351,27 @@ impl VipsTarget {
         }
     }
 
-    pub fn get_blob(&self) -> VipsBlob {
+    pub fn get_blob(&self) -> Vec<u8> {
         unsafe {
-            VipsBlob {
-                ctx: (*self.ctx).blob,
+            if self
+                .ctx
+                .is_null()
+                || (*self.ctx)
+                    .blob
+                    .is_null()
+            {
+                return Vec::new();
             }
+            let mut size: u64 = 0;
+            let bytes = bindings::vips_blob_get(
+                (*self.ctx).blob,
+                &mut size,
+            );
+            let slice = std::slice::from_raw_parts(
+                bytes as *const u8,
+                size as usize,
+            );
+            slice.to_vec()
         }
     }
 }

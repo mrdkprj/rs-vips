@@ -4,7 +4,6 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 #![allow(improper_ctypes)]
-#![allow(dead_code)]
 #[macro_use]
 extern crate num_derive;
 extern crate num_traits;
@@ -20,8 +19,6 @@ mod interpolate;
 pub mod operator;
 /// Vips Enumerations
 pub mod ops;
-/// VipsBlob
-mod region;
 pub mod utils;
 /// VOption, a list of name-value pairs
 pub mod voption;
@@ -30,7 +27,6 @@ pub use connection::*;
 use error::Error;
 pub use image::*;
 pub use interpolate::*;
-pub use region::*;
 use std::ffi::CStr;
 pub type Result<T> = std::result::Result<T, error::Error>;
 

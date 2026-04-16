@@ -1,118 +1,37 @@
 // (c) Copyright 2019-2025 OLX
 // (c) Copyright 2025 mrdkprj
-use crate::bindings::{self, g_type_from_name, VipsArrayDouble, VipsArrayImage, VipsArrayInt};
+use crate::bindings::{
+    self, g_log, g_type_from_name, vips_error_buffer, GLogLevelFlags_G_LOG_LEVEL_WARNING,
+};
 use crate::error::Error;
-use crate::VipsImage;
 use crate::{
     connection::{VipsSource, VipsTarget},
     Result,
 };
-use std::{
-    ffi::{c_void, CString},
-    path::Path,
-};
+use crate::{Image, VipsImage};
+use std::{ffi::CString, path::Path, rc::Rc};
 
-pub(crate) struct VipsArrayIntWrapper {
-    pub ctx: *mut VipsArrayInt,
-}
-pub(crate) struct VipsArrayDoubleWrapper {
-    pub ctx: *mut VipsArrayDouble,
-}
-pub(crate) struct VipsArrayImageWrapper {
-    pub ctx: *mut VipsArrayImage,
-}
-
-impl Drop for VipsArrayIntWrapper {
-    fn drop(&mut self) {
-        unsafe {
-            bindings::vips_area_unref(self.ctx as *mut bindings::VipsArea);
-        }
-    }
-}
-
-impl Drop for VipsArrayDoubleWrapper {
-    fn drop(&mut self) {
-        unsafe {
-            bindings::vips_area_unref(self.ctx as *mut bindings::VipsArea);
-        }
-    }
-}
-
-impl Drop for VipsArrayImageWrapper {
-    fn drop(&mut self) {
-        unsafe {
-            bindings::vips_area_unref(self.ctx as *mut bindings::VipsArea);
-        }
-    }
-}
-
-impl From<&[i32]> for VipsArrayIntWrapper {
-    #[inline]
-    fn from(array: &[i32]) -> Self {
-        VipsArrayIntWrapper {
-            ctx: unsafe {
-                bindings::vips_array_int_new(
-                    array.as_ptr(),
-                    array.len() as i32,
-                )
-            },
-        }
-    }
-}
-
-impl From<&[f64]> for VipsArrayDoubleWrapper {
-    #[inline]
-    fn from(array: &[f64]) -> Self {
-        VipsArrayDoubleWrapper {
-            ctx: unsafe {
-                bindings::vips_array_double_new(
-                    array.as_ptr(),
-                    array.len() as i32,
-                )
-            },
-        }
-    }
-}
-
-impl From<&[VipsImage]> for VipsArrayImageWrapper {
-    #[inline]
-    fn from(array: &[VipsImage]) -> Self {
-        let len = array.len() as i32;
-        let mut images = array
-            .iter()
-            .map(|v| v.ctx)
-            .collect::<Vec<_>>();
-        VipsArrayImageWrapper {
-            ctx: unsafe {
-                bindings::vips_array_image_new(
-                    images.as_mut_ptr(),
-                    len,
-                )
-            },
-        }
-    }
-}
-
-pub(crate) fn vips_image_result(res: *mut bindings::VipsImage, err: Error) -> Result<VipsImage> {
-    if res.is_null() {
+pub(crate) fn vips_image_result(out: *mut bindings::VipsImage, err: Error) -> Result<VipsImage> {
+    if out.is_null() {
         Err(err.extend())
     } else {
         Ok(
-            VipsImage {
-                ctx: res,
-            },
+            new_vipsimage(
+                out, None, None,
+            ),
         )
     }
 }
 
-pub(crate) fn vips_image_result_ext(res: VipsImage, err: Error) -> Result<VipsImage> {
-    if res
+pub(crate) fn vips_image_result_ext(out: VipsImage, err: Error) -> Result<VipsImage> {
+    if out
+        .image
         .ctx
         .is_null()
     {
         Err(err.extend())
     } else {
-        Ok(res)
+        Ok(out)
     }
 }
 
@@ -213,13 +132,18 @@ pub(crate) fn ensure_null_terminated(input: impl AsRef<[u8]>) -> crate::Result<C
     }
 }
 
-#[inline]
-pub(crate) unsafe fn new_byte_array(buf: *mut c_void, size: u64) -> Vec<u8> {
-    Vec::from_raw_parts(
-        buf as *mut u8,
-        size as usize,
-        size as usize,
-    )
+pub(crate) fn new_vipsimage(
+    ctx: *mut bindings::VipsImage,
+    buffer: Option<Rc<Vec<u8>>>,
+    refs: Option<Vec<Rc<Image>>>,
+) -> VipsImage {
+    VipsImage {
+        image: Rc::new(Image {
+            ctx,
+            buffer,
+            refs: refs.unwrap_or_default(),
+        }),
+    }
 }
 
 #[inline]
@@ -251,4 +175,18 @@ pub(crate) const G_TYPE_STRING: &str = "gchararray";
 pub(crate) fn get_g_type(name: &str) -> Result<u64> {
     let type_name = new_c_string(name)?;
     Ok(unsafe { g_type_from_name(type_name.as_ptr()) })
+}
+
+pub(crate) fn g_warning() -> Result<()> {
+    let domain = new_c_string("GLib-GObject")?;
+    let format = new_c_string("%s")?;
+    unsafe {
+        g_log(
+            domain.as_ptr(),
+            GLogLevelFlags_G_LOG_LEVEL_WARNING,
+            format.as_ptr(),
+            vips_error_buffer(),
+        )
+    };
+    Ok(())
 }

@@ -5,30 +5,77 @@ use crate::{
     connection::{VipsSource, VipsTarget},
     error::Error,
     ops::*,
-    region::VipsBlob,
-    utils::{self, ensure_null_terminated, vips_image_result, vips_image_result_ext},
+    utils::{
+        self, ensure_null_terminated, new_c_string, new_c_string_from_raw, new_vipsimage,
+        path_to_cstring, vips_image_result, vips_image_result_ext,
+    },
     voption::{call, call_option_string_, Setter, VOption},
     Result,
 };
 use num_traits::{FromPrimitive, ToPrimitive};
 use std::{
     ffi::{c_char, c_int, c_void, CStr},
+    fmt,
     path::Path,
     ptr::null_mut,
+    rc::Rc,
 };
 
 const NULL: *const c_void = null_mut();
 
-#[derive(Debug)]
+#[derive(Clone)]
 pub struct VipsImage {
-    pub(crate) ctx: *mut bindings::VipsImage,
+    pub(crate) image: Rc<Image>,
 }
 
 impl Default for VipsImage {
     fn default() -> VipsImage {
-        VipsImage {
-            ctx: unsafe { bindings::vips_image_new() },
+        utils::new_vipsimage(
+            unsafe { bindings::vips_image_new() },
+            None,
+            None,
+        )
+    }
+}
+
+impl fmt::Debug for VipsImage {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("VipsImage")
+            .field(
+                "ctx",
+                &self
+                    .image
+                    .ctx,
+            )
+            .finish()
+    }
+}
+
+#[allow(dead_code)]
+pub(crate) struct Image {
+    pub(crate) ctx: *mut bindings::VipsImage,
+    pub(crate) buffer: Option<Rc<Vec<u8>>>,
+    pub(crate) refs: Vec<Rc<Image>>,
+}
+
+impl Drop for Image {
+    fn drop(&mut self) {
+        unsafe {
+            if !self
+                .ctx
+                .is_null()
+            {
+                bindings::g_object_unref(self.ctx as *mut c_void);
+            }
         }
+    }
+}
+
+impl From<*mut bindings::VipsImage> for VipsImage {
+    fn from(value: *mut bindings::VipsImage) -> Self {
+        new_vipsimage(
+            value, None, None,
+        )
     }
 }
 
@@ -36,9 +83,7 @@ impl Default for VipsImage {
 /// In the moment this type is not thread safe. Be careful working within thread environments.
 impl VipsImage {
     pub fn new() -> VipsImage {
-        VipsImage {
-            ctx: unsafe { bindings::vips_image_new() },
-        }
+        Self::default()
     }
 
     /// Creates a new `VipsImage` which, when written to, will create a memory image.
@@ -66,7 +111,7 @@ impl VipsImage {
         option: VOption,
     ) -> Result<VipsImage> {
         unsafe {
-            let filename_c_str = utils::path_to_cstring(filename)?;
+            let filename_c_str = path_to_cstring(filename)?;
             let filename_part = bindings::vips_filename_get_filename(filename_c_str.as_ptr());
             let string_options = bindings::vips_filename_get_options(filename_c_str.as_ptr());
 
@@ -81,11 +126,11 @@ impl VipsImage {
             let mut out_out = VipsImage::from(null_mut());
             call_option_string_(
                 operation,
-                utils::new_c_string_from_raw(string_options).as_ptr(),
+                new_c_string_from_raw(string_options).as_ptr(),
                 option
                     .set(
                         "filename",
-                        utils::new_c_string_from_raw(filename_part).as_ptr(),
+                        new_c_string_from_raw(filename_part).as_ptr(),
                     )
                     .set(
                         "out",
@@ -103,7 +148,7 @@ impl VipsImage {
     /// Opens the named file for simultaneous reading and writing.
     pub fn new_from_file_rw<P: AsRef<Path>>(filename: P) -> Result<VipsImage> {
         unsafe {
-            let filename_c_str = utils::path_to_cstring(filename)?;
+            let filename_c_str = path_to_cstring(filename)?;
             let res = bindings::vips_image_new_from_file_RW(filename_c_str.as_ptr());
             vips_image_result(
                 res,
@@ -121,7 +166,7 @@ impl VipsImage {
         offset: u64,
     ) -> Result<VipsImage> {
         unsafe {
-            let filename_c_str = utils::path_to_cstring(filename)?;
+            let filename_c_str = path_to_cstring(filename)?;
             let res = bindings::vips_image_new_from_file_raw(
                 filename_c_str.as_ptr(),
                 x_size,
@@ -137,6 +182,7 @@ impl VipsImage {
     }
 
     /// Loads an image from the formatted area of memory.
+    /// Will make a copy of the memory area.
     pub fn new_from_buffer(buffer: &[u8], option_str: &str) -> Result<VipsImage> {
         Self::new_from_buffer_with_opts(
             buffer,
@@ -146,6 +192,7 @@ impl VipsImage {
     }
 
     /// Loads an image from the formatted area of memory.
+    /// Will make a copy of the memory area.
     pub fn new_from_buffer_with_opts(
         buffer: &[u8],
         option_str: &str,
@@ -165,27 +212,20 @@ impl VipsImage {
                 );
             }
 
-            let vips_blob = bindings::vips_blob_new(
-                None,
-                buffer.as_ptr() as *const c_void,
-                buffer.len() as u64,
-            );
             let mut out_out = VipsImage::from(null_mut());
-            let blob = VipsBlob::from(vips_blob);
             call_option_string_(
                 operation,
-                utils::new_c_string(option_str)?.as_ptr(),
+                new_c_string(option_str)?.as_ptr(),
                 option
                     .set(
                         "buffer",
-                        &blob,
+                        buffer,
                     )
                     .set(
                         "out",
                         &mut out_out,
                     ),
             )?;
-            blob.area_unref();
             vips_image_result_ext(
                 out_out,
                 Error::InitializationError(
@@ -224,7 +264,7 @@ impl VipsImage {
             let mut out_out = VipsImage::from(null_mut());
             call_option_string_(
                 operation,
-                utils::new_c_string(option_str)?.as_ptr(),
+                new_c_string(option_str)?.as_ptr(),
                 option
                     .set(
                         "source",
@@ -362,7 +402,9 @@ impl VipsImage {
     pub fn new_from_image(image: &VipsImage, array: &[f64]) -> Result<VipsImage> {
         unsafe {
             let res = bindings::vips_image_new_from_image(
-                image.ctx,
+                image
+                    .image
+                    .ctx,
                 array.as_ptr(),
                 array.len() as c_int,
             );
@@ -379,7 +421,9 @@ impl VipsImage {
     pub fn new_from_image1(image: &VipsImage, c: f64) -> Result<VipsImage> {
         unsafe {
             let res = bindings::vips_image_new_from_image1(
-                image.ctx,
+                image
+                    .image
+                    .ctx,
                 c,
             );
             vips_image_result(
@@ -394,7 +438,7 @@ impl VipsImage {
     /// Makes a `VipsImage` which, when written to, will create a temporary file on disc. The file will be automatically deleted when the image is destroyed.
     pub fn new_temp_file(format: &str) -> Result<VipsImage> {
         unsafe {
-            let format_c_str = utils::new_c_string(format)?;
+            let format_c_str = new_c_string(format)?;
             let res = bindings::vips_image_new_temp_file(format_c_str.as_ptr());
             vips_image_result(
                 res,
@@ -407,13 +451,17 @@ impl VipsImage {
 
     /// Returns the underlying VipsImage reference that this holds
     pub fn as_mut_ptr(&self) -> *mut bindings::VipsImage {
-        self.ctx
+        self.image
+            .ctx
     }
 
     /// Allocates memory, renders image into it, builds a new image around the memory area, and returns that.
     pub fn copy_memory(&self) -> Result<VipsImage> {
         unsafe {
-            let result = bindings::vips_image_copy_memory(self.ctx);
+            let result = bindings::vips_image_copy_memory(
+                self.image
+                    .ctx,
+            );
             vips_image_result(
                 result,
                 Error::OperationError("Could not copy memory".to_string()),
@@ -424,21 +472,30 @@ impl VipsImage {
     /// Invalidates all pixel caches on image and any downstream images, that is, images which depend on this image.
     pub fn invalidate_all(&self) {
         unsafe {
-            bindings::vips_image_invalidate_all(self.ctx);
+            bindings::vips_image_invalidate_all(
+                self.image
+                    .ctx,
+            );
         }
     }
 
     /// Minimises memory use on this image and any upstream images, that is, images which this image depends upon.
     pub fn minimise_all(&self) {
         unsafe {
-            bindings::vips_image_minimise_all(self.ctx);
+            bindings::vips_image_minimise_all(
+                self.image
+                    .ctx,
+            );
         }
     }
 
     /// Gets image ready for an in-place operation
     pub fn inplace(&mut self) -> Result<()> {
         unsafe {
-            let res = bindings::vips_image_inplace(self.ctx);
+            let res = bindings::vips_image_inplace(
+                self.image
+                    .ctx,
+            );
             utils::result(
                 res,
                 (),
@@ -449,59 +506,120 @@ impl VipsImage {
 
     pub fn get_filename(&self) -> std::result::Result<&str, std::str::Utf8Error> {
         unsafe {
-            let filename = bindings::vips_image_get_filename(self.ctx);
+            let filename = bindings::vips_image_get_filename(
+                self.image
+                    .ctx,
+            );
             let res = CStr::from_ptr(filename);
             res.to_str()
         }
     }
 
     pub fn get_width(&self) -> i32 {
-        unsafe { bindings::vips_image_get_width(self.ctx) }
+        unsafe {
+            bindings::vips_image_get_width(
+                self.image
+                    .ctx,
+            )
+        }
     }
 
     pub fn get_height(&self) -> i32 {
-        unsafe { bindings::vips_image_get_height(self.ctx) }
+        unsafe {
+            bindings::vips_image_get_height(
+                self.image
+                    .ctx,
+            )
+        }
     }
 
     pub fn get_xoffset(&self) -> i32 {
-        unsafe { bindings::vips_image_get_xoffset(self.ctx) }
+        unsafe {
+            bindings::vips_image_get_xoffset(
+                self.image
+                    .ctx,
+            )
+        }
     }
 
     pub fn get_yoffset(&self) -> i32 {
-        unsafe { bindings::vips_image_get_yoffset(self.ctx) }
+        unsafe {
+            bindings::vips_image_get_yoffset(
+                self.image
+                    .ctx,
+            )
+        }
     }
 
     pub fn get_scale(&self) -> f64 {
-        unsafe { bindings::vips_image_get_scale(self.ctx) }
+        unsafe {
+            bindings::vips_image_get_scale(
+                self.image
+                    .ctx,
+            )
+        }
     }
 
     pub fn get_offset(&self) -> f64 {
-        unsafe { bindings::vips_image_get_offset(self.ctx) }
+        unsafe {
+            bindings::vips_image_get_offset(
+                self.image
+                    .ctx,
+            )
+        }
     }
 
     pub fn get_xres(&self) -> f64 {
-        unsafe { bindings::vips_image_get_xres(self.ctx) }
+        unsafe {
+            bindings::vips_image_get_xres(
+                self.image
+                    .ctx,
+            )
+        }
     }
 
     pub fn get_yres(&self) -> f64 {
-        unsafe { bindings::vips_image_get_yres(self.ctx) }
+        unsafe {
+            bindings::vips_image_get_yres(
+                self.image
+                    .ctx,
+            )
+        }
     }
 
     pub fn get_bands(&self) -> i32 {
-        unsafe { bindings::vips_image_get_bands(self.ctx) }
+        unsafe {
+            bindings::vips_image_get_bands(
+                self.image
+                    .ctx,
+            )
+        }
     }
 
     pub fn get_page_height(&self) -> i32 {
-        unsafe { bindings::vips_image_get_page_height(self.ctx) }
+        unsafe {
+            bindings::vips_image_get_page_height(
+                self.image
+                    .ctx,
+            )
+        }
     }
 
     pub fn get_n_pages(&self) -> i32 {
-        unsafe { bindings::vips_image_get_n_pages(self.ctx) }
+        unsafe {
+            bindings::vips_image_get_n_pages(
+                self.image
+                    .ctx,
+            )
+        }
     }
 
     pub fn get_coding(&self) -> Result<Coding> {
         unsafe {
-            let res = bindings::vips_image_get_format(self.ctx);
+            let res = bindings::vips_image_get_format(
+                self.image
+                    .ctx,
+            );
             let format_enum = FromPrimitive::from_i32(res);
             format_enum.ok_or(Error::IOError("Could get format from image".to_string()))
         }
@@ -509,7 +627,10 @@ impl VipsImage {
 
     pub fn get_format(&self) -> Result<BandFormat> {
         unsafe {
-            let res = bindings::vips_image_get_format(self.ctx);
+            let res = bindings::vips_image_get_format(
+                self.image
+                    .ctx,
+            );
             let format_enum = FromPrimitive::from_i32(res);
             format_enum.ok_or(Error::IOError("Could get format from image".to_string()))
         }
@@ -517,19 +638,30 @@ impl VipsImage {
 
     pub fn guess_format(&self) -> Result<BandFormat> {
         unsafe {
-            let res = bindings::vips_image_guess_format(self.ctx);
+            let res = bindings::vips_image_guess_format(
+                self.image
+                    .ctx,
+            );
             let format_enum = FromPrimitive::from_i32(res);
             format_enum.ok_or(Error::IOError("Could get format from image".to_string()))
         }
     }
 
     pub fn get_orientation(&self) -> i32 {
-        unsafe { bindings::vips_image_get_orientation(self.ctx) }
+        unsafe {
+            bindings::vips_image_get_orientation(
+                self.image
+                    .ctx,
+            )
+        }
     }
 
     pub fn get_interpretation(&self) -> Result<Interpretation> {
         unsafe {
-            let res = bindings::vips_image_get_interpretation(self.ctx);
+            let res = bindings::vips_image_get_interpretation(
+                self.image
+                    .ctx,
+            );
             let format_enum = FromPrimitive::from_i32(res);
             format_enum.ok_or(Error::IOError("Could get format from image".to_string()))
         }
@@ -537,60 +669,102 @@ impl VipsImage {
 
     pub fn guess_interpretation(&self) -> Result<Interpretation> {
         unsafe {
-            let res = bindings::vips_image_guess_interpretation(self.ctx);
+            let res = bindings::vips_image_guess_interpretation(
+                self.image
+                    .ctx,
+            );
             let format_enum = FromPrimitive::from_i32(res);
             format_enum.ok_or(Error::IOError("Could get format from image".to_string()))
         }
     }
 
     pub fn get_tile_width(&self) -> i32 {
-        unsafe { bindings::vips_image_get_tile_width(self.ctx) }
+        unsafe {
+            bindings::vips_image_get_tile_width(
+                self.image
+                    .ctx,
+            )
+        }
     }
 
     pub fn get_tile_height(&self) -> i32 {
-        unsafe { bindings::vips_image_get_tile_height(self.ctx) }
+        unsafe {
+            bindings::vips_image_get_tile_height(
+                self.image
+                    .ctx,
+            )
+        }
     }
 
     pub fn get_gainmap(&self) -> Option<VipsImage> {
         unsafe {
-            let ctx = bindings::vips_image_get_gainmap(self.ctx);
+            let ctx = bindings::vips_image_get_gainmap(
+                self.image
+                    .ctx,
+            );
             if ctx.is_null() {
                 None
             } else {
                 Some(
-                    VipsImage {
-                        ctx,
-                    },
+                    new_vipsimage(
+                        ctx, None, None,
+                    ),
                 )
             }
         }
     }
 
     pub fn iskilled(&self) -> bool {
-        unsafe { bindings::vips_image_iskilled(self.ctx) == 1 }
+        unsafe {
+            bindings::vips_image_iskilled(
+                self.image
+                    .ctx,
+            ) == 1
+        }
     }
 
     pub fn isMSBfirst(&self) -> bool {
-        unsafe { bindings::vips_image_isMSBfirst(self.ctx) == 1 }
+        unsafe {
+            bindings::vips_image_isMSBfirst(
+                self.image
+                    .ctx,
+            ) == 1
+        }
     }
 
     pub fn isfile(&self) -> bool {
-        unsafe { bindings::vips_image_isfile(self.ctx) == 1 }
+        unsafe {
+            bindings::vips_image_isfile(
+                self.image
+                    .ctx,
+            ) == 1
+        }
     }
 
     pub fn ispartial(&self) -> bool {
-        unsafe { bindings::vips_image_ispartial(self.ctx) == 1 }
+        unsafe {
+            bindings::vips_image_ispartial(
+                self.image
+                    .ctx,
+            ) == 1
+        }
     }
 
     pub fn hasalpha(&self) -> bool {
-        unsafe { bindings::vips_image_hasalpha(self.ctx) == 1 }
+        unsafe {
+            bindings::vips_image_hasalpha(
+                self.image
+                    .ctx,
+            ) == 1
+        }
     }
 
     /// Sets the VipsImage.kill flag on an image.
     pub fn set_kill(&self, flag: bool) {
         unsafe {
             bindings::vips_image_set_kill(
-                self.ctx,
+                self.image
+                    .ctx,
                 if flag { 1 } else { 0 },
             );
         }
@@ -600,22 +774,31 @@ impl VipsImage {
     pub fn set_progress(&self, flag: bool) {
         unsafe {
             bindings::vips_image_set_progress(
-                self.ctx,
+                self.image
+                    .ctx,
                 if flag { 1 } else { 0 },
             );
         }
     }
 
     /// Writes this image to another image.
-    pub fn write(&self, other: &VipsImage) -> Result<()> {
+    pub fn write(&self) -> Result<VipsImage> {
         unsafe {
+            let out = bindings::vips_image_new();
             let res = bindings::vips_image_write(
-                self.ctx,
-                other.ctx,
+                self.image
+                    .ctx,
+                out,
             );
             utils::result(
                 res,
-                (),
+                new_vipsimage(
+                    out,
+                    None,
+                    Some(vec![self
+                        .image
+                        .clone()]),
+                ),
                 Error::IOError("Cannot write input to output".to_string()),
             )
         }
@@ -636,7 +819,7 @@ impl VipsImage {
         option: VOption,
     ) -> Result<()> {
         unsafe {
-            let filename_c_str = utils::path_to_cstring(filename)?;
+            let filename_c_str = path_to_cstring(filename)?;
             let filename_part = bindings::vips_filename_get_filename(filename_c_str.as_ptr());
             let string_options = bindings::vips_filename_get_options(filename_c_str.as_ptr());
 
@@ -651,12 +834,12 @@ impl VipsImage {
 
             let res = call_option_string_(
                 operation,
-                utils::new_c_string_from_raw(string_options).as_ptr(),
+                new_c_string_from_raw(string_options).as_ptr(),
                 option
                     .set("in", self)
                     .set(
                         "filename",
-                        utils::new_c_string_from_raw(filename_part).as_ptr(),
+                        new_c_string_from_raw(filename_part).as_ptr(),
                     ),
             )?;
             utils::result(
@@ -678,8 +861,9 @@ impl VipsImage {
     /// Writes this image to memory.
     pub fn write_to_buffer_with_opts(&self, suffix: &str, option: VOption) -> Result<Vec<u8>> {
         unsafe {
-            let suffix_c_str = utils::new_c_string(suffix)?;
-            let filename = bindings::vips_filename_get_filename(suffix_c_str.as_ptr());
+            let suffix_c_str = new_c_string(suffix)?;
+            let filename_part = bindings::vips_filename_get_filename(suffix_c_str.as_ptr());
+            let filename = new_c_string_from_raw(filename_part);
             let string_options = bindings::vips_filename_get_options(suffix_c_str.as_ptr());
 
             /* Save with the new target API if we can. Fall back to the older
@@ -688,14 +872,14 @@ impl VipsImage {
              * We need to hide any errors from this first phase.
              */
             bindings::vips_error_freeze();
-            let operation = bindings::vips_foreign_find_save_target(filename);
+            let operation = bindings::vips_foreign_find_save_target(filename.as_ptr());
             bindings::vips_error_thaw();
 
             if !operation.is_null() {
                 let target = VipsTarget::new_to_memory()?;
                 let res = call_option_string_(
                     operation,
-                    utils::new_c_string_from_raw(string_options).as_ptr(),
+                    new_c_string_from_raw(string_options).as_ptr(),
                     option
                         .set("in", self)
                         .set(
@@ -706,16 +890,12 @@ impl VipsImage {
                 return utils::safe_result(
                     res,
                     target,
-                    move |target| {
-                        target
-                            .get_blob()
-                            .into()
-                    },
+                    move |target| target.get_blob(),
                     Error::IOError("Cannot write to buffer".to_string()),
                 );
             }
 
-            let operation = bindings::vips_foreign_find_save_buffer(filename);
+            let operation = bindings::vips_foreign_find_save_buffer(filename.as_ptr());
             if operation.is_null() {
                 return utils::result(
                     -1,
@@ -724,10 +904,10 @@ impl VipsImage {
                 );
             }
 
-            let mut buffer_out = VipsBlob::from(null_mut());
+            let mut buffer_out = Vec::new();
             let res = call_option_string_(
                 operation,
-                utils::new_c_string_from_raw(string_options).as_ptr(),
+                new_c_string_from_raw(string_options).as_ptr(),
                 option
                     .set("in", self)
                     .set(
@@ -737,7 +917,7 @@ impl VipsImage {
             )?;
             utils::result(
                 res,
-                buffer_out.into(),
+                buffer_out,
                 Error::IOError("Cannot write to buffer".to_string()),
             )
         }
@@ -760,7 +940,7 @@ impl VipsImage {
         option: VOption,
     ) -> Result<()> {
         unsafe {
-            let suffix_c_str = utils::new_c_string(suffix)?;
+            let suffix_c_str = new_c_string(suffix)?;
             let filename = bindings::vips_filename_get_filename(suffix_c_str.as_ptr());
             let string_options = bindings::vips_filename_get_options(suffix_c_str.as_ptr());
 
@@ -776,7 +956,7 @@ impl VipsImage {
 
             let res = call_option_string_(
                 operation,
-                utils::new_c_string_from_raw(string_options).as_ptr(),
+                new_c_string_from_raw(string_options).as_ptr(),
                 option
                     .set("in", self)
                     .set(
@@ -797,11 +977,12 @@ impl VipsImage {
         unsafe {
             let mut buffer_buf_size: u64 = 0;
             let buffer_out = bindings::vips_image_write_to_memory(
-                self.ctx,
+                self.image
+                    .ctx,
                 &mut buffer_buf_size,
             );
             let buffer = std::slice::from_raw_parts(
-                buffer_out as *mut u8,
+                buffer_out as *const u8,
                 buffer_buf_size as usize,
             )
             .to_vec();
@@ -820,7 +1001,8 @@ impl VipsImage {
             let mut out_bands = 0;
             let mut out_format = 0;
             let res = bindings::vips_image_decode_predict(
-                self.ctx,
+                self.image
+                    .ctx,
                 &mut out_bands,
                 &mut out_format,
             );
@@ -844,14 +1026,19 @@ impl VipsImage {
         unsafe {
             let mut out: *mut bindings::VipsImage = null_mut();
             let res = bindings::vips_image_decode(
-                self.ctx,
+                self.image
+                    .ctx,
                 &mut out,
             );
             utils::result(
                 res,
-                VipsImage {
-                    ctx: out,
-                },
+                new_vipsimage(
+                    out,
+                    None,
+                    Some(vec![self
+                        .image
+                        .clone()]),
+                ),
                 Error::IOError("Cannot decode image".to_string()),
             )
         }
@@ -861,15 +1048,20 @@ impl VipsImage {
         unsafe {
             let mut out: *mut bindings::VipsImage = null_mut();
             let res = bindings::vips_image_encode(
-                self.ctx,
+                self.image
+                    .ctx,
                 &mut out,
                 coding as i32,
             );
             utils::result(
                 res,
-                VipsImage {
-                    ctx: out,
-                },
+                new_vipsimage(
+                    out,
+                    None,
+                    Some(vec![self
+                        .image
+                        .clone()]),
+                ),
                 Error::IOError("Cannot encode image".to_string()),
             )
         }
@@ -880,7 +1072,8 @@ impl VipsImage {
         unsafe {
             let type_name = ensure_null_terminated(type_)?;
             let gtype = bindings::vips_image_get_typeof(
-                self.ctx,
+                self.image
+                    .ctx,
                 type_name.as_ptr(),
             );
             utils::result(
@@ -897,7 +1090,8 @@ impl VipsImage {
             let mut out = 0;
             let name = ensure_null_terminated(name)?;
             let res = bindings::vips_image_get_int(
-                self.ctx,
+                self.image
+                    .ctx,
                 name.as_ptr(),
                 &mut out,
             );
@@ -914,7 +1108,8 @@ impl VipsImage {
         unsafe {
             let name = ensure_null_terminated(name)?;
             bindings::vips_image_set_int(
-                self.ctx,
+                self.image
+                    .ctx,
                 name.as_ptr(),
                 value,
             );
@@ -928,7 +1123,8 @@ impl VipsImage {
             let mut out = 0.0;
             let name = ensure_null_terminated(name)?;
             let res = bindings::vips_image_get_double(
-                self.ctx,
+                self.image
+                    .ctx,
                 name.as_ptr(),
                 &mut out,
             );
@@ -945,7 +1141,8 @@ impl VipsImage {
         unsafe {
             let name = ensure_null_terminated(name)?;
             bindings::vips_image_set_double(
-                self.ctx,
+                self.image
+                    .ctx,
                 name.as_ptr(),
                 value,
             );
@@ -959,7 +1156,8 @@ impl VipsImage {
             let mut out: *const c_char = std::ptr::null();
             let name = ensure_null_terminated(name)?;
             let res = bindings::vips_image_get_string(
-                self.ctx,
+                self.image
+                    .ctx,
                 name.as_ptr(),
                 &mut out,
             );
@@ -985,7 +1183,8 @@ impl VipsImage {
             let value = ensure_null_terminated(value)?;
 
             bindings::vips_image_set_string(
-                self.ctx,
+                self.image
+                    .ctx,
                 name.as_ptr(),
                 value.as_ptr(),
             );
@@ -1000,7 +1199,8 @@ impl VipsImage {
             let mut length = 0;
             let name = ensure_null_terminated(name)?;
             let res = bindings::vips_image_get_blob(
-                self.ctx,
+                self.image
+                    .ctx,
                 name.as_ptr(),
                 &mut out,
                 &mut length,
@@ -1025,7 +1225,8 @@ impl VipsImage {
         unsafe {
             let name = ensure_null_terminated(name)?;
             bindings::vips_image_set_blob(
-                self.ctx,
+                self.image
+                    .ctx,
                 name.as_ptr(),
                 None,
                 blob.as_ptr() as *const c_void,
@@ -1040,7 +1241,8 @@ impl VipsImage {
         unsafe {
             let name = ensure_null_terminated(name)?;
             bindings::vips_image_set_blob_copy(
-                self.ctx,
+                self.image
+                    .ctx,
                 name.as_ptr(),
                 blob.as_ptr() as *const c_void,
                 blob.len() as u64,
@@ -1056,7 +1258,8 @@ impl VipsImage {
             let mut size = 0;
             let name = ensure_null_terminated(name)?;
             let res = bindings::vips_image_get_array_int(
-                self.ctx,
+                self.image
+                    .ctx,
                 name.as_ptr(),
                 &mut out,
                 &mut size,
@@ -1080,7 +1283,8 @@ impl VipsImage {
         unsafe {
             let name = ensure_null_terminated(name)?;
             bindings::vips_image_set_array_int(
-                self.ctx,
+                self.image
+                    .ctx,
                 name.as_ptr(),
                 value.as_ptr(),
                 value.len() as c_int,
@@ -1096,7 +1300,8 @@ impl VipsImage {
             let mut size = 0;
             let name = ensure_null_terminated(name)?;
             let res = bindings::vips_image_get_array_double(
-                self.ctx,
+                self.image
+                    .ctx,
                 name.as_ptr(),
                 &mut out,
                 &mut size,
@@ -1120,7 +1325,8 @@ impl VipsImage {
         unsafe {
             let name = ensure_null_terminated(name)?;
             bindings::vips_image_set_array_double(
-                self.ctx,
+                self.image
+                    .ctx,
                 name.as_ptr(),
                 value.as_ptr(),
                 value.len() as c_int,
@@ -1134,9 +1340,12 @@ impl VipsImage {
         unsafe {
             let name = ensure_null_terminated(name)?;
             bindings::vips_image_set_image(
-                self.ctx,
+                self.image
+                    .ctx,
                 name.as_ptr(),
-                value.ctx,
+                value
+                    .image
+                    .ctx,
             );
             Ok(())
         }
@@ -1148,7 +1357,8 @@ impl VipsImage {
             let name = ensure_null_terminated(name)?;
             Ok(
                 bindings::vips_image_remove(
-                    self.ctx,
+                    self.image
+                        .ctx,
                     name.as_ptr(),
                 ) == 1,
             )
@@ -1203,39 +1413,5 @@ impl VipsImage {
             (x, y),
             Error::OperationError("maxpos failed".to_string()),
         )
-    }
-}
-
-impl Clone for VipsImage {
-    fn clone(&self) -> Self {
-        // Increase the reference count of ctx
-        unsafe {
-            bindings::g_object_ref(self.ctx as *mut _);
-        }
-
-        Self {
-            ctx: self.ctx,
-        }
-    }
-}
-
-impl Drop for VipsImage {
-    fn drop(&mut self) {
-        unsafe {
-            if !self
-                .ctx
-                .is_null()
-            {
-                bindings::g_object_unref(self.ctx as *mut c_void);
-            }
-        }
-    }
-}
-
-impl From<*mut bindings::VipsImage> for VipsImage {
-    fn from(value: *mut bindings::VipsImage) -> Self {
-        Self {
-            ctx: value,
-        }
     }
 }

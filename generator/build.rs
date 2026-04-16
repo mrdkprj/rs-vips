@@ -149,40 +149,9 @@ impl Operation {
     }
 
     fn get_variables(&self) -> String {
-        let mut vars = self
-            .required
-            .iter()
-            .filter(|p| p.param_type == ParamType::ArrayByte)
-            .map(|p| {
-                format!(
-                    r#"
-                        let vips_blob = unsafe {{ vips_blob_new(
-                            None,
-                            {}.as_ptr() as _,
-                            {}.len() as _
-                        ) }};
-                        let blob = VipsBlob::from(vips_blob);
-                    "#,
-                    p.name, p.name,
-                )
-            })
-            .collect::<Vec<_>>()
-            .join("\n");
-        let out_vars = self
-            .output
+        self.output
             .iter()
             .map(|p| p.declare_out_variable())
-            .collect::<Vec<_>>()
-            .join("\n");
-        vars.push_str(&out_vars);
-        vars
-    }
-
-    fn get_unref(&self) -> String {
-        self.required
-            .iter()
-            .filter(|p| p.param_type == ParamType::ArrayByte)
-            .map(|_| "blob.area_unref();")
             .collect::<Vec<_>>()
             .join("\n")
     }
@@ -216,12 +185,6 @@ impl Operation {
                         .param_type
                         .clone()
                     {
-                        ParamType::ArrayByte => {
-                            format!(
-                                r#".set("{}", &blob)"#,
-                                p.name
-                            )
-                        }
                         ParamType::VipsImage {
                             ..
                         } => {
@@ -296,13 +259,11 @@ impl Operation {
             r#"
                 {}
                 let vips_op_response = call("{}", {})?;
-                {}
                 utils::result(vips_op_response, {}, Error::OperationError("{} (vips_{}) failed".to_string()))
             "#,
             self.get_variables(),
             self.vips_name,
             self.get_method_call(with_optional),
-            self.get_unref(),
             out_result,
             to_class_case(&self.name),
             self.vips_name,
@@ -455,17 +416,10 @@ impl Parameter {
     }
 
     fn as_out_param(&self) -> String {
-        match self.param_type {
-            ParamType::ArrayByte | ParamType::VipsBlob => format!(
-                "{}_out.into()",
-                self.name
-            ),
-
-            _ => format!(
-                "{}_out",
-                self.name
-            ),
-        }
+        format!(
+            "{}_out",
+            self.name
+        )
     }
 
     fn doc(&self) -> String {
@@ -554,7 +508,7 @@ impl Parameter {
             ),
             ParamType::ArrayByte | ParamType::VipsBlob => {
                 format!(
-                    "let mut {}_out = VipsBlob::from(null_mut());",
+                    "let mut {}_out = Vec::new();",
                     self.name,
                 )
             }
@@ -1341,10 +1295,10 @@ fn rustfmt_path() -> io::Result<PathBuf> {
     match which::which("rustfmt") {
         Ok(p) => Ok(p),
         Err(e) => Err(
-            io::Error::new(
-                io::ErrorKind::Other,
-                format!("{}", e),
-            ),
+            io::Error::other(format!(
+                "{}",
+                e
+            )),
         ),
     }
 }
@@ -1393,22 +1347,12 @@ fn rustfmt_generated_string(source: &str) -> io::Result<String> {
     match String::from_utf8(output) {
         Ok(bindings) => match status.code() {
             Some(0) => Ok(bindings),
-            Some(2) => Err(
-                io::Error::new(
-                    io::ErrorKind::Other,
-                    "Rustfmt parsing errors.".to_string(),
-                ),
-            ),
+            Some(2) => Err(io::Error::other("Rustfmt parsing errors.".to_string())),
             Some(3) => {
                 println!("Rustfmt could not format some lines.");
                 Ok(bindings)
             }
-            _ => Err(
-                io::Error::new(
-                    io::ErrorKind::Other,
-                    "Internal rustfmt error".to_string(),
-                ),
-            ),
+            _ => Err(io::Error::other("Internal rustfmt error".to_string())),
         },
         _ => Ok(source),
     }
@@ -1486,19 +1430,14 @@ fn generate_opts(out_path: PathBuf) {
     // (c) Copyright 2025 mrdkprj
     #![allow(clippy::too_many_arguments)]
     #![allow(clippy::upper_case_acronyms)]
-    use crate::bindings::{{vips_blob_new}};
     use crate::connection::VipsSource;
     use crate::connection::VipsTarget;
     use crate::error::*;
-    use crate::region::VipsBlob;
     use crate::utils;
     use crate::voption::{{call, Setter, VOption}};
     use crate::Result;
     use crate::VipsImage;
-    use std::ffi::c_void;
     use std::ptr::null_mut;
-
-    const NULL: *const c_void = null_mut();
 
     {}
 
