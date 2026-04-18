@@ -2,13 +2,13 @@
 
 #![allow(clippy::all)]
 #![allow(warnings)]
-pub type size_t = u64;
+pub type size_t = usize;
 pub type gint64 = i64;
 pub type guint64 = u64;
-pub type gssize = u64;
-pub type gsize = u64;
-pub type gintptr = i64;
-pub type guintptr = u64;
+pub type gssize = isize;
+pub type gsize = usize;
+pub type gintptr = isize;
+pub type guintptr = usize;
 
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd)]

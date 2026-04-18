@@ -69,14 +69,33 @@ pub fn result<T>(res: i32, output: T, error: Error) -> Result<T> {
 }
 
 #[inline]
-pub(crate) fn safe_result<F, O, R>(res: i32, output: O, func: F, error: Error) -> Result<R>
+pub fn result_cond<T>(cond: bool, output: T, error: Error) -> Result<T> {
+    if cond {
+        Ok(output)
+    } else {
+        Err(error.extend())
+    }
+}
+
+#[inline]
+pub(crate) fn safe_result<F, O>(res: i32, func: F, error: Error) -> Result<O>
 where
-    F: Fn(O) -> R,
+    F: FnOnce() -> O,
 {
     if res == 0 {
-        Ok(func(
-            output,
-        ))
+        Ok(func())
+    } else {
+        Err(error.extend())
+    }
+}
+
+#[inline]
+pub(crate) fn safe_result_cond<F, O>(cond: bool, func: F, error: Error) -> Result<O>
+where
+    F: FnOnce() -> O,
+{
+    if cond {
+        Ok(func())
     } else {
         Err(error.extend())
     }
@@ -172,7 +191,7 @@ pub(crate) const G_TYPE_UINT64: &str = "guint64";
 pub(crate) const G_TYPE_DOUBLE: &str = "gdouble";
 pub(crate) const G_TYPE_STRING: &str = "gchararray";
 
-pub(crate) fn get_g_type(name: &str) -> Result<u64> {
+pub(crate) fn get_g_type(name: &str) -> Result<usize> {
     let type_name = new_c_string(name)?;
     Ok(unsafe { g_type_from_name(type_name.as_ptr()) })
 }

@@ -8,23 +8,21 @@ pub struct VipsInterpolate {
     pub(crate) ctx: *mut bindings::VipsInterpolate,
 }
 
-impl Default for VipsInterpolate {
-    fn default() -> VipsInterpolate {
-        unsafe {
-            VipsInterpolate {
-                ctx: bindings::vips_interpolate_nearest_static(),
-            }
-        }
-    }
-}
-
 impl VipsInterpolate {
-    /// defaults to vips_interpolate_nearest_static
-    pub fn new() -> VipsInterpolate {
+    /// Look up an interpolator from a nickname and make one.
+    pub fn new_from_name(name: &str) -> Result<VipsInterpolate> {
         unsafe {
-            VipsInterpolate {
-                ctx: bindings::vips_interpolate_nearest_static(),
-            }
+            let nickname = utils::new_c_string(name)?;
+            let res = bindings::vips_interpolate_new(nickname.as_ptr());
+            utils::result_cond(
+                !res.is_null(),
+                VipsInterpolate {
+                    ctx: res,
+                },
+                Error::InitializationError(
+                    "Cannot initialize interpolator with provided nickname".to_string(),
+                ),
+            )
         }
     }
 
@@ -42,27 +40,6 @@ impl VipsInterpolate {
         unsafe {
             VipsInterpolate {
                 ctx: bindings::vips_interpolate_bilinear_static(),
-            }
-        }
-    }
-
-    /// Look up an interpolator from a nickname and make one.
-    pub fn new_from_name(name: &str) -> Result<VipsInterpolate> {
-        unsafe {
-            let nickname = utils::new_c_string(name)?;
-            let res = bindings::vips_interpolate_new(nickname.as_ptr());
-            if res.is_null() {
-                Err(
-                    Error::InitializationError(
-                        "Cannot initialize interpolator with provided nickname".to_string(),
-                    ),
-                )
-            } else {
-                Ok(
-                    VipsInterpolate {
-                        ctx: res,
-                    },
-                )
             }
         }
     }

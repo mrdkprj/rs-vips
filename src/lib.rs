@@ -19,6 +19,8 @@ mod interpolate;
 pub mod operator;
 /// Vips Enumerations
 pub mod ops;
+/// VipsRegion
+mod region;
 pub mod utils;
 /// VOption, a list of name-value pairs
 pub mod voption;
@@ -27,6 +29,7 @@ pub use connection::*;
 use error::Error;
 pub use image::*;
 pub use interpolate::*;
+pub use region::*;
 use std::ffi::CStr;
 pub type Result<T> = std::result::Result<T, error::Error>;
 
@@ -162,7 +165,7 @@ impl Vips {
     }
 
     /// Set the maximum amount of tracked memory we allow before we start dropping cached operations.
-    pub fn cache_set_max_mem(max: u64) {
+    pub fn cache_set_max_mem(max: usize) {
         unsafe {
             bindings::vips_cache_set_max_mem(max);
         }
@@ -181,7 +184,7 @@ impl Vips {
     }
 
     /// Get the maximum amount of tracked memory we allow before we start dropping cached operations.
-    pub fn cache_get_max_mem() -> u64 {
+    pub fn cache_get_max_mem() -> usize {
         unsafe { bindings::vips_cache_get_max_mem() }
     }
 
@@ -222,12 +225,12 @@ impl Vips {
     }
 
     /// Returns the number of bytes currently allocated via vips_malloc() and friends.
-    pub fn tracked_get_mem() -> u64 {
+    pub fn tracked_get_mem() -> usize {
         unsafe { bindings::vips_tracked_get_mem() }
     }
 
     /// Returns the largest number of bytes simultaneously allocated via vips_tracked_malloc().
-    pub fn tracked_get_mem_highwater() -> u64 {
+    pub fn tracked_get_mem_highwater() -> usize {
         unsafe { bindings::vips_tracked_get_mem_highwater() }
     }
 

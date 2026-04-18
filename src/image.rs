@@ -201,7 +201,7 @@ impl VipsImage {
         unsafe {
             let operation = bindings::vips_foreign_find_load_buffer(
                 buffer.as_ptr() as *const c_void,
-                buffer.len() as u64,
+                buffer.len(),
             );
             if operation.is_null() {
                 return vips_image_result(
@@ -302,7 +302,7 @@ impl VipsImage {
             if let Some(format) = format.to_i32() {
                 let res = bindings::vips_image_new_from_memory(
                     buffer.as_ptr() as *const c_void,
-                    buffer.len() as u64,
+                    buffer.len(),
                     width,
                     height,
                     bands,
@@ -334,7 +334,7 @@ impl VipsImage {
             if let Some(format) = format.to_i32() {
                 let res = bindings::vips_image_new_from_memory_copy(
                     buffer.as_ptr() as *const c_void,
-                    buffer.len() as u64,
+                    buffer.len(),
                     width,
                     height,
                     bands,
@@ -889,8 +889,7 @@ impl VipsImage {
                 )?;
                 return utils::safe_result(
                     res,
-                    target,
-                    move |target| target.get_blob(),
+                    || target.get_blob(),
                     Error::IOError("Cannot write to buffer".to_string()),
                 );
             }
@@ -975,7 +974,7 @@ impl VipsImage {
     /// Writes this image to a large memory array.
     pub fn write_to_memory(&self) -> Vec<u8> {
         unsafe {
-            let mut buffer_buf_size: u64 = 0;
+            let mut buffer_buf_size = 0;
             let buffer_out = bindings::vips_image_write_to_memory(
                 self.image
                     .ctx,
@@ -983,7 +982,7 @@ impl VipsImage {
             );
             let buffer = std::slice::from_raw_parts(
                 buffer_out as *const u8,
-                buffer_buf_size as usize,
+                buffer_buf_size,
             )
             .to_vec();
             bindings::g_free(buffer_out);
@@ -1068,7 +1067,7 @@ impl VipsImage {
     }
 
     /// Reads the GType for a header field.
-    pub fn get_typeof(&self, type_: impl AsRef<[u8]>) -> Result<u64> {
+    pub fn get_typeof(&self, type_: impl AsRef<[u8]>) -> Result<usize> {
         unsafe {
             let type_name = ensure_null_terminated(type_)?;
             let gtype = bindings::vips_image_get_typeof(
@@ -1163,8 +1162,7 @@ impl VipsImage {
             );
             utils::safe_result(
                 res,
-                out,
-                move |out| {
+                || {
                     if let Ok(cstr) = CStr::from_ptr(out).to_str() {
                         cstr.to_string()
                     } else {
@@ -1207,11 +1205,10 @@ impl VipsImage {
             );
             utils::safe_result(
                 res,
-                out,
-                move |out| {
+                || {
                     std::slice::from_raw_parts(
                         out as *const u8,
-                        length as usize,
+                        length,
                     )
                     .to_vec()
                 },
@@ -1230,7 +1227,7 @@ impl VipsImage {
                 name.as_ptr(),
                 None,
                 blob.as_ptr() as *const c_void,
-                blob.len() as u64,
+                blob.len(),
             );
             Ok(())
         }
@@ -1245,7 +1242,7 @@ impl VipsImage {
                     .ctx,
                 name.as_ptr(),
                 blob.as_ptr() as *const c_void,
-                blob.len() as u64,
+                blob.len(),
             );
             Ok(())
         }
@@ -1266,8 +1263,7 @@ impl VipsImage {
             );
             utils::safe_result(
                 res,
-                out,
-                move |out| {
+                || {
                     utils::new_int_array(
                         out,
                         size as u64,
@@ -1308,8 +1304,7 @@ impl VipsImage {
             );
             utils::safe_result(
                 res,
-                out,
-                move |out| {
+                || {
                     utils::new_double_array(
                         out,
                         size as u64,

@@ -8,14 +8,11 @@ use crate::{
 };
 use std::{
     borrow::Cow,
-    ffi::{c_void, CStr, CString},
-    ptr::null_mut,
+    ffi::{c_int, c_void, CStr},
+    path::Path,
 };
 
-#[derive(Debug, Clone)]
-pub struct VipsConnection {
-    pub(crate) ctx: *mut bindings::VipsConnection,
-}
+struct VipsConnection;
 
 #[derive(Debug, Clone)]
 pub struct VipsSource {
@@ -28,9 +25,9 @@ pub struct VipsTarget {
 }
 
 impl VipsConnection {
-    pub fn connection_filename(&self) -> Option<String> {
+    fn filename(ctx: *mut bindings::VipsConnection) -> Option<String> {
         unsafe {
-            let result = bindings::vips_connection_filename(self.ctx);
+            let result = bindings::vips_connection_filename(ctx);
             if result.is_null() {
                 None
             } else {
@@ -43,9 +40,9 @@ impl VipsConnection {
         }
     }
 
-    pub fn connection_nick(&self) -> Option<String> {
+    fn nick(ctx: *mut bindings::VipsConnection) -> Option<String> {
         unsafe {
-            let result = bindings::vips_connection_nick(self.ctx);
+            let result = bindings::vips_connection_nick(ctx);
             if result.is_null() {
                 None
             } else {
@@ -74,10 +71,10 @@ impl VipsSource {
     }
 
     /// Create a source attached to a file.
-    pub fn new_from_file(filename: &str) -> Result<VipsSource> {
+    pub fn new_from_file<P: AsRef<Path>>(filename: P) -> Result<VipsSource> {
         unsafe {
-            let f = utils::new_c_string(filename)?;
-            let res = bindings::vips_source_new_from_file(f.as_ptr());
+            let filename_c_str = utils::path_to_cstring(filename)?;
+            let res = bindings::vips_source_new_from_file(filename_c_str.as_ptr());
             vips_source_result(
                 res,
                 Error::InitializationError("Could not initialise VipsSource from file".to_string()),
@@ -90,7 +87,7 @@ impl VipsSource {
         unsafe {
             let res = bindings::vips_source_new_from_memory(
                 buffer.as_ptr() as *const c_void,
-                buffer.len() as u64,
+                buffer.len(),
             );
             vips_source_result(
                 res,
@@ -149,28 +146,45 @@ impl VipsSource {
     /// Read up to length bytes from source and store the bytes in buffer.
     pub fn read(&mut self, length: u64) -> Result<Vec<u8>> {
         unsafe {
-            let bytes: *mut c_void = null_mut();
+            let mut bytes = vec![0u8; length as usize];
             let result = bindings::vips_source_read(
                 self.ctx,
-                bytes,
-                length,
+                bytes.as_mut_ptr() as *mut c_void,
+                length as usize,
             );
-            if result != -1 {
-                let buffer = Vec::from_raw_parts(
-                    bytes as *mut u8,
-                    result as usize,
-                    result as usize,
-                );
-                Ok(buffer)
-            } else {
-                Err(Error::OperationError("Error on vips read".to_string()))
-            }
+            utils::result_cond(
+                result != -1,
+                bytes,
+                Error::OperationError("Error on vips_source_read".to_string()),
+            )
         }
     }
 
     /// Whether the source can be efficiently mapped into memory.
     pub fn is_mappable(&self) -> bool {
         unsafe { bindings::vips_source_is_mappable(self.ctx) == 1 }
+    }
+
+    /// Map the source entirely into memory and return a pointer to the start.
+    pub fn map(&self) -> Result<Vec<u8>> {
+        unsafe {
+            let mut length = 0;
+            let result = bindings::vips_source_map(
+                self.ctx,
+                &mut length,
+            );
+            utils::safe_result_cond(
+                !result.is_null(),
+                || {
+                    std::slice::from_raw_parts(
+                        result as *mut u8,
+                        length,
+                    )
+                    .to_vec()
+                },
+                Error::OperationError("Error on vips map".to_string()),
+            )
+        }
     }
 
     /// Move the file read position.
@@ -181,11 +195,11 @@ impl VipsSource {
                 offset,
                 whence,
             );
-            if result == -1 {
-                Err(Error::OperationError("Error on vips seek".to_string()))
-            } else {
-                Ok(result)
-            }
+            utils::result_cond(
+                result != -1,
+                result,
+                Error::OperationError("Error on vips seek".to_string()),
+            )
         }
     }
 
@@ -193,11 +207,11 @@ impl VipsSource {
     pub fn rewind(&mut self) -> Result<()> {
         unsafe {
             let result = bindings::vips_source_rewind(self.ctx);
-            if result == -1 {
-                Err(Error::OperationError("Error on vips rewind".to_string()))
-            } else {
-                Ok(())
-            }
+            utils::result_cond(
+                result != -1,
+                (),
+                Error::OperationError("Error on vips rewind".to_string()),
+            )
         }
     }
 
@@ -205,38 +219,23 @@ impl VipsSource {
     pub fn length(&self) -> Result<i64> {
         unsafe {
             let result = bindings::vips_source_length(self.ctx);
-            if result == -1 {
-                Err(Error::OperationError("Error on vips length".to_string()))
-            } else {
-                Ok(result)
-            }
+            utils::result_cond(
+                result != -1,
+                result,
+                Error::OperationError("Error on vips length".to_string()),
+            )
         }
     }
 }
 
-impl<'a> VipsSource {
-    /// Map the source entirely into memory and return a pointer to the start.
-    pub fn map(&'a self) -> Result<&'a [u8]> {
-        unsafe {
-            let length: *mut u64 = null_mut();
-            let result = bindings::vips_source_map(
-                self.ctx,
-                length,
-            );
-            if length.is_null() {
-                Err(Error::OperationError("Error on vips map".to_string()))
-            } else {
-                let size = (*length)
-                    .try_into()
-                    .map_err(|_| Error::OperationError("Can't get size of array".to_string()))?;
-                Ok(
-                    std::slice::from_raw_parts(
-                        result as *mut u8,
-                        size,
-                    ),
-                )
-            }
-        }
+// VipsConnection for VipsSource
+impl VipsSource {
+    pub fn filename(&self) -> Option<String> {
+        unsafe { VipsConnection::filename(&mut (*self.ctx).parent_object) }
+    }
+
+    pub fn nick(&self) -> Option<String> {
+        unsafe { VipsConnection::nick(&mut (*self.ctx).parent_object) }
     }
 }
 
@@ -255,10 +254,10 @@ impl VipsTarget {
     }
 
     /// Create a target attached to a file.
-    pub fn new_to_file(filename: &str) -> Result<VipsTarget> {
+    pub fn new_to_file<P: AsRef<Path>>(filename: P) -> Result<VipsTarget> {
         unsafe {
-            let f = utils::new_c_string(filename)?;
-            let res = bindings::vips_target_new_to_file(f.as_ptr());
+            let filename_c_str = utils::path_to_cstring(filename)?;
+            let res = bindings::vips_target_new_to_file(filename_c_str.as_ptr());
             vips_target_result(
                 res,
                 Error::InitializationError("Could not initialise VipsTarget from file".to_string()),
@@ -279,25 +278,18 @@ impl VipsTarget {
         }
     }
 
-    /// Call this at the end of write to make the target do any cleaning up.
-    pub fn end(self) {
-        unsafe {
-            bindings::vips_target_end(self.ctx);
-        }
-    }
-
     /// Write a single character ch to target.
     pub fn putc(&mut self, ch: char) -> Result<()> {
         unsafe {
             let res = bindings::vips_target_putc(
                 self.ctx,
-                ch as i32,
+                ch as c_int,
             );
-            if res == -1 {
-                Err(Error::OperationError("Could not write to buffer".to_string()))
-            } else {
-                Ok(())
-            }
+            utils::result_cond(
+                res != -1,
+                (),
+                Error::OperationError("Could not write to target".to_string()),
+            )
         }
     }
 
@@ -307,47 +299,52 @@ impl VipsTarget {
             let res = bindings::vips_target_write(
                 self.ctx,
                 buffer.as_ptr() as *const c_void,
-                buffer.len() as u64,
+                buffer.len(),
             );
-            if res == -1 {
-                Err(Error::OperationError("Could not write to buffer".to_string()))
-            } else {
-                Ok(())
-            }
+            utils::result_cond(
+                res != -1,
+                (),
+                Error::OperationError("Could not write to target".to_string()),
+            )
         }
     }
 
-    /// Write str to target.
-    pub fn write_amp(&mut self, text: &str) -> Result<()> {
-        unsafe {
-            let cstr = CString::new(text)
-                .map_err(|_| Error::OperationError("Cannot initialize C string".to_string()))?;
-            let res = bindings::vips_target_write_amp(
-                self.ctx,
-                cstr.as_ptr(),
-            );
-            if res == -1 {
-                Err(Error::OperationError("Could not write to buffer".to_string()))
-            } else {
-                Ok(())
-            }
-        }
-    }
-
-    /// Write a null-terminated string to target.
+    /// Write a string to target.
     pub fn writes(&mut self, text: &str) -> Result<()> {
         unsafe {
-            let cstr = CString::new(text)
-                .map_err(|_| Error::OperationError("Cannot initialize C string".to_string()))?;
+            let cstr = utils::new_c_string(text)?;
             let res = bindings::vips_target_writes(
                 self.ctx,
                 cstr.as_ptr(),
             );
-            if res == -1 {
-                Err(Error::OperationError("Could not write to buffer".to_string()))
-            } else {
-                Ok(())
-            }
+            utils::result_cond(
+                res != -1,
+                (),
+                Error::OperationError("Could not write to target".to_string()),
+            )
+        }
+    }
+
+    /// Write str to target, but escape stuff that xml hates in text.
+    pub fn write_amp(&mut self, text: &str) -> Result<()> {
+        unsafe {
+            let cstr = utils::new_c_string(text)?;
+            let res = bindings::vips_target_write_amp(
+                self.ctx,
+                cstr.as_ptr(),
+            );
+            utils::result_cond(
+                res != -1,
+                (),
+                Error::OperationError("Could not write to target".to_string()),
+            )
+        }
+    }
+
+    /// Call this at the end of write to make the target do any cleaning up.
+    pub fn end(self) {
+        unsafe {
+            bindings::vips_target_end(self.ctx);
         }
     }
 
@@ -362,30 +359,28 @@ impl VipsTarget {
             {
                 return Vec::new();
             }
-            let mut size: u64 = 0;
+            let mut size = 0;
             let bytes = bindings::vips_blob_get(
                 (*self.ctx).blob,
                 &mut size,
             );
             let slice = std::slice::from_raw_parts(
                 bytes as *const u8,
-                size as usize,
+                size,
             );
             slice.to_vec()
         }
     }
 }
 
-impl Drop for VipsConnection {
-    fn drop(&mut self) {
-        unsafe {
-            if !self
-                .ctx
-                .is_null()
-            {
-                bindings::g_object_unref(self.ctx as *mut c_void);
-            }
-        }
+// VipsConnection for VipsTarget
+impl VipsTarget {
+    pub fn filename(&self) -> Option<String> {
+        unsafe { VipsConnection::filename(&mut (*self.ctx).parent_object) }
+    }
+
+    pub fn nick(&self) -> Option<String> {
+        unsafe { VipsConnection::nick(&mut (*self.ctx).parent_object) }
     }
 }
 
@@ -411,22 +406,6 @@ impl Drop for VipsTarget {
             {
                 bindings::g_object_unref(self.ctx as *mut c_void);
             }
-        }
-    }
-}
-
-impl From<*mut bindings::VipsSource> for VipsSource {
-    fn from(value: *mut bindings::VipsSource) -> Self {
-        Self {
-            ctx: value,
-        }
-    }
-}
-
-impl From<*mut bindings::VipsTarget> for VipsTarget {
-    fn from(value: *mut bindings::VipsTarget) -> Self {
-        Self {
-            ctx: value,
         }
     }
 }

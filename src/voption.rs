@@ -243,7 +243,7 @@ fn get_operation(
                     if length > 0 {
                         let slice = std::slice::from_raw_parts(
                             ptr as *const u8,
-                            length as usize,
+                            length,
                         );
                         bytes.extend(slice);
                     }

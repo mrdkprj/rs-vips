@@ -1479,13 +1479,13 @@ fn main() {
         // ignore warnings
         .raw_line("#![allow(warnings)]")
         // replace c_long with rust type
-        .raw_line("pub type size_t = u64;")
+        .raw_line("pub type size_t = usize;")
         .raw_line("pub type gint64 = i64;")
         .raw_line("pub type guint64 = u64;")
-        .raw_line("pub type gssize = u64;")
-        .raw_line("pub type gsize = u64;")
-        .raw_line("pub type gintptr = i64;")
-        .raw_line("pub type guintptr = u64;")
+        .raw_line("pub type gssize = isize;")
+        .raw_line("pub type gsize = usize;")
+        .raw_line("pub type gintptr = isize;")
+        .raw_line("pub type guintptr = usize;")
         /*
         The previous version of bindgen(v0.53) that was used to generate the bindings had the
         following parameter (size_t_is_usize) set to false by default. In the current
