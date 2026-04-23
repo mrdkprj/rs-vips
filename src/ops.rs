@@ -2,13 +2,13 @@
 // (c) Copyright 2025 mrdkprj
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::upper_case_acronyms)]
-use crate::connection::VipsSource;
-use crate::connection::VipsTarget;
 use crate::error::*;
 use crate::utils;
 use crate::voption::{call, Setter, VOption};
 use crate::Result;
 use crate::VipsImage;
+use crate::VipsSource;
+use crate::VipsTarget;
 use std::ptr::null_mut;
 
 #[derive(Copy, Clone, Debug, FromPrimitive, ToPrimitive, PartialEq, PartialOrd)]

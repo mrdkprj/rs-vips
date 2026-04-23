@@ -1,6 +1,11 @@
 // (c) Copyright 2019-2025 OLX
 // (c) Copyright 2025 mrdkprj
-use crate::{bindings, error::Error, utils, Result};
+use crate::{
+    bindings,
+    error::Error,
+    utils::{new_c_string, result_cond},
+    Result,
+};
 use std::ffi::c_void;
 
 #[derive(Debug, Clone)]
@@ -12,9 +17,9 @@ impl VipsInterpolate {
     /// Look up an interpolator from a nickname and make one.
     pub fn new_from_name(name: &str) -> Result<VipsInterpolate> {
         unsafe {
-            let nickname = utils::new_c_string(name)?;
+            let nickname = new_c_string(name)?;
             let res = bindings::vips_interpolate_new(nickname.as_ptr());
-            utils::result_cond(
+            result_cond(
                 !res.is_null(),
                 VipsInterpolate {
                     ctx: res,
@@ -64,14 +69,6 @@ impl Drop for VipsInterpolate {
             {
                 bindings::g_object_unref(self.ctx as *mut c_void);
             }
-        }
-    }
-}
-
-impl From<*mut bindings::VipsInterpolate> for VipsInterpolate {
-    fn from(value: *mut bindings::VipsInterpolate) -> Self {
-        Self {
-            ctx: value,
         }
     }
 }

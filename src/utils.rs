@@ -3,12 +3,7 @@
 use crate::bindings::{
     self, g_log, g_type_from_name, vips_error_buffer, GLogLevelFlags_G_LOG_LEVEL_WARNING,
 };
-use crate::error::Error;
-use crate::{
-    connection::{VipsSource, VipsTarget},
-    Result,
-};
-use crate::{Image, VipsImage};
+use crate::{error::Error, Image, Result, VipsImage};
 use std::{ffi::CString, path::Path, rc::Rc};
 
 pub(crate) fn vips_image_result(out: *mut bindings::VipsImage, err: Error) -> Result<VipsImage> {
@@ -35,32 +30,8 @@ pub(crate) fn vips_image_result_ext(out: VipsImage, err: Error) -> Result<VipsIm
     }
 }
 
-pub(crate) fn vips_source_result(res: *mut bindings::VipsSource, err: Error) -> Result<VipsSource> {
-    if res.is_null() {
-        Err(err.extend())
-    } else {
-        Ok(
-            VipsSource {
-                ctx: res,
-            },
-        )
-    }
-}
-
-pub(crate) fn vips_target_result(res: *mut bindings::VipsTarget, err: Error) -> Result<VipsTarget> {
-    if res.is_null() {
-        Err(err.extend())
-    } else {
-        Ok(
-            VipsTarget {
-                ctx: res,
-            },
-        )
-    }
-}
-
 #[inline]
-pub fn result<T>(res: i32, output: T, error: Error) -> Result<T> {
+pub(crate) fn result<T>(res: i32, output: T, error: Error) -> Result<T> {
     if res == 0 {
         Ok(output)
     } else {
@@ -69,7 +40,7 @@ pub fn result<T>(res: i32, output: T, error: Error) -> Result<T> {
 }
 
 #[inline]
-pub fn result_cond<T>(cond: bool, output: T, error: Error) -> Result<T> {
+pub(crate) fn result_cond<T>(cond: bool, output: T, error: Error) -> Result<T> {
     if cond {
         Ok(output)
     } else {
@@ -167,22 +138,20 @@ pub(crate) fn new_vipsimage(
 
 #[inline]
 pub(crate) unsafe fn new_int_array(array: *mut i32, size: u64) -> Vec<i32> {
-    Vec::from(
-        std::slice::from_raw_parts(
-            array,
-            size as usize,
-        ),
+    std::slice::from_raw_parts(
+        array,
+        size as usize,
     )
+    .to_vec()
 }
 
 #[inline]
 pub(crate) unsafe fn new_double_array(array: *mut f64, size: u64) -> Vec<f64> {
-    Vec::from(
-        std::slice::from_raw_parts(
-            array,
-            size as usize,
-        ),
+    std::slice::from_raw_parts(
+        array,
+        size as usize,
     )
+    .to_vec()
 }
 
 pub(crate) const G_TYPE_BOOLEAN: &str = "gboolean";

@@ -9,28 +9,28 @@ extern crate num_derive;
 extern crate num_traits;
 
 pub mod bindings;
-/// VipsConnection, VipsSource, VipsTarget
 mod connection;
 pub mod error;
-/// VipsImage
 mod image;
-/// VipsInterpolate
 mod interpolate;
 pub mod operator;
 /// Vips Enumerations
 pub mod ops;
-/// VipsRegion
 mod region;
-pub mod utils;
+mod source;
+mod target;
+mod utils;
 /// VOption, a list of name-value pairs
 pub mod voption;
 
-pub use connection::*;
 use error::Error;
 pub use image::*;
 pub use interpolate::*;
 pub use region::*;
+pub use source::*;
 use std::ffi::CStr;
+pub use target::*;
+
 pub type Result<T> = std::result::Result<T, error::Error>;
 
 pub struct Vips;
@@ -68,7 +68,11 @@ impl Vips {
     /// Get the VIPS version as a static string, including a build date and time.
     pub fn version_string() -> Result<String> {
         unsafe {
-            let version = CStr::from_ptr(bindings::vips_version_string());
+            let version_string = bindings::vips_version_string();
+            if version_string.is_null() {
+                return Err(Error::InitializationError("Cannot get version_string".to_string()));
+            }
+            let version = CStr::from_ptr(version_string);
             let version_str = version
                 .to_str()
                 .map_err(|_| Error::InitializationError("Error initializing string".to_string()))?;
@@ -86,38 +90,15 @@ impl Vips {
     /// Get a pointer to the start of the error buffer as string
     pub fn error_buffer() -> Result<String> {
         unsafe {
-            let buffer = CStr::from_ptr(bindings::vips_error_buffer());
+            let error_buffer = bindings::vips_error_buffer();
+            if error_buffer.is_null() {
+                return Ok(String::new());
+            }
+            let buffer = CStr::from_ptr(error_buffer);
             let buffer_str = buffer
                 .to_str()
                 .map_err(|_| Error::InitializationError("Error initializing string".to_string()))?;
             Ok(buffer_str.to_string())
-        }
-    }
-
-    /// Format the string in the style of printf() and append to the error buffer.
-    pub fn error(domain: &str, error: &str) -> Result<()> {
-        unsafe {
-            let c_str_error = utils::new_c_string(error)?;
-            let c_str_domain = utils::new_c_string(domain)?;
-            bindings::vips_error(
-                c_str_domain.as_ptr(),
-                c_str_error.as_ptr(),
-            );
-            Ok(())
-        }
-    }
-
-    /// Format the string in the style of printf() and append to the error buffer. Then create and append a localised message based on the system error code, usually the value of errno
-    pub fn error_system(code: i32, domain: &str, error: &str) -> Result<()> {
-        unsafe {
-            let c_str_error = utils::new_c_string(error)?;
-            let c_str_domain = utils::new_c_string(domain)?;
-            bindings::vips_error_system(
-                code,
-                c_str_domain.as_ptr(),
-                c_str_error.as_ptr(),
-            );
-            Ok(())
         }
     }
 

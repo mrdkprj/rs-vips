@@ -1,7 +1,8 @@
 use crate::{
     bindings::{self, free},
     error::Error,
-    utils, Result, VipsImage,
+    utils::{result_cond, safe_result_cond},
+    Result, VipsImage,
 };
 use std::ffi::c_void;
 
@@ -17,7 +18,7 @@ impl VipsRegion {
                     .image
                     .ctx,
             );
-            utils::result_cond(
+            result_cond(
                 !res.is_null(),
                 VipsRegion {
                     ctx: res,
@@ -47,14 +48,10 @@ impl VipsRegion {
                 height,
                 &mut len,
             );
-            utils::safe_result_cond(
+            safe_result_cond(
                 !ptr.is_null(),
                 || {
-                    let buffer = std::slice::from_raw_parts(
-                        ptr as *const u8,
-                        len,
-                    )
-                    .to_vec();
+                    let buffer = std::slice::from_raw_parts(ptr, len).to_vec();
                     free(ptr as *mut c_void);
                     buffer
                 },

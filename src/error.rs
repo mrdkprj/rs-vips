@@ -1,6 +1,5 @@
 // (c) Copyright 2025 mrdkprj
-use crate::bindings::vips_error_buffer;
-use std::ffi::CStr;
+use crate::Vips;
 
 #[derive(Debug)]
 pub enum Error {
@@ -35,12 +34,7 @@ impl std::fmt::Display for Error {
 
 impl Error {
     pub(crate) fn extend(self) -> Self {
-        let erro_buffer = unsafe { vips_error_buffer() };
-        if erro_buffer.is_null() {
-            return self;
-        }
-
-        if let Ok(detail) = unsafe { CStr::from_ptr(erro_buffer).to_str() } {
+        if let Ok(detail) = Vips::error_buffer() {
             match self {
                 Error::InitializationError(msg) => Error::InitializationError(format!(
                     "{}. {}",

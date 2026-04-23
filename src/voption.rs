@@ -568,8 +568,8 @@ enum VipsValue<'a> {
     ImageArray(&'a [crate::VipsImage]),
     Blob(&'a [u8]),
     MutBlob(&'a mut Vec<u8>),
-    Target(&'a crate::connection::VipsTarget),
-    Source(&'a crate::connection::VipsSource),
+    Target(&'a crate::VipsTarget),
+    Source(&'a crate::VipsSource),
     Interpolate(&'a crate::interpolate::VipsInterpolate),
 }
 
@@ -959,8 +959,8 @@ impl<'a> Setter<'a, &'a [u8]> for VOption<'a> {
 }
 
 // input VipsTarget
-impl<'a> Setter<'a, &'a crate::connection::VipsTarget> for VOption<'a> {
-    fn set(mut self, name: &str, value: &'a crate::connection::VipsTarget) -> VOption<'a> {
+impl<'a> Setter<'a, &'a crate::VipsTarget> for VOption<'a> {
+    fn set(mut self, name: &str, value: &'a crate::VipsTarget) -> VOption<'a> {
         self.options
             .push(
                 Pair::input(
@@ -970,7 +970,7 @@ impl<'a> Setter<'a, &'a crate::connection::VipsTarget> for VOption<'a> {
             );
         self
     }
-    fn add(&mut self, name: &str, value: &'a crate::connection::VipsTarget) {
+    fn add(&mut self, name: &str, value: &'a crate::VipsTarget) {
         self.options
             .push(
                 Pair::input(
@@ -982,8 +982,8 @@ impl<'a> Setter<'a, &'a crate::connection::VipsTarget> for VOption<'a> {
 }
 
 // input VipsSource
-impl<'a> Setter<'a, &'a crate::connection::VipsSource> for VOption<'a> {
-    fn set(mut self, name: &str, value: &'a crate::connection::VipsSource) -> VOption<'a> {
+impl<'a> Setter<'a, &'a crate::VipsSource> for VOption<'a> {
+    fn set(mut self, name: &str, value: &'a crate::VipsSource) -> VOption<'a> {
         self.options
             .push(
                 Pair::input(
@@ -993,7 +993,7 @@ impl<'a> Setter<'a, &'a crate::connection::VipsSource> for VOption<'a> {
             );
         self
     }
-    fn add(&mut self, name: &str, value: &'a crate::connection::VipsSource) {
+    fn add(&mut self, name: &str, value: &'a crate::VipsSource) {
         self.options
             .push(
                 Pair::input(

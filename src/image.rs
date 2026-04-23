@@ -2,7 +2,6 @@
 // (c) Copyright 2025 mrdkprj
 use crate::{
     bindings,
-    connection::{VipsSource, VipsTarget},
     error::Error,
     ops::*,
     utils::{
@@ -10,7 +9,7 @@ use crate::{
         path_to_cstring, vips_image_result, vips_image_result_ext,
     },
     voption::{call, call_option_string_, Setter, VOption},
-    Result,
+    Result, VipsSource, VipsTarget,
 };
 use num_traits::{FromPrimitive, ToPrimitive};
 use std::{
@@ -278,7 +277,7 @@ impl VipsImage {
             vips_image_result_ext(
                 out_out,
                 Error::InitializationError(
-                    "Could not initialise VipsImage from buffer".to_string(),
+                    "Could not initialise VipsImage from source".to_string(),
                 ),
             )
         }
@@ -510,8 +509,12 @@ impl VipsImage {
                 self.image
                     .ctx,
             );
-            let res = CStr::from_ptr(filename);
-            res.to_str()
+            if filename.is_null() {
+                Ok("")
+            } else {
+                let res = CStr::from_ptr(filename);
+                res.to_str()
+            }
         }
     }
 
@@ -940,10 +943,9 @@ impl VipsImage {
     ) -> Result<()> {
         unsafe {
             let suffix_c_str = new_c_string(suffix)?;
-            let filename = bindings::vips_filename_get_filename(suffix_c_str.as_ptr());
             let string_options = bindings::vips_filename_get_options(suffix_c_str.as_ptr());
 
-            let operation = bindings::vips_foreign_find_save_target(filename);
+            let operation = bindings::vips_foreign_find_save_target(suffix_c_str.as_ptr());
 
             if operation.is_null() {
                 return utils::result(
@@ -1218,7 +1220,11 @@ impl VipsImage {
     }
 
     /// Attaches data as a metadata item on image under the name.
-    pub fn set_blob(&mut self, name: impl AsRef<[u8]>, blob: &[u8]) -> Result<()> {
+    ///
+    /// # Safety
+    ///
+    /// This does not take a copy of the memory area. Use `set_blob_copy` instead.
+    pub unsafe fn set_blob(&mut self, name: impl AsRef<[u8]>, blob: &[u8]) -> Result<()> {
         unsafe {
             let name = ensure_null_terminated(name)?;
             bindings::vips_image_set_blob(
