@@ -65,7 +65,7 @@ To ensure thread safety, this crate internally makes a copy of the image in memo
 
 Be aware that `VipsImage` struct is not thread-safe at v0.6.0 and earlier. 
 
-### Example
+## Example
 
 ```rust
 use rs_vips::{voption::{VOption, Setter}, Vips, VipsImage};
