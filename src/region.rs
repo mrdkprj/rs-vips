@@ -6,6 +6,7 @@ use crate::{
 };
 use std::ffi::c_void;
 
+/// A small, rectangular part of an image
 pub struct VipsRegion {
     pub(crate) ctx: *mut bindings::VipsRegion,
 }

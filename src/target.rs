@@ -13,12 +13,120 @@ use std::{
     path::Path,
 };
 
+/// A unified interface for writing data to various output destinations
 #[derive(Debug, Clone)]
 pub struct VipsTarget {
     pub(crate) ctx: *mut bindings::VipsTarget,
 }
 
+pub trait Writer: Write + Read + Seek + Send + 'static {}
+impl<T: Write + Read + Seek + Send + 'static> Writer for T {}
+struct TargetContext {
+    writer: Box<dyn Writer>,
+}
+
 impl VipsTarget {
+    /// Create a target from a writer.
+    pub fn new_to_writer<W: Writer>(output: W) -> Result<VipsTarget> {
+        unsafe {
+            let target = bindings::vips_target_custom_new();
+
+            if target.is_null() {
+                return Err(
+                    Error::InitializationError("Cannot create VipsTargetCustom".to_string()),
+                );
+            }
+
+            let context = Box::new(
+                TargetContext {
+                    writer: Box::new(output),
+                },
+            );
+
+            let user_data = Box::into_raw(context) as *mut c_void;
+
+            bindings::g_signal_connect_data(
+                target as *mut c_void,
+                c"write".as_ptr(),
+                Some(
+                    std::mem::transmute::<
+                        unsafe extern "C" fn(
+                            target: *mut bindings::VipsTargetCustom,
+                            data: *const c_void,
+                            length: bindings::gint64,
+                            user_data: *mut c_void,
+                        ) -> bindings::gint64,
+                        unsafe extern "C" fn(),
+                    >(on_write),
+                ),
+                user_data,
+                None,
+                0,
+            );
+
+            bindings::g_signal_connect_data(
+                target as *mut c_void,
+                c"read".as_ptr(),
+                Some(
+                    std::mem::transmute::<
+                        unsafe extern "C" fn(
+                            target: *mut bindings::VipsTargetCustom,
+                            buffer: *mut c_void,
+                            length: gint64,
+                            user_data: *mut c_void,
+                        ) -> gint64,
+                        unsafe extern "C" fn(),
+                    >(on_read),
+                ),
+                user_data,
+                None,
+                0,
+            );
+
+            bindings::g_signal_connect_data(
+                target as *mut c_void,
+                c"seek".as_ptr(),
+                Some(
+                    std::mem::transmute::<
+                        unsafe extern "C" fn(
+                            target: *mut bindings::VipsTargetCustom,
+                            offset: gint64,
+                            whence: c_int,
+                            user_data: *mut c_void,
+                        ) -> gint64,
+                        unsafe extern "C" fn(),
+                    >(on_seek),
+                ),
+                user_data,
+                None,
+                0,
+            );
+
+            bindings::g_signal_connect_data(
+                target as *mut c_void,
+                c"end".as_ptr(),
+                Some(
+                    std::mem::transmute::<
+                        unsafe extern "C" fn(
+                            target: *mut bindings::VipsTargetCustom,
+                            user_data: *mut c_void,
+                        ) -> c_int,
+                        unsafe extern "C" fn(),
+                    >(on_end),
+                ),
+                user_data,
+                None,
+                0,
+            );
+
+            Ok(
+                VipsTarget {
+                    ctx: target as *mut bindings::VipsTarget,
+                },
+            )
+        }
+    }
+
     /// Create a target attached to a file descriptor. descriptor is kept open until the target is finalized.
     pub fn new_to_descriptor(descriptor: i32) -> Result<VipsTarget> {
         unsafe {
@@ -159,124 +267,15 @@ impl VipsTarget {
             slice.to_vec()
         }
     }
-}
 
-// VipsConnection for VipsTarget
-impl VipsTarget {
+    // VipsConnection for VipsTarget
     pub fn filename(&self) -> Option<String> {
         unsafe { VipsConnection::filename(&mut (*self.ctx).parent_object) }
     }
 
+    // VipsConnection for VipsTarget
     pub fn nick(&self) -> Option<String> {
         unsafe { VipsConnection::nick(&mut (*self.ctx).parent_object) }
-    }
-}
-
-pub trait Writer: Write + Read + Seek + Send + 'static {}
-impl<T: Write + Read + Seek + Send + 'static> Writer for T {}
-struct TargetContext {
-    writer: Box<dyn Writer>,
-}
-
-impl VipsTarget {
-    pub fn new_to_writer<W: Writer>(output: W) -> Result<VipsTarget> {
-        unsafe {
-            let target = bindings::vips_target_custom_new();
-
-            if target.is_null() {
-                return Err(
-                    Error::InitializationError("Cannot create VipsTargetCustom".to_string()),
-                );
-            }
-
-            let context = Box::new(
-                TargetContext {
-                    writer: Box::new(output),
-                },
-            );
-
-            let user_data = Box::into_raw(context) as *mut c_void;
-
-            bindings::g_signal_connect_data(
-                target as *mut c_void,
-                c"write".as_ptr(),
-                Some(
-                    std::mem::transmute::<
-                        unsafe extern "C" fn(
-                            target: *mut bindings::VipsTargetCustom,
-                            data: *const c_void,
-                            length: bindings::gint64,
-                            user_data: *mut c_void,
-                        ) -> bindings::gint64,
-                        unsafe extern "C" fn(),
-                    >(on_write),
-                ),
-                user_data,
-                None,
-                0,
-            );
-
-            bindings::g_signal_connect_data(
-                target as *mut c_void,
-                c"read".as_ptr(),
-                Some(
-                    std::mem::transmute::<
-                        unsafe extern "C" fn(
-                            target: *mut bindings::VipsTargetCustom,
-                            buffer: *mut c_void,
-                            length: gint64,
-                            user_data: *mut c_void,
-                        ) -> gint64,
-                        unsafe extern "C" fn(),
-                    >(on_read),
-                ),
-                user_data,
-                None,
-                0,
-            );
-
-            bindings::g_signal_connect_data(
-                target as *mut c_void,
-                c"seek".as_ptr(),
-                Some(
-                    std::mem::transmute::<
-                        unsafe extern "C" fn(
-                            target: *mut bindings::VipsTargetCustom,
-                            offset: gint64,
-                            whence: c_int,
-                            user_data: *mut c_void,
-                        ) -> gint64,
-                        unsafe extern "C" fn(),
-                    >(on_seek),
-                ),
-                user_data,
-                None,
-                0,
-            );
-
-            bindings::g_signal_connect_data(
-                target as *mut c_void,
-                c"end".as_ptr(),
-                Some(
-                    std::mem::transmute::<
-                        unsafe extern "C" fn(
-                            target: *mut bindings::VipsTargetCustom,
-                            user_data: *mut c_void,
-                        ) -> c_int,
-                        unsafe extern "C" fn(),
-                    >(on_end),
-                ),
-                user_data,
-                None,
-                0,
-            );
-
-            Ok(
-                VipsTarget {
-                    ctx: target as *mut bindings::VipsTarget,
-                },
-            )
-        }
     }
 }
 

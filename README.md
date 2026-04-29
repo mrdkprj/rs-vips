@@ -9,7 +9,7 @@ Rust bindings for libvips. Generated from `version 8.18.1`.
 
 This is a safe wrapper for [libvips](https://libvips.github.io/libvips/) C library. It is made on top of the C API and based on the introspection API results.
 
-This crate itself is not documented, but it has no logic or special behavior in comparison to libvips itself. All calls and types described in the official libvips [docs](https://libvips.github.io/libvips/API/current/) are just translated to rust types. All defaults also respected.
+This crate itself is not fully documented, but it has no logic or special behavior in comparison to libvips itself. All calls and types described in the official libvips [docs](https://libvips.github.io/libvips/API/current/) are just translated to rust types. All defaults also respected.
 
 ## About this crate
 
@@ -24,15 +24,15 @@ This crate is different from it in that
 
 ## How the crate was written
 
-As a first step, it runs the bindgen to generate unsafe calls to the C libvips library. After this is generated, a C code is compiled and executed. This code introspects the operations and outputs them as text. This text is parsed and then generates the `ops.rs` modules.
+As a first step, it runs the bindgen to generate unsafe calls to the C libvips library. After this is generated, a C code is compiled and executed. This code introspects the operations and outputs them as text. This text is parsed and then generates the `ops.rs` and `enums.rs` modules.
 
 Those are basically safe wrappers on top of the also genereated bindings. Though not widely tested, all the memory cleaning should be working as expected. Important to note that all "vips" prefixes in the naming were removed from the operations's names.
 
-Both the bindings and the generated operations were pushed to crates.io with most of optional dependencies from libvips included. Be careful when calling functions that are dependent on those sub-dependencies (most of them format related).
+Both the bindings and the generated modules were pushed to crates.io with most of optional dependencies from libvips included. Be careful when calling functions that are dependent on those sub-dependencies (most of them format related).
 
 ### Contributing
 
-Everything in ops.rs (and of course bindings.rs) is generated programmatically. You need to make changes for these files to the builder for these. Then, run the following shell scripts from the `generator` directory.
+Everything in ops.rs and enums.rs (and of course bindings.rs) is generated programmatically. You need to make changes for these files to the builder for these. Then, run the following shell scripts from the `generator` directory.
 
 ```
 $ ./build.sh     # Builds the libvips-builder docker image
@@ -45,7 +45,7 @@ Vips needs to be initialized. You have to call `Vips::init()` at least once befo
 
 Shutdown is optional. You can shut down by `Vips::shutdown()`. Once Vips is shut down, all operations including `Vips::init()` are no longer available.  
 
-Many vips operations have optional arguments. The ones that have have been implemented with too variants by this crate. Basically there'll be a regular call with only the required parameters and an additional with the suffix `with_opts` which takes `VOption` containing optional arguments.  
+Many vips operations have optional arguments. Basically there'll be a regular call with only the required parameters and an additional with the suffix `with_opts` which takes `VOption` containing optional arguments.  
 
 ```rust
 let option = VOption::new().set("embedded", true).set("depth", 16);
@@ -53,7 +53,17 @@ let option = VOption::new().set("embedded", true).set("depth", 16);
 
 The error messages in the libvips error buffer are appended to the errors themselves. 
 
-Most (if not all) vips operations don't mutate the `VipsImage` object, so they'll return a new object for this. The implementation of `VipsImage` in this crate takes care of freeing the internal pointer after it is dropped. <span style="color:red">Be aware that the VipsImage object is not thread safe in the moment.</span>. 
+Most (if not all) vips operations don't mutate the underlying `VipsImage` object, so they'll return a new object for this. The implementation of `VipsImage` in this crate takes care of freeing the internal pointer after it is dropped. 
+
+## Threads
+libvips is threaded and thread-safe.  
+
+`VipsImage` struct is thread-safe as its underlying VipsImage object is immutable and can be shared between threads.  
+The exception is the drawing operations, such as `draw_circle()`. These operations modify their input image.  
+
+To ensure thread safety, this crate internally makes a copy of the image in memory before calling the draw operation by [vips_image_copy_memory](https://www.libvips.org/API/current/method.Image.copy_memory.html).  
+
+Be aware that `VipsImage` struct is not thread-safe at v0.6.0 and earlier. 
 
 ### Example
 
@@ -87,7 +97,7 @@ fn main() {
             .set("optimize_scans", true)
             .set("optimize_coding", true),
     ) {
-        Err(_) => println!("error: {}", Vips::error_buffer().unwrap()),
+        Err(ex) => println!("error: {}", ex),
         Ok(_) => println!("Great Success!"),
     }
 

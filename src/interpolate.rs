@@ -8,6 +8,7 @@ use crate::{
 };
 use std::ffi::c_void;
 
+/// Base struct for the various interpolation functions
 #[derive(Debug, Clone)]
 pub struct VipsInterpolate {
     pub(crate) ctx: *mut bindings::VipsInterpolate,

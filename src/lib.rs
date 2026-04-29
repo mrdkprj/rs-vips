@@ -1,5 +1,93 @@
 // (c) Copyright 2019-2025 OLX
 // (c) Copyright 2025 mrdkprj
+
+#![allow(clippy::needless_doctest_main)]
+//! This is a safe wrapper for [libvips](https://libvips.github.io/libvips/) C library. It is made on top of the C API and based on the introspection API results.
+//!
+//! This crate itself is not well documented, but it has no logic or special behavior in comparison to libvips itself. All calls and types described in the official libvips [docs](https://libvips.github.io/libvips/API/current/) are just translated to rust types. All defaults also respected.
+//!
+//! ## About this crate
+//!
+//! This is a fork of [libvips-rust-bindings](https://github.com/olxgroup-oss/libvips-rust-bindings).
+//!
+//! This crate is different from it in that
+//!
+//! - [`VipsImage`] implements vips operations
+//! - this uses [`voption::VOption`] for optional arguments of some vips operations instead of structs to prevent unnecessary default values
+//! - this supports operator overloads
+//! - this supports some operations to VipsImage like [`VipsImage::get_int()`] and [`VipsImage::set_int()`].
+//!
+//! ## How to use it
+//!
+//! Vips needs to be initialized. You have to call [`Vips::init()`] at least once before any operations.
+//!
+//! Shutdown is optional. You can shut down by [`Vips::shutdown()`]. Once Vips is shut down, all operations including [`Vips::init()`] are no longer available.
+//!
+//! Many vips operations have optional arguments. Basically there'll be a regular call with only the required parameters and an additional with the suffix `with_opts` which takes [`voption::VOption`] containing optional arguments.
+//!
+//! ```no_run
+//! let option = VOption::new().set("embedded", true).set("depth", 16);
+//! ```
+//!
+//! The error messages in the libvips error buffer are appended to the errors themselves.
+//!
+//! Most (if not all) vips operations don't mutate the underlying `VipsImage` object, so they'll return a new object for this. The implementation of `VipsImage` in this crate takes care of freeing the internal pointer after it is dropped.
+//!
+//! ## Threads
+//! libvips is threaded and thread-safe.
+//!
+//! [`VipsImage`] is thread-safe as its underlying `VipsImage` object is immutable and can be shared between threads.
+//!
+//! The exception is the drawing operations, such as [`VipsImage::draw_circle()`]. These operations modify their input image.
+//!
+//! To ensure thread safety, this crate internally makes a copy of the image in memory before calling the draw operation by [vips_image_copy_memory](https://www.libvips.org/API/current/method.Image.copy_memory.html).
+//!
+//! Be aware that [`VipsImage`] is not thread-safe at v0.6.0 and earlier.
+//!
+//! ### Example
+//!
+//! ```no_run
+//! use rs_vips::{voption::{VOption, Setter}, Vips, VipsImage};
+//!
+//! fn main() {
+//!     // this initializes the libvips library.
+//!     Vips::init("Test Libvips").expect("Cannot initialize libvips");
+//!     // if you want leak checking, turn it on.
+//!     Vips::leak_set(true);
+//!     // set number of threads in libvips's threadpool
+//!     Vips::concurrency_set(2);
+//!
+//!     // loads an image from file
+//!     let image = VipsImage::new_from_file("test.png").unwrap();
+//!
+//!     // will resize the image and return a new instance.
+//!     // libvips works most of the time with immutable objects, so it will return a new object
+//!     // the VipsImage struct implements Drop, which will free the memory
+//!     let resized = image.resize(0.5).unwrap();
+//!
+//!     // save with optional parameters
+//!     match resized.jpegsave_with_opts(
+//!         "output.jpeg",
+//!         VOption::new()
+//!             .set("q", 90)
+//!             .set("background", &[255.0])
+//!             .set("strip", true)
+//!             .set("interlace", true)
+//!             .set("optimize_scans", true)
+//!             .set("optimize_coding", true),
+//!     ) {
+//!         Err(ex) => println!("error: {}", ex),
+//!         Ok(_) => println!("Great Success!"),
+//!     }
+//!
+//!     // only when you are done with Vips, shut it down.
+//!     // this is optional as described in the official document.
+//!     // To clean up, thread_shut_down may be enough.
+//!     // Vips::thread_shutdown()
+//!     Vips::shutdown();
+//! }
+//! ```
+
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
@@ -34,9 +122,9 @@ pub use target::*;
 
 pub type Result<T> = std::result::Result<T, error::Error>;
 
+/// Basic utility struct. Use it to initialize/shutdown the system
 pub struct Vips;
 
-/// That's the main type of this crate. Use it to initialize the system
 impl Vips {
     /// Starts up libvips
     pub fn init(name: &str) -> Result<()> {
@@ -103,7 +191,7 @@ impl Vips {
         }
     }
 
-    /// Stop errors being logged. Use [func@error_thaw] to unfreeze
+    /// Stop errors being logged. Use `error_thaw` to unfreeze
     pub fn freeze_error_buffer() {
         unsafe {
             bindings::vips_error_freeze();

@@ -22,6 +22,7 @@ use std::{
 
 const NULL: *const c_void = null_mut();
 
+/// Represents an image and most operations will take one as input and output a new one
 #[derive(Clone)]
 pub struct VipsImage {
     pub(crate) image: Arc<Image>,
@@ -80,7 +81,6 @@ impl From<*mut bindings::VipsImage> for VipsImage {
     }
 }
 
-/// This is the main type of vips. It represents an image and most operations will take one as input and output a new one.
 impl VipsImage {
     pub fn new() -> VipsImage {
         Self::default()

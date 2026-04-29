@@ -13,12 +13,85 @@ use std::{
     path::Path,
 };
 
+/// A unified interface for reading, seeking, and mapping data
 #[derive(Debug, Clone)]
 pub struct VipsSource {
     pub(crate) ctx: *mut bindings::VipsSource,
 }
 
+pub trait Reader: Read + Seek + Send + 'static {}
+impl<T: Read + Seek + Send + 'static> Reader for T {}
+
+struct SourceContext {
+    reader: Box<dyn Reader>,
+}
+
 impl VipsSource {
+    /// Create a target from a reader.
+    pub fn new_from_reader<R: Reader>(input: R) -> Result<VipsSource> {
+        unsafe {
+            let source = bindings::vips_source_custom_new();
+
+            if source.is_null() {
+                return Err(
+                    Error::InitializationError("Cannot create VipsSourceCustom".to_string()),
+                );
+            }
+
+            let context = Box::new(
+                SourceContext {
+                    reader: Box::new(input),
+                },
+            );
+
+            let user_data = Box::into_raw(context) as *mut c_void;
+
+            bindings::g_signal_connect_data(
+                source as *mut c_void,
+                c"read".as_ptr(),
+                Some(
+                    std::mem::transmute::<
+                        unsafe extern "C" fn(
+                            source: *mut bindings::VipsSourceCustom,
+                            buffer: *mut c_void,
+                            length: gint64,
+                            user_data: *mut c_void,
+                        ) -> gint64,
+                        unsafe extern "C" fn(),
+                    >(on_read),
+                ),
+                user_data,
+                Some(source_destroy),
+                0,
+            );
+
+            bindings::g_signal_connect_data(
+                source as *mut c_void,
+                c"seek".as_ptr(),
+                Some(
+                    std::mem::transmute::<
+                        unsafe extern "C" fn(
+                            source: *mut bindings::VipsSourceCustom,
+                            offset: gint64,
+                            whence: c_int,
+                            user_data: *mut c_void,
+                        ) -> gint64,
+                        unsafe extern "C" fn(),
+                    >(on_seek),
+                ),
+                user_data,
+                None,
+                0,
+            );
+
+            Ok(
+                VipsSource {
+                    ctx: source as *mut bindings::VipsSource,
+                },
+            )
+        }
+    }
+
     /// Create an source attached to a file descriptor. descriptor is closed with close() when source is finalized.
     pub fn new_from_descriptor(descriptor: i32) -> Result<VipsSource> {
         unsafe {
@@ -200,90 +273,15 @@ impl VipsSource {
             )
         }
     }
-}
 
-// VipsConnection for VipsSource
-impl VipsSource {
+    // VipsConnection for VipsSource
     pub fn filename(&self) -> Option<String> {
         unsafe { VipsConnection::filename(&mut (*self.ctx).parent_object) }
     }
 
+    // VipsConnection for VipsSource
     pub fn nick(&self) -> Option<String> {
         unsafe { VipsConnection::nick(&mut (*self.ctx).parent_object) }
-    }
-}
-
-pub trait Reader: Read + Seek + Send + 'static {}
-impl<T: Read + Seek + Send + 'static> Reader for T {}
-
-struct SourceContext {
-    reader: Box<dyn Reader>,
-}
-
-// VipsSourceCustom
-impl VipsSource {
-    pub fn new_from_reader<R: Reader>(input: R) -> Result<VipsSource> {
-        unsafe {
-            let source = bindings::vips_source_custom_new();
-
-            if source.is_null() {
-                return Err(
-                    Error::InitializationError("Cannot create VipsSourceCustom".to_string()),
-                );
-            }
-
-            let context = Box::new(
-                SourceContext {
-                    reader: Box::new(input),
-                },
-            );
-
-            let user_data = Box::into_raw(context) as *mut c_void;
-
-            bindings::g_signal_connect_data(
-                source as *mut c_void,
-                c"read".as_ptr(),
-                Some(
-                    std::mem::transmute::<
-                        unsafe extern "C" fn(
-                            source: *mut bindings::VipsSourceCustom,
-                            buffer: *mut c_void,
-                            length: gint64,
-                            user_data: *mut c_void,
-                        ) -> gint64,
-                        unsafe extern "C" fn(),
-                    >(on_read),
-                ),
-                user_data,
-                Some(source_destroy),
-                0,
-            );
-
-            bindings::g_signal_connect_data(
-                source as *mut c_void,
-                c"seek".as_ptr(),
-                Some(
-                    std::mem::transmute::<
-                        unsafe extern "C" fn(
-                            source: *mut bindings::VipsSourceCustom,
-                            offset: gint64,
-                            whence: c_int,
-                            user_data: *mut c_void,
-                        ) -> gint64,
-                        unsafe extern "C" fn(),
-                    >(on_seek),
-                ),
-                user_data,
-                None,
-                0,
-            );
-
-            Ok(
-                VipsSource {
-                    ctx: source as *mut bindings::VipsSource,
-                },
-            )
-        }
     }
 }
 

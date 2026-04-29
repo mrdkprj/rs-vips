@@ -27,7 +27,7 @@ use std::{
     sync::Arc,
 };
 
-const ERROR_CODE: c_int = 1;
+const ERROR_CODE: c_int = -1;
 
 /// Runs the vips operation with options
 pub fn call(operation: &str, option: VOption) -> Result<c_int> {
