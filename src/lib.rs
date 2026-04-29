@@ -10,12 +10,13 @@ extern crate num_traits;
 
 pub mod bindings;
 mod connection;
+/// Vips Enumerations
+pub mod enums;
 pub mod error;
 mod image;
 mod interpolate;
 pub mod operator;
-/// Vips Enumerations
-pub mod ops;
+mod ops;
 mod region;
 mod source;
 mod target;

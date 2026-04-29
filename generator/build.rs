@@ -32,6 +32,16 @@ fn to_class_case(str: &str) -> String {
     }
 }
 
+// Check if an operation can be thread-unsafe
+// vips_draw_*, vips_system, vips_linecache, vips_tilecache
+fn is_thread_unsafe(name: &str) -> bool {
+    is_draw_operation(name) || name.starts_with("system") || name.contains("cache")
+}
+
+fn is_draw_operation(name: &str) -> bool {
+    name.starts_with("draw")
+}
+
 impl Operation {
     fn doc_base(&self) -> String {
         format!(
@@ -149,11 +159,18 @@ impl Operation {
     }
 
     fn get_variables(&self) -> String {
-        self.output
+        let mut variables = self
+            .output
             .iter()
             .map(|p| p.declare_out_variable())
-            .collect::<Vec<_>>()
-            .join("\n")
+            .collect::<Vec<_>>();
+        if is_draw_operation(&self.name) {
+            variables.insert(
+                0,
+                String::from("self.prepare_draw()?;"),
+            );
+        }
+        variables.join("\n")
     }
 
     fn get_method_call(&self, with_optional: bool) -> String {
@@ -193,7 +210,7 @@ impl Operation {
                                 p.vips_name, p.name
                             )
                         }
-                        ParamType::RefSelf => {
+                        ParamType::RefSelf | ParamType::MutSelf => {
                             format!(
                                 r#".set("{}", self)"#,
                                 p.vips_name
@@ -460,7 +477,7 @@ impl Parameter {
         } else {
             format!(
                 "/// {}: {} -> {}",
-                self.name,
+                self.vips_name,
                 self.param_type
                     .option_type(self.is_output),
                 self.description
@@ -546,19 +563,15 @@ impl Parameter {
     }
 
     fn param_declaration(&self) -> String {
-        if self
-            .param_type
-            .param_type()
-            .is_empty()
-        {
-            "&self".to_string()
-        } else {
-            format!(
+        match self.param_type {
+            ParamType::RefSelf => "&self".to_string(),
+            ParamType::MutSelf => "&mut self".to_string(),
+            _ => format!(
                 "{}: {}",
                 self.name,
                 self.param_type
                     .param_type()
-            )
+            ),
         }
     }
 }
@@ -601,6 +614,7 @@ enum ParamType {
     },
     VipsBlob,
     RefSelf,
+    MutSelf,
 }
 
 impl ParamType {
@@ -695,7 +709,7 @@ impl ParamType {
                 name,
                 ..
             } => Self::enum_name(name),
-            ParamType::RefSelf => String::new(),
+            ParamType::RefSelf | ParamType::MutSelf => String::new(),
         }
     }
 
@@ -765,7 +779,7 @@ impl ParamType {
                 name,
                 ..
             } => Self::enum_name(name),
-            ParamType::RefSelf => String::new(),
+            ParamType::RefSelf | ParamType::MutSelf => String::new(),
         };
 
         match self {
@@ -812,7 +826,7 @@ impl ParamType {
                 name,
                 ..
             } => Self::enum_name(name),
-            ParamType::RefSelf => String::new(),
+            ParamType::RefSelf | ParamType::MutSelf => String::new(),
         }
     }
 
@@ -898,7 +912,7 @@ impl ParamType {
                 })
                 .collect::<Vec<_>>()[0]
                 .clone(),
-            ParamType::RefSelf => String::new(),
+            ParamType::RefSelf | ParamType::MutSelf => String::new(),
         }
     }
 
@@ -965,6 +979,7 @@ fn parse_param(
     param_list: Vec<&str>,
     order: u8,
     prev: Option<String>,
+    thread_unsafe: bool,
 ) -> (
     bool,
     Parameter,
@@ -995,7 +1010,11 @@ fn parse_param(
         ParamType::Str
     } else if param_list[3].starts_with("VipsImage") {
         if order == 0 && !is_output {
-            ParamType::RefSelf
+            if thread_unsafe {
+                ParamType::MutSelf
+            } else {
+                ParamType::RefSelf
+            }
         } else {
             ParamType::VipsImage {
                 prev,
@@ -1177,6 +1196,7 @@ fn parse_output(output: String) -> Vec<Operation> {
                     .skip(1)
                     .peekable(); // skip the first line PARAM:
                 let mut order: u8 = 0;
+                let thread_unsafe = is_thread_unsafe(name_split[0]);
                 while required_vals
                     .peek()
                     .is_some()
@@ -1200,6 +1220,7 @@ fn parse_output(output: String) -> Vec<Operation> {
                             .collect(),
                         order,
                         prev,
+                        thread_unsafe,
                     );
                     if is_output {
                         output.push(param);
@@ -1225,6 +1246,7 @@ fn parse_output(output: String) -> Vec<Operation> {
                         param_list,
                         0,
                         None,
+                        thread_unsafe,
                     );
                     optional.push(param);
                 }
@@ -1390,7 +1412,7 @@ fn add_missiong(methods: &mut String) {
     );
 }
 
-fn generate_opts(out_path: PathBuf) {
+fn generate_opts_and_enums(out_path: PathBuf) {
     let vips_introspection = Command::new("./introspect")
         .output()
         .expect("Failed to run vips introspection");
@@ -1433,19 +1455,17 @@ fn generate_opts(out_path: PathBuf) {
     use crate::VipsSource;
     use crate::VipsTarget;
     use crate::error::*;
+    use crate::enums::*;
     use crate::utils;
     use crate::voption::{{call, Setter, VOption}};
     use crate::Result;
     use crate::VipsImage;
     use std::ptr::null_mut;
 
-    {}
-
     impl VipsImage {{
         {}
     }}
     "#,
-        enums.join("\n"),
         methods
     );
 
@@ -1458,6 +1478,26 @@ fn generate_opts(out_path: PathBuf) {
     let mut file_ops = File::create(out_path.join("ops.rs")).expect("Can't create file");
     file_ops
         .write_all(ops_formated.as_bytes())
+        .expect("Can't write to file");
+
+    let enums_content = format!(
+        r#"
+            // (c) Copyright 2019-2025 OLX
+            // (c) Copyright 2025 mrdkprj
+            {}
+        "#,
+        enums.join("\n"),
+    );
+
+    let enums_formated = if let Ok(formated) = rustfmt_generated_string(&enums_content) {
+        formated
+    } else {
+        enums_content
+    };
+
+    let mut file_enums = File::create(out_path.join("enums.rs")).expect("Can't create file");
+    file_enums
+        .write_all(enums_formated.as_bytes())
         .expect("Can't write to file");
 }
 
@@ -1561,5 +1601,5 @@ fn main() {
         .expect("Couldn't write bindings!");
 
     // Create ops.rs
-    generate_opts(out_path);
+    generate_opts_and_enums(out_path);
 }

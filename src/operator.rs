@@ -7,7 +7,7 @@
 //!
 //! Every overload returns VipsImage as the result of Vips operation.
 use crate::{
-    ops::{OperationBoolean, OperationRelational},
+    enums::{OperationBoolean, OperationRelational},
     VipsImage,
 };
 use std::ops::{Add, BitAnd, BitOr, BitXor, Div, Mul, Rem, Shl, Shr, Sub};

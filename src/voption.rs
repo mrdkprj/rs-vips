@@ -24,8 +24,10 @@ use crate::{
 use std::{
     ffi::{c_char, c_int, c_void},
     mem::MaybeUninit,
-    rc::Rc,
+    sync::Arc,
 };
+
+const ERROR_CODE: c_int = 1;
 
 /// Runs the vips operation with options
 pub fn call(operation: &str, option: VOption) -> Result<c_int> {
@@ -55,6 +57,7 @@ pub(crate) fn call_option_string_(
     unsafe {
         let mut vips_operation = vips_operation_new(operation);
 
+        // Set option_string before set options
         if !option_string.is_null()
             && vips_object_set_from_string(
                 vips_operation as *mut VipsObject,
@@ -63,12 +66,13 @@ pub(crate) fn call_option_string_(
         {
             vips_object_unref_outputs(vips_operation as *mut VipsObject);
             g_object_unref(vips_operation as *mut c_void);
-            return Ok(1);
+            return Ok(ERROR_CODE);
         }
 
         // Collect input buffer/image/images beforehand for output image
         let image_source = get_image_source(&option);
 
+        // Set input args
         set_opreration(
             vips_operation,
             &option,
@@ -80,9 +84,10 @@ pub(crate) fn call_option_string_(
         if result < 0 {
             vips_object_unref_outputs(vips_operation as *mut VipsObject);
             g_object_unref(vips_operation as *mut c_void);
-            return Ok(1);
+            return Ok(ERROR_CODE);
         }
 
+        // Write output
         get_operation(
             vips_operation,
             option,
@@ -97,8 +102,8 @@ pub(crate) fn call_option_string_(
 
 #[derive(Default)]
 struct ImageSource {
-    buffer: Option<Rc<Vec<u8>>>,
-    images: Vec<Rc<crate::Image>>,
+    buffer: Option<Arc<[u8]>>,
+    images: Vec<Arc<crate::Image>>,
 }
 
 fn get_image_source(option: &VOption) -> ImageSource {
@@ -121,28 +126,20 @@ fn get_image_source(option: &VOption) -> ImageSource {
             match pair.value {
                 VipsValue::Blob(buffer) => {
                     // Take ownership of buffer
-                    image_source.buffer = Some(Rc::new(
-                        buffer.to_vec(),
+                    image_source.buffer = Some(Arc::from(
+                        buffer,
                     ));
                 }
                 VipsValue::Image(vips_image) => {
                     image_source
                         .images
-                        .push(
-                            vips_image
-                                .image
-                                .clone(),
-                        );
+                        .push(Arc::clone(&vips_image.image));
                 }
                 VipsValue::ImageArray(vips_images) => {
                     for vips_image in vips_images {
                         image_source
                             .images
-                            .push(
-                                vips_image
-                                    .image
-                                    .clone(),
-                            );
+                            .push(Arc::clone(&vips_image.image));
                     }
                 }
                 _ => {}
@@ -152,6 +149,7 @@ fn get_image_source(option: &VOption) -> ImageSource {
     image_source
 }
 
+#[allow(clippy::arc_with_non_send_sync)]
 fn get_operation(
     vips_operation: *mut VipsOperation,
     option: VOption,
@@ -259,7 +257,8 @@ fn get_operation(
                         gvalue_ptr,
                     );
                     let out_image: *mut VipsImage = g_value_get_object(gvalue_ptr).cast();
-                    out.image = Rc::new(
+                    // Copy underlying buffer/images
+                    out.image = Arc::new(
                         crate::Image {
                             ctx: out_image,
                             buffer: image_source
@@ -1096,26 +1095,49 @@ impl<'a> Setter<'a, &'a mut f64> for VOption<'a> {
     }
 }
 
-// output VipsImage
+// output VipsImage/mutable input VipsImage
 impl<'a> Setter<'a, &'a mut crate::VipsImage> for VOption<'a> {
     fn set(mut self, name: &str, value: &'a mut crate::VipsImage) -> VOption<'a> {
+        // If ctx is null, assume it is output image. Otherwise, it is mutable input image.
+        let pair = if value
+            .image
+            .ctx
+            .is_null()
+        {
+            Pair::output(
+                name,
+                VipsValue::MutImage(value),
+            )
+        } else {
+            Pair::input(
+                name,
+                VipsValue::Image(value),
+            )
+        };
         self.options
-            .push(
-                Pair::output(
-                    name,
-                    VipsValue::MutImage(value),
-                ),
-            );
+            .push(pair);
+
         self
     }
     fn add(&mut self, name: &str, value: &'a mut crate::VipsImage) {
+        // If ctx is null, assume it is output image. Otherwise, it is mutable input image.
+        let pair = if value
+            .image
+            .ctx
+            .is_null()
+        {
+            Pair::output(
+                name,
+                VipsValue::MutImage(value),
+            )
+        } else {
+            Pair::input(
+                name,
+                VipsValue::Image(value),
+            )
+        };
         self.options
-            .push(
-                Pair::output(
-                    name,
-                    VipsValue::MutImage(value),
-                ),
-            );
+            .push(pair);
     }
 }
 

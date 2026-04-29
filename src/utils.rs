@@ -4,7 +4,7 @@ use crate::bindings::{
     self, g_log, g_type_from_name, vips_error_buffer, GLogLevelFlags_G_LOG_LEVEL_WARNING,
 };
 use crate::{error::Error, Image, Result, VipsImage};
-use std::{ffi::CString, path::Path, rc::Rc};
+use std::{ffi::CString, path::Path, sync::Arc};
 
 pub(crate) fn vips_image_result(out: *mut bindings::VipsImage, err: Error) -> Result<VipsImage> {
     if out.is_null() {
@@ -122,13 +122,14 @@ pub(crate) fn ensure_null_terminated(input: impl AsRef<[u8]>) -> crate::Result<C
     }
 }
 
+#[allow(clippy::arc_with_non_send_sync)]
 pub(crate) fn new_vipsimage(
     ctx: *mut bindings::VipsImage,
-    buffer: Option<Rc<Vec<u8>>>,
-    refs: Option<Vec<Rc<Image>>>,
+    buffer: Option<Arc<[u8]>>,
+    refs: Option<Vec<Arc<Image>>>,
 ) -> VipsImage {
     VipsImage {
-        image: Rc::new(Image {
+        image: Arc::new(Image {
             ctx,
             buffer,
             refs: refs.unwrap_or_default(),

@@ -2,8 +2,8 @@
 // (c) Copyright 2025 mrdkprj
 use crate::{
     bindings,
+    enums::*,
     error::Error,
-    ops::*,
     utils::{
         self, ensure_null_terminated, new_c_string, new_c_string_from_raw, new_vipsimage,
         path_to_cstring, vips_image_result, vips_image_result_ext,
@@ -17,15 +17,17 @@ use std::{
     fmt,
     path::Path,
     ptr::null_mut,
-    rc::Rc,
+    sync::Arc,
 };
 
 const NULL: *const c_void = null_mut();
 
 #[derive(Clone)]
 pub struct VipsImage {
-    pub(crate) image: Rc<Image>,
+    pub(crate) image: Arc<Image>,
 }
+unsafe impl Send for VipsImage {}
+unsafe impl Sync for VipsImage {}
 
 impl Default for VipsImage {
     fn default() -> VipsImage {
@@ -53,8 +55,8 @@ impl fmt::Debug for VipsImage {
 #[allow(dead_code)]
 pub(crate) struct Image {
     pub(crate) ctx: *mut bindings::VipsImage,
-    pub(crate) buffer: Option<Rc<Vec<u8>>>,
-    pub(crate) refs: Vec<Rc<Image>>,
+    pub(crate) buffer: Option<Arc<[u8]>>,
+    pub(crate) refs: Vec<Arc<Image>>,
 }
 
 impl Drop for Image {
@@ -79,7 +81,6 @@ impl From<*mut bindings::VipsImage> for VipsImage {
 }
 
 /// This is the main type of vips. It represents an image and most operations will take one as input and output a new one.
-/// In the moment this type is not thread safe. Be careful working within thread environments.
 impl VipsImage {
     pub fn new() -> VipsImage {
         Self::default()
@@ -448,8 +449,12 @@ impl VipsImage {
         }
     }
 
-    /// Returns the underlying VipsImage reference that this holds
-    pub fn as_mut_ptr(&self) -> *mut bindings::VipsImage {
+    /// Returns the underlying VipsImage reference that this holds.
+    ///
+    /// # Safety
+    ///
+    /// Use with caution working within thread environments
+    pub unsafe fn as_mut_ptr(&self) -> *mut bindings::VipsImage {
         self.image
             .ctx
     }
@@ -1414,5 +1419,14 @@ impl VipsImage {
             (x, y),
             Error::OperationError("maxpos failed".to_string()),
         )
+    }
+}
+
+impl VipsImage {
+    // Call this before using the draw operations to make sure you have a memory image that can be modified.
+    pub(crate) fn prepare_draw(&mut self) -> Result<()> {
+        let copied = self.copy_memory()?;
+        self.image = copied.image;
+        Ok(())
     }
 }
