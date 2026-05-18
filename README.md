@@ -1,4 +1,4 @@
-# libvips-rust-bindings &emsp;  [![Latest Version]][crates.io] [![Documentation]][docs]
+# rs-vips &emsp;  [![Latest Version]][crates.io] [![Documentation]][docs]
 
 [Documentation]: https://docs.rs/rs-vips/badge.svg
 [docs]: https://docs.rs/rs-vips
