@@ -79,7 +79,7 @@ pub(crate) fn new_c_string(string: impl Into<Vec<u8>>) -> Result<CString> {
 }
 
 #[inline]
-pub(crate) fn new_c_string_from_raw(ptr: *mut i8) -> CString {
+pub(crate) fn new_c_string_from_raw(ptr: *mut std::os::raw::c_char) -> CString {
     unsafe { CString::from_raw(ptr) }
 }
 
