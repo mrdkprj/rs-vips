@@ -4,7 +4,11 @@ use crate::bindings::{
     self, g_log, g_type_from_name, vips_error_buffer, GLogLevelFlags_G_LOG_LEVEL_WARNING,
 };
 use crate::{error::Error, Image, Result, VipsImage};
-use std::{ffi::CString, path::Path, sync::Arc};
+use std::{
+    ffi::{c_char, CString},
+    path::Path,
+    sync::Arc,
+};
 
 pub(crate) fn vips_image_result(out: *mut bindings::VipsImage, err: Error) -> Result<VipsImage> {
     if out.is_null() {
@@ -79,7 +83,7 @@ pub(crate) fn new_c_string(string: impl Into<Vec<u8>>) -> Result<CString> {
 }
 
 #[inline]
-pub(crate) fn new_c_string_from_raw(ptr: *mut i8) -> CString {
+pub(crate) fn new_c_string_from_raw(ptr: *mut c_char) -> CString {
     unsafe { CString::from_raw(ptr) }
 }
 
