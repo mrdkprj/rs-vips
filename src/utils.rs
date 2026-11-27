@@ -4,7 +4,11 @@ use crate::bindings::{
     self, g_log, g_type_from_name, vips_error_buffer, GLogLevelFlags_G_LOG_LEVEL_WARNING,
 };
 use crate::{error::Error, Image, Result, VipsImage};
-use std::{ffi::CString, path::Path, sync::Arc};
+use std::{
+    ffi::{c_char, CStr, CString},
+    path::Path,
+    sync::Arc,
+};
 
 pub(crate) fn vips_image_result(out: *mut bindings::VipsImage, err: Error) -> Result<VipsImage> {
     if out.is_null() {
@@ -78,9 +82,17 @@ pub(crate) fn new_c_string(string: impl Into<Vec<u8>>) -> Result<CString> {
         .map_err(|_| Error::InitializationError("Error initializing C string.".to_string()))
 }
 
+/// Copies a GLib-owned C string and releases the original allocation.
+///
+/// # Safety
+///
+/// `ptr` must be non-null, NUL-terminated, allocated by GLib, and transferred
+/// to the caller with full ownership.
 #[inline]
-pub(crate) fn new_c_string_from_raw(ptr: *mut i8) -> CString {
-    unsafe { CString::from_raw(ptr) }
+pub(crate) unsafe fn take_glib_c_string(ptr: *mut c_char) -> CString {
+    let owned = unsafe { CStr::from_ptr(ptr) }.to_owned();
+    unsafe { bindings::g_free(ptr.cast()) };
+    owned
 }
 
 #[inline]

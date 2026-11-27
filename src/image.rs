@@ -5,8 +5,8 @@ use crate::{
     enums::*,
     error::Error,
     utils::{
-        self, ensure_null_terminated, new_c_string, new_c_string_from_raw, new_vipsimage,
-        path_to_cstring, vips_image_result, vips_image_result_ext,
+        self, ensure_null_terminated, new_c_string, new_vipsimage, path_to_cstring,
+        take_glib_c_string, vips_image_result, vips_image_result_ext,
     },
     voption::{call, call_option_string_, Setter, VOption},
     Result, VipsSource, VipsTarget,
@@ -126,11 +126,11 @@ impl VipsImage {
             let mut out_out = VipsImage::from(null_mut());
             call_option_string_(
                 operation,
-                new_c_string_from_raw(string_options).as_ptr(),
+                take_glib_c_string(string_options).as_ptr(),
                 option
                     .set(
                         "filename",
-                        new_c_string_from_raw(filename_part).as_ptr(),
+                        take_glib_c_string(filename_part).as_ptr(),
                     )
                     .set(
                         "out",
@@ -842,12 +842,12 @@ impl VipsImage {
 
             let res = call_option_string_(
                 operation,
-                new_c_string_from_raw(string_options).as_ptr(),
+                take_glib_c_string(string_options).as_ptr(),
                 option
                     .set("in", self)
                     .set(
                         "filename",
-                        new_c_string_from_raw(filename_part).as_ptr(),
+                        take_glib_c_string(filename_part).as_ptr(),
                     ),
             )?;
             utils::result(
@@ -871,7 +871,7 @@ impl VipsImage {
         unsafe {
             let suffix_c_str = new_c_string(suffix)?;
             let filename_part = bindings::vips_filename_get_filename(suffix_c_str.as_ptr());
-            let filename = new_c_string_from_raw(filename_part);
+            let filename = take_glib_c_string(filename_part);
             let string_options = bindings::vips_filename_get_options(suffix_c_str.as_ptr());
 
             /* Save with the new target API if we can. Fall back to the older
@@ -887,7 +887,7 @@ impl VipsImage {
                 let target = VipsTarget::new_to_memory()?;
                 let res = call_option_string_(
                     operation,
-                    new_c_string_from_raw(string_options).as_ptr(),
+                    take_glib_c_string(string_options).as_ptr(),
                     option
                         .set("in", self)
                         .set(
@@ -914,7 +914,7 @@ impl VipsImage {
             let mut buffer_out = Vec::new();
             let res = call_option_string_(
                 operation,
-                new_c_string_from_raw(string_options).as_ptr(),
+                take_glib_c_string(string_options).as_ptr(),
                 option
                     .set("in", self)
                     .set(
@@ -962,7 +962,7 @@ impl VipsImage {
 
             let res = call_option_string_(
                 operation,
-                new_c_string_from_raw(string_options).as_ptr(),
+                take_glib_c_string(string_options).as_ptr(),
                 option
                     .set("in", self)
                     .set(
