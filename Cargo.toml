@@ -13,3 +13,6 @@ exclude = ["generator"]
 [dependencies]
 num-traits = "0.2"
 num-derive = "0.4.2"
+
+[build-dependencies]
+pkg-config = "0.3"
